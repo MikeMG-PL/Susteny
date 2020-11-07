@@ -5,6 +5,7 @@ using UnityEngine;
 public class SC_HeadBobber : MonoBehaviour
 {
     public float walkingBobbingSpeed = 14f;
+    public float runningBobbingSpeed = 18f;
     public float bobbingAmountWalk = 0.05f;
     public float bobbingAmountSprint = 0.1f;
     public SC_FPSController controller;
@@ -22,7 +23,7 @@ public class SC_HeadBobber : MonoBehaviour
     void Update()
     {
         float bobbingAmount = controller.isRunning ? bobbingAmountSprint : bobbingAmountWalk;
-        float bobbingSpeed = controller.isRunning ? 18f : walkingBobbingSpeed;
+        float bobbingSpeed = controller.isRunning ? runningBobbingSpeed : walkingBobbingSpeed;
         if (Mathf.Abs(controller.moveDirection.x) > 0.1f || Mathf.Abs(controller.moveDirection.z) > 0.1f)
         {
             //Player is moving

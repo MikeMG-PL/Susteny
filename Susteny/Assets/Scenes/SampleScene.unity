@@ -496,8 +496,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingBobbingSpeed: 14
+  runningBobbingSpeed: 18
   bobbingAmountWalk: 0.05
-  bobbingAmountSprint: 0.1
+  bobbingAmountSprint: 0.07
   controller: {fileID: 432935318}
 --- !u!1 &1340962906
 GameObject:
