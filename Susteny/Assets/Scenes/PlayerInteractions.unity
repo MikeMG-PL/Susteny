@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 1652378970}
   - component: {fileID: 1652378969}
   - component: {fileID: 1652378973}
+  - component: {fileID: 1652378974}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1030,9 +1031,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1010864988}
-  interactionDistance: 2
   grabbable: 1
-  RotationSpeed: 500
+  interactionDistance: 2
+--- !u!114 &1652378974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652378968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bc91e2bda4d6647996055440324299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
 --- !u!1 &1811273100 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7563f23f4a6e64041a2ed5fb0b9aa187,
