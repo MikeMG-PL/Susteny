@@ -41,7 +41,6 @@ public class ViewMode : MonoBehaviour
     {
         if (viewMode)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerComponents>().viewObject.transform.position, 0.03f);
             transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0, Space.World);
         }
 
