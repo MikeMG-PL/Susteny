@@ -52,6 +52,7 @@ public class Interactable : MonoBehaviour
         grabbing = true;
         ungrabbing = false;
         GetComponent<ViewMode>().ViewModeOn();
+        SetAllCollidersStatus(false);
     }
 
     void Ungrab()
@@ -60,5 +61,14 @@ public class Interactable : MonoBehaviour
         grabbing = false;
         ungrabbing = true;
         GetComponent<ViewMode>().ViewModeOff();
+        SetAllCollidersStatus(true);
+    }
+
+    void SetAllCollidersStatus(bool enable)
+    {
+        foreach (Collider c in GetComponents<Collider>())
+        {
+            c.enabled = enable;
+        }
     }
 }

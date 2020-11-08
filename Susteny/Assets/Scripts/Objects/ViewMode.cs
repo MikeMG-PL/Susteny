@@ -12,7 +12,7 @@ public class ViewMode : MonoBehaviour
     bool disablingFocus;
     bool enablingFocus;
     bool viewMode;
-    float focusSpeed = 20f;
+    float focusSpeed = 30f;
 
     void Start()
     {
