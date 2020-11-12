@@ -7,72 +7,38 @@ using UnityEngine.Rendering.PostProcessing;
 public class Interactable : MonoBehaviour
 {
     public GameObject player;
-    public float interactionDistance = 2f;
     public bool grabbable;
-    public float RotationSpeed = 5;
+    public float interactionDistance = 2f;
 
-    bool viewMode;
-    bool disablingFocus;
-    bool enablingFocus;
+    Vector3 startPosition;
+    Quaternion startRotation;
     bool grabbed;
+    bool grabbing;
+    bool ungrabbing;
 
-    float focusSpeed = 20f;
-
-    void Update()
+    private void Update()
     {
-        if (viewMode)
+        if (grabbing)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerComponents>().viewObject.transform.position, 0.03f);
-            transform.Rotate(Input.GetAxis("Mouse Y") * RotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime, 0, Space.World);
-
-            if (Input.GetKey(KeyCode.Mouse1)) Ungrab();
+            if (transform.position == player.GetComponent<PlayerComponents>().viewObject.transform.position) grabbing = false;
         }
 
-        if (disablingFocus)
+        else if (ungrabbing)
         {
-            FloatParameter focalLength = player.GetComponent<PlayerComponents>().focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
-            if (focalLength.value <= 25)
-            {
-                disablingFocus = false;
-                focalLength.value = 25f;
-                player.GetComponent<PlayerComponents>().focusCamera.SetActive(false);
-            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 0.05f);
+            transform.position = Vector3.MoveTowards(transform.position, startPosition, 0.03f);
 
-            else focalLength.value -= Time.deltaTime * focusSpeed;
+            if (transform.position == startPosition && transform.rotation == startRotation) ungrabbing = false;
         }
 
-        if (enablingFocus)
-        {
-            FloatParameter focalLength = player.GetComponent<PlayerComponents>().focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
-            if (focalLength.value >= 35)
-            {
-                enablingFocus = false;
-                focalLength.value = 35f;
-            }
-
-            else focalLength.value += Time.deltaTime * focusSpeed;
-        }
-    }
-
-    void ViewModeOn()
-    {
-        viewMode = true;
-        disablingFocus = false;
-        enablingFocus = true;
-        player.GetComponent<SC_FPSController>().canMove = false;
-        player.GetComponent<PlayerComponents>().focusCamera.SetActive(true);
-    }
-
-    void ViewModeOff()
-    {
-        viewMode = false;
-        disablingFocus = true;
-        enablingFocus = false;
-        player.GetComponent<SC_FPSController>().canMove = true;
+        if (Input.GetKey(KeyCode.Mouse1) && grabbed) Ungrab();
     }
 
     private void OnMouseDown()
     {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (grabbable && distance <= interactionDistance && !grabbed)
         {
@@ -83,12 +49,26 @@ public class Interactable : MonoBehaviour
     void Grab()
     {
         grabbed = true;
-        ViewModeOn();
+        grabbing = true;
+        ungrabbing = false;
+        GetComponent<ViewMode>().ViewModeOn();
+        SetAllCollidersStatus(false);
     }
 
     void Ungrab()
     {
         grabbed = false;
-        ViewModeOff();
+        grabbing = false;
+        ungrabbing = true;
+        GetComponent<ViewMode>().ViewModeOff();
+        SetAllCollidersStatus(true);
+    }
+
+    void SetAllCollidersStatus(bool enable)
+    {
+        foreach (Collider c in GetComponents<Collider>())
+        {
+            c.enabled = enable;
+        }
     }
 }
