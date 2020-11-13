@@ -7,8 +7,12 @@ public class DialogueManager : MonoBehaviour
     public Dialogue dialogueSO;
 
     string workspace; int cursor1, cursor2;
-    string marker, talkMarker, optionMarker;
-    string sentence;
+    string marker;          // Pobrany znacznik
+    string talkMarker;      // Znacznik postaci
+    string optionMarker;    // X.Y
+    string sentence;        // Zdanie
+    string choice;          // Wybór
+    string quitMarker;      // Znacznik wyjścia
     bool dialogueRunning;
 
     void Start()
@@ -63,7 +67,6 @@ public class DialogueManager : MonoBehaviour
                 optionMarker = marker;
                 workspace = workspace.Remove(0, cursor2 + 2);
                 break;
-
         }
     }
 
