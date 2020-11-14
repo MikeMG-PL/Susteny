@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 
     string workspace; int cursor1, cursor2;
     string marker;          // Pobrany znacznik
-    string talkMarker;      // Znacznik postaci
+    string speakerMarker;   // Znacznik postaci
     string optionMarker;    // X.Y
     string sentence;        // Zdanie
     string choice;          // Wybór
@@ -17,31 +17,216 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        StartDialogue(0);
+        choice = "1.1";
+        Syntax(0);
     }
 
-    void StartDialogue(int ID)
+    void Syntax(int ID)
+    {
+        Initialize(ID);
+        Analyze();
+    }
+
+    void Initialize(int element)
     {
         dialogueRunning = true;
-        workspace = dialogueSO.texts[ID];
-        GetMarker();
+        workspace = dialogueSO.texts[element];
+        workspace += "#end#";
     }
 
-    void Next()
+    void Analyze()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && dialogueRunning)
+        GetMarker();
+        if (dialogueRunning)
         {
-            switch (MarkerFound())
+            switch (marker)
             {
-                case true:
-                    GetMarker();
+                case "npc":
+                case "player":
+                    speakerMarker = marker;
+                    DeeperAnalyze();
                     break;
 
-                case false:
-                    GetSentence();
+                case "end":
+                    dialogueRunning = false;
+                    break;
+
+                default:
+                    optionMarker = marker;
+                    DeeperAnalyze();
                     break;
             }
         }
+    }
+
+    void DeeperAnalyze()
+    {
+        if (dialogueRunning)
+        {
+            switch (GetMarkerOrSentence())
+            {
+                case "end":
+                    dialogueRunning = false;
+                    break;
+
+                case "npc":
+                case "player":
+                    speakerMarker = marker;
+                    Analyze();
+                    break;
+
+                case "quit":
+                    Error();
+                    break;
+
+                case null:
+                    GetSentence();
+                    ShowAsSpeaker(sentence);
+                    Analyze();
+                    break;
+
+                default:
+                    optionMarker = marker;
+                    PlayerOrNPCOption();
+                    break;
+            }
+        }
+
+    }
+
+    void PlayerOrNPCOption()
+    {
+        switch (speakerMarker)
+        {
+            case "player":
+                RecognizeQuitMarker();
+                break;
+
+            case "npc":
+                if (choice == optionMarker)
+                {
+                    while (GetMarkerOrSentence() != null)
+                    {
+                        switch (GetMarkerOrSentence())
+                        {
+                            case "npc":
+                            case "player":
+                            case "quit":
+                                Error();
+                                break;
+
+                            case null:
+                                GetSentence();
+                                ShowAsSpeaker(sentence);
+                                DeleteRestOfOptions();
+                                Analyze();
+                                break;
+
+                            default:
+                                GetMarker();
+                                break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    switch (GetMarkerOrSentence())
+                    {
+                        case null:
+                            GetSentence();
+                            DeeperAnalyze();
+                            break;
+
+                        case "npc":
+                        case "player":
+                        case "quit":
+                            Error();
+                            break;
+
+                        default:
+                            GetMarker();
+                            optionMarker = marker;
+                            DeeperAnalyze();
+                            break;
+                    }
+                }
+                break;
+
+            default:
+                Error();
+                break;
+        }
+    }
+
+    void RecognizeQuitMarker()
+    {
+        switch (GetMarkerOrSentence())
+        {
+            case "quit":
+                quitMarker = optionMarker;
+                break;
+
+            case null:
+                break;
+        }
+
+        GetSentence();
+        ShowAsOption(sentence);
+        Analyze();
+    }
+
+    /////////////////////////////////////////////////
+
+    void DeleteRestOfOptions()
+    {
+        while (marker != "npc" || marker != "player" || marker != "quit" || marker != "end")
+        {
+            GetMarker();
+        }
+    }
+
+    void ShowAsOption(string sentenceToShow)
+    {
+        Debug.Log(">>> " + sentenceToShow);
+    }
+
+    void ShowAsSpeaker(string sentenceToShow)
+    {
+        switch (speakerMarker)
+        {
+            case "npc":
+                Debug.Log(dialogueSO.nameInDialogue.ToUpper() + ": " + sentenceToShow);
+                break;
+
+            case "player":
+                Debug.Log("GRACZ: " + sentenceToShow);
+                break;
+
+            default:
+                Error();
+                break;
+        }
+    }
+
+    void Error()
+    {
+        Debug.LogError("Dialogue syntax error!");
+        Debug.Log("MARKER: " + marker + ", SPEAKERMARKER: "
+            + speakerMarker + ", OPTIONMARKER: "
+            + optionMarker + ", WORKSPACE: "
+            + workspace);
+    }
+
+    string GetMarkerOrSentence()
+    {
+        if (MarkerFound())
+        {
+            GetMarker();
+            return marker;
+        }
+        else
+            return null;
     }
 
     void GetMarker()
@@ -50,24 +235,7 @@ public class DialogueManager : MonoBehaviour
         workspace = workspace.Remove(cursor1, 1);
         cursor2 = workspace.IndexOf("#");
         marker = workspace.Substring(0, cursor2);
-
-        switch (marker)
-        {
-            case "npc":
-            case "player":
-                talkMarker = marker;
-                workspace = workspace.Remove(0, cursor2 + 2);
-                break;
-
-            case "end":
-                dialogueRunning = false;
-                break;
-
-            default:
-                optionMarker = marker;
-                workspace = workspace.Remove(0, cursor2 + 2);
-                break;
-        }
+        workspace = workspace.Remove(0, cursor2 + 2);
     }
 
     void GetSentence()
@@ -75,11 +243,6 @@ public class DialogueManager : MonoBehaviour
         cursor1 = workspace.IndexOf("#");
         sentence = workspace.Substring(0, cursor1 - 1);
         workspace = workspace.Remove(0, cursor1);
-
-        if (talkMarker == "player")
-            Debug.Log("GRACZ: " + sentence);
-        else
-            Debug.Log(dialogueSO.nameInDialogue.ToUpper() + ": " + sentence);
     }
 
     bool MarkerFound()
@@ -91,57 +254,9 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        Next();
+        /*Debug.Log("MARKER: " + marker + ", SPEAKERMARKER: "
+            + speakerMarker + ", OPTIONMARKER: "
+            + optionMarker + ", WORKSPACE: "
+            + workspace);*/
     }
-
-
-
-
-
-
-
-
-    /* 
-        Znaczniki:
-
-        #end# - Oznacza koniec dialogu
-        #npc# - Ta kwestia jest wypowiadana przez NPC
-        #player# - Ta kwestia jest wypowiadana przez gracza
-        #save# - Poniższy wybór zostanie zapisany do pliku
-        #X.Y# (po znaczniku #player) - X jest wachlarzem opcji do wyboru, Y - konkretną opcją
-        #X.Y# (po znaczniku #npc) - jest odpowiedzią na opcję X.Y wybraną przez gracza
-
-        Reguły:
-
-        1) Po znaczniku #player# oraz #npc# nie może być pustki
-        
-        2) #player#
-           #X.Y# musi być stale połączony z
-
-           #npc#
-           #X.Y#
-        
-           - każdy wybór gracza musi mieć przypisaną odpowiadającą sentencję NPC
-
-        3) Po znaczniku #save# musi się znajdować znacznik #X.Y#
-
-        4) Po każdym znaczniku musi być ENTER
-
-        5) Syntax musi się kończyć znacznikiem #end#
-        
-        Przykład:
-
-        #npc#
-        W końcu jesteś. Ile można czekać?
-        #player#
-        #1.1#
-        Musiałem załatwić coś pilnego.
-        #1.2#
-        Ciesz się, że w ogóle przyszedłem.
-        #npc#
-        #1.1#
-        #1.2#
-        Nie interesują mnie twoje wymówki.
-        #end#
-        */
 }

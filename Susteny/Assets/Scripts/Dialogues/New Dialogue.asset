@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameInDialogue: Anna
   texts:
-  - '#npc#
-
-    #end#'
+  - "#player#\n#1.1#\nCo masz na my\u015Bli?\n#1.2#\nObiecuj\u0119 popraw\u0119.\n#npc#\n#1.1#\nMam
+    na my\u015Bli to, \u017Ce pope\u0142niasz b\u0142\u0105d, K...\n#1.2#\nWyt\u0142umacz\u0119
+    ci, dlaczego i tak ci si\u0119 nie uda...\n#end#"
   - 
   - 
