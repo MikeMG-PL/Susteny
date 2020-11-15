@@ -24,166 +24,139 @@ public class DialogueManager : MonoBehaviour
     void Syntax(int ID)
     {
         Initialize(ID);
-        Analyze();
+        MarkerLoop();
     }
 
     void Initialize(int element)
     {
         dialogueRunning = true;
         workspace = dialogueSO.texts[element];
-        workspace += "#end#";
+        workspace += "\n#end#";
     }
 
-    void Analyze()
+    void MarkerLoop()
     {
-        GetMarker();
-        if (dialogueRunning)
+        while (dialogueRunning)
         {
-            switch (marker)
-            {
-                case "npc":
-                case "player":
-                    speakerMarker = marker;
-                    DeeperAnalyze();
-                    break;
-
-                case "end":
-                    dialogueRunning = false;
-                    break;
-
-                default:
-                    optionMarker = marker;
-                    DeeperAnalyze();
-                    break;
-            }
-        }
-    }
-
-    void DeeperAnalyze()
-    {
-        if (dialogueRunning)
-        {
-            switch (GetMarkerOrSentence())
+            switch (GetMarker())
             {
                 case "end":
                     dialogueRunning = false;
-                    break;
-
-                case "npc":
-                case "player":
-                    speakerMarker = marker;
-                    Analyze();
                     break;
 
                 case "quit":
                     Error();
                     break;
 
+                case "npc":
+                case "player":
+                    speakerMarker = marker;
+                    break;
+
                 case null:
                     GetSentence();
                     ShowAsSpeaker(sentence);
-                    Analyze();
                     break;
 
                 default:
                     optionMarker = marker;
-                    PlayerOrNPCOption();
-                    break;
-            }
-        }
-
-    }
-
-    void PlayerOrNPCOption()
-    {
-        switch (speakerMarker)
-        {
-            case "player":
-                RecognizeQuitMarker();
-                break;
-
-            case "npc":
-                if (choice == optionMarker)
-                {
-                    while (GetMarkerOrSentence() != null)
+                    switch (speakerMarker)
                     {
-                        switch (GetMarkerOrSentence())
-                        {
-                            case "npc":
-                            case "player":
-                            case "quit":
-                                Error();
-                                break;
-
-                            case null:
-                                GetSentence();
-                                ShowAsSpeaker(sentence);
-                                DeleteRestOfOptions();
-                                Analyze();
-                                break;
-
-                            default:
-                                GetMarker();
-                                break;
-                        }
-                    }
-
-                }
-                else
-                {
-                    switch (GetMarkerOrSentence())
-                    {
-                        case null:
+                        case "player":
+                            switch (GetMarker())
+                            {
+                                case "quit":
+                                    quitMarker = optionMarker;
+                                    break;
+                                case null:
+                                    break;
+                            }
                             GetSentence();
-                            DeeperAnalyze();
+                            ShowAsOption(sentence);
                             break;
 
                         case "npc":
-                        case "player":
-                        case "quit":
-                            Error();
-                            break;
+                            if (choice == optionMarker)
+                            {
+                                while (marker != null)
+                                {
+                                    switch (GetMarker())
+                                    {
+                                        case "npc":
+                                        case "player":
+                                        case "quit":
+                                        case "end":
+                                            Error();
+                                            break;
 
-                        default:
-                            GetMarker();
-                            optionMarker = marker;
-                            DeeperAnalyze();
+                                        case null:
+                                            GetSentence();
+                                            ShowAsSpeaker(sentence);
+                                            DeleteRestOfOptions();
+                                            break;
+
+                                        default:
+                                            DeleteMarker();
+                                            break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                switch (GetMarker())
+                                {
+                                    case "npc":
+                                    case "player":
+                                    case "quit":
+                                    case "end":
+                                        Error();
+                                        break;
+
+                                    case null:
+                                        GetSentence();
+                                        break;
+
+                                    default:
+                                        optionMarker = marker;
+                                        break;
+                                }
+                            }
                             break;
                     }
-                }
-                break;
-
-            default:
-                Error();
-                break;
+                    break;
+            }
         }
-    }
-
-    void RecognizeQuitMarker()
-    {
-        switch (GetMarkerOrSentence())
-        {
-            case "quit":
-                quitMarker = optionMarker;
-                break;
-
-            case null:
-                break;
-        }
-
-        GetSentence();
-        ShowAsOption(sentence);
-        Analyze();
     }
 
     /////////////////////////////////////////////////
 
     void DeleteRestOfOptions()
     {
-        while (marker != "npc" || marker != "player" || marker != "quit" || marker != "end")
+        marker = "X.Y";
+        while (marker != "npc" && marker != "player" && marker != "quit" && marker != "end" && dialogueRunning)
         {
-            GetMarker();
+            switch (CheckMarker())
+            {
+                case null:
+                    GetSentence();
+                    break;
+
+                case "end":
+                    dialogueRunning = false;
+                    break;
+
+                case "npc":
+                case "player":
+                case "quit":
+                    break;
+
+                default:
+                    marker = "X.Y";
+                    DeleteMarker();
+                    break;
+            }
         }
+        marker = null;
     }
 
     void ShowAsOption(string sentenceToShow)
@@ -218,24 +191,45 @@ public class DialogueManager : MonoBehaviour
             + workspace);
     }
 
-    string GetMarkerOrSentence()
+    string GetMarker()
     {
         if (MarkerFound())
         {
-            GetMarker();
+            cursor1 = workspace.IndexOf("#");
+            workspace = workspace.Remove(cursor1, 1);
+            cursor2 = workspace.IndexOf("#");
+            marker = workspace.Substring(0, cursor2);
+            workspace = workspace.Remove(0, cursor2 + 2);
             return marker;
         }
         else
             return null;
     }
 
-    void GetMarker()
+    string CheckMarker()
     {
-        cursor1 = workspace.IndexOf("#");
-        workspace = workspace.Remove(cursor1, 1);
-        cursor2 = workspace.IndexOf("#");
-        marker = workspace.Substring(0, cursor2);
-        workspace = workspace.Remove(0, cursor2 + 2);
+        if (MarkerFound())
+        {
+            cursor1 = workspace.IndexOf("#");
+            workspace = workspace.Remove(cursor1, 1);
+            cursor2 = workspace.IndexOf("#");
+            marker = workspace.Substring(0, cursor2);
+            workspace.Insert(0, "#");
+            return marker;
+        }
+        else
+            return null;
+    }
+
+    void DeleteMarker()
+    {
+        if (MarkerFound())
+        {
+            cursor1 = workspace.IndexOf("#");
+            workspace = workspace.Remove(cursor1, 1);
+            cursor2 = workspace.IndexOf("#");
+            workspace = workspace.Remove(0, cursor2 + 2);
+        }
     }
 
     void GetSentence()
@@ -247,16 +241,16 @@ public class DialogueManager : MonoBehaviour
 
     bool MarkerFound()
     {
-        if (workspace[0] == '#')
+        if (workspace != null && workspace[0] == '#')
             return true;
         else return false;
     }
 
     void Update()
     {
-        /*Debug.Log("MARKER: " + marker + ", SPEAKERMARKER: "
+        Debug.Log("MARKER: " + marker + ", SPEAKERMARKER: "
             + speakerMarker + ", OPTIONMARKER: "
             + optionMarker + ", WORKSPACE: "
-            + workspace);*/
+            + workspace);
     }
 }
