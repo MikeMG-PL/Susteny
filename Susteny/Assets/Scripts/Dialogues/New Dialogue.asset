@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameInDialogue: Anna
   texts:
-  - "#player#\n#1.1#\nCo masz na my\u015Bli?\n#1.2#\nObiecuj\u0119 popraw\u0119.\n#npc#\n#1.1#\nTo
-    brzmi sensownie.\n#1.2#\nRozumiem.\n#end#"
+  - "#npc#\nCzas jest wzgl\u0119dny.\n#player#\n#1.1#\nSp\xF3\u017Ani\u0142a\u015B
+    si\u0119.\n#1.2#\nCo masz na my\u015Bli?\n#npc#\n#1.1#\nCiesz si\u0119, \u017Ce
+    w og\xF3le jestem.\n#1.2#\nZegar tyka. Tik-tak...\n#player#\n#2.1#\nPrzejd\u017Amy
+    zatem do rzeczy...\n#2.2#\n#quit#\nNie mam na to czasu.\n#end#"
   - 
   - 

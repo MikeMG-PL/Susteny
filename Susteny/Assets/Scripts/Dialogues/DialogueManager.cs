@@ -78,21 +78,25 @@ public class DialogueManager : MonoBehaviour
                         case "npc":
                             if (choice == optionMarker)
                             {
-                                while (marker != null)
+                                GetMarker();
+                                GetSentence();
+                                ShowAsSpeaker(sentence);
+
+                                while (marker != "npc" && marker != "player" && marker != "quit" && marker != "end")
                                 {
                                     switch (GetMarker())
                                     {
                                         case "npc":
                                         case "player":
                                         case "quit":
+                                            break;
+
                                         case "end":
-                                            Error();
+                                            dialogueRunning = false;
                                             break;
 
                                         case null:
                                             GetSentence();
-                                            ShowAsSpeaker(sentence);
-                                            DeleteRestOfOptions();
                                             break;
 
                                         default:
