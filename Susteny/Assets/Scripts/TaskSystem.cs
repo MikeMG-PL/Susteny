@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TaskSystem : MonoBehaviour
 {
     [SerializeField]
-    List<TaskScriptableObject> tasks;
+    List<TaskScriptableObject> tasks = new List<TaskScriptableObject>();
 
-    public TaskSystem() => tasks = new List<TaskScriptableObject>();
+    public GameObject tasksData;
 
     void Start()
     {
-        TaskScriptableObject task = ScriptableObject.CreateInstance<TaskScriptableObject>();
-        task.name = "gra";
-        task.id = "sda";
-        task.descprition = "sgsdfsdfd";
-        tasks.Add(task);
+        updateTasksDisplay();
     }
 
     void Update()
     {
         incrementTime(Time.deltaTime);
+        updateTasksDisplay();
     }
 
     public void endTask(string taskId)
@@ -41,6 +40,8 @@ public class TaskSystem : MonoBehaviour
         else Debug.LogError("Trying to add task with not unique Id!");
     }
 
+    // ---------------------- PRIVATE PART ---------------------- //
+
     void incrementTime(float deltaTime) // incrementing time for all tasks
     {
         for (int i = 0; i < tasks.Count; i++)
@@ -58,5 +59,18 @@ public class TaskSystem : MonoBehaviour
         return -1; // there is no task with such taskId
     }
 
+    void updateTasksDisplay()
+    {
+        tasksData.GetComponent<Text>().text = "--- Tasks --- \n";
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            if(tasks[i].isVisible == true)
+            {
+                tasksData.GetComponent<Text>().text = "+ " + tasksData.GetComponent<Text>().text
+                + tasks[i].name + "\n       " + tasks[i].descprition + "\n       "
+                + tasks[i].timeSpent + "\n";
+            }
+        }
+    }
 
 }
