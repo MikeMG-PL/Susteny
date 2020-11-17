@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class TaskScriptableObject : ScriptableObject
 {
-    public string id;
-    public string name;
-    public string descprition;
+    public string id; // must be unique
+    public string name; // name for task (not unique)
+    public string descprition; 
     public bool isDone = false;
     public bool isVisible = true; // is it visible for player?
     public float timeSpent = 0; // time spent on certain quest (in seconds)
