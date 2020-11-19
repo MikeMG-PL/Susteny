@@ -48,57 +48,98 @@ public class DialogueManager : MonoBehaviour
             if (!MarkerFound())
             {
                 GetSentence();
-                Say();
+                ShowAsSpeaker();
             }
             else
                 MarkerLoop();
-            // rekurencja bitch B)
         }
         else
         {
             switch (speakerMarker)
             {
                 case "player":
-                    while (marker != "npc" && marker != "player")
-                    {
-                        if (MarkerFound())
-                        {
-                            GetMarker();
-                            if (marker == "npc" || marker == "player")
-                            {
-                                speakerMarker = marker;
-                                break;
-                            }
-
-                        }
-                        else
-                        {
-                            GetSentence();
-                            ShowAsOption();
-                        }
-                    }
+                    PlayerDecide();
                     break;
 
                 case "npc":
-                    Debug.Log("dupa");
+                    NPCAnswer();
                     break;
             }
         }
     }
 
-    void Say()
-    {
-        ShowAsSpeaker();
-    }
-
     void NPCAnswer()
     {
+        while (marker != "npc" && marker != "player")
+        {
+            CheckForEnd();
+            if (!dialogueRunning)
+                break;
 
+            if (MarkerFound())
+            {
+                GetMarker();
+                optionMarker = marker;
+                if (marker == "npc" || marker == "player")
+                {
+                    speakerMarker = marker;
+                    break;
+                }
+                if (optionMarker == choice)
+                {
+                    if (MarkerFound())
+                        GetMarker();
+                    else
+                    {
+                        GetSentence();
+                        ShowAsSpeaker();
+                    }
+                }
+                else
+                {
+                    if (MarkerFound())
+                    {
+                        GetMarker();
+                        if (marker == choice)
+                            optionMarker = marker;
+                    }
+                    else
+                    {
+                        GetSentence();
+                    }
+                }
+            }
+            else
+            {
+                GetSentence();
+                ShowAsSpeaker();
+            }
+        }
     }
 
     void PlayerDecide()
     {
+        while (marker != "npc" && marker != "player")
+        {
+            CheckForEnd();
+            if (!dialogueRunning)
+                break;
 
+            if (MarkerFound())
+            {
+                GetMarker();
+                if (marker == "npc" || marker == "player")
+                {
+                    speakerMarker = marker;
+                    break;
+                }
+            }
+            else
+            {
+                GetSentence();
+                ShowAsOption();
+            }
+        }
     }
 
     void CheckForEnd()
