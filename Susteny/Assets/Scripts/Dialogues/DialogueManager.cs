@@ -24,7 +24,6 @@ public class DialogueManager : MonoBehaviour
     void Syntax(int ID)
     {
         Initialize(ID);
-        MarkerLoop();
     }
 
     void Initialize(int element)
@@ -34,102 +33,78 @@ public class DialogueManager : MonoBehaviour
         workspace += "\n#end#";
     }
 
+    void Forward()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && dialogueRunning)
+            MarkerLoop();
+    }
+
     void MarkerLoop()
     {
-        while (dialogueRunning)
+        GetMarker();
+        if (marker == "npc" || marker == "player")
         {
-            switch (GetMarker())
+            speakerMarker = marker;
+            if (!MarkerFound())
             {
-                case "end":
-                    dialogueRunning = false;
-                    break;
+                GetSentence();
+                Say();
+            }
+            else
+                MarkerLoop();
+            // rekurencja bitch B)
+        }
+        else
+        {
+            switch (speakerMarker)
+            {
+                case "player":
+                    while (marker != "npc" && marker != "player")
+                    {
+                        if (MarkerFound())
+                        {
+                            GetMarker();
+                            if (marker == "npc" || marker == "player")
+                            {
+                                speakerMarker = marker;
+                                break;
+                            }
 
-                case "quit":
-                    Error();
+                        }
+                        else
+                        {
+                            GetSentence();
+                            ShowAsOption();
+                        }
+                    }
                     break;
 
                 case "npc":
-                case "player":
-                    speakerMarker = marker;
-                    break;
-
-                case null:
-                    GetSentence();
-                    ShowAsSpeaker(sentence);
-                    break;
-
-                default:
-                    optionMarker = marker;
-                    switch (speakerMarker)
-                    {
-                        case "player":
-                            switch (GetMarker())
-                            {
-                                case "quit":
-                                    quitMarker = optionMarker;
-                                    break;
-                                case null:
-                                    break;
-                            }
-                            GetSentence();
-                            ShowAsOption(sentence);
-                            break;
-
-                        case "npc":
-                            if (choice == optionMarker)
-                            {
-                                GetMarker();
-                                GetSentence();
-                                ShowAsSpeaker(sentence);
-
-                                while (marker != "npc" && marker != "player" && marker != "quit" && marker != "end")
-                                {
-                                    switch (GetMarker())
-                                    {
-                                        case "npc":
-                                        case "player":
-                                        case "quit":
-                                            break;
-
-                                        case "end":
-                                            dialogueRunning = false;
-                                            break;
-
-                                        case null:
-                                            GetSentence();
-                                            break;
-
-                                        default:
-                                            DeleteMarker();
-                                            break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                switch (GetMarker())
-                                {
-                                    case "npc":
-                                    case "player":
-                                    case "quit":
-                                    case "end":
-                                        Error();
-                                        break;
-
-                                    case null:
-                                        GetSentence();
-                                        break;
-
-                                    default:
-                                        optionMarker = marker;
-                                        break;
-                                }
-                            }
-                            break;
-                    }
+                    Debug.Log("dupa");
                     break;
             }
         }
+    }
+
+    void Say()
+    {
+        ShowAsSpeaker();
+    }
+
+    void NPCAnswer()
+    {
+
+    }
+
+    void PlayerDecide()
+    {
+
+    }
+
+    void CheckForEnd()
+    {
+        if (marker == "end")
+            dialogueRunning = false;
     }
 
     /////////////////////////////////////////////////
@@ -163,21 +138,21 @@ public class DialogueManager : MonoBehaviour
         marker = null;
     }
 
-    void ShowAsOption(string sentenceToShow)
+    void ShowAsOption()
     {
-        Debug.Log(">>> " + sentenceToShow);
+        Debug.Log(">>> " + sentence);
     }
 
-    void ShowAsSpeaker(string sentenceToShow)
+    void ShowAsSpeaker()
     {
         switch (speakerMarker)
         {
             case "npc":
-                Debug.Log(dialogueSO.nameInDialogue.ToUpper() + ": " + sentenceToShow);
+                Debug.Log(dialogueSO.nameInDialogue.ToUpper() + ": " + sentence);
                 break;
 
             case "player":
-                Debug.Log("GRACZ: " + sentenceToShow);
+                Debug.Log("GRACZ: " + sentence);
                 break;
 
             default:
@@ -252,9 +227,6 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("MARKER: " + marker + ", SPEAKERMARKER: "
-            + speakerMarker + ", OPTIONMARKER: "
-            + optionMarker + ", WORKSPACE: "
-            + workspace);
+        Forward();
     }
 }
