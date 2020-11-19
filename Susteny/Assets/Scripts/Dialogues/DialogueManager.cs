@@ -78,8 +78,8 @@ public class DialogueManager : MonoBehaviour
 
             if (MarkerFound())
             {
-                GetMarker();
                 optionMarker = marker;
+                GetMarker();
                 if (marker == "npc" || marker == "player")
                 {
                     speakerMarker = marker;
