@@ -5,25 +5,20 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public Dialogue dialogueSO;
+    public int chosenDialogue;
+    public string choice;          // Wybór
 
     string workspace; int cursor1, cursor2;
     string marker;          // Pobrany znacznik
     string speakerMarker;   // Znacznik postaci
     string optionMarker;    // X.Y
     string sentence;        // Zdanie
-    string choice;          // Wybór
     string quitMarker;      // Znacznik wyjścia
     bool dialogueRunning;
 
     void Start()
     {
-        choice = "1.1";
-        Syntax(0);
-    }
-
-    void Syntax(int ID)
-    {
-        Initialize(ID);
+        Initialize(chosenDialogue);
     }
 
     void Initialize(int element)
@@ -68,15 +63,8 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void NPCAnswer()
-    {
-        while (marker != "npc" && marker != "player")
-        {
-            CheckForEnd();
-            if (!dialogueRunning)
-                break;
-
-            if (MarkerFound())
+    /*
+     if (MarkerFound())
             {
                 optionMarker = marker;
                 GetMarker();
@@ -114,6 +102,62 @@ public class DialogueManager : MonoBehaviour
                 GetSentence();
                 ShowAsSpeaker();
             }
+     */
+
+    void NPCAnswer()
+    {
+        while (marker != "npc" && marker != "player")
+        {
+            CheckForEnd();
+            if (!dialogueRunning)
+                break;
+
+            if (marker == choice)
+                optionMarker = marker;
+
+            while (marker != "npc" && marker != "player")
+            {
+                if (optionMarker == choice)
+                {
+                    if (MarkerFound())
+                        GetMarker();
+                    else
+                    {
+                        GetSentence();
+                        ShowAsSpeaker();
+                        while (marker != "npc" && marker != "player")
+                        {
+                            if (MarkerFound())
+                                GetMarker();
+                            else
+                                GetSentence();
+                        }
+                    }
+
+                    if (marker == "npc" || marker == "player")
+                        speakerMarker = marker;
+                }
+                else
+                {
+                    while (marker != "npc" && marker != "player")
+                    {
+                        if (MarkerFound())
+                        {
+                            GetMarker();
+                            if (marker == choice)
+                            {
+                                optionMarker = marker;
+                                break;
+                            }
+                        }
+                        else
+                            GetSentence();
+                    }
+                    if (marker == "npc" || marker == "player")
+                        speakerMarker = marker;
+                }
+            }
+
         }
     }
 
