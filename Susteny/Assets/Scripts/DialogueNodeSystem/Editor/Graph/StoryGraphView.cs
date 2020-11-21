@@ -58,7 +58,7 @@ namespace Subtegral.DialogueSystem.Editor
 
         public Group CreateCommentBlock(Rect rect, CommentBlockData commentBlockData = null)
         {
-            if(commentBlockData==null)
+            if (commentBlockData == null)
                 commentBlockData = new CommentBlockData();
             var group = new Group
             {
@@ -86,7 +86,7 @@ namespace Subtegral.DialogueSystem.Editor
             ExposedProperties.Add(item);
 
             var container = new VisualElement();
-            var field = new BlackboardField {text = localPropertyName, typeText = "string"};
+            var field = new BlackboardField { text = localPropertyName, typeText = "string" };
             container.Add(field);
 
             var propertyValueTextField = new TextField("Value:")
@@ -118,18 +118,19 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, string quit)
         {
-            AddElement(CreateNode(nodeName, position));
+            AddElement(CreateNode(nodeName, position, quit));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, string quit)
         {
             var tempDialogueNode = new DialogueNode()
             {
                 title = nodeName,
                 DialogueText = nodeName,
-                GUID = Guid.NewGuid().ToString()
+                GUID = Guid.NewGuid().ToString(),
+                QuitNode = quit
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
@@ -139,6 +140,16 @@ namespace Subtegral.DialogueSystem.Editor
             tempDialogueNode.RefreshPorts();
             tempDialogueNode.SetPosition(new Rect(position,
                 DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
+
+            //var quitNode = new UnityEngine.UIElements.Toggle()
+            var quitNode = new TextField()
+            {
+                //text = "quits dialogue?",
+                value = tempDialogueNode.QuitNode//QuitNode
+            };
+            quitNode.RegisterValueChangedCallback((x) => tempDialogueNode.QuitNode = x.newValue);
+            quitNode.SetValueWithoutNotify(quitNode.value);
+            tempDialogueNode.mainContainer.Add(quitNode);
 
             var textField = new TextField("");
             textField.RegisterValueChangedCallback(evt =>
@@ -169,7 +180,6 @@ namespace Subtegral.DialogueSystem.Editor
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
 
-
             var textField = new TextField()
             {
                 name = string.Empty,
@@ -178,9 +188,10 @@ namespace Subtegral.DialogueSystem.Editor
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
             generatedPort.contentContainer.Add(textField);
+
             var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
             {
-                text = "X"
+                text = "Delete choice"
             };
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;

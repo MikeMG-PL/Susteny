@@ -66,6 +66,7 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 dialogueContainerObject.DialogueNodeData.Add(new DialogueNodeData
                 {
+                    QuitNode = node.QuitNode,
                     NodeGUID = node.GUID,
                     DialogueText = node.DialogueText,
                     Position = node.GetPosition().position
@@ -135,10 +136,10 @@ namespace Subtegral.DialogueSystem.Editor
         {
             foreach (var perNode in _dialogueContainer.DialogueNodeData)
             {
-                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero);
+                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero, perNode.QuitNode);
                 tempNode.GUID = perNode.NodeGUID;
+                tempNode.QuitNode = perNode.QuitNode;
                 _graphView.AddElement(tempNode);
-
                 var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
                 nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName));
             }
