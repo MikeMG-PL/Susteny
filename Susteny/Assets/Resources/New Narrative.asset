@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: New Narrative
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 7b3f9508-1401-46da-b540-f4f108225d57
+    PortName: Next
+    TargetNodeGUID: 654d6091-0962-486d-8ede-e60bd2862eea
+  - BaseNodeGUID: 654d6091-0962-486d-8ede-e60bd2862eea
+    PortName: Okej
+    TargetNodeGUID: 6b9fa498-1832-40d5-ad61-3a9e33861d30
+  - BaseNodeGUID: 654d6091-0962-486d-8ede-e60bd2862eea
+    PortName: Fajnie
+    TargetNodeGUID: 6b9fa498-1832-40d5-ad61-3a9e33861d30
+  - BaseNodeGUID: 654d6091-0962-486d-8ede-e60bd2862eea
+    PortName: Bruh
+    TargetNodeGUID: 6b9fa498-1832-40d5-ad61-3a9e33861d30
+  DialogueNodeData:
+  - NodeGUID: 6b9fa498-1832-40d5-ad61-3a9e33861d30
+    DialogueText: Mhm
+    Position: {x: 639, y: 205}
+  - NodeGUID: 654d6091-0962-486d-8ede-e60bd2862eea
+    DialogueText: Kwestia dialogowa NPC!
+    Position: {x: 263, y: 181}
+  ExposedProperties: []
+  CommentBlockData: []

@@ -1,103 +1,202 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
+using System.Net;
+using System.Text;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using Subtegral.DialogueSystem.DataContainers;
+using UnityEngine.UIElements;
 
-public class GraphSaveUtility
+namespace Subtegral.DialogueSystem.Editor
 {
-    DialogueGraphView _targetGraphView;
-    DialogueContainer _containerCache;
-
-    List<Edge> Edges => _targetGraphView.edges.ToList();
-    List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
-
-    public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
+    public class GraphSaveUtility
     {
-        return new GraphSaveUtility
+        private List<Edge> Edges => _graphView.edges.ToList();
+        private List<DialogueNode> Nodes => _graphView.nodes.ToList().Cast<DialogueNode>().ToList();
+
+        private List<Group> CommentBlocks =>
+            _graphView.graphElements.ToList().Where(x => x is Group).Cast<Group>().ToList();
+
+        private DialogueContainer _dialogueContainer;
+        private StoryGraphView _graphView;
+
+        public static GraphSaveUtility GetInstance(StoryGraphView graphView)
         {
-            _targetGraphView = targetGraphView
-        };
-    }
-
-    public void SaveGraph(string fileName)
-    {
-        if (!Edges.Any()) return;
-        var dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
-        var connectedPorts = Edges.Where(Edge => Edge.input.node != null).ToArray();
-
-        for(int i = 0; i<connectedPorts.Length; i++)
-        {
-            var outputNode = connectedPorts[i].output.node as DialogueNode;
-            var inputNode = connectedPorts[i].input.node as DialogueNode;
-
-            dialogueContainer.NodeLinks.Add(new NodeLinkData
+            return new GraphSaveUtility
             {
-                BaseNodeGuid = outputNode.GUID,
-                PortName = connectedPorts[i].output.portName,
-                TargetNodeGuid = inputNode.GUID
-            });
+                _graphView = graphView
+            };
         }
 
-        foreach(var dialogueNode in Nodes.Where(node=>!node.EntryPoint))
+        public void SaveGraph(string fileName)
         {
-            dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
+            var dialogueContainerObject = ScriptableObject.CreateInstance<DialogueContainer>();
+            if (!SaveNodes(fileName, dialogueContainerObject)) return;
+            SaveExposedProperties(dialogueContainerObject);
+            SaveCommentBlocks(dialogueContainerObject);
+
+            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                AssetDatabase.CreateFolder("Assets", "Resources");
+
+            AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/Resources/{fileName}.asset");
+            AssetDatabase.SaveAssets();
+        }
+
+        private bool SaveNodes(string fileName, DialogueContainer dialogueContainerObject)
+        {
+            if (!Edges.Any()) return false;
+            var connectedSockets = Edges.Where(x => x.input.node != null).ToArray();
+            for (var i = 0; i < connectedSockets.Count(); i++)
             {
-                Guid = dialogueNode.GUID,
-                DialogueText = dialogueNode.DialogueText,
-                Position = dialogueNode.GetPosition().position
-            });
+                var outputNode = (connectedSockets[i].output.node as DialogueNode);
+                var inputNode = (connectedSockets[i].input.node as DialogueNode);
+                dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+                {
+                    BaseNodeGUID = outputNode.GUID,
+                    PortName = connectedSockets[i].output.portName,
+                    TargetNodeGUID = inputNode.GUID
+                });
+            }
+
+            foreach (var node in Nodes.Where(node => !node.EntyPoint))
+            {
+                dialogueContainerObject.DialogueNodeData.Add(new DialogueNodeData
+                {
+                    NodeGUID = node.GUID,
+                    DialogueText = node.DialogueText,
+                    Position = node.GetPosition().position
+                });
+            }
+
+            return true;
         }
 
-        if (!AssetDatabase.IsValidFolder("Assets/Resources/Dialogues"))
-            AssetDatabase.CreateFolder("Assets", "Resources");
-
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Resources/Dialogues/{fileName}.asset");
-        AssetDatabase.SaveAssets();
-    }
-
-    public void LoadGraph(string fileName)
-    {
-        _containerCache = Resources.Load<DialogueContainer>($"Dialogues/{fileName}");
-        if(_containerCache == null)
+        private void SaveExposedProperties(DialogueContainer dialogueContainer)
         {
-            EditorUtility.DisplayDialog("File not found", "Target dialogue graph file does not exist.", "OK");
-            return;
+            dialogueContainer.ExposedProperties.Clear();
+            dialogueContainer.ExposedProperties.AddRange(_graphView.ExposedProperties);
         }
 
-        ClearGraph();
-        CreateNodes();
-        ConnectNodes();
-    }
-
-    void ClearGraph()
-    {
-        Nodes.Find(DialogueNode => DialogueNode.EntryPoint).GUID = _containerCache.NodeLinks[0].BaseNodeGuid;
-        foreach (var node in Nodes)
+        private void SaveCommentBlocks(DialogueContainer dialogueContainer)
         {
-            if (node.EntryPoint) continue;
-            Edges.Where(Edges => Edges.input.node == node).ToList().ForEach(edge=>_targetGraphView.RemoveElement(edge));
+            foreach (var block in CommentBlocks)
+            {
+                var nodes = block.containedElements.Where(x => x is DialogueNode).Cast<DialogueNode>().Select(x => x.GUID)
+                    .ToList();
 
-            _targetGraphView.RemoveElement(node);
+                dialogueContainer.CommentBlockData.Add(new CommentBlockData
+                {
+                    ChildNodes = nodes,
+                    Title = block.title,
+                    Position = block.GetPosition().position
+                });
+            }
         }
-    }
 
-    void CreateNodes()
-    {
-        foreach(DialogueNodeData nodeData in _containerCache.DialogueNodeData)
+        public void LoadNarrative(string fileName)
         {
-            var tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText);
-            tempNode.GUID = nodeData.Guid;
-            _targetGraphView.AddElement(tempNode);
+            _dialogueContainer = Resources.Load<DialogueContainer>(fileName);
+            if (_dialogueContainer == null)
+            {
+                EditorUtility.DisplayDialog("File Not Found", "Target Narrative Data does not exist!", "OK");
+                return;
+            }
 
-            var nodePorts = _containerCache.NodeLinks.Where(NodeLinkData => NodeLinkData.BaseNodeGuid == nodeData.Guid).ToList();
-            nodePorts.ForEach(NodeLinkData => _targetGraphView.AddChoicePort(tempNode, NodeLinkData.PortName));
+            ClearGraph();
+            GenerateDialogueNodes();
+            ConnectDialogueNodes();
+            AddExposedProperties();
+            GenerateCommentBlocks();
         }
-    }
 
-    void ConnectNodes()
-    {
+        /// <summary>
+        /// Set Entry point GUID then Get All Nodes, remove all and their edges. Leave only the entrypoint node. (Remove its edge too)
+        /// </summary>
+        private void ClearGraph()
+        {
+            Nodes.Find(x => x.EntyPoint).GUID = _dialogueContainer.NodeLinks[0].BaseNodeGUID;
+            foreach (var perNode in Nodes)
+            {
+                if (perNode.EntyPoint) continue;
+                Edges.Where(x => x.input.node == perNode).ToList()
+                    .ForEach(edge => _graphView.RemoveElement(edge));
+                _graphView.RemoveElement(perNode);
+            }
+        }
 
+        /// <summary>
+        /// Create All serialized nodes and assign their guid and dialogue text to them
+        /// </summary>
+        private void GenerateDialogueNodes()
+        {
+            foreach (var perNode in _dialogueContainer.DialogueNodeData)
+            {
+                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero);
+                tempNode.GUID = perNode.NodeGUID;
+                _graphView.AddElement(tempNode);
+
+                var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
+                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName));
+            }
+        }
+
+        private void ConnectDialogueNodes()
+        {
+            for (var i = 0; i < Nodes.Count; i++)
+            {
+                var k = i; //Prevent access to modified closure
+                var connections = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == Nodes[k].GUID).ToList();
+                for (var j = 0; j < connections.Count(); j++)
+                {
+                    var targetNodeGUID = connections[j].TargetNodeGUID;
+                    var targetNode = Nodes.First(x => x.GUID == targetNodeGUID);
+                    LinkNodesTogether(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
+
+                    targetNode.SetPosition(new Rect(
+                        _dialogueContainer.DialogueNodeData.First(x => x.NodeGUID == targetNodeGUID).Position,
+                        _graphView.DefaultNodeSize));
+                }
+            }
+        }
+
+        private void LinkNodesTogether(Port outputSocket, Port inputSocket)
+        {
+            var tempEdge = new Edge()
+            {
+                output = outputSocket,
+                input = inputSocket
+            };
+            tempEdge?.input.Connect(tempEdge);
+            tempEdge?.output.Connect(tempEdge);
+            _graphView.Add(tempEdge);
+        }
+
+        private void AddExposedProperties()
+        {
+            _graphView.ClearBlackBoardAndExposedProperties();
+            foreach (var exposedProperty in _dialogueContainer.ExposedProperties)
+            {
+                _graphView.AddPropertyToBlackBoard(exposedProperty);
+            }
+        }
+
+        private void GenerateCommentBlocks()
+        {
+            foreach (var commentBlock in CommentBlocks)
+            {
+                _graphView.RemoveElement(commentBlock);
+            }
+
+            foreach (var commentBlockData in _dialogueContainer.CommentBlockData)
+            {
+               var block = _graphView.CreateCommentBlock(new Rect(commentBlockData.Position, _graphView.DefaultCommentBlockSize),
+                    commentBlockData);
+               block.AddElements(Nodes.Where(x=>commentBlockData.ChildNodes.Contains(x.GUID)));
+            }
+        }
     }
 }
