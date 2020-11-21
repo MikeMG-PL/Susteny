@@ -6,7 +6,7 @@ namespace Subtegral.DialogueSystem.DataContainers
     [Serializable]
     public class DialogueNodeData
     {
-        public string QuitNode;
+        public bool QuitNode;
         public string NodeGUID;
         public string DialogueText;
         public Vector2 Position;

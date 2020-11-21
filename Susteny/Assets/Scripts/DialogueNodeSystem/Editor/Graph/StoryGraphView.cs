@@ -118,12 +118,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, string quit)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit)
         {
             AddElement(CreateNode(nodeName, position, quit));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, string quit)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -141,17 +141,18 @@ namespace Subtegral.DialogueSystem.Editor
             tempDialogueNode.SetPosition(new Rect(position,
                 DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
 
-            //var quitNode = new UnityEngine.UIElements.Toggle()
-            var quitNode = new TextField()
+            var quitNode = new UnityEngine.UIElements.Toggle()
             {
-                //text = "quits dialogue?",
-                value = tempDialogueNode.QuitNode//QuitNode
+                text = "quits dialogue",
+                value = tempDialogueNode.QuitNode
             };
             quitNode.RegisterValueChangedCallback((x) => tempDialogueNode.QuitNode = x.newValue);
             quitNode.SetValueWithoutNotify(quitNode.value);
             tempDialogueNode.mainContainer.Add(quitNode);
 
-            var textField = new TextField("");
+            var textField = new TextField();
+            textField.multiline = true;
+
             textField.RegisterValueChangedCallback(evt =>
             {
                 tempDialogueNode.DialogueText = evt.newValue;
@@ -180,11 +181,23 @@ namespace Subtegral.DialogueSystem.Editor
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
 
+            var sentence = new TextField()
+            {
+                name = string.Empty,
+                value = "[Do not modify to use \"Option\" as a text]"
+            };
+            sentence.multiline = true;
+
+            generatedPort.contentContainer.Add(sentence);
+            generatedPort.contentContainer.Add(new Label("| Sentence:"));
+
             var textField = new TextField()
             {
                 name = string.Empty,
                 value = outputPortName
             };
+            textField.multiline = true;
+
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
             generatedPort.contentContainer.Add(textField);
@@ -193,6 +206,7 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 text = "Delete choice"
             };
+            generatedPort.contentContainer.Add(new Label("  | Option:"));
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);

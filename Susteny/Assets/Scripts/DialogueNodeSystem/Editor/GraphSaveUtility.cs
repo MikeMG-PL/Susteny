@@ -39,10 +39,9 @@ namespace Subtegral.DialogueSystem.Editor
             SaveExposedProperties(dialogueContainerObject);
             SaveCommentBlocks(dialogueContainerObject);
 
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                AssetDatabase.CreateFolder("Assets", "Resources");
-
-            AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/Resources/{fileName}.asset");
+            if (!AssetDatabase.IsValidFolder("Assets/Resources/Dialogues"))
+                AssetDatabase.CreateFolder("Assets/Resources", "Dialogues");
+            AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/Resources/Dialogues/{fileName}.asset");
             AssetDatabase.SaveAssets();
         }
 
@@ -100,7 +99,7 @@ namespace Subtegral.DialogueSystem.Editor
 
         public void LoadNarrative(string fileName)
         {
-            _dialogueContainer = Resources.Load<DialogueContainer>(fileName);
+            _dialogueContainer = Resources.Load<DialogueContainer>($"Dialogues/{fileName}");
             if (_dialogueContainer == null)
             {
                 EditorUtility.DisplayDialog("File Not Found", "Target Narrative Data does not exist!", "OK");

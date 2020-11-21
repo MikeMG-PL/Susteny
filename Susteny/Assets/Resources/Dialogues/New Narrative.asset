@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: New Narrative
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: b5312b9f-acf6-493c-9922-5918b6868871
+    PortName: Next
+    TargetNodeGUID: 865e77ca-1ea9-4762-9c67-8ac82cb175f2
+  - BaseNodeGUID: 865e77ca-1ea9-4762-9c67-8ac82cb175f2
+    PortName: '[ignoruj]'
+    TargetNodeGUID: 1eca4ce0-b9e4-4cba-8922-3b97d0d4a0d8
+  - BaseNodeGUID: 865e77ca-1ea9-4762-9c67-8ac82cb175f2
+    PortName: Bruh
+    TargetNodeGUID: 4a6e2b2a-4403-4b42-b474-f9f2a7e058b1
+  - BaseNodeGUID: 865e77ca-1ea9-4762-9c67-8ac82cb175f2
+    PortName: Fajno
+    TargetNodeGUID: 4a6e2b2a-4403-4b42-b474-f9f2a7e058b1
+  DialogueNodeData:
+  - QuitNode: 1
+    NodeGUID: 1eca4ce0-b9e4-4cba-8922-3b97d0d4a0d8
+    DialogueText: Dialogue Node
+    Position: {x: 951, y: -13}
+  - QuitNode: 0
+    NodeGUID: 4a6e2b2a-4403-4b42-b474-f9f2a7e058b1
+    DialogueText: Tu jest kolejna kwestia dialogowa.
+    Position: {x: 1058, y: 197}
+  - QuitNode: 0
+    NodeGUID: 865e77ca-1ea9-4762-9c67-8ac82cb175f2
+    DialogueText: To jest pierwsza kwestia dialogowa.
+    Position: {x: 267, y: 193}
+  ExposedProperties: []
+  CommentBlockData:
+  - ChildNodes: []
+    Position: {x: 251, y: 363}
+    Title: "To jest pierwsza rzecz, jak\u0105 wypowie napotkana posta\u0107."
