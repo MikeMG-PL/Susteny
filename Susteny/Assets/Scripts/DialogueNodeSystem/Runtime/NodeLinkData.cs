@@ -7,6 +7,7 @@ namespace Subtegral.DialogueSystem.DataContainers
     public class NodeLinkData
     {
         public string BaseNodeGUID;
+        public string Sentence;
         public string PortName;
         public string TargetNodeGUID;
     }

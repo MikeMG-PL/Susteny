@@ -57,6 +57,7 @@ namespace Subtegral.DialogueSystem.Editor
                 {
                     BaseNodeGUID = outputNode.GUID,
                     PortName = connectedSockets[i].output.portName,
+                    Sentence = connectedSockets[i].output.name,
                     TargetNodeGUID = inputNode.GUID
                 });
             }
@@ -140,7 +141,7 @@ namespace Subtegral.DialogueSystem.Editor
                 tempNode.QuitNode = perNode.QuitNode;
                 _graphView.AddElement(tempNode);
                 var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
-                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName));
+                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.Sentence, x.PortName));
             }
         }
 

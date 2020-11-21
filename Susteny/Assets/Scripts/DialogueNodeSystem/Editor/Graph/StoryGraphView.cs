@@ -161,7 +161,7 @@ namespace Subtegral.DialogueSystem.Editor
             textField.SetValueWithoutNotify(tempDialogueNode.title);
             tempDialogueNode.mainContainer.Add(textField);
 
-            var button = new Button(() => { AddChoicePort(tempDialogueNode); })
+            var button = new Button(() => { AddChoicePort(tempDialogueNode, "[Do not modify to use \"Option\" as a text]"); })
             {
                 text = "Add Choice"
             };
@@ -170,7 +170,7 @@ namespace Subtegral.DialogueSystem.Editor
         }
 
 
-        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
+        public void AddChoicePort(DialogueNode nodeCache, string title, string overriddenPortName = "")
         {
             var generatedPort = GetPortInstance(nodeCache, Direction.Output);
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
@@ -180,14 +180,18 @@ namespace Subtegral.DialogueSystem.Editor
             var outputPortName = string.IsNullOrEmpty(overriddenPortName)
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
+            //var sentenceToShow = "[Do not modify to use \"Option\" as a text]";
+            var sentenceToShow = string.IsNullOrEmpty(title) ? "[Do not modify to use \"Option\" as a text]" : title;
 
+            generatedPort.contentContainer.Add(new Label("  "));
             var sentence = new TextField()
             {
                 name = string.Empty,
-                value = "[Do not modify to use \"Option\" as a text]"
+                value = sentenceToShow
             };
             sentence.multiline = true;
 
+            sentence.RegisterValueChangedCallback((x) => generatedPort.name = x.newValue);
             generatedPort.contentContainer.Add(sentence);
             generatedPort.contentContainer.Add(new Label("| Sentence:"));
 
