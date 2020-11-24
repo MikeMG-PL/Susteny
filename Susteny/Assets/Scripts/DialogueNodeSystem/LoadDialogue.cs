@@ -11,6 +11,7 @@ public class LoadDialogue : MonoBehaviour
     public int placeHolderChoice;
     public List<DialogueContainer> dialogues;
     DialogueContainer currentDialogue;
+    bool dialogueStarted;
 
     string dialogueText;
     List<string> options;
@@ -21,8 +22,6 @@ public class LoadDialogue : MonoBehaviour
     void Start()
     {
         Load(currentDialogueID);
-        FirstNode(0);
-        GetOptions();
     }
 
     void Update()
@@ -40,23 +39,32 @@ public class LoadDialogue : MonoBehaviour
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
     void ProcessDialogue()
     {
-        GetNode();
-        GetOptions();
+        if (!dialogueStarted)
+            FirstNode();
+        else
+        {
+            GetNode();
+            if (!quitNode)
+                GetOptions();
+        }
+        dialogueStarted = true;
     }
 
     /// FUNKCJE ODCZYTUJĄCE DANE Z POBRANEGO SO W RAMACH FUNKCJI ProcessDialogue() ///
 
-
-    void FirstNode(int i)
+    void FirstNode()
     {
-        var quitNode = currentDialogue.DialogueNodeData[i].QuitNode;
+        quitNode = currentDialogue.DialogueNodeData[0].QuitNode;
         if (!quitNode)
         {
-            nodeGUID = currentDialogue.DialogueNodeData[i].NodeGUID;
-            dialogueText = currentDialogue.DialogueNodeData[i].DialogueText;
+            nodeGUID = currentDialogue.DialogueNodeData[0].NodeGUID;
+            dialogueText = currentDialogue.DialogueNodeData[0].DialogueText;
             Debug.Log($"{nameOfNPC}: {dialogueText}");
+            GetOptions();
         }
         else Debug.Log("Koniec dialogu.");
+
+
     }
 
     void GetNode()
@@ -82,7 +90,6 @@ public class LoadDialogue : MonoBehaviour
     {
         options = new List<string>();
         targetNodes = new List<string>();
-
 
         var nodeLinks = currentDialogue.NodeLinks;
         foreach (NodeLinkData n in nodeLinks)
