@@ -1340,12 +1340,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932751233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3bbc4607ef9e68459b42170a494a2c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a63c4a5ff9878d42857a41f56797e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueSO: {fileID: 11400000, guid: fad8ea1c734b4f64495beddf67542aa8, type: 2}
-  chosenDialogue: 0
-  choice: 1.1
+  nameOfNPC: NPC
+  currentDialogueID: 0
+  placeHolderChoice: 1
+  dialogues:
+  - {fileID: 11400000, guid: 68ffd7970abcc1e4695d9f1e088e1782, type: 2}
 --- !u!33 &1932751237
 MeshFilter:
   m_ObjectHideFlags: 0
