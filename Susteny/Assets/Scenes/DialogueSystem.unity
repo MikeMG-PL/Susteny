@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfNPC: NPC
   currentDialogueID: 0
-  placeHolderChoice: 1
+  placeHolderChoice: 0
   dialogues:
   - {fileID: 11400000, guid: 68ffd7970abcc1e4695d9f1e088e1782, type: 2}
 --- !u!33 &1932751237
