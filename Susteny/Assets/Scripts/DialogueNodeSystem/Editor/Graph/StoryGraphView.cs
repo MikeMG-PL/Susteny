@@ -118,19 +118,20 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
         {
-            AddElement(CreateNode(nodeName, position, quit));
+            AddElement(CreateNode(nodeName, position, quit, pText));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
         {
             var tempDialogueNode = new DialogueNode()
             {
                 title = nodeName,
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
-                QuitNode = quit
+                QuitNode = quit,
+                PlayerText = pText
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
@@ -149,6 +150,15 @@ namespace Subtegral.DialogueSystem.Editor
             quitNode.RegisterValueChangedCallback((x) => tempDialogueNode.QuitNode = x.newValue);
             quitNode.SetValueWithoutNotify(quitNode.value);
             tempDialogueNode.mainContainer.Add(quitNode);
+
+            var playerText = new UnityEngine.UIElements.Toggle()
+            {
+                text = "player's text",
+                value = tempDialogueNode.PlayerText
+            };
+            playerText.RegisterValueChangedCallback((x) => tempDialogueNode.PlayerText = x.newValue);
+            playerText.SetValueWithoutNotify(playerText.value);
+            tempDialogueNode.mainContainer.Add(playerText);
 
             var textField = new TextField();
             textField.multiline = true;

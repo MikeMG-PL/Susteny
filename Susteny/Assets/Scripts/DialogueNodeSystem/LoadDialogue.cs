@@ -34,6 +34,8 @@ public class LoadDialogue : MonoBehaviour
     void Load(int i)
     {
         currentDialogue = dialogues[i];
+        if (currentDialogue == null)
+            Debug.LogError($"Beware! NPC \"{name}\", a.k.a. \"{nameOfNPC}\" has empty places for dialogue data! Assign them in the inspector.");
     }
 
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
@@ -59,7 +61,11 @@ public class LoadDialogue : MonoBehaviour
         {
             nodeGUID = currentDialogue.DialogueNodeData[0].NodeGUID;
             dialogueText = currentDialogue.DialogueNodeData[0].DialogueText;
-            Debug.Log($"{nameOfNPC}: {dialogueText}");
+
+            if(!currentDialogue.DialogueNodeData[0].PlayerText)
+                Debug.Log($"{nameOfNPC}: {dialogueText}");
+            else Debug.Log($"YOU: {dialogueText}");
+
             GetOptions();
         }
         else Debug.Log("Koniec dialogu.");
@@ -79,7 +85,11 @@ public class LoadDialogue : MonoBehaviour
                 {
                     nodeGUID = d.NodeGUID;
                     dialogueText = d.DialogueText;
-                    Debug.Log($"{nameOfNPC}: {dialogueText}");
+
+                    if(!d.PlayerText)
+                        Debug.Log($"{nameOfNPC}: {dialogueText}");
+                    else
+                        Debug.Log($"YOU: {dialogueText}");
                 }
                 else Debug.Log("Koniec dialogu.");
             }

@@ -47,22 +47,26 @@ MonoBehaviour:
     TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
   DialogueNodeData:
   - QuitNode: 0
-    NodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
-    DialogueText: "K.? Do cholery, pukaj, jak zamierzasz wej\u015B\u0107... Wiesz,
-      jak mnie przestraszy\u0142e\u015B?"
-    Position: {x: 244, y: 183}
-  - QuitNode: 0
+    PlayerText: 0
     NodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
     DialogueText: "\u0106\u015B\u015B\u015B, zaczekaj. Zaraz ci powiem."
     Position: {x: 1154, y: -86}
   - QuitNode: 0
+    PlayerText: 0
     NodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
     DialogueText: "Domy\u015Blam si\u0119, K., \u017Ce masz mi pewnie par\u0119 pyta\u0144
       do zadania..."
     Position: {x: 1846, y: 180}
   - QuitNode: 1
+    PlayerText: 0
     NodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
     DialogueText: finish node
     Position: {x: 2693, y: 384}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    DialogueText: "K.? Do cholery, pukaj, jak zamierzasz wej\u015B\u0107... Wiesz,
+      jak mnie przestraszy\u0142e\u015B?"
+    Position: {x: 244, y: 183}
   ExposedProperties: []
   CommentBlockData: []
