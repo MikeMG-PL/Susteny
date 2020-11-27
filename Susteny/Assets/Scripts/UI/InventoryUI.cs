@@ -6,6 +6,7 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public Inventory inventory;
+    public RectTransform startPosition;
     public int x_start = -200;
     public int y_start = 100;
     public int x_space_between_items;
@@ -55,8 +56,8 @@ public class InventoryUI : MonoBehaviour
     Vector3 GetPosition(int i)
     {
         return new Vector3(
-            x_start + (x_space_between_items * (i % number_of_colums)),
-            y_start + (-y_space_between_items * (i / number_of_colums)),
+            startPosition.anchoredPosition.x + (x_space_between_items * (i % number_of_colums)),
+            startPosition.anchoredPosition.y + (-y_space_between_items * (i / number_of_colums)),
             0f);
     }
 }
