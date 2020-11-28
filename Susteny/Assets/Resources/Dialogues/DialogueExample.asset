@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: DialogueExample
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: bdd1ecfc-9fda-480f-9790-dc76a3e5b458
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+  - BaseNodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: Przepraszam...
+    TargetNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: Waleria? Co ty tutaj robisz?
+    TargetNodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: "W\u0142a\u015Bnie widz\u0119."
+    TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
+  - BaseNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+    Sentence: 
+    PortName: Co tutaj robisz?
+    TargetNodeGUID: 266e9ac6-b796-43ba-89b8-c3ef028d3145
+  - BaseNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+    Sentence: 
+    PortName: "Co\u015B ukrywacie?"
+    TargetNodeGUID: b67b5f60-529e-46e3-b6c8-24f4321ac046
+  - BaseNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+    Sentence: 
+    PortName: "Chcesz mi co\u015B powiedzie\u0107?"
+    TargetNodeGUID: 3d91269f-91ed-42a7-a970-b48f5d9eb11a
+  - BaseNodeGUID: 266e9ac6-b796-43ba-89b8-c3ef028d3145
+    Sentence: 
+    PortName: "Nie spodziewa\u0142em si\u0119 tego."
+    TargetNodeGUID: 0e649464-ae7e-440f-8a1c-ec015edc071a
+  - BaseNodeGUID: 266e9ac6-b796-43ba-89b8-c3ef028d3145
+    Sentence: 
+    PortName: "Domy\u015Bli\u0142em si\u0119."
+    TargetNodeGUID: e85b326a-290b-4400-b668-dd056cbe6797
+  - BaseNodeGUID: e85b326a-290b-4400-b668-dd056cbe6797
+    Sentence: 
+    PortName: Wybornie...
+    TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
+  - BaseNodeGUID: 0e649464-ae7e-440f-8a1c-ec015edc071a
+    Sentence: 
+    PortName: Wybornie...
+    TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
+  - BaseNodeGUID: b67b5f60-529e-46e3-b6c8-24f4321ac046
+    Sentence: 
+    PortName: "M\xF3w, zatem."
+    TargetNodeGUID: 0e649464-ae7e-440f-8a1c-ec015edc071a
+  - BaseNodeGUID: 3d91269f-91ed-42a7-a970-b48f5d9eb11a
+    Sentence: 
+    PortName: "Przejd\u017A wi\u0119c do rzeczy, Walerio..."
+    TargetNodeGUID: 0e649464-ae7e-440f-8a1c-ec015edc071a
+  - BaseNodeGUID: b67b5f60-529e-46e3-b6c8-24f4321ac046
+    Sentence: 
+    PortName: "Mhm. Chyba \u0142api\u0119 tw\xF3j tok my\u015Blenia."
+    TargetNodeGUID: e85b326a-290b-4400-b668-dd056cbe6797
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
+    DialogueText: "\u0106\u015B\u015B\u015B, zaczekaj. Zaraz ci powiem."
+    Position: {x: 1154, y: -86}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+    DialogueText: "Domy\u015Blam si\u0119, K., \u017Ce masz mi pewnie par\u0119 pyta\u0144
+      do zadania..."
+    Position: {x: 1846, y: 180}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    DialogueText: "K.? Do cholery, pukaj, jak zamierzasz wej\u015B\u0107... Wiesz,
+      jak mnie przestraszy\u0142e\u015B?"
+    Position: {x: 244, y: 183}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 266e9ac6-b796-43ba-89b8-c3ef028d3145
+    DialogueText: "Czekam na ciebie, co niby mam robi\u0107? Przecie\u017C to ja
+      do ciebie napisa\u0142am ten list!"
+    Position: {x: 2640, y: -253}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: b67b5f60-529e-46e3-b6c8-24f4321ac046
+    DialogueText: "Tak. Ale chyba powiniene\u015B si\u0119 cieszy\u0107, \u017Ce
+      zamierzamy ci\u0119 wtajemniczy\u0107."
+    Position: {x: 2645, y: -104}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 3d91269f-91ed-42a7-a970-b48f5d9eb11a
+    DialogueText: "Tak. Co\u015B ukrywamy i zamierzamy ci\u0119 wtajemniczy\u0107."
+    Position: {x: 2656, y: 54}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 0e649464-ae7e-440f-8a1c-ec015edc071a
+    DialogueText: "Jeszcze nie raz ci\u0119 zaskocz\u0119."
+    Position: {x: 3546, y: -224}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
+    DialogueText: finish node
+    Position: {x: 4341, y: 408}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e85b326a-290b-4400-b668-dd056cbe6797
+    DialogueText: "Ciesz\u0119 si\u0119, \u017Ce za mn\u0105 nad\u0105\u017Casz."
+    Position: {x: 3559, y: -411}
+  ExposedProperties: []
+  CommentBlockData: []
