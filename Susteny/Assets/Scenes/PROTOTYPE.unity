@@ -1375,5 +1375,20 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 5096870061051996923}
+    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39908803dc136e341a26d197c61c99b1, type: 3}
