@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Subtegral.DialogueSystem.DataContainers;
 
 public class LoadDialogue : MonoBehaviour
@@ -19,27 +20,24 @@ public class LoadDialogue : MonoBehaviour
     string nodeGUID;
     bool quitNode;
 
-    void Start()
-    {
-        Load(currentDialogueID);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-            ProcessDialogue();
-    }
+    public GameObject panel;
+    public GameObject buttonPrefab;
+    Text npcName;
+    Text sentence;
 
     // Wczytanie dialogu
-    void Load(int i)
+    public void Load(int i)
     {
         currentDialogue = dialogues[i];
         if (currentDialogue == null)
             Debug.LogError($"Beware! NPC \"{name}\", a.k.a. \"{nameOfNPC}\" has empty places for dialogue data! Assign them in the inspector.");
+
+        npcName = panel.GetComponent<Panel>().npcName;
+        sentence = panel.GetComponent<Panel>().sentence;
     }
 
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
-    void ProcessDialogue()
+    public void ProcessDialogue()
     {
         if (!dialogueStarted)
             FirstNode();
@@ -61,16 +59,23 @@ public class LoadDialogue : MonoBehaviour
         {
             nodeGUID = currentDialogue.DialogueNodeData[0].NodeGUID;
             dialogueText = currentDialogue.DialogueNodeData[0].DialogueText;
+            Debug.Log(dialogueText);
 
             if(!currentDialogue.DialogueNodeData[0].PlayerText)
-                Debug.Log($"{nameOfNPC}: {dialogueText}");
-            else Debug.Log($"YOU: {dialogueText}");
+            {
+                npcName.text = nameOfNPC;
+                sentence.text = dialogueText;
+            }
+            else
+            {
+                npcName.text = nameOfNPC;
+                sentence.text = ($"[TY:] {dialogueText}");
+            }
+                
 
             GetOptions();
         }
         else Debug.Log("Koniec dialogu.");
-
-
     }
 
     void GetNode()
@@ -86,10 +91,16 @@ public class LoadDialogue : MonoBehaviour
                     nodeGUID = d.NodeGUID;
                     dialogueText = d.DialogueText;
 
-                    if(!d.PlayerText)
-                        Debug.Log($"{nameOfNPC}: {dialogueText}");
+                    if (!d.PlayerText)
+                    {
+                        npcName.text = nameOfNPC;
+                        sentence.text = dialogueText;
+                    }
                     else
-                        Debug.Log($"YOU: {dialogueText}");
+                    {
+                        npcName.text = nameOfNPC;
+                        sentence.text = ($"[TY:] {dialogueText}");
+                    }
                 }
                 else Debug.Log("Koniec dialogu.");
             }
@@ -104,21 +115,29 @@ public class LoadDialogue : MonoBehaviour
         var nodeLinks = currentDialogue.NodeLinks;
         foreach (NodeLinkData n in nodeLinks)
         {
+            int instantiatedButtons = 0;
             if (n.BaseNodeGUID == nodeGUID)
             {
                 targetNodes.Add(n.TargetNodeGUID);
                 if (string.IsNullOrEmpty(n.Sentence))
                 {
                     options.Add(n.PortName);
-                    Debug.Log($">>> {n.PortName}");
+                    CreateButton(instantiatedButtons, n.PortName);
                 }
                 else
                 {
                     options.Add(n.Sentence);
-                    Debug.Log($">>> {n.Sentence}");
+                    CreateButton(instantiatedButtons, n.Sentence);
                 }
             }
         }
+    }
 
+    void CreateButton(int n, string text)
+    {
+        n++;
+        var option = Instantiate(buttonPrefab, panel.transform);
+        option.transform.localPosition = new Vector2(0, (n - 1) * (-40) - 100);
+        option.transform.GetChild(0).GetComponent<Text>().text = text;
     }
 }

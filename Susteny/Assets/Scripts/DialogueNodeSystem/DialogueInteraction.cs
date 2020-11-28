@@ -32,5 +32,12 @@ public class DialogueInteraction : MonoBehaviour
         talking = b;
         panel.SetActive(b);
         Talking.Invoke(b);
+
+        if (b)
+        {
+            var d = GetComponent<LoadDialogue>();
+            d.Load(d.currentDialogueID);
+            d.ProcessDialogue();
+        }
     }
 }

@@ -17,18 +17,6 @@ MonoBehaviour:
     Sentence: 
     PortName: Next
     TargetNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
-  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
-    Sentence: 
-    PortName: Przepraszam...
-    TargetNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
-  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
-    Sentence: 
-    PortName: Waleria? Co ty tutaj robisz?
-    TargetNodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
-  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
-    Sentence: 
-    PortName: "W\u0142a\u015Bnie widz\u0119."
-    TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
   - BaseNodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
     Sentence: 
     PortName: '[dalej...]'
@@ -44,6 +32,18 @@ MonoBehaviour:
   - BaseNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
     Sentence: 
     PortName: "Chcesz mi co\u015B powiedzie\u0107?"
+    TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: Przepraszam...
+    TargetNodeGUID: e4b89070-8b61-4017-9328-b11c2ee5fbc0
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: Waleria? Co ty tutaj robisz?
+    TargetNodeGUID: 7db30b81-68b9-4624-b035-34dc49000267
+  - BaseNodeGUID: 38019b75-d113-405b-af66-d4a51d6d9981
+    Sentence: 
+    PortName: "W\u0142a\u015Bnie widz\u0119."
     TargetNodeGUID: dc397c09-f3ab-4ef9-b60c-fbe30c5633f2
   DialogueNodeData:
   - QuitNode: 0
