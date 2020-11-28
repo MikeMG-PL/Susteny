@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DialoguePanel
   - InventoryUI
+  - Cloud
+  - TaskSystem
   layers:
   - Default
   - TransparentFX
