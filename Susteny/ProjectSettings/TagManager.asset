@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DialoguePanel
+  - InventoryUI
   layers:
   - Default
   - TransparentFX

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class DialogueInteraction : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject panel;
+    GameObject player;
+    GameObject panel;
     public float interactionDistance = 5f;
     bool talking;
 
@@ -20,12 +20,18 @@ public class DialogueInteraction : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        panel = GameObject.FindGameObjectWithTag("DialoguePanel");
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     public static event Action<bool> Talking;
 
     public void Talk(bool b)
     {
         talking = b;
-        panel.SetActive(b);
+        panel.transform.GetChild(0).gameObject.SetActive(b);
         Talking.Invoke(b);
 
         var d = GetComponent<LoadDialogue>();

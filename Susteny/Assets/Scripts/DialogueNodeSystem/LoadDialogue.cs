@@ -22,11 +22,16 @@ public class LoadDialogue : MonoBehaviour
     string nodeGUID;
     bool quitNode;
 
-    public GameObject panel;
+    GameObject panel;
     public GameObject buttonPrefab;
     Text npcName;
     Text sentence;
     public int instantiatedButtons;
+
+    void Awake()
+    {
+        panel = GameObject.FindGameObjectWithTag("DialoguePanel");
+    }
 
     // Wczytanie dialogu
     public void Load(int i)
@@ -177,7 +182,7 @@ public class LoadDialogue : MonoBehaviour
     void CreateButton(string text)
     {
         instantiatedButtons++;
-        var option = Instantiate(buttonPrefab, panel.transform);
+        var option = Instantiate(buttonPrefab, panel.transform.GetChild(0));
 
         option.transform.localPosition = new Vector2(0, (instantiatedButtons - 1) * (-40) - 100);
         option.transform.GetChild(0).GetComponent<Text>().text = text;
