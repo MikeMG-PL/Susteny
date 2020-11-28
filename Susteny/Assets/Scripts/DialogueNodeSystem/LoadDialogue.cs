@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Subtegral.DialogueSystem.DataContainers;
 
@@ -9,7 +10,7 @@ public class LoadDialogue : MonoBehaviour
 {
     public string nameOfNPC;
     public int currentDialogueID;
-    public int placeHolderChoice;
+    int choice;
     public List<DialogueContainer> dialogues;
     DialogueContainer currentDialogue;
     bool dialogueStarted;
@@ -17,6 +18,7 @@ public class LoadDialogue : MonoBehaviour
     string dialogueText;
     List<string> options;
     List<string> targetNodes;
+    [HideInInspector] public List<GameObject> buttons;
     string nodeGUID;
     bool quitNode;
 
@@ -24,6 +26,7 @@ public class LoadDialogue : MonoBehaviour
     public GameObject buttonPrefab;
     Text npcName;
     Text sentence;
+    public int instantiatedButtons;
 
     // Wczytanie dialogu
     public void Load(int i)
@@ -34,6 +37,21 @@ public class LoadDialogue : MonoBehaviour
 
         npcName = panel.GetComponent<Panel>().npcName;
         sentence = panel.GetComponent<Panel>().sentence;
+        Clear();
+    }
+
+    void Clear()
+    {
+        instantiatedButtons = 0;
+        dialogueStarted = false;
+        dialogueText = null;
+        options?.Clear();
+        targetNodes?.Clear();
+        buttons = new List<GameObject>();
+        options = new List<string>();
+        targetNodes = new List<string>();
+        nodeGUID = null;
+        quitNode = false;
     }
 
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
@@ -54,28 +72,31 @@ public class LoadDialogue : MonoBehaviour
 
     void FirstNode()
     {
-        quitNode = currentDialogue.DialogueNodeData[0].QuitNode;
-        if (!quitNode)
+        Clear();
+        var target = currentDialogue.NodeLinks[0].TargetNodeGUID;
+        var dialogueNodeData = currentDialogue.DialogueNodeData;
+
+        foreach (DialogueNodeData d in dialogueNodeData)
         {
-            nodeGUID = currentDialogue.DialogueNodeData[0].NodeGUID;
-            dialogueText = currentDialogue.DialogueNodeData[0].DialogueText;
-            Debug.Log(dialogueText);
-
-            if(!currentDialogue.DialogueNodeData[0].PlayerText)
+            if (target == d.NodeGUID && !d.QuitNode)
             {
-                npcName.text = nameOfNPC;
-                sentence.text = dialogueText;
-            }
-            else
-            {
-                npcName.text = nameOfNPC;
-                sentence.text = ($"[TY:] {dialogueText}");
-            }
-                
+                nodeGUID = d.NodeGUID;
+                dialogueText = d.DialogueText;
 
-            GetOptions();
+                if (!d.PlayerText)
+                {
+                    npcName.text = nameOfNPC;
+                    sentence.text = dialogueText;
+                }
+                else
+                {
+                    npcName.text = nameOfNPC;
+                    sentence.text = ($"[TY:] {dialogueText}");
+                }
+
+                GetOptions();
+            }
         }
-        else Debug.Log("Koniec dialogu.");
     }
 
     void GetNode()
@@ -83,7 +104,7 @@ public class LoadDialogue : MonoBehaviour
         var dialogueNodeData = currentDialogue.DialogueNodeData;
         foreach (DialogueNodeData d in dialogueNodeData)
         {
-            if (targetNodes[placeHolderChoice] == d.NodeGUID)
+            if (targetNodes[choice] == d.NodeGUID)
             {
                 quitNode = d.QuitNode;
                 if (!quitNode)
@@ -102,7 +123,11 @@ public class LoadDialogue : MonoBehaviour
                         sentence.text = ($"[TY:] {dialogueText}");
                     }
                 }
-                else Debug.Log("Koniec dialogu.");
+                else
+                {
+                    GetComponent<DialogueInteraction>().Talk(false);
+                    DestroyButtons();
+                }
             }
         }
     }
@@ -112,32 +137,71 @@ public class LoadDialogue : MonoBehaviour
         options = new List<string>();
         targetNodes = new List<string>();
 
+        instantiatedButtons = 0;
         var nodeLinks = currentDialogue.NodeLinks;
         foreach (NodeLinkData n in nodeLinks)
         {
-            int instantiatedButtons = 0;
             if (n.BaseNodeGUID == nodeGUID)
             {
+                // Sprawdzenie czy ta opcja kończy dialog
+                var nodes = currentDialogue.DialogueNodeData;
+                bool quitOption = false;
+                foreach(DialogueNodeData d in nodes)
+                {
+                    if (n.TargetNodeGUID == d.NodeGUID && d.QuitNode)
+                        quitOption = true;
+                }
+
+                // Przekazanie zdania lub tytułu opcji na przycisk
                 targetNodes.Add(n.TargetNodeGUID);
                 if (string.IsNullOrEmpty(n.Sentence))
                 {
                     options.Add(n.PortName);
-                    CreateButton(instantiatedButtons, n.PortName);
+                    if(!quitOption)
+                        CreateButton(n.PortName);
+                    else
+                        CreateButton($"[ZAKOŃCZ] {n.PortName}");
                 }
                 else
                 {
                     options.Add(n.Sentence);
-                    CreateButton(instantiatedButtons, n.Sentence);
+                    if (!quitOption)
+                        CreateButton(n.Sentence);
+                    else
+                        CreateButton($"[ZAKOŃCZ] {n.Sentence}");
                 }
             }
         }
     }
 
-    void CreateButton(int n, string text)
+    void CreateButton(string text)
     {
-        n++;
+        instantiatedButtons++;
         var option = Instantiate(buttonPrefab, panel.transform);
-        option.transform.localPosition = new Vector2(0, (n - 1) * (-40) - 100);
+
+        option.transform.localPosition = new Vector2(0, (instantiatedButtons - 1) * (-40) - 100);
         option.transform.GetChild(0).GetComponent<Text>().text = text;
+        option.GetComponent<ButtonID>().buttonID = instantiatedButtons-1;
+
+        buttons.Add(option);
+        option.GetComponent<Button>().onClick.AddListener(delegate { DBG(option.GetComponent<ButtonID>().buttonID); });
+    }
+
+    void DBG(int n)
+    {
+        choice = n;
+
+        DestroyButtons();
+        GetNode();
+        GetOptions();
+    }
+
+    void DestroyButtons()
+    {
+        foreach (GameObject o in buttons)
+        {
+            Destroy(o);
+        }
+        buttons?.Clear();
     }
 }

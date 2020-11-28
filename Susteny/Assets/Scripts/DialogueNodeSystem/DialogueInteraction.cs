@@ -11,11 +11,6 @@ public class DialogueInteraction : MonoBehaviour
     public float interactionDistance = 5f;
     bool talking;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Mouse1)) Talk(false);
-    }
-
     private void OnMouseDown()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
@@ -27,17 +22,31 @@ public class DialogueInteraction : MonoBehaviour
 
     public static event Action<bool> Talking;
 
-    void Talk(bool b)
+    public void Talk(bool b)
     {
         talking = b;
         panel.SetActive(b);
         Talking.Invoke(b);
 
+        var d = GetComponent<LoadDialogue>();
         if (b)
         {
-            var d = GetComponent<LoadDialogue>();
+            DestroyButtons(d);
             d.Load(d.currentDialogueID);
             d.ProcessDialogue();
         }
+        else
+        {
+            DestroyButtons(d);
+        }
+    }
+
+    void DestroyButtons(LoadDialogue d)
+    {
+        foreach (GameObject o in d.buttons)
+        {
+            Destroy(o);
+        }
+        d.buttons?.Clear();
     }
 }

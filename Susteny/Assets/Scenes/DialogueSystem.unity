@@ -1408,12 +1408,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfNPC: NPC
   currentDialogueID: 0
-  placeHolderChoice: 0
   dialogues:
   - {fileID: 11400000, guid: 68ffd7970abcc1e4695d9f1e088e1782, type: 2}
+  buttons: []
   panel: {fileID: 1833197832}
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
     type: 3}
+  instantiatedButtons: 0
 --- !u!33 &1932751237
 MeshFilter:
   m_ObjectHideFlags: 0
