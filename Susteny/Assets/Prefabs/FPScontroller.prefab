@@ -191,10 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cef490f5043b8543a39aa1fb911f3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingBobbingSpeed: 14
-  runningBobbingSpeed: 18
-  bobbingAmountWalk: 0.05
-  bobbingAmountSprint: 0.07
+  walkingBobbingSpeed: 11
+  runningBobbingSpeed: 13.5
+  bobbingAmountWalk: 0.07
+  bobbingAmountSprint: 0.15
   controller: {fileID: 1824086119982000199}
 --- !u!1 &1824086119190900110
 GameObject:
@@ -296,9 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 6
-  runningSpeed: 12
-  jumpSpeed: 15
-  gravity: 40
+  runningSpeed: 10
+  jumpSpeed: 10
+  gravity: 30
   playerCamera: {fileID: 1824086118552689595}
   lookSpeed: 2
   lookXLimit: 70
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bc91e2bda4d6647996055440324299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 150
 --- !u!82 &1824086119982000254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -381,7 +381,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5e6d44543216ef545a0c475353f62865, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4d4b365b9f8ce6d44b78d048acfe9fae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
