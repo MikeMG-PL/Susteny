@@ -27,7 +27,7 @@ public class PlayerActions : MonoBehaviour
         grabbedInteractable.grabbing = true;
         grabbedInteractable.ungrabbing = false;
         grabbedInteractable.SetAllCollidersStatus(false);
-        viewMode.ViewModeOn(grabbedInteractable);
+        viewMode.ToggleViewMode(grabbedInteractable, true);
     }
 
     void Ungrab()
@@ -37,7 +37,7 @@ public class PlayerActions : MonoBehaviour
         grabbedInteractable.ungrabbing = true;
         grabbedInteractable.SetAllCollidersStatus(true);
         grabbedInteractable = null;
-        viewMode.ViewModeOff();
+        viewMode.ToggleViewMode(null, false);
     }
 
     public void TakeToInventory(ItemWorld interactable)

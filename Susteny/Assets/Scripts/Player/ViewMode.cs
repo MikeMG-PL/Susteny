@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 
 public class ViewMode : MonoBehaviour
@@ -13,23 +15,21 @@ public class ViewMode : MonoBehaviour
     bool viewMode;
     float focusSpeed = 30f;
 
-    public void ViewModeOn(ItemWorld item)
-    {
-        viewMode = true;
-        disablingFocus = false;
-        enablingFocus = true;
-        GetComponent<SC_FPSController>().canMove = false;
-        GetComponent<PlayerComponents>().focusCamera.SetActive(true);
-        interactable = item;
-    }
+    public static event Action<bool> Viewing;
 
-    public void ViewModeOff()
+    public void ToggleViewMode(ItemWorld item, bool b)
     {
-        viewMode = false;
-        disablingFocus = true;
-        enablingFocus = false;
-        GetComponent<SC_FPSController>().canMove = true;
-        interactable = null;
+        Viewing.Invoke(b);
+        viewMode = b;
+        disablingFocus = !b;
+        enablingFocus = b;
+        GetComponent<SC_FPSController>().canMove = !b;
+        GetComponent<SC_FPSController>().canLook = !b;
+        GetComponent<PlayerComponents>().focusCamera.SetActive(b);
+        if (b)
+            interactable = item;
+        else
+            interactable = null;
     }
 
     void Update()

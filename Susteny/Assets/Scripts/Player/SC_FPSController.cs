@@ -22,8 +22,9 @@ public class SC_FPSController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+    public bool canLook = true;
 
-    void Start()
+    void Awake()
     {
         Init();
         Subscribe();
@@ -37,21 +38,36 @@ public class SC_FPSController : MonoBehaviour
 
     void Subscribe()
     {
-        DialogueInteraction.Talking += LockControls;
+        DialogueInteraction.Talking += LockControlsCursorOn;
+        Prototype.LevelStart += LockControlsCursorOff;
+        Prototype.MouseLookUnfreeze += UnfreezeLook;
     }
     void Unsubscribe()
     {
-        DialogueInteraction.Talking -= LockControls;
+        DialogueInteraction.Talking -= LockControlsCursorOn;
+        Prototype.LevelStart -= LockControlsCursorOff;
+        Prototype.MouseLookUnfreeze -= UnfreezeLook;
     }
-    void LockControls(bool b)
+
+    void UnfreezeLook(bool b)
+    {
+        canLook = b;
+    }
+    void LockControlsCursorOn(bool b)
     {
         canMove = !b;
+        canLook = !b;
         Cursor.visible = b;
 
         if (b)
             Cursor.lockState = CursorLockMode.None;
         else
             Cursor.lockState = CursorLockMode.Locked;
+    }
+    void LockControlsCursorOff(bool b)
+    {
+        canMove = !b;
+        canLook = !b;
     }
     void Init()
     {
@@ -88,7 +104,7 @@ public class SC_FPSController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
-        if (canMove)
+        if (canLook)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);

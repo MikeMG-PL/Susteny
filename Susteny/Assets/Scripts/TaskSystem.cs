@@ -67,14 +67,13 @@ public class TaskSystem : MonoBehaviour
     // Updates display for tasks
     void updateTasksDisplay()
     {
-        tasksData.GetComponent<Text>().text = "--- Tasks --- \n";
+        tasksData.GetComponent<Text>().text = "";
         for (int i = 0; i < tasks.Count; i++)
         {
             if(tasks[i].isVisible == true && tasks[i].isDone == false)
             {
-                tasksData.GetComponent<Text>().text = tasksData.GetComponent<Text>().text + "+ " 
-                + tasks[i].name + "\n       " + tasks[i].descprition + "\n       "
-                + tasks[i].timeSpent + "\n";
+                tasksData.GetComponent<Text>().text = tasksData.GetComponent<Text>().text + "► " 
+                + tasks[i].name + "\n       " + tasks[i].descprition + "\n       ";
             }
         }
     }
