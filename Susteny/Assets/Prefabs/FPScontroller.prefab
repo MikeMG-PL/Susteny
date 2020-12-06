@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingBobbingSpeed: 11
-  runningBobbingSpeed: 13.5
+  runningBobbingSpeed: 16
   bobbingAmountWalk: 0.05
-  bobbingAmountSprint: 0.13
+  bobbingAmountSprint: 0.08
   controller: {fileID: 1824086119982000199}
 --- !u!1 &1824086119190900110
 GameObject:
@@ -206,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1824086119190900111}
   m_Layer: 0
-  m_Name: ViewObject
+  m_Name: ViewModePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,6 @@ GameObject:
   - component: {fileID: 1824086119982000196}
   - component: {fileID: 1824086119982000199}
   - component: {fileID: 1824086119982000249}
-  - component: {fileID: 1824086119982000250}
   - component: {fileID: 1824086119982000248}
   - component: {fileID: 6911843426005422561}
   - component: {fileID: 1824086119982000251}
@@ -318,22 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1e20186b6fdd148a23214a52d879f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
---- !u!114 &1824086119982000250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824086119982000198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6291419ad554c4c820e2e89f7c01c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewObject: {fileID: 1824086119190900110}
+  viewModePosition: {fileID: 1824086119190900110}
   camera: {fileID: 1824086118552689594}
   focusCamera: {fileID: 1824086120152002050}
+  inventory: {fileID: 0}
 --- !u!114 &1824086119982000248
 MonoBehaviour:
   m_ObjectHideFlags: 0

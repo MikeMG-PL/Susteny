@@ -28,8 +28,8 @@ public class ItemWorld : MonoBehaviour
     {
         if (grabbing)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerComponents>().viewObject.transform.position, 0.03f);
-            if (transform.position == player.GetComponent<PlayerComponents>().viewObject.transform.position) grabbing = false;
+            transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<Player>().viewModePosition.transform.position, 0.03f);
+            if (transform.position == player.GetComponent<Player>().viewModePosition.transform.position) grabbing = false;
         }
 
         else if (ungrabbing)

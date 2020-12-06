@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BlueItem
   m_EditorClassIdentifier: 
   itemType: 1
-  worldPrefab: {fileID: 0}
+  worldPrefab: {fileID: 7714389021140834262, guid: 16b0b96cd6a07c245a792e1f4472688e,
+    type: 3}
   UI_Prefab: {fileID: 2423658314606168525, guid: b67cf31ea098ec14caccc1fb2d3a4e40,
     type: 3}
   name: Blue

@@ -14,8 +14,16 @@ public class ViewMode : MonoBehaviour
     bool enablingFocus;
     bool viewMode;
     float focusSpeed = 30f;
+    GameObject focusCamera;
+    FloatParameter focalLength;
 
     public static event Action<bool> Viewing;
+
+    private void Start()
+    {
+        focusCamera = GetComponent<Player>().focusCamera;
+        focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
+    }
 
     public void ToggleViewMode(ItemWorld item, bool b)
     {
@@ -25,7 +33,7 @@ public class ViewMode : MonoBehaviour
         enablingFocus = b;
         GetComponent<SC_FPSController>().canMove = !b;
         GetComponent<SC_FPSController>().canLook = !b;
-        GetComponent<PlayerComponents>().focusCamera.SetActive(b);
+        focusCamera.SetActive(b);
         if (b)
             interactable = item;
         else
@@ -41,12 +49,11 @@ public class ViewMode : MonoBehaviour
 
         if (disablingFocus)
         {
-            FloatParameter focalLength = GetComponent<PlayerComponents>().focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
             if (focalLength.value <= 25)
             {
                 disablingFocus = false;
                 focalLength.value = 25f;
-                GetComponent<PlayerComponents>().focusCamera.SetActive(false);
+                focusCamera.SetActive(false);
             }
 
             else focalLength.value -= Time.deltaTime * focusSpeed;
@@ -54,7 +61,6 @@ public class ViewMode : MonoBehaviour
 
         if (enablingFocus)
         {
-            FloatParameter focalLength = GetComponent<PlayerComponents>().focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
             if (focalLength.value >= 35)
             {
                 enablingFocus = false;

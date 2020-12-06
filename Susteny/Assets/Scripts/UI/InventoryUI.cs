@@ -7,8 +7,6 @@ public class InventoryUI : MonoBehaviour
 {
     public Inventory inventory;
     public RectTransform startPosition;
-    public int x_start = -200;
-    public int y_start = 100;
     public int x_space_between_items;
     public int y_space_between_items;
     public int number_of_colums;

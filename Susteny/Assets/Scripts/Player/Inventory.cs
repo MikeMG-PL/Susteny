@@ -37,11 +37,4 @@ public class Inventory : MonoBehaviour
         }
             return searchedItem;
     }
-
-    public void ShowInventory()
-    {
-        Debug.Log("Ekwipunek zawiera: ");
-        foreach (ItemInventory i in inventory)
-            Debug.Log(i.item.name + " " + i.amount);
-    }
 }
