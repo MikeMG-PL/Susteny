@@ -13,7 +13,7 @@ public class ViewMode : MonoBehaviour
     bool disablingFocus;
     bool enablingFocus;
     bool viewMode;
-    float focusSpeed = 30f;
+    public float focusSpeed = 30f;
     GameObject focusCamera;
     FloatParameter focalLength;
 
@@ -33,11 +33,12 @@ public class ViewMode : MonoBehaviour
         enablingFocus = b;
         GetComponent<SC_FPSController>().canMove = !b;
         GetComponent<SC_FPSController>().canLook = !b;
-        focusCamera.SetActive(b);
         if (b)
+        {
+            focusCamera.SetActive(b);
             interactable = item;
-        else
-            interactable = null;
+        }
+        else interactable = null;
     }
 
     void Update()
@@ -51,9 +52,9 @@ public class ViewMode : MonoBehaviour
         {
             if (focalLength.value <= 25)
             {
-                disablingFocus = false;
                 focalLength.value = 25f;
                 focusCamera.SetActive(false);
+                disablingFocus = false;
             }
 
             else focalLength.value -= Time.deltaTime * focusSpeed;
@@ -63,8 +64,8 @@ public class ViewMode : MonoBehaviour
         {
             if (focalLength.value >= 35)
             {
-                enablingFocus = false;
                 focalLength.value = 35f;
+                enablingFocus = false;
             }
 
             else focalLength.value += Time.deltaTime * focusSpeed;
