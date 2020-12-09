@@ -1531,11 +1531,6 @@ PrefabInstance:
       propertyPath: inventoryViewTransform
       value: 
       objectReference: {fileID: 410429673}
-    - target: {fileID: 1824086119982000251, guid: b2391b03fbf38cb4bb771dcef6796d8e,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 400
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2391b03fbf38cb4bb771dcef6796d8e, type: 3}
 --- !u!114 &5096870061051996923 stripped
