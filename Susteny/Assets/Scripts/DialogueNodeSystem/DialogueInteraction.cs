@@ -30,29 +30,34 @@ public class DialogueInteraction : MonoBehaviour
 
     public void Talk(bool b)
     {
-        talking = b;
-        panel.transform.GetChild(0).gameObject.SetActive(b);
-        Talking.Invoke(b);
-
         var d = GetComponent<LoadDialogue>();
-        if (b)
-        {
-            DestroyButtons(d);
-            d.Load(d.currentDialogueID);
-            d.ProcessDialogue();
-        }
-        else
-        {
-            DestroyButtons(d);
-        }
-    }
 
-    void DestroyButtons(LoadDialogue d)
-    {
-        foreach (GameObject o in d.buttons)
+        if (d.dialogues.Count > 0)
         {
-            Destroy(o);
+            talking = b;
+            panel.transform.GetChild(0).gameObject.SetActive(b);
+            Talking.Invoke(b);
+
+
+            if (b)
+            {
+                DestroyButtons(d);
+                d.Load(d.currentDialogueID);
+                d.ProcessDialogue();
+            }
+            else
+            {
+                DestroyButtons(d);
+            }
         }
-        d.buttons?.Clear();
+
+        void DestroyButtons(LoadDialogue dial)
+        {
+            foreach (GameObject o in d.buttons)
+            {
+                Destroy(o);
+            }
+            d.buttons?.Clear();
+        }
     }
 }

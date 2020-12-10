@@ -36,13 +36,17 @@ public class LoadDialogue : MonoBehaviour
     // Wczytanie dialogu
     public void Load(int i)
     {
-        currentDialogue = dialogues[i];
-        if (currentDialogue == null)
-            Debug.LogError($"Beware! NPC \"{name}\", a.k.a. \"{nameOfNPC}\" has empty places for dialogue data! Assign them in the inspector.");
+        if (dialogues.Count > 0)
+        {
+            currentDialogue = dialogues[i];
+            if (currentDialogue == null)
+                Debug.LogError($"Beware! NPC \"{name}\", a.k.a. \"{nameOfNPC}\" has empty places for dialogue data! Assign them in the inspector.");
 
-        npcName = panel.GetComponent<Panel>().npcName;
-        sentence = panel.GetComponent<Panel>().sentence;
-        Clear();
+            npcName = panel.GetComponent<Panel>().npcName;
+            sentence = panel.GetComponent<Panel>().sentence;
+            Clear();
+        }
+
     }
 
     void Clear()
@@ -62,9 +66,9 @@ public class LoadDialogue : MonoBehaviour
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
     public void ProcessDialogue()
     {
-        if (!dialogueStarted)
+        if (!dialogueStarted && dialogues.Count > 0)
             FirstNode();
-        else
+        else if(dialogues.Count > 0)
         {
             GetNode();
             if (!quitNode)
@@ -151,7 +155,7 @@ public class LoadDialogue : MonoBehaviour
                 // Sprawdzenie czy ta opcja kończy dialog
                 var nodes = currentDialogue.DialogueNodeData;
                 bool quitOption = false;
-                foreach(DialogueNodeData d in nodes)
+                foreach (DialogueNodeData d in nodes)
                 {
                     if (n.TargetNodeGUID == d.NodeGUID && d.QuitNode)
                         quitOption = true;
@@ -162,7 +166,7 @@ public class LoadDialogue : MonoBehaviour
                 if (string.IsNullOrEmpty(n.Sentence))
                 {
                     options.Add(n.PortName);
-                    if(!quitOption)
+                    if (!quitOption)
                         CreateButton(n.PortName);
                     else
                         CreateButton($"[ZAKOŃCZ] {n.PortName}");
@@ -186,7 +190,7 @@ public class LoadDialogue : MonoBehaviour
 
         option.transform.localPosition = new Vector2(0, (instantiatedButtons - 1) * (-40) - 100);
         option.transform.GetChild(0).GetComponent<Text>().text = text;
-        option.GetComponent<ButtonID>().buttonID = instantiatedButtons-1;
+        option.GetComponent<ButtonID>().buttonID = instantiatedButtons - 1;
 
         buttons.Add(option);
         option.GetComponent<Button>().onClick.AddListener(delegate { DBG(option.GetComponent<ButtonID>().buttonID); });
