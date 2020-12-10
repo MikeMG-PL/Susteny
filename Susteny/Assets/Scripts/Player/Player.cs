@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public new GameObject camera;
     public GameObject focusCamera;
 
-    public Inventory inventory;
+    [HideInInspector] public Inventory inventory;
 
     private void Awake()
     {

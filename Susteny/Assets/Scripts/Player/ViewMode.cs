@@ -7,12 +7,13 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class ViewMode : MonoBehaviour
 {
+    public Transform inventoryViewTransform;
     public float rotationSpeed = 100f;
 
-    ItemWorld interactable;
+    GameObject viewedItem;
     bool disablingFocus;
     bool enablingFocus;
-    bool viewMode;
+    public bool active;
     public float focusSpeed = 30f;
     GameObject focusCamera;
     FloatParameter focalLength;
@@ -25,10 +26,10 @@ public class ViewMode : MonoBehaviour
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
     }
 
-    public void ToggleViewMode(ItemWorld item, bool b)
+    public void ToggleViewMode(GameObject item, bool b)
     {
         Viewing.Invoke(b);
-        viewMode = b;
+        active = b;
         disablingFocus = !b;
         enablingFocus = b;
         GetComponent<SC_FPSController>().canMove = !b;
@@ -36,16 +37,35 @@ public class ViewMode : MonoBehaviour
         if (b)
         {
             focusCamera.SetActive(b);
-            interactable = item;
+            viewedItem = item.gameObject;
         }
-        else interactable = null;
+        else viewedItem = null;
+    }
+
+    public void ToggleViewInventoryItem(bool enable, Item item = null)
+    {
+        if (enable)
+        {
+            GameObject obj = Instantiate(item.worldPrefab);
+            obj.transform.SetParent(inventoryViewTransform.parent);
+            obj.transform.localPosition = inventoryViewTransform.localPosition;
+            obj.transform.localRotation = inventoryViewTransform.localRotation;
+            obj.transform.localScale = inventoryViewTransform.localScale;
+            GetComponent<PlayerActions>().ToggleInventoryUI(false, false);
+            ToggleViewMode(obj, true);
+        }
+
+        else
+        {
+            ToggleViewMode(null, false);
+        }
     }
 
     void Update()
     {
-        if (viewMode)
+        if (active)
         {
-            interactable.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0, Space.World);
+            viewedItem.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0, Space.World);
         }
 
         if (disablingFocus)

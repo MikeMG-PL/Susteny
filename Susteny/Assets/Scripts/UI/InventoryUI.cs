@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Inventory inventory;
+    public GameObject player;
     public RectTransform startPosition;
     public int x_space_between_items;
     public int y_space_between_items;
     public int number_of_colums;
 
+    Inventory inventory;
+    ViewMode viewMode;
+
     Dictionary<ItemInventory, GameObject> itemsDisplayed = new Dictionary<ItemInventory, GameObject>();
+
+    private void Awake()
+    {
+        inventory = player.GetComponent<Inventory>();
+        viewMode = player.GetComponent<ViewMode>();
+    }
 
     private void Start()
     {
@@ -48,14 +57,17 @@ public class InventoryUI : MonoBehaviour
         var obj = Instantiate(inventory.GetInventory()[index].item.UI_Prefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = GetPosition(index);
         obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.GetInventory()[index].amount.ToString("n0");
+        ItemUI item = obj.GetComponent<ItemUI>();
+        item.item = inventory.GetInventory()[index].item;
+        item.viewMode = viewMode;
         itemsDisplayed.Add(inventory.GetInventory()[index], obj);
     }
 
     Vector3 GetPosition(int i)
     {
         return new Vector3(
-            startPosition.anchoredPosition.x + (x_space_between_items * (i % number_of_colums)),
-            startPosition.anchoredPosition.y + (-y_space_between_items * (i / number_of_colums)),
+            startPosition.localPosition.x + (x_space_between_items * (i % number_of_colums)),
+            startPosition.localPosition.y + (-y_space_between_items * (i / number_of_colums)),
             0f);
     }
 }

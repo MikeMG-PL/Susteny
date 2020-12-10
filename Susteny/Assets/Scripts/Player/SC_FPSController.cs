@@ -39,6 +39,7 @@ public class SC_FPSController : MonoBehaviour
     void Subscribe()
     {
         DialogueInteraction.Talking += LockControlsCursorOn;
+        PlayerActions.BrowsingInventory += LockControlsCursorOn;
         Prototype.LevelStart += LockControlsCursorOff;
         Prototype.MouseLookUnfreeze += UnfreezeLook;
     }
