@@ -57,9 +57,11 @@ public class InventoryUI : MonoBehaviour
         var obj = Instantiate(inventory.GetInventory()[index].item.UI_Prefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = GetPosition(index);
         obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.GetInventory()[index].amount.ToString("n0");
+
         ItemUI item = obj.GetComponent<ItemUI>();
         item.item = inventory.GetInventory()[index].item;
         item.playerActions = playerActions;
+
         itemsDisplayed.Add(inventory.GetInventory()[index], obj);
     }
 

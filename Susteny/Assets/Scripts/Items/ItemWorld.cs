@@ -17,6 +17,15 @@ public class ItemWorld : MonoBehaviour
     [HideInInspector] public bool grabbing;
     [HideInInspector] public bool ungrabbing;
 
+    Player playerScript;
+    float moveToViewModeRotSpeed = 0.015f;
+    float moveToViewModePosSpeed = 0.02f;
+
+    private void Awake()
+    {
+        playerScript = player.GetComponent<Player>();
+    }
+
     void Start()
     {
         // Pozycja do której wracać będą przedmioty, które można podnieść, obejrzeć i z powrotem odstawić
@@ -28,14 +37,16 @@ public class ItemWorld : MonoBehaviour
     {
         if (grabbing)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<Player>().viewModePosition.transform.position, 0.03f);
-            if (transform.position == player.GetComponent<Player>().viewModePosition.transform.position) grabbing = false;
+            transform.position = Vector3.MoveTowards(
+                transform.position, playerScript.viewModePosition.transform.position, moveToViewModePosSpeed);
+
+            if (transform.position == playerScript.viewModePosition.transform.position) grabbing = false;
         }
 
         else if (ungrabbing)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 0.05f);
-            transform.position = Vector3.MoveTowards(transform.position, startPosition, 0.03f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, moveToViewModeRotSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, startPosition, moveToViewModePosSpeed);
 
             if (transform.position == startPosition && transform.rotation == startRotation) ungrabbing = false;
         }

@@ -10,14 +10,15 @@ public class ViewMode : MonoBehaviour
     public Transform inventoryViewTransform;
     public float rotationSpeed = 100f;
     public float focusSpeed = 30f;
-    public bool viewingItem;
-    public bool viewingFromInventory;
 
+    [HideInInspector] public bool viewingItem;
+    [HideInInspector] public bool viewingFromInventory;
+
+    FloatParameter focalLength;
     GameObject viewedItem;
+    GameObject focusCamera;
     bool disablingFocus;
     bool enablingFocus;
-    GameObject focusCamera;
-    FloatParameter focalLength;
 
     public static event Action<bool> Viewing;
 
@@ -45,15 +46,20 @@ public class ViewMode : MonoBehaviour
 
     public void ViewItemFromInventory(GameObject item)
     {
+        GameObject obj = CreateItemFromInventory(item);
+        viewingFromInventory = true;
+        GetComponent<PlayerActions>().ToggleInventoryUI(false);
+        ToggleViewMode(obj, true);
+    }
+
+    GameObject CreateItemFromInventory(GameObject item)
+    {
         GameObject obj = Instantiate(item);
         obj.transform.SetParent(inventoryViewTransform.parent);
         obj.transform.localPosition = inventoryViewTransform.localPosition;
         obj.transform.localRotation = inventoryViewTransform.localRotation;
         obj.transform.localScale = inventoryViewTransform.localScale;
-
-        viewingFromInventory = true;
-        GetComponent<PlayerActions>().ToggleInventoryUI(false, false);
-        ToggleViewMode(obj, true);
+        return obj;
     }
 
     public void StopViewingItemFromInventory()

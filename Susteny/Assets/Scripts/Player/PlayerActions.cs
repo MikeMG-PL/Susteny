@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] GameObject InventoryUI;
+
+    [HideInInspector] public bool canUngrab; // Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu
+    // (ponieważ odpowiada za nie ten sam przycisk myszki)
+
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
-
-    [HideInInspector] public bool canUngrab; // Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu (ponieważ odpowiada za nie ten sam przycisk myszki)
 
     public static event Action<bool> BrowsingInventory;
 
@@ -28,27 +30,22 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
             UngrabFromInventory();
 
-        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem) ToggleInventoryUI();
+        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem) SwitchInventoryUI();
 
         canUngrab = true;
     }
 
-    public void ToggleInventoryUI(bool toggle = true, bool b = false)
+    public void ToggleInventoryUI(bool enable)
     {
-        if (InventoryUI == null)
-        {
-            Debug.LogError("Nie ma przypisanego obiektu InventoryUI!");
-            return;
-        }
-
-        // Jeżeli wywołano z (domyślnym) toggle = true, widoczność inventoryUI zostanie przełączona na przeciwną wartość do aktualnej
-        // (jeśli jest włączona, zostanie wyłączona)
-        // W przeciwnym wypadku, programista podaje pożądaną wartość w zmiennej b
-        bool enable;
-        if (toggle) enable = !InventoryUI.activeSelf;
-        else enable = b;
         BrowsingInventory.Invoke(enable);
         InventoryUI.SetActive(enable);
+    }
+
+    public void SwitchInventoryUI()
+    {
+        bool b = !InventoryUI.activeSelf;
+        BrowsingInventory.Invoke(b);
+        InventoryUI.SetActive(b);
     }
 
     public void GrabFromInventory(GameObject item)
