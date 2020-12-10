@@ -5,10 +5,10 @@ using UnityEngine;
 public class ItemUI : MonoBehaviour
 {
     public Item item;
-    public ViewMode viewMode;
+    public PlayerActions playerActions;
 
-    public void EnableViewMode()
+    public void PointerDown()
     {
-        viewMode.ToggleViewInventoryItem(true, item);
+        playerActions.GrabFromInventory(item.worldPrefab);
     }
 }

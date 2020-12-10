@@ -25,10 +25,10 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null)
             TakeToInventory(grabbedInteractable);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && grabbedInteractable == null && GetComponent<ViewMode>().active)
-            GetComponent<ViewMode>().ToggleViewInventoryItem(false);
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
+            UngrabFromInventory();
 
-        if (Input.GetKeyDown(KeyCode.E) && !viewMode.active) ToggleInventoryUI();
+        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem) ToggleInventoryUI();
 
         canUngrab = true;
     }
@@ -49,6 +49,16 @@ public class PlayerActions : MonoBehaviour
         else enable = b;
         BrowsingInventory.Invoke(enable);
         InventoryUI.SetActive(enable);
+    }
+
+    public void GrabFromInventory(GameObject item)
+    {
+        viewMode.ViewItemFromInventory(item);
+    }
+
+    public void UngrabFromInventory()
+    {
+        viewMode.StopViewingItemFromInventory();
     }
 
     public void Grab(ItemWorld interactable)

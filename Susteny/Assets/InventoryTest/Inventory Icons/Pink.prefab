@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762fd96a3b2bb5342ac739e60e7d8cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   item: {fileID: 0}
+  viewMode: {fileID: 0}
 --- !u!114 &-8096914223378635890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6410178877091355751}
-          m_MethodName: EnableViewMode
+          m_MethodName: PointerDown
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

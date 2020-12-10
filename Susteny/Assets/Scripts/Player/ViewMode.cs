@@ -9,12 +9,13 @@ public class ViewMode : MonoBehaviour
 {
     public Transform inventoryViewTransform;
     public float rotationSpeed = 100f;
+    public float focusSpeed = 30f;
+    public bool viewingItem;
+    public bool viewingFromInventory;
 
     GameObject viewedItem;
     bool disablingFocus;
     bool enablingFocus;
-    public bool active;
-    public float focusSpeed = 30f;
     GameObject focusCamera;
     FloatParameter focalLength;
 
@@ -29,7 +30,7 @@ public class ViewMode : MonoBehaviour
     public void ToggleViewMode(GameObject item, bool b)
     {
         Viewing.Invoke(b);
-        active = b;
+        viewingItem = b;
         disablingFocus = !b;
         enablingFocus = b;
         GetComponent<SC_FPSController>().canMove = !b;
@@ -42,28 +43,29 @@ public class ViewMode : MonoBehaviour
         else viewedItem = null;
     }
 
-    public void ToggleViewInventoryItem(bool enable, Item item = null)
+    public void ViewItemFromInventory(GameObject item)
     {
-        if (enable)
-        {
-            GameObject obj = Instantiate(item.worldPrefab);
-            obj.transform.SetParent(inventoryViewTransform.parent);
-            obj.transform.localPosition = inventoryViewTransform.localPosition;
-            obj.transform.localRotation = inventoryViewTransform.localRotation;
-            obj.transform.localScale = inventoryViewTransform.localScale;
-            GetComponent<PlayerActions>().ToggleInventoryUI(false, false);
-            ToggleViewMode(obj, true);
-        }
+        GameObject obj = Instantiate(item);
+        obj.transform.SetParent(inventoryViewTransform.parent);
+        obj.transform.localPosition = inventoryViewTransform.localPosition;
+        obj.transform.localRotation = inventoryViewTransform.localRotation;
+        obj.transform.localScale = inventoryViewTransform.localScale;
 
-        else
-        {
-            ToggleViewMode(null, false);
-        }
+        viewingFromInventory = true;
+        GetComponent<PlayerActions>().ToggleInventoryUI(false, false);
+        ToggleViewMode(obj, true);
+    }
+
+    public void StopViewingItemFromInventory()
+    {
+        viewingFromInventory = false;
+        Destroy(viewedItem);
+        ToggleViewMode(null, false);
     }
 
     void Update()
     {
-        if (active)
+        if (viewingItem)
         {
             viewedItem.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0, Space.World);
         }

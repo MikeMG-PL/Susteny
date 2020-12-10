@@ -12,14 +12,14 @@ public class InventoryUI : MonoBehaviour
     public int number_of_colums;
 
     Inventory inventory;
-    ViewMode viewMode;
+    PlayerActions playerActions;
 
     Dictionary<ItemInventory, GameObject> itemsDisplayed = new Dictionary<ItemInventory, GameObject>();
 
     private void Awake()
     {
         inventory = player.GetComponent<Inventory>();
-        viewMode = player.GetComponent<ViewMode>();
+        playerActions = player.GetComponent<PlayerActions>();
     }
 
     private void Start()
@@ -59,7 +59,7 @@ public class InventoryUI : MonoBehaviour
         obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.GetInventory()[index].amount.ToString("n0");
         ItemUI item = obj.GetComponent<ItemUI>();
         item.item = inventory.GetInventory()[index].item;
-        item.viewMode = viewMode;
+        item.playerActions = playerActions;
         itemsDisplayed.Add(inventory.GetInventory()[index], obj);
     }
 
