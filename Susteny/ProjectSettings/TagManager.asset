@@ -9,6 +9,7 @@ TagManager:
   - Cloud
   - TaskSystem
   - NavigationPoints
+  - VehiclePoints
   layers:
   - Default
   - TransparentFX

@@ -5,10 +5,8 @@ using UnityEngine.AI;
 
 public class WalkAround : MonoBehaviour
 {
-    Camera cam;
     NavMeshAgent agent;
     GameObject navigationPointsContainer;
-    SC_FPSController player;
 
     int point;      // Do którego punktu zmierzać będzie NPC
     float time;     // Ile ma trwać jego podróż, zanim ją przerwie i zmieni punkt
@@ -19,8 +17,6 @@ public class WalkAround : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         agent = GetComponent<NavMeshAgent>();
         navigationPointsContainer = GameObject.FindGameObjectWithTag("NavigationPoints");
         Destination();
@@ -29,7 +25,7 @@ public class WalkAround : MonoBehaviour
     void Destination()
     {
         point = Random.Range(0, navigationPointsContainer.transform.childCount);
-        time = Random.Range(10, 40);
+        time = Random.Range(30, 60);
         speed = Random.Range(3, 4);
         priority = Random.Range(0, 99);
         Move();
