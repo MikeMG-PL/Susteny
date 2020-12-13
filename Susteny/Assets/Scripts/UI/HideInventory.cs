@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideUI : MonoBehaviour
+public class HideInventory : MonoBehaviour
 {
     void Start()
     {
         DialogueInteraction.Talking += HideOverlayingUI;
-        ViewMode.Viewing += HideOverlayingUI;
         Prototype.LevelStart += HideOverlayingUI;
-        PlayerActions.BrowsingInventory += HideOverlayingUI;
     }
 
     void OnDisable()
     {
         DialogueInteraction.Talking -= HideOverlayingUI;
-        ViewMode.Viewing -= HideOverlayingUI;
         Prototype.LevelStart -= HideOverlayingUI;
-        PlayerActions.BrowsingInventory -= HideOverlayingUI;
     }
 
     void HideOverlayingUI(bool b)

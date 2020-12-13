@@ -1038,9 +1038,9 @@ Transform:
   m_Father: {fileID: 1700982572}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &727240630 stripped
+--- !u!1 &762781376 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6110900597439073733, guid: 39908803dc136e341a26d197c61c99b1,
+  m_CorrespondingSourceObject: {fileID: 9101639093896139049, guid: 39908803dc136e341a26d197c61c99b1,
     type: 3}
   m_PrefabInstance: {fileID: 6510924345920772673}
   m_PrefabAsset: {fileID: 0}
@@ -2831,7 +2831,7 @@ PrefabInstance:
         type: 3}
       propertyPath: InventoryUI
       value: 
-      objectReference: {fileID: 727240630}
+      objectReference: {fileID: 762781376}
     - target: {fileID: 1824086119982000251, guid: b2391b03fbf38cb4bb771dcef6796d8e,
         type: 3}
       propertyPath: inventoryViewTransform
@@ -3328,6 +3328,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 586037646626439634, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1010864988}
+    - target: {fileID: 937161402400094058, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Layer (0)
+      objectReference: {fileID: 0}
     - target: {fileID: 937161402828376832, guid: 39908803dc136e341a26d197c61c99b1,
         type: 3}
       propertyPath: m_LocalPosition.x

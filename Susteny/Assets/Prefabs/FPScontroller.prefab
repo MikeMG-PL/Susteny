@@ -334,7 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328faab0fd4241b4fbda1bcdfbd73ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryUI: {fileID: 0}
+  InventoryUI: {fileID: 4310431017799287784, guid: 32adb34fad4819a41aced96b1219cf5f,
+    type: 3}
   canUngrab: 0
 --- !u!114 &6911843426005422561
 MonoBehaviour:
@@ -363,8 +364,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryViewTransform: {fileID: 0}
   rotationSpeed: 400
-  active: 0
   focusSpeed: 30
+  viewingItem: 0
+  viewingFromInventory: 0
 --- !u!82 &1824086119982000254
 AudioSource:
   m_ObjectHideFlags: 0
