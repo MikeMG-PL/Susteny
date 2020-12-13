@@ -7,17 +7,25 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] GameObject InventoryUI;
 
-    [HideInInspector] public bool canUngrab; // Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu
+    [HideInInspector] public bool canUngrab;// Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu
     // (ponieważ odpowiada za nie ten sam przycisk myszki)
+
+    bool inventoryAllowed = true;
 
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
 
     public static event Action<bool> BrowsingInventory;
 
-    private void Start()
+    private void Awake()
     {
         viewMode = GetComponent<ViewMode>();
+        Prototype.LevelStart += DisallowInventorySwitching;
+    }
+
+    void DisallowInventorySwitching(bool b)
+    {
+        inventoryAllowed = !b;
     }
 
     private void Update()
@@ -30,7 +38,7 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
             UngrabFromInventory();
 
-        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem) SwitchInventoryUI();
+        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
 
         canUngrab = true;
     }
@@ -84,5 +92,10 @@ public class PlayerActions : MonoBehaviour
         /* Debbuging */ //GetComponent<Player>().inventory.ShowInventory();
         if (grabbedInteractable != null) Ungrab();
         Destroy(interactable.gameObject);
+    }
+
+    void OnDestroy()
+    {
+        Prototype.LevelStart -= DisallowInventorySwitching;
     }
 }

@@ -790,6 +790,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eef90be9b912f4649a82e77fe1f0fd64, type: 3}
+--- !u!1 &991555967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9101639093896139049, guid: 39908803dc136e341a26d197c61c99b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6510924345920772673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1076678938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824086119982000198, guid: b2391b03fbf38cb4bb771dcef6796d8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1824086119784905498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1243988118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,6 +1606,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPScontroller
       objectReference: {fileID: 0}
+    - target: {fileID: 1824086119982000248, guid: b2391b03fbf38cb4bb771dcef6796d8e,
+        type: 3}
+      propertyPath: InventoryUI
+      value: 
+      objectReference: {fileID: 991555967}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2391b03fbf38cb4bb771dcef6796d8e, type: 3}
 --- !u!114 &5096870061051996923 stripped
@@ -1602,7 +1619,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1824086119784905498}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1076678938}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8793d7b0379e993428a780817c32494f, type: 3}
@@ -1689,6 +1706,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 586037646626439634, guid: 39908803dc136e341a26d197c61c99b1,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1076678938}
     - target: {fileID: 937161402828376832, guid: 39908803dc136e341a26d197c61c99b1,
         type: 3}
       propertyPath: m_LocalPosition.x
