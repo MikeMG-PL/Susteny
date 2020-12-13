@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < inventory.GetInventory().Count; i++)
         {
             if (itemsDisplayed.ContainsKey(inventory.GetInventory()[i]))
-                itemsDisplayed[inventory.GetInventory()[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.GetInventory()[i].amount.ToString("n0");
+                itemsDisplayed[inventory.GetInventory()[i]].GetComponentInChildren<Text>().text = inventory.GetInventory()[i].amount.ToString("n0");
 
             else
                 AddUIItem(i);
@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
     {
         var obj = Instantiate(inventory.GetInventory()[index].item.UI_Prefab, Vector3.zero, Quaternion.identity, transform);
         obj.GetComponent<RectTransform>().localPosition = GetPosition(index);
-        obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.GetInventory()[index].amount.ToString("n0");
+        obj.GetComponentInChildren<Text>().text = inventory.GetInventory()[index].amount.ToString("n0");
 
         ItemUI item = obj.GetComponent<ItemUI>();
         item.item = inventory.GetInventory()[index].item;

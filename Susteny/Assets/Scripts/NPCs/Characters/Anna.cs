@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Anna : MonoBehaviour
 {
+    public GameObject photo;
     SC_FPSController player;
     GameManager.Level Level;
     NavMeshAgent agent;
@@ -37,6 +38,7 @@ public class Anna : MonoBehaviour
             Camera.main.transform.LookAt(destinations[0]);
             GetComponent<DialogueInteraction>().Talk(true);
             Destroy(destinations[0].gameObject);
+            //player.GetComponent<PlayerActions>().TakeToInventory(photo.GetComponent<ItemWorld>());
         }
     }
 }

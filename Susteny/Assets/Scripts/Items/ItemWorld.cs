@@ -6,9 +6,9 @@ using UnityEngine;
 public class ItemWorld : MonoBehaviour
 {
     public Action action;
-    public GameObject player;
+    GameObject player;
     public Item item;
-    public float interactionDistance = 2f;
+    public float interactionDistance = 3.5f;
     public int amount = 1; 
 
     [HideInInspector] public Vector3 startPosition;
@@ -23,6 +23,7 @@ public class ItemWorld : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
     }
 

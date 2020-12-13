@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1847ac38e7eae2041b304bb044d7922b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photo: {fileID: 1811378431932966367, guid: 559298b258f6d174a905aeaa2e359b82, type: 3}
   destinations: []
 --- !u!33 &5577894649324973030
 MeshFilter:

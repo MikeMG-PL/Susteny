@@ -337,6 +337,7 @@ MonoBehaviour:
   InventoryUI: {fileID: 4310431017799287784, guid: 32adb34fad4819a41aced96b1219cf5f,
     type: 3}
   canUngrab: 0
+  inventoryAllowed: 1
 --- !u!114 &6911843426005422561
 MonoBehaviour:
   m_ObjectHideFlags: 0

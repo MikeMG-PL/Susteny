@@ -107,9 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 1
-  player: {fileID: 5930968530936124649, guid: fdca0e2527c4d684c954b865b8c24eff, type: 3}
   item: {fileID: 11400000, guid: 61f9df3b713da7a47b2f13b9b19870b8, type: 2}
-  interactionDistance: 2
+  interactionDistance: 3.5
   amount: 1
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
