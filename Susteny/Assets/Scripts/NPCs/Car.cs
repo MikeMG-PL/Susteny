@@ -6,31 +6,41 @@ using UnityEngine.AI;
 public class Car : MonoBehaviour
 {
     NavMeshAgent agent;
-    GameObject navigationPointsContainer;
+    GameObject navigationPointsContainer, currentContainer;
 
-    int point;      // Do którego punktu zmierzać będzie pojazd
+    int pointID;      // Do którego punktu zmierzać będzie pojazd
+    public int destinationType; // Gdzie zmierza pojazd docelowo
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         navigationPointsContainer = GameObject.FindGameObjectWithTag("VehiclePoints");
+
+        agent.speed = Random.Range(15, 22.5f);
+        agent.angularSpeed = agent.speed + 35;
         Move();
     }
 
     void Move()
     {
-        agent.SetDestination(navigationPointsContainer.transform.GetChild(point).position);
+        currentContainer = navigationPointsContainer.transform.GetChild(destinationType).gameObject;
+        agent.SetDestination(currentContainer.transform.GetChild(pointID).position);
     }
 
     void Update()
     {
+        Move();
+
         if (Vector3.Distance(agent.pathEndPosition, agent.transform.position) < 3)
         {
-            if (point + 1 < navigationPointsContainer.transform.childCount)
+            if (pointID < currentContainer.transform.childCount - 1)
             {
-                point++;
+                pointID++;
                 Move();
             }
+
+            if (pointID == currentContainer.transform.childCount - 1)
+                Destroy(gameObject);
         }
     }
 }

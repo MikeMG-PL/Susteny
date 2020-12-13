@@ -14,20 +14,44 @@ public class WalkAround : MonoBehaviour
     int priority; // Priorytet omijania przeszkód wzgl. innych NPC
     /////////////////////////////////////////////////////////////////////////
     float timer;
+    int ID;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         navigationPointsContainer = GameObject.FindGameObjectWithTag("NavigationPoints");
+
+        for(int i = 0; i < transform.parent.childCount; i++)
+        {
+            if (transform.parent.GetChild(i) == transform)
+                ID = i;
+        }
+
         Destination();
     }
 
     void Destination()
-    {
-        point = Random.Range(0, navigationPointsContainer.transform.childCount);
+    { 
+        int newPoint = Random.Range(0, navigationPointsContainer.transform.childCount);
+        while(newPoint == point)
+        {
+            newPoint = Random.Range(0, navigationPointsContainer.transform.childCount);
+        }
+        point = newPoint;
+
         time = Random.Range(30, 60);
         speed = Random.Range(3, 4);
         priority = Random.Range(0, 99);
+
+        if (point + ID < navigationPointsContainer.transform.childCount)
+            point += ID;
+        else if (point + ID / 2 < navigationPointsContainer.transform.childCount)
+            point += ID / 2;
+        else if (point + ID - 3 < navigationPointsContainer.transform.childCount && point + ID - 3 > 0)
+            point += ID - 3;
+        else if (point + ID + 2 < navigationPointsContainer.transform.childCount)
+            point += ID + 2;
+
         Move();
     }
 
