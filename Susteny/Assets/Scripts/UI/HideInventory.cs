@@ -6,13 +6,13 @@ public class HideInventory : MonoBehaviour
 {
     void Start()
     {
-        DialogueInteraction.Talking += HideOverlayingUI;
+        DialogueInteraction.Talking += NoEQduringDialogue;
         Prototype.LevelStart += HideOverlayingUI;
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
-        DialogueInteraction.Talking -= HideOverlayingUI;
+        DialogueInteraction.Talking -= NoEQduringDialogue;
         Prototype.LevelStart -= HideOverlayingUI;
     }
 
@@ -21,6 +21,14 @@ public class HideInventory : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(!b);
+        }
+    }
+
+    void NoEQduringDialogue(bool b)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = !b;
         }
     }
 }

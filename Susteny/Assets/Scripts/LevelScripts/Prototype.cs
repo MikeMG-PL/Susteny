@@ -8,7 +8,7 @@ public class Prototype : MonoBehaviour
 {
     void Start()
     {
-        LevelEvents();    
+        LevelEvents();
     }
 
     void LevelEvents()
@@ -40,8 +40,21 @@ public class Prototype : MonoBehaviour
 
     public IEnumerator PanelAndUnfreezing()
     {
-        ShowPanelAtStart(true);
-        yield return new WaitForSecondsRealtime(22.5f);
-        UnfreezeLooking(true);
+        if (!GetComponent<GameManager>().skipIntro)
+        {
+            ShowPanelAtStart(true);
+            yield return new WaitForSecondsRealtime(22.5f);
+            UnfreezeLooking(true);
+        }
+        else
+            UnfreezeLooking(true);
+    }
+
+    ///////////////////////////////////////////////////////////
+    //WARUNKI
+    
+    void Update()
+    {
+        ;
     }
 }

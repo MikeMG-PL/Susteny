@@ -9,14 +9,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5577894649324973029}
+  - component: {fileID: 5389328372794970724}
+  - component: {fileID: 7849140011197825162}
+  - component: {fileID: 4352086680673005735}
   - component: {fileID: 5577894649324973030}
   - component: {fileID: 5577894649324973024}
-  - component: {fileID: 4390599786226993152}
   - component: {fileID: 5577894649324973025}
-  - component: {fileID: 7794767057996378313}
-  - component: {fileID: 8604294333642004272}
+  - component: {fileID: 7125937214530855209}
+  - component: {fileID: 2872351384848834726}
   m_Layer: 0
-  m_Name: Ped
+  m_Name: Anna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,6 +39,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5389328372794970724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a63c4a5ff9878d42857a41f56797e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfNPC: Anna
+  currentDialogueID: 0
+  dialogues:
+  - {fileID: 0}
+  buttons: []
+  buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
+    type: 3}
+  instantiatedButtons: 0
+--- !u!114 &7849140011197825162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd849bf7070ebb45899929789ed9a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+--- !u!114 &4352086680673005735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1847ac38e7eae2041b304bb044d7922b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinations: []
 --- !u!33 &5577894649324973030
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -63,7 +111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07f4356808b5927438f6f56377896dd1, type: 2}
+  - {fileID: 2100000, guid: ef420a9c154b53b45b25c303f3fd65bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,18 +132,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4390599786226993152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5577894649324973026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574943e7c8b3f924d8cab7d89adf4190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &5577894649324973025
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -110,7 +146,29 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7794767057996378313
+--- !u!195 &7125937214530855209
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 99
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!54 &2872351384848834726
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,28 +184,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!195 &8604294333642004272
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5577894649324973026}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 7
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &7526145798180056041
 GameObject:
   m_ObjectHideFlags: 0

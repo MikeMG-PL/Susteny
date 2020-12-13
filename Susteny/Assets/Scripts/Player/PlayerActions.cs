@@ -10,7 +10,7 @@ public class PlayerActions : MonoBehaviour
     [HideInInspector] public bool canUngrab;// Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu
     // (ponieważ odpowiada za nie ten sam przycisk myszki)
 
-    bool inventoryAllowed = true;
+    public bool inventoryAllowed = true;
 
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
