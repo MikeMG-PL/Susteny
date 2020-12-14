@@ -32,13 +32,13 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null && canUngrab) Ungrab();
 
-        if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
+        else if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
             TakeToInventory(grabbedInteractable);
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
             UngrabFromInventory();
 
-        if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
+        else if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
 
         canUngrab = true;
     }

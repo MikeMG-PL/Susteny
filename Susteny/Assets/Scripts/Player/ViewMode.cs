@@ -80,8 +80,8 @@ public class ViewMode : MonoBehaviour
             {
                 var delta = Input.mousePosition - mousePos;
                 mousePos = Input.mousePosition;
-                viewedItem.transform.Rotate(transform.right, delta.y, Space.World);
-                viewedItem.transform.Rotate(transform.up, -delta.x, Space.World);
+                viewedItem.transform.Rotate(transform.right, delta.y * rotationSpeed, Space.World);
+                viewedItem.transform.Rotate(transform.up, -delta.x * rotationSpeed, Space.World);
             }
         }
 
