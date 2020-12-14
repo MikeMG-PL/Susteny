@@ -40,7 +40,7 @@ public class SC_FPSController : MonoBehaviour
     {
         DialogueInteraction.Talking += LockControlsCursorOn;
         PlayerActions.BrowsingInventory += LockControlsCursorOn;
-        ViewMode.Viewing += LockControlsCursorOn;
+        ViewMode.ViewingItem += LockControlsCursorOn;
         Prototype.LevelStart += LockControlsCursorOff;
         Prototype.MouseLookUnfreeze += UnfreezeLook;
     }
@@ -48,7 +48,7 @@ public class SC_FPSController : MonoBehaviour
     {
         DialogueInteraction.Talking -= LockControlsCursorOn;
         PlayerActions.BrowsingInventory -= LockControlsCursorOn;
-        ViewMode.Viewing -= LockControlsCursorOn;
+        ViewMode.ViewingItem -= LockControlsCursorOn;
         Prototype.LevelStart -= LockControlsCursorOff;
         Prototype.MouseLookUnfreeze -= UnfreezeLook;
     }

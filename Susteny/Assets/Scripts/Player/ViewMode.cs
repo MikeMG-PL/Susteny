@@ -21,7 +21,7 @@ public class ViewMode : MonoBehaviour
     bool disablingFocus;
     bool enablingFocus;
 
-    public static event Action<bool> Viewing;
+    public static event Action<bool> ViewingItem;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class ViewMode : MonoBehaviour
 
     public void ToggleViewMode(GameObject item, bool b)
     {
-        Viewing.Invoke(b);
+        ViewingItem.Invoke(b);
         viewingItem = b;
         disablingFocus = !b;
         enablingFocus = b;

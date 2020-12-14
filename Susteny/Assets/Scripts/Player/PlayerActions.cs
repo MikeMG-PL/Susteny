@@ -7,10 +7,8 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] GameObject InventoryUI;
 
-    [HideInInspector] public bool canUngrab;// Zmienna, która zapobiega jednoczesnemu podniesieniu i upuszczeniu przedmiotu
-    // (ponieważ odpowiada za nie ten sam przycisk myszki)
-
     public bool inventoryAllowed = true;
+    public bool canGrab = true;
 
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
@@ -19,8 +17,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Awake()
     {
+        Subscribe();
         viewMode = GetComponent<ViewMode>();
-        Prototype.LevelStart += DisallowInventorySwitching;
     }
 
     void DisallowInventorySwitching(bool b)
@@ -30,7 +28,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null && canUngrab) Ungrab();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null) Ungrab();
 
         else if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
             TakeToInventory(grabbedInteractable);
@@ -39,14 +37,6 @@ public class PlayerActions : MonoBehaviour
             UngrabFromInventory();
 
         else if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
-
-        canUngrab = true;
-    }
-
-    public bool canGrab()
-    {
-        if (grabbedInteractable != null || isInventoryOpened()) return false;
-        else return true;
     }
 
     public void ToggleInventoryUI(bool enable)
@@ -60,11 +50,6 @@ public class PlayerActions : MonoBehaviour
         bool b = !InventoryUI.activeSelf;
         BrowsingInventory.Invoke(b);
         InventoryUI.SetActive(b);
-    }
-
-    public bool isInventoryOpened()
-    {
-        return InventoryUI.activeSelf;
     }
 
     public void GrabFromInventory(GameObject item)
@@ -105,8 +90,29 @@ public class PlayerActions : MonoBehaviour
         Destroy(interactable.gameObject);
     }
 
+    void LockGrabbingItems(bool b)
+    {
+        canGrab = !b;
+    }
+
+    void Subscribe()
+    {
+        BrowsingInventory += LockGrabbingItems;
+        DialogueInteraction.Talking += LockGrabbingItems;
+        Prototype.LevelStart += DisallowInventorySwitching;
+        ViewMode.ViewingItem += LockGrabbingItems;
+    }
+
+    void Unsubscribe()
+    {
+        BrowsingInventory += LockGrabbingItems;
+        DialogueInteraction.Talking -= LockGrabbingItems;
+        Prototype.LevelStart -= DisallowInventorySwitching;
+        ViewMode.ViewingItem += LockGrabbingItems;
+    }
+
     void OnDestroy()
     {
-        Prototype.LevelStart -= DisallowInventorySwitching;
+        Unsubscribe();
     }
 }

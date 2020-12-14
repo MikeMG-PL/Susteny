@@ -11,7 +11,7 @@ public class HideUI : MonoBehaviour
     void Start()
     {
         DialogueInteraction.Talking += HideOverlayingUI;
-        ViewMode.Viewing += HideOverlayingUI;
+        ViewMode.ViewingItem += HideOverlayingUI;
         Prototype.LevelStart += HideOverlayingUI;
         PlayerActions.BrowsingInventory += HideOverlayingUI;
 
@@ -21,7 +21,7 @@ public class HideUI : MonoBehaviour
     void OnDisable()
     {
         DialogueInteraction.Talking -= HideOverlayingUI;
-        ViewMode.Viewing -= HideOverlayingUI;
+        ViewMode.ViewingItem -= HideOverlayingUI;
         Prototype.LevelStart -= HideOverlayingUI;
         PlayerActions.BrowsingInventory -= HideOverlayingUI;
     }

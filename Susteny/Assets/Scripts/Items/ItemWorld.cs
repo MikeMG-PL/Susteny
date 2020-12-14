@@ -56,13 +56,9 @@ public class ItemWorld : MonoBehaviour
     private void OnMouseDown()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > interactionDistance || !player.GetComponent<PlayerActions>().canGrab()) return;
+        if (distance > interactionDistance || !player.GetComponent<PlayerActions>().canGrab) return;
 
-        if (action == Action.grabbable && !grabbed)
-        {
-            player.GetComponent<PlayerActions>().canUngrab = false;
-            player.GetComponent<PlayerActions>().Grab(this);
-        }
+        if (action == Action.grabbable && !grabbed) player.GetComponent<PlayerActions>().Grab(this);
 
         else if (action == Action.takeable) player.GetComponent<PlayerActions>().TakeToInventory(this);
     }
