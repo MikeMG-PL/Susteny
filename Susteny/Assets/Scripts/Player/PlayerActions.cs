@@ -30,9 +30,9 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && grabbedInteractable != null && canUngrab) Ungrab();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null && canUngrab) Ungrab();
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null)
+        if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
             TakeToInventory(grabbedInteractable);
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)

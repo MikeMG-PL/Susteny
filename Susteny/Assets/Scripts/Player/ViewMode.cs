@@ -14,6 +14,7 @@ public class ViewMode : MonoBehaviour
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
 
+    Vector3 mousePos;
     FloatParameter focalLength;
     GameObject viewedItem;
     GameObject focusCamera;
@@ -34,8 +35,6 @@ public class ViewMode : MonoBehaviour
         viewingItem = b;
         disablingFocus = !b;
         enablingFocus = b;
-        GetComponent<SC_FPSController>().canMove = !b;
-        GetComponent<SC_FPSController>().canLook = !b;
         if (b)
         {
             focusCamera.SetActive(b);
@@ -56,10 +55,8 @@ public class ViewMode : MonoBehaviour
     {
         GameObject obj = Instantiate(item);
         obj.transform.SetParent(inventoryViewTransform.parent);
-        obj.transform.localPosition = inventoryViewTransform.localPosition * 3;
+        obj.transform.localPosition = inventoryViewTransform.localPosition;
         obj.transform.localEulerAngles = item.transform.localEulerAngles;
-        //obj.transform.localRotation = inventoryViewTransform.localRotation;
-        obj.transform.localScale = inventoryViewTransform.localScale * 0.4f;
         return obj;
     }
 
@@ -74,7 +71,18 @@ public class ViewMode : MonoBehaviour
     {
         if (viewingItem)
         {
-            viewedItem.transform.Rotate(Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0, Space.World);
+            if (Input.GetMouseButtonDown(0))
+            {
+                mousePos = Input.mousePosition;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                var delta = Input.mousePosition - mousePos;
+                mousePos = Input.mousePosition;
+                viewedItem.transform.Rotate(transform.right, delta.y, Space.World);
+                viewedItem.transform.Rotate(transform.up, -delta.x, Space.World);
+            }
         }
 
         if (disablingFocus)
