@@ -18,8 +18,8 @@ public class ItemWorld : MonoBehaviour
     [HideInInspector] public bool ungrabbing;
 
     Player playerScript;
-    float moveToViewModeRotSpeed = 0.015f;
-    float moveToViewModePosSpeed = 0.02f;
+    float moveToViewModeRotSpeed = 5f;
+    float moveToViewModePosSpeed = 0.05f;
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class ItemWorld : MonoBehaviour
 
         else if (ungrabbing)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, moveToViewModeRotSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, startRotation, moveToViewModeRotSpeed);
             transform.position = Vector3.MoveTowards(transform.position, startPosition, moveToViewModePosSpeed);
 
             if (transform.position == startPosition && transform.rotation == startRotation) ungrabbing = false;
