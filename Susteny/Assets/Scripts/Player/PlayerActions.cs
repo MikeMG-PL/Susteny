@@ -43,6 +43,12 @@ public class PlayerActions : MonoBehaviour
         canUngrab = true;
     }
 
+    public bool canGrab()
+    {
+        if (grabbedInteractable != null) return false;
+        else return true;
+    }
+
     public void ToggleInventoryUI(bool enable)
     {
         BrowsingInventory.Invoke(enable);
