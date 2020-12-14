@@ -14,9 +14,14 @@ public class ViewMode : MonoBehaviour
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
 
+    public Shader viewShader;
+    public Shader[] shadersCopyX; Shader parentShaderX;
+    public MeshRenderer[] renderers; MeshRenderer parentRenderer;
+
     Vector3 mousePos;
     FloatParameter focalLength;
     GameObject viewedItem;
+    GameObject lastItem;
     GameObject focusCamera;
     bool disablingFocus;
     bool enablingFocus;
@@ -39,8 +44,33 @@ public class ViewMode : MonoBehaviour
         {
             focusCamera.SetActive(b);
             viewedItem = item.gameObject;
+
+            parentRenderer = viewedItem.GetComponent<MeshRenderer>();
+            renderers = viewedItem.GetComponentsInChildren<MeshRenderer>();
+
+            Shader parentShader = parentRenderer.material.shader;
+            Shader[] shadersCopy = new Shader[renderers.Length];
+
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                shadersCopy[i] = renderers[i].material.shader;
+            }
+
+            parentRenderer.material.shader = viewShader;
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.shader = viewShader;
+            }
+            lastItem = null;
+
+            parentShaderX = parentShader;
+            shadersCopyX = shadersCopy;
         }
-        else viewedItem = null;
+        else
+        {
+            lastItem = viewedItem;
+            viewedItem = null;
+        }
     }
 
     public void ViewItemFromInventory(GameObject item)
@@ -69,6 +99,16 @@ public class ViewMode : MonoBehaviour
 
     void Update()
     {
+        if (lastItem != null && lastItem.GetComponent<ItemWorld>() != null && lastItem.GetComponent<ItemWorld>().ungrabbing == false)
+        {
+            lastItem.GetComponent<MeshRenderer>().material.shader = parentShaderX;
+
+            for (int i = 0; i < lastItem.transform.childCount; i++)
+            {
+                lastItem.transform.GetChild(i).GetComponent<MeshRenderer>().material.shader = shadersCopyX[i];
+            }
+        }
+
         if (viewingItem)
         {
             if (Input.GetMouseButtonDown(0))
