@@ -45,7 +45,7 @@ public class PlayerActions : MonoBehaviour
 
     public bool canGrab()
     {
-        if (grabbedInteractable != null) return false;
+        if (grabbedInteractable != null || isInventoryOpened()) return false;
         else return true;
     }
 
@@ -60,6 +60,11 @@ public class PlayerActions : MonoBehaviour
         bool b = !InventoryUI.activeSelf;
         BrowsingInventory.Invoke(b);
         InventoryUI.SetActive(b);
+    }
+
+    public bool isInventoryOpened()
+    {
+        return InventoryUI.activeSelf;
     }
 
     public void GrabFromInventory(GameObject item)
