@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: GreenItem
   m_EditorClassIdentifier: 
   itemType: 1
-  worldPrefab: {fileID: 3997744773470864206, guid: 1c8d7cf8582084a4390c39ac367739b1,
-    type: 3}
+  model: {fileID: 3997744773470864206, guid: 1c8d7cf8582084a4390c39ac367739b1, type: 3}
   UI_Prefab: {fileID: 8253609507822655935, guid: bea548d591641ea45ac39c07e26594c1,
     type: 3}
   name: GreenItem

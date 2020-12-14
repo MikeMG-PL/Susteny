@@ -9,6 +9,6 @@ public class ItemUI : MonoBehaviour
 
     public void PointerDown()
     {
-        playerActions.GrabFromInventory(item.worldPrefab);
+        playerActions.GrabFromInventory(item.model);
     }
 }

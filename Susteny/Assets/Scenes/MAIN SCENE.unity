@@ -2379,7 +2379,7 @@ PrefabInstance:
     - target: {fileID: 1811378431932966367, guid: 559298b258f6d174a905aeaa2e359b82,
         type: 3}
       propertyPath: m_Name
-      value: PhotoModel
+      value: Photo
       objectReference: {fileID: 0}
     - target: {fileID: 3709484034521785276, guid: 559298b258f6d174a905aeaa2e359b82,
         type: 3}

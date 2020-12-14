@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: PhotosItem
   m_EditorClassIdentifier: 
   itemType: 1
-  worldPrefab: {fileID: 1811378431932966367, guid: 559298b258f6d174a905aeaa2e359b82,
-    type: 3}
+  model: {fileID: 9045765145696704172, guid: 36191fd50e4364b49a5ac235c6bca8fe, type: 3}
   UI_Prefab: {fileID: 6853138276984767834, guid: 384a9f61f9834f547b797a91d5f04274,
     type: 3}
   name: "Tajemnicze zdj\u0119cie"

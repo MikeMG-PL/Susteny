@@ -6,7 +6,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public ItemType itemType = ItemType.Default;
-    public GameObject worldPrefab;
+    public GameObject model;
     public GameObject UI_Prefab;
     public new string name = "Brak nazwy";
     [TextArea(15, 20)] public string description;
