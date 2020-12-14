@@ -56,10 +56,10 @@ public class ViewMode : MonoBehaviour
     {
         GameObject obj = Instantiate(item);
         obj.transform.SetParent(inventoryViewTransform.parent);
-        obj.transform.localPosition = inventoryViewTransform.localPosition;
+        obj.transform.localPosition = inventoryViewTransform.localPosition * 3;
         obj.transform.localEulerAngles = item.transform.localEulerAngles;
         //obj.transform.localRotation = inventoryViewTransform.localRotation;
-        //obj.transform.localScale = inventoryViewTransform.localScale * 0.4f;
+        obj.transform.localScale = inventoryViewTransform.localScale * 0.4f;
         return obj;
     }
 
