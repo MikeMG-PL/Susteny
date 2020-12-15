@@ -45,6 +45,11 @@ public class PlayerActions : MonoBehaviour
         InventoryUI.SetActive(enable);
     }
 
+    public void ToggleViewMode(GameObject item, bool enable)
+    {
+        viewMode.ToggleViewMode(item, enable);
+    }
+
     public void SwitchInventoryUI()
     {
         bool b = !InventoryUI.activeSelf;

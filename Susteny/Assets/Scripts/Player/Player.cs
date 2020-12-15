@@ -13,5 +13,14 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         inventory = GetComponent<Inventory>();
+
+        PrepareFocusCamera();
+    }
+
+    // Czy to działa?
+    void PrepareFocusCamera()
+    {
+        focusCamera.SetActive(true);
+        focusCamera.SetActive(false);
     }
 }
