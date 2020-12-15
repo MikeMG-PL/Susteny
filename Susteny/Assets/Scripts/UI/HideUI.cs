@@ -48,7 +48,7 @@ public class HideUI : MonoBehaviour
 
         if (Physics.Raycast(ray, out _hit, 20))
         {
-            if (_hit.transform.GetComponent<ItemWorld>() != null || (_hit.transform.GetComponent<LoadDialogue>() != null && _hit.collider.isTrigger == false))
+            if (_hit.transform.GetComponent<ItemWorld>() != null || _hit.transform.GetComponent<LoadDialogue>() != null)
                 crosshair.color = Color.green;
             else
                 crosshair.color = currentColor;
