@@ -2025,46 +2025,6 @@ MonoBehaviour:
   angleTolerance: 10
   rotationSpeed: 1
   correct: 0
---- !u!1 &1506416543 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8708988322038962841, guid: 66a306021ca3cf847b9a3f29fe26efba,
-    type: 3}
-  m_PrefabInstance: {fileID: 7372492514650168055}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1506416544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506416543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action: 2
-  player: {fileID: 0}
-  item: {fileID: 0}
-  interactionDistance: 3.5
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
---- !u!114 &1506416545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506416543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347c867d4966f30468f8ba7ffe6537bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1575547002
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,16 +4029,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7726374960479483975, guid: 66a306021ca3cf847b9a3f29fe26efba,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7726374960479483975, guid: 66a306021ca3cf847b9a3f29fe26efba,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7991920819883822952, guid: 66a306021ca3cf847b9a3f29fe26efba,
         type: 3}
