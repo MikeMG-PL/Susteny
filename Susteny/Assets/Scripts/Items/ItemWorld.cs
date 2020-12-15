@@ -18,7 +18,8 @@ public class ItemWorld : MonoBehaviour
     [HideInInspector] public bool ungrabbing;
 
     Player playerScript;
-    float moveToViewModeRotSpeed = 5f;
+    bool changeLayer;
+    float moveToViewModeRotSpeed = 3.5f;
     float moveToViewModePosSpeed = 0.05f;
 
     private void Awake()
@@ -49,7 +50,16 @@ public class ItemWorld : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, startRotation, moveToViewModeRotSpeed);
             transform.position = Vector3.MoveTowards(transform.position, startPosition, moveToViewModePosSpeed);
 
-            if (transform.position == startPosition && transform.rotation == startRotation) ungrabbing = false;
+            if (transform.position == startPosition && transform.rotation == startRotation)
+            {
+                ChangeLayerAfterViewing();
+                ungrabbing = false;
+            }
+        }
+
+        if (changeLayer && !ungrabbing)
+        {
+            ChangeLayerAfterViewing();
         }
     }
 
@@ -65,7 +75,7 @@ public class ItemWorld : MonoBehaviour
     {
         if (action == Action.interactable)
         {
-            player.GetComponent<PlayerActions>().ToggleViewMode(gameObject, true, true);
+            player.GetComponent<PlayerActions>().Interact(gameObject);
         }
 
         if (!player.GetComponent<PlayerActions>().canGrab) return;
@@ -81,6 +91,19 @@ public class ItemWorld : MonoBehaviour
         {
             c.enabled = enable;
         }
+    }
+
+    public void ViewingEnded()
+    {
+        changeLayer = true;
+    }
+
+    // Jeżeli obiekt zostanie zniszczony (wzięty do ekwipunku etc.) layer może nie zostać zmieniony na czas
+    void ChangeLayerAfterViewing()
+    {
+        gameObject.layer = 0;
+        foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 0;
+        changeLayer = false;
     }
 }
 

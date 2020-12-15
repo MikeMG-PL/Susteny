@@ -28,7 +28,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) ToggleViewMode(null, false);
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopInteracting();
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null) Ungrab();
 
@@ -45,11 +45,6 @@ public class PlayerActions : MonoBehaviour
     {
         BrowsingInventory.Invoke(enable);
         InventoryUI.SetActive(enable);
-    }
-
-    public void ToggleViewMode(GameObject item, bool enable, bool interact = false)
-    {
-        viewMode.ToggleViewMode(item, enable, interact);
     }
 
     public void SwitchInventoryUI()
@@ -93,8 +88,22 @@ public class PlayerActions : MonoBehaviour
     {
         GetComponent<Player>().inventory.Add(interactable.item, interactable.amount);
         /* Debbuging */ //GetComponent<Player>().inventory.ShowInventory();
-        if (grabbedInteractable != null) Ungrab();
+        if (grabbedInteractable != null)
+        {
+            grabbedInteractable = null;
+            viewMode.ToggleViewMode(null, false);
+        }
         Destroy(interactable.gameObject);
+    }
+
+    public void Interact(GameObject item)
+    {
+        viewMode.ToggleViewMode(item, true, true);
+    }
+
+    void StopInteracting()
+    {
+        viewMode.ToggleViewMode(null, false, false);
     }
 
     void LockGrabbingItems(bool b)

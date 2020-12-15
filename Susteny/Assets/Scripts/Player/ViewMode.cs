@@ -8,28 +8,23 @@ using UnityEngine.Rendering.PostProcessing;
 public class ViewMode : MonoBehaviour
 {
     public Transform inventoryViewTransform;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
 
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
     [HideInInspector] public bool interactingWithItem;
 
-    public Shader viewShader;
-    public Shader[] shadersCopyX; Shader parentShaderX;
-    public MeshRenderer[] renderers; MeshRenderer parentRenderer;
-
     Vector3 mousePos;
     FloatParameter focalLength;
     GameObject viewedItem;
-    GameObject lastItem;
     GameObject focusCamera;
     bool disablingFocus;
     bool enablingFocus;
 
     public static event Action<bool> ViewingItem;
 
-    private void Start()
+    private void Awake()
     {
         focusCamera = GetComponent<Player>().focusCamera;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
@@ -42,37 +37,26 @@ public class ViewMode : MonoBehaviour
         interactingWithItem = interact;
         disablingFocus = !b;
         enablingFocus = b;
+
         if (b)
         {
             focusCamera.SetActive(b);
             viewedItem = item.gameObject;
-
-            parentRenderer = viewedItem.GetComponent<MeshRenderer>();
-            renderers = viewedItem.GetComponentsInChildren<MeshRenderer>();
-
-            Shader parentShader = parentRenderer.material.shader;
-            Shader[] shadersCopy = new Shader[renderers.Length];
-
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                shadersCopy[i] = renderers[i].material.shader;
-            }
-
-            parentRenderer.material.shader = viewShader;
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                renderers[i].material.shader = viewShader;
-            }
-            lastItem = null;
-
-            parentShaderX = parentShader;
-            shadersCopyX = shadersCopy;
+            ChangeLayerToFocus();
         }
+
         else
         {
-            lastItem = viewedItem;
+            // Zawsze po skończeniu oglądania, będziemy próbować ustawić layer itemu z powrotem na domyślny
+            if (viewedItem != null && viewedItem.GetComponent<ItemWorld>() != null) viewedItem.GetComponent<ItemWorld>().ViewingEnded();
             viewedItem = null;
         }
+    }
+
+    void ChangeLayerToFocus()
+    {
+        viewedItem.layer = 9;
+        foreach (Transform child in viewedItem.GetComponentsInChildren<Transform>())child.gameObject.layer = 9;
     }
 
     public void ViewItemFromInventory(GameObject item)
@@ -101,17 +85,7 @@ public class ViewMode : MonoBehaviour
 
     void Update()
     {
-        if (lastItem != null && lastItem.GetComponent<ItemWorld>() != null && lastItem.GetComponent<ItemWorld>().ungrabbing == false)
-        {
-            lastItem.GetComponent<MeshRenderer>().material.shader = parentShaderX;
-
-            for (int i = 0; i < lastItem.transform.childCount; i++)
-            {
-                lastItem.transform.GetChild(i).GetComponent<MeshRenderer>().material.shader = shadersCopyX[i];
-            }
-        }
-
-        else if (viewingItem && !interactingWithItem)
+        if (viewingItem && !interactingWithItem)
         {
             InspectItem();
         }

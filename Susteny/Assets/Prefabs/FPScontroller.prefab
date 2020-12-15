@@ -364,11 +364,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryViewTransform: {fileID: 0}
-  rotationSpeed: 400
+  rotationSpeed: 0.5
   focusSpeed: 30
-  viewShader: {fileID: 4800000, guid: e52320e0dc53c564d8e4e9a048926fd4, type: 3}
   viewingItem: 0
   viewingFromInventory: 0
+  interactingWithItem: 0
 --- !u!82 &1824086119982000254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -523,7 +523,7 @@ Camera:
   m_GameObject: {fileID: 1824086120152002050}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0, g: 0.008681207, b: 0.1981132, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
