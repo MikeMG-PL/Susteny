@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1824086118552689598}
   - component: {fileID: 1824086118552689593}
   - component: {fileID: 1824086118552689592}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824086119190900111}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ViewModePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 1824086119982000251}
   - component: {fileID: 1824086119982000254}
   - component: {fileID: 223227635823609084}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FPScontroller
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryViewTransform: {fileID: 0}
-  rotationSpeed: 0.5
+  rotationSpeed: 0.25
   focusSpeed: 30
   viewingItem: 0
   viewingFromInventory: 0
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 1824086120152002052}
   - component: {fileID: 1824086120152002055}
   - component: {fileID: 1824086120152002054}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Focus
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 1824086120338536829}
   - component: {fileID: 5437058771785298369}
   - component: {fileID: 446968699697811183}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
