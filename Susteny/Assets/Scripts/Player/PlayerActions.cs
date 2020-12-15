@@ -28,6 +28,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) ToggleViewMode(null, false);
+
         if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null) Ungrab();
 
         else if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
@@ -45,9 +47,9 @@ public class PlayerActions : MonoBehaviour
         InventoryUI.SetActive(enable);
     }
 
-    public void ToggleViewMode(GameObject item, bool enable)
+    public void ToggleViewMode(GameObject item, bool enable, bool interact = false)
     {
-        viewMode.ToggleViewMode(item, enable);
+        viewMode.ToggleViewMode(item, enable, interact);
     }
 
     public void SwitchInventoryUI()

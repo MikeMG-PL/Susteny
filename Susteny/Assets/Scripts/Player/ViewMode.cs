@@ -13,6 +13,7 @@ public class ViewMode : MonoBehaviour
 
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
+    [HideInInspector] public bool interactingWithItem;
 
     public Shader viewShader;
     public Shader[] shadersCopyX; Shader parentShaderX;
@@ -34,10 +35,11 @@ public class ViewMode : MonoBehaviour
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
     }
 
-    public void ToggleViewMode(GameObject item, bool b)
+    public void ToggleViewMode(GameObject item, bool b, bool interact = false)
     {
         ViewingItem.Invoke(b);
         viewingItem = b;
+        interactingWithItem = interact;
         disablingFocus = !b;
         enablingFocus = b;
         if (b)
@@ -109,22 +111,32 @@ public class ViewMode : MonoBehaviour
             }
         }
 
-        if (viewingItem)
+        else if (viewingItem && !interactingWithItem)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                mousePos = Input.mousePosition;
-            }
-
-            if (Input.GetMouseButton(0))
-            {
-                var delta = Input.mousePosition - mousePos;
-                mousePos = Input.mousePosition;
-                viewedItem.transform.Rotate(transform.right, delta.y * rotationSpeed, Space.World);
-                viewedItem.transform.Rotate(transform.up, -delta.x * rotationSpeed, Space.World);
-            }
+            InspectItem();
         }
 
+        ManageFocus();
+    }
+
+    void InspectItem()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            mousePos = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            var delta = Input.mousePosition - mousePos;
+            mousePos = Input.mousePosition;
+            viewedItem.transform.Rotate(transform.right, delta.y * rotationSpeed, Space.World);
+            viewedItem.transform.Rotate(transform.up, -delta.x * rotationSpeed, Space.World);
+        }
+    }
+
+    void ManageFocus()
+    {
         if (disablingFocus)
         {
             if (focalLength.value <= 25)

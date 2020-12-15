@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemWorld : MonoBehaviour
 {
     public Action action;
-    GameObject player;
+    public GameObject player;
     public Item item;
     public float interactionDistance = 3.5f;
     public int amount = 1; 
@@ -58,9 +58,14 @@ public class ItemWorld : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance > interactionDistance) return;
 
+        TriggerAction();
+    }
+
+    public void TriggerAction()
+    {
         if (action == Action.interactable)
         {
-            player.GetComponent<PlayerActions>().ToggleViewMode(gameObject, true);
+            player.GetComponent<PlayerActions>().ToggleViewMode(gameObject, true, true);
         }
 
         if (!player.GetComponent<PlayerActions>().canGrab) return;
