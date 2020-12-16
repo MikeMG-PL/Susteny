@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -15,3 +16,4 @@ namespace Subtegral.DialogueSystem.Editor
         public bool EntyPoint = false;
     }
 }
+#endif

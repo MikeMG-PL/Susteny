@@ -14,7 +14,7 @@ public class Anna : MonoBehaviour
     NavMeshAgent agent;
     bool inspectingPhoto;
     TaskSystem tasks;
-    
+
 
     void Awake()
     {
@@ -26,11 +26,6 @@ public class Anna : MonoBehaviour
         DialogueInteraction.Conversation += ConversationEvent;
     }
 
-    void OnTriggerStay(Collider other)
-    {
-
-    }
-
     void OnTriggerEnter(Collider other)
     {
         LookAtAnna(other);
@@ -38,7 +33,7 @@ public class Anna : MonoBehaviour
 
     void ConversationEvent(bool b, string n, int i)
     {
-        if(b == false && n == "Anna" && i == 0)
+        if (b == false && n == "Anna" && i == 0)
         {
             var p = Instantiate(photo);
             player.GetComponent<PlayerActions>().TakeToInventory(p.GetComponent<ItemWorld>());
@@ -47,10 +42,10 @@ public class Anna : MonoBehaviour
             inspectingPhoto = true;
         }
 
-        if(b == false && n == "Anna" && i == 1)
+        if (b == false && n == "Anna" && i == 1)
         {
             GetComponent<LoadDialogue>().currentDialogueID = 2;
-            StartCoroutine(AnnaWalkAway());
+            AnnaWalkAway();
         }
     }
 
@@ -68,7 +63,7 @@ public class Anna : MonoBehaviour
     float timer = 0;
     void QuitViewMode()
     {
-        if(inspectingPhoto)
+        if (inspectingPhoto)
         {
             timer += Time.deltaTime;
 
@@ -82,9 +77,8 @@ public class Anna : MonoBehaviour
         }
     }
 
-    public IEnumerator AnnaWalkAway()
+    void AnnaWalkAway()
     {
-        yield return new WaitForSeconds(3);
         agent.SetDestination(destinations[1].position);
         tasks.addTask(AnnaTasks[0]);
         tasks.addTask(AnnaTasks[1]);
@@ -92,9 +86,9 @@ public class Anna : MonoBehaviour
 
     void Update()
     {
-        QuitViewMode();       
+        QuitViewMode();
     }
-    
+
     void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationEvent;
