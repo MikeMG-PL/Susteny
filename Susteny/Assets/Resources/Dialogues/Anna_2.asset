@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Anna_2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: 42aec46e-a407-414d-bd04-e0198d6b22b3
+  - BaseNodeGUID: 42aec46e-a407-414d-bd04-e0198d6b22b3
+    Sentence: 
+    PortName: "Ciekawie to wygl\u0105da."
+    TargetNodeGUID: a49a7504-0d3a-46f6-837f-169a812886f2
+  - BaseNodeGUID: 42aec46e-a407-414d-bd04-e0198d6b22b3
+    Sentence: 
+    PortName: "Cyrk. Kto\u015B sobie \u017Cartuje?"
+    TargetNodeGUID: b6ffd315-30a4-4e49-8964-e2ebc39faebd
+  - BaseNodeGUID: b6ffd315-30a4-4e49-8964-e2ebc39faebd
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: 29842748-6162-4864-9756-f072a00296ca
+  - BaseNodeGUID: a49a7504-0d3a-46f6-837f-169a812886f2
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: 29842748-6162-4864-9756-f072a00296ca
+  - BaseNodeGUID: 29842748-6162-4864-9756-f072a00296ca
+    Sentence: 
+    PortName: "Chcia\u0142bym ci si\u0119 jako\u015B odwdzi\u0119czy\u0107."
+    TargetNodeGUID: 9fce87ac-e2bc-464d-addc-1ecf0890e186
+  - BaseNodeGUID: 29842748-6162-4864-9756-f072a00296ca
+    Sentence: 
+    PortName: "Dzi\u0119kuj\u0119. Niepotrzebnie si\u0119 nara\u017Ca\u0142a\u015B."
+    TargetNodeGUID: 9dff4290-f6dd-4665-9669-1c1cc936fea7
+  - BaseNodeGUID: 29842748-6162-4864-9756-f072a00296ca
+    Sentence: 
+    PortName: Twoje zawsze.
+    TargetNodeGUID: 9fce87ac-e2bc-464d-addc-1ecf0890e186
+  - BaseNodeGUID: 9dff4290-f6dd-4665-9669-1c1cc936fea7
+    Sentence: 
+    PortName: Ale...
+    TargetNodeGUID: 4e796825-8e33-4a6f-b664-4be637eba56e
+  - BaseNodeGUID: 9dff4290-f6dd-4665-9669-1c1cc936fea7
+    Sentence: 
+    PortName: "Dla bezpiecze\u0144stwa."
+    TargetNodeGUID: 8a7a5797-30de-4d2b-bf97-820942a04543
+  - BaseNodeGUID: 9fce87ac-e2bc-464d-addc-1ecf0890e186
+    Sentence: 
+    PortName: "I tak kto\u015B ci\u0119 znajdzie. Albo oni, albo ja. \u017Begnaj,
+      Anno."
+    TargetNodeGUID: 4e796825-8e33-4a6f-b664-4be637eba56e
+  - BaseNodeGUID: 9fce87ac-e2bc-464d-addc-1ecf0890e186
+    Sentence: 
+    PortName: "Tak. Tak b\u0119dzie lepiej."
+    TargetNodeGUID: 8a7a5797-30de-4d2b-bf97-820942a04543
+  - BaseNodeGUID: 4e796825-8e33-4a6f-b664-4be637eba56e
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: 7c397afb-7c01-43ac-b812-768db98389ca
+  - BaseNodeGUID: 8a7a5797-30de-4d2b-bf97-820942a04543
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: 7c397afb-7c01-43ac-b812-768db98389ca
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 42aec46e-a407-414d-bd04-e0198d6b22b3
+    DialogueText: No i?
+    Position: {x: 229, y: 200}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: b6ffd315-30a4-4e49-8964-e2ebc39faebd
+    DialogueText: "Na pewno nie ja. Wiesz, \u017Ce od jakiego\u015B czasu grozi mi
+      niebezpiecze\u0144stwo. Poniek\u0105d przez ciebie... Zabieraj sobie to zdj\u0119cie
+      i zr\xF3b z nim co chcesz."
+    Position: {x: 1022, y: 390}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: a49a7504-0d3a-46f6-837f-169a812886f2
+    DialogueText: "Nie. Nieciekawie. Wiesz, \u017Ce od jakiego\u015B czasu grozi
+      mi niebezpiecze\u0144stwo. Poniek\u0105d przez ciebie... Zabieraj sobie to
+      zdj\u0119cie i zr\xF3b z nim co chcesz."
+    Position: {x: 1016, y: 3}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 29842748-6162-4864-9756-f072a00296ca
+    DialogueText: "Nie interesuje mnie, czy b\u0119dziesz si\u0119 z tym kim\u015B
+      teraz bawi\u0142 podchody czy nie. Ja swoje zrobi\u0142am. Daj\u0119 ci to
+      zdj\u0119cie maj\u0105c nadziej\u0119, \u017Ce masz na wzgl\u0119dzie bezpiecze\u0144stwo
+      innych."
+    Position: {x: 2039, y: 194}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 9dff4290-f6dd-4665-9669-1c1cc936fea7
+    DialogueText: "Nie musisz, jeste\u015Bmy kwita. Z nami koniec, nie szukaj mnie.
+      Taka by\u0142a umowa, prawda? Dla bezpiecze\u0144stwa."
+    Position: {x: 3322, y: 231}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 9fce87ac-e2bc-464d-addc-1ecf0890e186
+    DialogueText: "To... to nie pr\xF3buj mnie szuka\u0107. Nie chcia\u0142am tego,
+      wybaczy\u0142am ci, ale... tak b\u0119dzie lepiej. B\u0119dzie lepiej, je\u015Bli
+      we\u017Amiesz to cholerne zdj\u0119cie i po prostu urwiemy kontakt."
+    Position: {x: 3322, y: 63}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 4e796825-8e33-4a6f-b664-4be637eba56e
+    DialogueText: Nigdy do ciebie to nie dotrze...
+    Position: {x: 4477, y: 301}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 8a7a5797-30de-4d2b-bf97-820942a04543
+    DialogueText: "\u017Begnaj, Konrad."
+    Position: {x: 4576, y: 145}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: 7c397afb-7c01-43ac-b812-768db98389ca
+    DialogueText: Dialogue Node
+    Position: {x: 5266, y: 251}
+  ExposedProperties: []
+  CommentBlockData: []

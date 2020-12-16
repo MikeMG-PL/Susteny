@@ -6,10 +6,13 @@ using UnityEngine.AI;
 public class Anna : MonoBehaviour
 {
     public GameObject photo;
+    public Transform[] destinations;
+
     SC_FPSController player;
     GameManager.Level Level;
     NavMeshAgent agent;
-    public Transform[] destinations;
+    bool inspectingPhoto;
+    
 
     void Awake()
     {
@@ -34,11 +37,11 @@ public class Anna : MonoBehaviour
     {
         if(b == false && n == "Anna" && i == 0)
         {
-            player.canLook = true;
             var p = Instantiate(photo);
-            p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             player.GetComponent<PlayerActions>().TakeToInventory(p.GetComponent<ItemWorld>());
-            player.GetComponent<PlayerActions>().GrabFromInventory(player.GetComponent<Inventory>().GetInventory()[0].item.model); // here
+            player.GetComponent<PlayerActions>().GrabFromInventory(player.GetComponent<Inventory>().GetInventory()[0].item.model);
+            player.GetComponent<ViewMode>().viewingFromInventory = false;
+            inspectingPhoto = true;
         }
     }
 
@@ -53,8 +56,30 @@ public class Anna : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationEvent;
+    }
+
+    float timer = 0;
+    void QuitViewMode()
+    {
+        if(inspectingPhoto)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= 8)
+            {
+                player.GetComponent<PlayerActions>().UngrabFromInventory();
+                inspectingPhoto = false;
+                GetComponent<LoadDialogue>().currentDialogueID = 1;
+                GetComponent<DialogueInteraction>().Talk(true);
+            }
+        }
+    }
+
+    void Update()
+    {
+        QuitViewMode();       
     }
 }

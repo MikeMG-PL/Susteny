@@ -22,14 +22,17 @@ public class DialogueInteraction : MonoBehaviour
         }
     }
 
+    public static event Action<bool> Talking;
+    public static event Action<bool, string, int> Conversation;
+
     void Awake()
     {
         panel = GameObject.FindGameObjectWithTag("DialoguePanel");
         player = GameObject.FindGameObjectWithTag("Player");
+        Conversation += Conv;
     }
 
-    public static event Action<bool> Talking;
-    public static event Action<bool, string, int> Conversation;
+    private void Conv(bool arg1, string arg2, int arg3) { ; }
 
     public void Talk(bool b)
     {
@@ -41,7 +44,6 @@ public class DialogueInteraction : MonoBehaviour
         {
             talking = b;
             panel.transform.GetChild(0).gameObject.SetActive(b);
-            Conversation.Invoke(b, talkingGameObjectName, dialogueID);
             Talking.Invoke(b);
 
             if (b)
@@ -53,6 +55,7 @@ public class DialogueInteraction : MonoBehaviour
             else
             {
                 DestroyButtons(d);
+                Conversation.Invoke(false, talkingGameObjectName, dialogueID);
             }
         }
 
@@ -63,6 +66,7 @@ public class DialogueInteraction : MonoBehaviour
                 Destroy(o);
             }
             dial.buttons?.Clear();
+            Conversation -= Conv;
         }
     }
 }

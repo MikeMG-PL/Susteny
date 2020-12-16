@@ -139,7 +139,7 @@ public class PlayerActions : MonoBehaviour
         ViewMode.ViewingItem -= LockDialogueInteractions;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         Unsubscribe();
     }

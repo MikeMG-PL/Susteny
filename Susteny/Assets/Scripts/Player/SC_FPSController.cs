@@ -29,7 +29,7 @@ public class SC_FPSController : MonoBehaviour
         Init();
         Subscribe();
     }
-    void OnDestroy()
+    void OnDisable()
     {
         Unsubscribe();
     }

@@ -67,7 +67,7 @@ public class Prototype : MonoBehaviour
         ;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationEvent;
     }
