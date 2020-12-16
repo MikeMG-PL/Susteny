@@ -9,6 +9,7 @@ public class PlayerActions : MonoBehaviour
 
     public bool inventoryAllowed = true;
     public bool canGrab = true;
+    public bool canTalk = true;
 
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
@@ -111,9 +112,16 @@ public class PlayerActions : MonoBehaviour
         canGrab = !b;
     }
 
+    void LockDialogueInteractions(bool b)
+    {
+        canTalk = !b;
+    }
+
     void Subscribe()
     {
         BrowsingInventory += LockGrabbingItems;
+        BrowsingInventory += LockDialogueInteractions;
+        DialogueInteraction.Talking += LockDialogueInteractions;
         DialogueInteraction.Talking += LockGrabbingItems;
         Prototype.LevelStart += DisallowInventorySwitching;
         ViewMode.ViewingItem += LockGrabbingItems;
@@ -121,10 +129,12 @@ public class PlayerActions : MonoBehaviour
 
     void Unsubscribe()
     {
-        BrowsingInventory += LockGrabbingItems;
+        BrowsingInventory -= LockGrabbingItems;
+        BrowsingInventory -= LockDialogueInteractions;
+        DialogueInteraction.Talking -= LockDialogueInteractions;
         DialogueInteraction.Talking -= LockGrabbingItems;
         Prototype.LevelStart -= DisallowInventorySwitching;
-        ViewMode.ViewingItem += LockGrabbingItems;
+        ViewMode.ViewingItem -= LockGrabbingItems;
     }
 
     void OnDestroy()
