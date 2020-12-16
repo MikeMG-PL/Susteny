@@ -11,4 +11,9 @@ public class ItemUI : MonoBehaviour
     {
         playerActions.GrabFromInventory(item.model);
     }
+
+    void Start()
+    {
+        gameObject.layer = 9;    
+    }
 }
