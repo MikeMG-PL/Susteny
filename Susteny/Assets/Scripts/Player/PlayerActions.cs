@@ -125,6 +125,7 @@ public class PlayerActions : MonoBehaviour
         DialogueInteraction.Talking += LockGrabbingItems;
         Prototype.LevelStart += DisallowInventorySwitching;
         ViewMode.ViewingItem += LockGrabbingItems;
+        ViewMode.ViewingItem += LockDialogueInteractions;
     }
 
     void Unsubscribe()
@@ -135,6 +136,7 @@ public class PlayerActions : MonoBehaviour
         DialogueInteraction.Talking -= LockGrabbingItems;
         Prototype.LevelStart -= DisallowInventorySwitching;
         ViewMode.ViewingItem -= LockGrabbingItems;
+        ViewMode.ViewingItem -= LockDialogueInteractions;
     }
 
     void OnDestroy()
