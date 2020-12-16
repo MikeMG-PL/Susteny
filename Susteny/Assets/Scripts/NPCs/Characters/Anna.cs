@@ -38,7 +38,7 @@ public class Anna : MonoBehaviour
             var p = Instantiate(photo);
             p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             player.GetComponent<PlayerActions>().TakeToInventory(p.GetComponent<ItemWorld>());
-            //player.GetComponent<PlayerActions>().GrabFromInventory(player.GetComponent<Inventory>().GetInventory()[0].item.model);
+            player.GetComponent<PlayerActions>().GrabFromInventory(player.GetComponent<Inventory>().GetInventory()[0].item.model); // here
         }
     }
 
