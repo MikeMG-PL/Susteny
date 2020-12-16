@@ -134,4 +134,11 @@ public class ViewMode : MonoBehaviour
             else focalLength.value += Time.deltaTime * focusSpeed;
         }
     }
+
+    // disablingFocus = false - gdy nie oglądamy żadnego przedmiotu / gdy skończyliśmy oglądać przedmiot i focus już się wyłączył
+    // gdy skończyliśmy oglądać przedmiot, ale zaczęliśmy szybko oglądać drugi
+    public bool DisablingFocusEnded()
+    {
+        return !disablingFocus;
+    }
 }

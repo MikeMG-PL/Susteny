@@ -52,12 +52,12 @@ public class ItemWorld : MonoBehaviour
 
             if (transform.position == startPosition && transform.rotation == startRotation)
             {
-                ChangeLayerAfterViewing();
                 ungrabbing = false;
             }
         }
 
-        if (changeLayer && !ungrabbing)
+        // Sytuacja poniżej występuje gdy skończyliśmy oglądać ten przedmiot i focus już się wyłączył lub gdy zaczęliśmy oglądać inny przedmiot
+        if (changeLayer && player.GetComponent<ViewMode>().DisablingFocusEnded())
         {
             ChangeLayerAfterViewing();
         }
