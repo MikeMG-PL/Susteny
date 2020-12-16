@@ -63,24 +63,6 @@ public class WalkAround : MonoBehaviour
         timer = 0;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius * 0.1f;
-            agent.radius = agent.radius * 0.0001f;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius / 0.1f;
-            agent.radius = agent.radius / 0.0001f;
-        }
-    }
-
     void Update()
     {
         timer += Time.deltaTime;

@@ -43,6 +43,13 @@ public class Anna : MonoBehaviour
             player.GetComponent<ViewMode>().viewingFromInventory = false;
             inspectingPhoto = true;
         }
+
+        if(b == false && n == "Anna" && i == 1)
+        {
+            // nowy cel
+            GetComponent<LoadDialogue>().currentDialogueID = 2;
+            StartCoroutine(AnnaWalkAway());
+        }
     }
 
     void LookAtAnna(Collider c)
@@ -54,11 +61,6 @@ public class Anna : MonoBehaviour
             GetComponent<DialogueInteraction>().Talk(true);
             Destroy(destinations[0].gameObject);
         }
-    }
-
-    void OnDisable()
-    {
-        DialogueInteraction.Conversation -= ConversationEvent;
     }
 
     float timer = 0;
@@ -78,8 +80,19 @@ public class Anna : MonoBehaviour
         }
     }
 
+    public IEnumerator AnnaWalkAway()
+    {
+        yield return new WaitForSeconds(3);
+        agent.SetDestination(destinations[1].position);
+    }
+
     void Update()
     {
         QuitViewMode();       
+    }
+    
+    void OnDisable()
+    {
+        DialogueInteraction.Conversation -= ConversationEvent;
     }
 }

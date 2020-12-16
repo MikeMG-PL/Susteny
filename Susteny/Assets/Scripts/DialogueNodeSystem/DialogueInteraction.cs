@@ -66,7 +66,11 @@ public class DialogueInteraction : MonoBehaviour
                 Destroy(o);
             }
             dial.buttons?.Clear();
-            Conversation -= Conv;
         }
+    }
+
+    void OnDestroy()
+    {
+        Conversation -= Conv;
     }
 }
