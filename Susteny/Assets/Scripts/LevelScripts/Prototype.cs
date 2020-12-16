@@ -23,6 +23,7 @@ public class Prototype : MonoBehaviour
     public static event Action<bool> LevelStart;
     public static event Action<bool> ShowStartPanel;
     public static event Action<bool> MouseLookUnfreeze;
+    public static event Action<bool> UnlockBuilding;
 
     void LevelStarted(bool b)
     {
@@ -39,6 +40,11 @@ public class Prototype : MonoBehaviour
         MouseLookUnfreeze.Invoke(b);
     }
 
+    void UnlockTheBuilding(bool b)
+    {
+        UnlockBuilding.Invoke(b);
+    }
+
     public IEnumerator PanelAndUnfreezing()
     {
         if (!GetComponent<GameManager>().skipIntro)
@@ -53,9 +59,9 @@ public class Prototype : MonoBehaviour
 
     void ConversationEvent(bool b, string n, int i)
     {
-        if (b == false && n == "Anna" && i == 0)
+        if (b == false && n == "Anna" && i == 1)
         {
-            ;
+            UnlockTheBuilding(true);
         }
     }
 

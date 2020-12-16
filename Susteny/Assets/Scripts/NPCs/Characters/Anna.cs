@@ -7,15 +7,18 @@ public class Anna : MonoBehaviour
 {
     public GameObject photo;
     public Transform[] destinations;
+    public List<TaskScriptableObject> AnnaTasks;
 
     SC_FPSController player;
     GameManager.Level Level;
     NavMeshAgent agent;
     bool inspectingPhoto;
+    TaskSystem tasks;
     
 
     void Awake()
     {
+        tasks = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
         Level = GameManager.Level.Prototype;
         agent = GetComponent<NavMeshAgent>();
@@ -46,7 +49,6 @@ public class Anna : MonoBehaviour
 
         if(b == false && n == "Anna" && i == 1)
         {
-            // nowy cel
             GetComponent<LoadDialogue>().currentDialogueID = 2;
             StartCoroutine(AnnaWalkAway());
         }
@@ -84,6 +86,8 @@ public class Anna : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         agent.SetDestination(destinations[1].position);
+        tasks.addTask(AnnaTasks[0]);
+        tasks.addTask(AnnaTasks[1]);
     }
 
     void Update()

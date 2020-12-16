@@ -86,7 +86,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photo: {fileID: 1811378431932966367, guid: 559298b258f6d174a905aeaa2e359b82, type: 3}
-  destinations: []
+  destinations:
+  - {fileID: 0}
+  - {fileID: 0}
+  AnnaTasks:
+  - {fileID: 11400000, guid: 42545ecbb250019498d70c87e6c751c9, type: 2}
+  - {fileID: 11400000, guid: 83a219a168227744d82e8b0a4c507dc8, type: 2}
 --- !u!33 &5577894649324973030
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128b5eb9cb36ec8448667e250dc8e601, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  id: 1
+  name: "\"Kobieta s\u0142abej wiary\""
+  descprition: "[opcjonalnie] \u015Aled\u017A Ann\u0119."
+  isDone: 0
+  isVisible: 1
+  timeSpent: 205.29793

@@ -73,7 +73,7 @@ public class TaskSystem : MonoBehaviour
             if(tasks[i].isVisible == true && tasks[i].isDone == false)
             {
                 tasksData.GetComponent<Text>().text = tasksData.GetComponent<Text>().text + "► " 
-                + tasks[i].name + "\n       " + tasks[i].descprition + "\n       ";
+                + tasks[i].name + "\n       " + tasks[i].descprition + "\n";
             }
         }
     }
