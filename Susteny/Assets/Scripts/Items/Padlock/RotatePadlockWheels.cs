@@ -7,7 +7,7 @@ public class RotatePadlockWheels : MonoBehaviour
     public Transform correctPos;
     public float angleTolerance = 10f;
     public float rotationSpeed = 1f;
-    public bool correct;
+    [HideInInspector] public bool correct;
 
     Vector3 mousePos;
     bool wasClickedOn;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Padlock : MonoBehaviour
 {
     RotatePadlockWheels[] children; 
-    bool isUnlocked;
 
     private void Awake()
     {
@@ -21,8 +20,12 @@ public class Padlock : MonoBehaviour
             if (!wheel.correct) unlock = false;
         }
 
-        if (unlock) isUnlocked = true;
-        else isUnlocked = false;
+        if (unlock) Unlocked();
+    }
+
+    void Unlocked()
+    {
+        GetComponent<Renderer>().material.color = Color.green;
     }
 
     void Update()
