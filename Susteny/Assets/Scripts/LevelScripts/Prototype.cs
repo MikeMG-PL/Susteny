@@ -8,6 +8,7 @@ public class Prototype : MonoBehaviour
 {
     void Start()
     {
+        DialogueInteraction.Conversation += ConversationEvent;
         LevelEvents();
     }
 
@@ -50,11 +51,23 @@ public class Prototype : MonoBehaviour
             UnfreezeLooking(true);
     }
 
+    void ConversationEvent(bool b, string n, int i)
+    {
+        if (b == false && n == "Anna" && i == 0)
+        {
+        }
+    }
+
     ///////////////////////////////////////////////////////////
     //WARUNKI
     
     void Update()
     {
         ;
+    }
+
+    void OnDestroy()
+    {
+        DialogueInteraction.Conversation -= ConversationEvent;
     }
 }

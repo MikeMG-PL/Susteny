@@ -17,7 +17,7 @@ public class Anna : MonoBehaviour
         Level = GameManager.Level.Prototype;
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(destinations[0].position);
-
+        DialogueInteraction.Conversation += ConversationEvent;
     }
 
     void OnTriggerStay(Collider other)
@@ -30,6 +30,16 @@ public class Anna : MonoBehaviour
         LookAtAnna(other);
     }
 
+    void ConversationEvent(bool b, string n, int i)
+    {
+        if(b == false && n == "Anna" && i == 0)
+        {
+            player.canLook = true;
+            var p = Instantiate(photo);
+            player.GetComponent<PlayerActions>().TakeToInventory(p.GetComponent<ItemWorld>());
+        }
+    }
+
     void LookAtAnna(Collider c)
     {
         if (c.gameObject.GetComponent<Destination>() != null && c.gameObject.GetComponent<Destination>().ID == 0)
@@ -38,7 +48,11 @@ public class Anna : MonoBehaviour
             Camera.main.transform.LookAt(destinations[0]);
             GetComponent<DialogueInteraction>().Talk(true);
             Destroy(destinations[0].gameObject);
-            //player.GetComponent<PlayerActions>().TakeToInventory(photo.GetComponent<ItemWorld>());
         }
+    }
+
+    void OnDestroy()
+    {
+        DialogueInteraction.Conversation -= ConversationEvent;
     }
 }
