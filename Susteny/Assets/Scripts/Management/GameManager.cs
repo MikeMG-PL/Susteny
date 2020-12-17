@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public enum Level { None, Prototype };
     public Level level;
     public bool skipIntro;
+    public bool skipPW;
 
     void Awake()
     {

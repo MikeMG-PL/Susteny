@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3973208708305241259}
   - component: {fileID: 6389003609707793653}
   - component: {fileID: 7726374960479483975}
-  - component: {fileID: 1339190986310017790}
   - component: {fileID: 1774080982686097189}
+  - component: {fileID: 3860611000697321915}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -95,7 +95,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.031612515}
   m_Center: {x: 0, y: 0, z: 0.48419386}
---- !u!114 &1339190986310017790
+--- !u!114 &1774080982686097189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708988322038962841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0c41a72f13a6d409e0770d8120af9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackPanel: {fileID: 0}
+--- !u!114 &3860611000697321915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,22 +123,10 @@ MonoBehaviour:
   action: 2
   player: {fileID: 0}
   item: {fileID: 0}
-  interactionDistance: 5
+  interactionDistance: 3.5
   amount: 1
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   grabbed: 0
   grabbing: 0
   ungrabbing: 0
---- !u!114 &1774080982686097189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8708988322038962841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0c41a72f13a6d409e0770d8120af9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

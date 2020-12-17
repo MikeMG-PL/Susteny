@@ -8,15 +8,25 @@ public class Prototype : MonoBehaviour
 {
     void Start()
     {
+        AnyDoor.Opened += WalkThorughDoors;
         DialogueInteraction.Conversation += ConversationEvent;
         ViewMode.ViewingItem += QuittedPhotoViewing;
+        Padlock.PadlockUnlocked += AfterPadlock;
+        Door.Entered += InBuilding;
         LevelEvents();
     }
 
     void LevelEvents()
     {
-        LevelStarted(true);
-        StartCoroutine(PanelAndUnfreezing());
+        if (!GetComponent<GameManager>().skipPW)
+        {
+            LevelStarted(true);
+            StartCoroutine(PanelAndUnfreezing());
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(140, 12, 140);
+        }
     }
 
     /////////////////////////////////////////
@@ -80,6 +90,9 @@ public class Prototype : MonoBehaviour
     {
         DialogueInteraction.Conversation -= ConversationEvent;
         ViewMode.ViewingItem -= QuittedPhotoViewing;
+        Padlock.PadlockUnlocked -= AfterPadlock;
+        Door.Entered -= InBuilding;
+        AnyDoor.Opened -= WalkThorughDoors;
     }
 
     bool proceed = true;
@@ -95,5 +108,27 @@ public class Prototype : MonoBehaviour
             t.showTask("1");
             proceed = false;
         }
+    }
+
+    void InBuilding(bool b)
+    {
+        Teleport();
+    }
+
+    void AfterPadlock(bool b)
+    {
+        
+    }
+
+    void WalkThorughDoors(bool b, int i)
+    {
+        ;
+    }
+
+    void Teleport()
+    {
+        var p = GameObject.FindGameObjectWithTag("Player");
+        p.transform.position = new Vector3(140, 12, 140);
+        p.transform.localEulerAngles = new Vector3(0, 0, 0);
     }
 }

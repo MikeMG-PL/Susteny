@@ -886,7 +886,7 @@ MonoBehaviour:
   action: 2
   player: {fileID: 0}
   item: {fileID: 0}
-  interactionDistance: 1.5
+  interactionDistance: 1.75
   amount: 1
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}

@@ -3,24 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class AnyDoor : MonoBehaviour
 {
+    public int ID;
+    bool unlocked;
     ViewMode v;
-    TaskSystem t;
-    public GameObject blackPanel;
-    public static event Action<bool> Entered;
+    GameObject blackPanel;
+    public static event Action<bool, int> Opened;
 
     void Start()
     {
+        blackPanel = GameObject.FindGameObjectWithTag("BlackPanel");
         v = GameObject.FindGameObjectWithTag("Player").GetComponent<ViewMode>();
     }
 
     void OnMouseDown()
     {
-        v.ToggleViewMode(null, false, false);
-        t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
-        foreach (TaskScriptableObject so in t.tasks) t.hideTask(so.id.ToString());
-        FadeIn();
+        v.ToggleViewMode(null, false, true);
+        if (unlocked)
+        {    
+            FadeIn();
+            gameObject.AddComponent<ItemWorld>();
+            GetComponent<ItemWorld>().action = Action.interactable;
+        }
     }
 
     void FadeIn()
@@ -38,6 +43,6 @@ public class Door : MonoBehaviour
         var b = blackPanel.GetComponent<BlackScreen>();
         yield return new WaitForSeconds(2f);
         a.runtimeAnimatorController = b.Unfade;
-        Entered.Invoke(true);
+        Opened.Invoke(true, ID);
     }
 }

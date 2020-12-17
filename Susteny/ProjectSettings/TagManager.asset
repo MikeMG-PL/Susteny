@@ -10,6 +10,7 @@ TagManager:
   - TaskSystem
   - NavigationPoints
   - VehiclePoints
+  - BlackPanel
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Buddy_2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: ed4ef042-1a92-4922-9519-2b848836e0da
+  - BaseNodeGUID: ed4ef042-1a92-4922-9519-2b848836e0da
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: 16ec76ad-f9d1-4a71-a5f3-641547e6c65f
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: ed4ef042-1a92-4922-9519-2b848836e0da
+    DialogueText: "Czas jest wzgl\u0119dny."
+    Position: {x: 216, y: 200}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: 16ec76ad-f9d1-4a71-a5f3-641547e6c65f
+    DialogueText: Dialogue Node
+    Position: {x: 928, y: 207}
+  ExposedProperties: []
+  CommentBlockData: []

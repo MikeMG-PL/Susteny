@@ -572,9 +572,10 @@ GameObject:
   - component: {fileID: 211986456263413596}
   - component: {fileID: 287616218818937544}
   - component: {fileID: 5883570645721595283}
+  - component: {fileID: 6978265622001338647}
   m_Layer: 5
   m_Name: Black
-  m_TagString: Untagged
+  m_TagString: BlackPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,6 +627,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6978265622001338647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546228849572288357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ae91fe93e4503489a1abc5d5227391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fade: {fileID: 9100000, guid: f19361b0eaf04284ab3ad8add670ef1d, type: 2}
+  Unfade: {fileID: 9100000, guid: 4428d085a9bca16458f04b06a6ea12dd, type: 2}
 --- !u!1 &7309911170111403090
 GameObject:
   m_ObjectHideFlags: 0
