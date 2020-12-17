@@ -9,6 +9,7 @@ public class Prototype : MonoBehaviour
     void Start()
     {
         DialogueInteraction.Conversation += ConversationEvent;
+        ViewMode.ViewingItem += QuittedPhotoViewing;
         LevelEvents();
     }
 
@@ -24,6 +25,7 @@ public class Prototype : MonoBehaviour
     public static event Action<bool> ShowStartPanel;
     public static event Action<bool> MouseLookUnfreeze;
     public static event Action<bool> UnlockBuilding;
+    bool buildingUnlocked;
 
     void LevelStarted(bool b)
     {
@@ -43,6 +45,7 @@ public class Prototype : MonoBehaviour
     void UnlockTheBuilding(bool b)
     {
         UnlockBuilding.Invoke(b);
+        buildingUnlocked = true;
     }
 
     public IEnumerator PanelAndUnfreezing()
@@ -67,14 +70,30 @@ public class Prototype : MonoBehaviour
 
     ///////////////////////////////////////////////////////////
     //WARUNKI
-    
+
     void Update()
     {
-        ;
+
     }
 
     void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationEvent;
+        ViewMode.ViewingItem -= QuittedPhotoViewing;
+    }
+
+    bool proceed = true;
+    void QuittedPhotoViewing(bool b)
+    {
+        if (!b && buildingUnlocked && proceed)
+        {
+            var t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
+
+            t.hideTask("0");
+            t.hideTask("1");
+            t.addTask(t.availableTasks[2]);
+            t.showTask("1");
+            proceed = false;
+        }
     }
 }

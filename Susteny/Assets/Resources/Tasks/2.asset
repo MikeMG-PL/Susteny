@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 128b5eb9cb36ec8448667e250dc8e601, type: 3}
-  m_Name: 1
+  m_Name: 2
   m_EditorClassIdentifier: 
-  id: 1
-  name: "\"Kobieta s\u0142abej wiary\""
-  descprition: "[opcjonalnie] \u015Aled\u017A Ann\u0119."
+  id: 2
+  name: '"Miasto kamienic"'
+  descprition: "Odnajd\u017A kamienic\u0119 ze zdj\u0119cia."
   isDone: 0
   isVisible: 1
-  timeSpent: 471.8764
+  timeSpent: 420.58112

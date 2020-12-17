@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Anna_4
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: b0174149-80e8-44cf-95d7-7f7aedfe374d
+  - BaseNodeGUID: b0174149-80e8-44cf-95d7-7f7aedfe374d
+    Sentence: 
+    PortName: "Nie tak \u0142atwo si\u0119 mnie pozby\u0107."
+    TargetNodeGUID: a517868b-268d-4e07-a0a2-b664ce7488f3
+  - BaseNodeGUID: b0174149-80e8-44cf-95d7-7f7aedfe374d
+    Sentence: 
+    PortName: "Dopiero gdy b\u0119d\u0119 pewien, \u017Ce jeste\u015B bezpieczna."
+    TargetNodeGUID: a517868b-268d-4e07-a0a2-b664ce7488f3
+  - BaseNodeGUID: b0174149-80e8-44cf-95d7-7f7aedfe374d
+    Sentence: 
+    PortName: Spokojnie, widzisz mnie ostatni raz.
+    TargetNodeGUID: a517868b-268d-4e07-a0a2-b664ce7488f3
+  - BaseNodeGUID: a517868b-268d-4e07-a0a2-b664ce7488f3
+    Sentence: 
+    PortName: "Ty... czekasz na msz\u0119?"
+    TargetNodeGUID: 425c1ec5-380b-4fb3-b30c-492c073e33ba
+  - BaseNodeGUID: 425c1ec5-380b-4fb3-b30c-492c073e33ba
+    Sentence: 
+    PortName: "W\u0142a\u015Bciwie to nic..."
+    TargetNodeGUID: 8996130c-668b-4f3d-adf5-1d8d221320cc
+  - BaseNodeGUID: 425c1ec5-380b-4fb3-b30c-492c073e33ba
+    Sentence: 
+    PortName: "No czekasz pod ko\u015Bcio\u0142em."
+    TargetNodeGUID: 8fbb21be-675e-47dd-9abe-ca9582b5038e
+  - BaseNodeGUID: 8fbb21be-675e-47dd-9abe-ca9582b5038e
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: 8996130c-668b-4f3d-adf5-1d8d221320cc
+  - BaseNodeGUID: 8996130c-668b-4f3d-adf5-1d8d221320cc
+    Sentence: 
+    PortName: "Dobra, to nie ma sensu. Nie ci\u0105gnijmy tego d\u0142u\u017Cej."
+    TargetNodeGUID: 0598dd8e-d60d-4eb3-9952-16d0643904c0
+  - BaseNodeGUID: 8996130c-668b-4f3d-adf5-1d8d221320cc
+    Sentence: 
+    PortName: Co zamierzasz?
+    TargetNodeGUID: 08f4bf1b-07a0-4b58-9ea3-3d87443dcfb4
+  - BaseNodeGUID: 08f4bf1b-07a0-4b58-9ea3-3d87443dcfb4
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: 0598dd8e-d60d-4eb3-9952-16d0643904c0
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: b0174149-80e8-44cf-95d7-7f7aedfe374d
+    DialogueText: "Nie odczepisz si\u0119, prawda?"
+    Position: {x: 187, y: 202}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: a517868b-268d-4e07-a0a2-b664ce7488f3
+    DialogueText: "\u0179le si\u0119 to dla ciebie sko\u0144czy, zobaczysz... Z reszt\u0105,
+      w pierwszej kolejno\u015Bci oberw\u0119 ja."
+    Position: {x: 1123, y: 227}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 425c1ec5-380b-4fb3-b30c-492c073e33ba
+    DialogueText: Co?
+    Position: {x: 1901, y: 227}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 8fbb21be-675e-47dd-9abe-ca9582b5038e
+    DialogueText: "Bo pal\u0119 fajk\u0119. Co ma piernik do wiatraka?"
+    Position: {x: 2699, y: 392}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 8996130c-668b-4f3d-adf5-1d8d221320cc
+    DialogueText: "Pogr\u0105\u017Casz si\u0119 z ka\u017Cdym kolejnym zdaniem. A\u017C
+      g\u0142upio przyzna\u0107, \u017Ce sz\u0142am do ciebie z dobrym nastawieniem."
+    Position: {x: 3389, y: 233}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 08f4bf1b-07a0-4b58-9ea3-3d87443dcfb4
+    DialogueText: "Musz\u0119 podomyka\u0107 te\u017C inne sprawy w mie\u015Bcie.
+      Nie jeste\u015B p\u0119pkiem \u015Bwiata. I nie powinno ci\u0119 obchodzi\u0107,
+      gdzie p\xF3jd\u0119 dalej. Widzisz? W\u0142a\u015Bnie dopalam fajk\u0119. Moja
+      cierpliwo\u015B\u0107 do ciebie maleje z ka\u017Cdym buchem. To koniec. Nie
+      wracaj."
+    Position: {x: 4336, y: 247}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: 0598dd8e-d60d-4eb3-9952-16d0643904c0
+    DialogueText: Dialogue Node
+    Position: {x: 5890, y: 44}
+  ExposedProperties: []
+  CommentBlockData: []

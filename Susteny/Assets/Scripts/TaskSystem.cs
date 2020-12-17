@@ -6,14 +6,16 @@ using UnityEngine.UI;
 
 public class TaskSystem : MonoBehaviour
 {
-    [SerializeField] // List of tasks
-    List<TaskScriptableObject> tasks = new List<TaskScriptableObject>();
+    // List of tasks
+    public List<TaskScriptableObject> tasks = new List<TaskScriptableObject>();
+    public List<TaskScriptableObject> availableTasks = new List<TaskScriptableObject>();
 
     public GameObject tasksData;
 
     void Start()
     {
         updateTasksDisplay();
+        foreach (TaskScriptableObject t in availableTasks) { t.isDone = false; t.isVisible = true; } // tu
     }
 
     void Update()
@@ -36,6 +38,13 @@ public class TaskSystem : MonoBehaviour
         else Debug.LogError("Trying to hide task that doesnt exist!");
     }
 
+    // Shows tasks (set its isVisible value to true)
+    public void showTask(string taskId)
+    {
+        if (getTaskIterator(taskId) != -1) tasks[getTaskIterator(taskId)].isVisible = true;
+        else Debug.LogError("Trying to hide task that doesnt exist!");
+    }
+
     // Adds new task, must have uniqueId
     public void addTask(TaskScriptableObject newTask)
     {
@@ -46,16 +55,16 @@ public class TaskSystem : MonoBehaviour
     // ---------------------- PRIVATE PART ---------------------- //
 
     // Increments time for all tasks
-    void incrementTime(float deltaTime) 
+    void incrementTime(float deltaTime)
     {
         for (int i = 0; i < tasks.Count; i++)
         {
-            if(tasks[i].isDone == false) tasks[i].timeSpent = tasks[i].timeSpent  + deltaTime;
+            if (tasks[i].isDone == false) tasks[i].timeSpent = tasks[i].timeSpent + deltaTime;
         }
     }
 
     // Pass task id, return that task iterator in list
-    int getTaskIterator(string taskId) 
+    int getTaskIterator(string taskId)
     {
         for (int i = 0; i < tasks.Count; i++)
         {
@@ -70,9 +79,9 @@ public class TaskSystem : MonoBehaviour
         tasksData.GetComponent<Text>().text = "";
         for (int i = 0; i < tasks.Count; i++)
         {
-            if(tasks[i].isVisible == true && tasks[i].isDone == false)
+            if (tasks[i].isVisible == true && tasks[i].isDone == false) // w docelowej grze będziemy zapisywać wykonanie tasków. Do prototypu wyłączam (patrz - Start())
             {
-                tasksData.GetComponent<Text>().text = tasksData.GetComponent<Text>().text + "► " 
+                tasksData.GetComponent<Text>().text = tasksData.GetComponent<Text>().text + "► "
                 + tasks[i].name + "\n       " + tasks[i].descprition + "\n";
             }
         }

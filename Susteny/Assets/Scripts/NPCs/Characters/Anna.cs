@@ -7,7 +7,6 @@ public class Anna : MonoBehaviour
 {
     public GameObject photo;
     public Transform[] destinations;
-    public List<TaskScriptableObject> AnnaTasks;
 
     SC_FPSController player;
     GameManager.Level Level;
@@ -47,6 +46,11 @@ public class Anna : MonoBehaviour
             GetComponent<LoadDialogue>().currentDialogueID = 2;
             AnnaWalkAway();
         }
+
+        if(b == false && n == "Anna" && i == 3)
+        {
+            tasks.endTask("1");
+        }
     }
 
     void LookAtAnna(Collider c)
@@ -58,6 +62,9 @@ public class Anna : MonoBehaviour
             GetComponent<DialogueInteraction>().Talk(true);
             Destroy(destinations[0].gameObject);
         }
+
+        if (c.gameObject.GetComponent<Destination>() != null && c.gameObject.GetComponent<Destination>().ID == 1)
+            GetComponent<LoadDialogue>().currentDialogueID = 3;
     }
 
     float timer = 0;
@@ -80,8 +87,8 @@ public class Anna : MonoBehaviour
     void AnnaWalkAway()
     {
         agent.SetDestination(destinations[1].position);
-        tasks.addTask(AnnaTasks[0]);
-        tasks.addTask(AnnaTasks[1]);
+        tasks.addTask(tasks.availableTasks[0]);
+        tasks.addTask(tasks.availableTasks[1]);
     }
 
     void Update()

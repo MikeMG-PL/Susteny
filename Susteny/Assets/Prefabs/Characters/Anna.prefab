@@ -55,7 +55,10 @@ MonoBehaviour:
   nameOfNPC: Anna
   currentDialogueID: 0
   dialogues:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ea00eb4f6f3dd584a98d485e47dd8042, type: 2}
+  - {fileID: 11400000, guid: 99a06c6b66607cb458bd19a49307bf56, type: 2}
+  - {fileID: 11400000, guid: 884768199e8b02f4ea33c26580d1a342, type: 2}
+  - {fileID: 11400000, guid: aad74521ba7d2f548bfc006349699a8e, type: 2}
   buttons: []
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
     type: 3}
@@ -89,9 +92,6 @@ MonoBehaviour:
   destinations:
   - {fileID: 0}
   - {fileID: 0}
-  AnnaTasks:
-  - {fileID: 11400000, guid: 42545ecbb250019498d70c87e6c751c9, type: 2}
-  - {fileID: 11400000, guid: 83a219a168227744d82e8b0a4c507dc8, type: 2}
 --- !u!33 &5577894649324973030
 MeshFilter:
   m_ObjectHideFlags: 0
