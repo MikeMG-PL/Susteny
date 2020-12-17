@@ -49,7 +49,7 @@ public class Anna : MonoBehaviour
 
         if(b == false && n == "Anna" && i == 3)
         {
-            tasks.endTask("1");
+            tasks.hideTask("1");
         }
     }
 

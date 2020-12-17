@@ -12,7 +12,7 @@ public class Buddy : MonoBehaviour
         if (other.CompareTag("Player") && !talked)
         {
             GetComponent<DialogueInteraction>().Talk(true);
-            GetComponent<LoadDialogue>().currentDialogueID = 1;
+            //GetComponent<LoadDialogue>().currentDialogueID = 1;
             talked = true;
         }
     }

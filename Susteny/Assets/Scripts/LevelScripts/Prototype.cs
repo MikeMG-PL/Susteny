@@ -116,8 +116,9 @@ public class Prototype : MonoBehaviour
 
     void InBuilding(bool b)
     {
-        Debug.Log("aaa");
         Teleport();
+        var t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
+        t.addTask(t.availableTasks[3]);
     }
 
     void Teleport()

@@ -1969,7 +1969,7 @@ PrefabInstance:
     - target: {fileID: 5577894649324973026, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5577894649324973029, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
         type: 3}
@@ -2381,6 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548880db7da9a9e46a776619d701112a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Vlad: {fileID: 1791818873}
   keys:
     item: {fileID: 11400000, guid: 9416d764fc3d9d3459e085feb83c870d, type: 2}
     amount: 1
@@ -10319,6 +10320,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 488136428}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1791818873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5577894649324973026, guid: ede08e878e6a02b4daaf1fc05c532c65,
+    type: 3}
+  m_PrefabInstance: {fileID: 1548673877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1799452231
 GameObject:
   m_ObjectHideFlags: 0
@@ -11588,6 +11595,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 134081102}
     m_Modifications:
+    - target: {fileID: 5389328372794970724, guid: ede08e878e6a02b4daaf1fc05c532c65,
+        type: 3}
+      propertyPath: dialogues.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: fa90bcd01a84c6d4db6e817f9d083bd8,
+        type: 2}
     - target: {fileID: 5577894649324973026, guid: ede08e878e6a02b4daaf1fc05c532c65,
         type: 3}
       propertyPath: m_Name
@@ -12243,7 +12256,7 @@ PrefabInstance:
     - target: {fileID: 5698530657478050963, guid: 96c0fa1dae6cb964f820dd8a55596714,
         type: 3}
       propertyPath: skipPW
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c0fa1dae6cb964f820dd8a55596714, type: 3}

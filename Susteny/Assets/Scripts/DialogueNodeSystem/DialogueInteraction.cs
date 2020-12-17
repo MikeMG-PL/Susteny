@@ -61,6 +61,13 @@ public class DialogueInteraction : MonoBehaviour
 
         void DestroyButtons(LoadDialogue dial)
         {
+            var p = GameObject.FindGameObjectWithTag("DialoguePanel").transform.GetChild(0);
+            for (int i = 0; i < p.childCount; i++)
+            {
+                if (p.GetChild(i).GetComponent<Button>() != null)
+                    Destroy(p.GetChild(i).gameObject);
+            }
+
             foreach (GameObject o in dial.buttons)
             {
                 Destroy(o);
@@ -69,7 +76,7 @@ public class DialogueInteraction : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         Conversation -= Conv;
     }
