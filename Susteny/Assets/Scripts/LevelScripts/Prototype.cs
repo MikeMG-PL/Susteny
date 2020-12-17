@@ -83,7 +83,15 @@ public class Prototype : MonoBehaviour
 
     void Update()
     {
+        //102 -10 91
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
+            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(33, 11, 106);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = true;
 
+        }
+            
     }
 
     void OnDisable()
@@ -112,6 +120,7 @@ public class Prototype : MonoBehaviour
 
     void InBuilding(bool b)
     {
+        Debug.Log("aaa");
         Teleport();
     }
 
@@ -128,7 +137,9 @@ public class Prototype : MonoBehaviour
     void Teleport()
     {
         var p = GameObject.FindGameObjectWithTag("Player");
+        p.GetComponent<CharacterController>().enabled = false;
         p.transform.position = new Vector3(140, 12, 140);
         p.transform.localEulerAngles = new Vector3(0, 0, 0);
+        p.GetComponent<CharacterController>().enabled = true;
     }
 }
