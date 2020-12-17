@@ -55,7 +55,7 @@ MonoBehaviour:
   nameOfNPC: ???
   currentDialogueID: 0
   dialogues:
-  - {fileID: 11400000, guid: 2e84c768e1ebad644bed1d683b743f0e, type: 2}
+  - {fileID: 11400000, guid: fa90bcd01a84c6d4db6e817f9d083bd8, type: 2}
   - {fileID: 11400000, guid: 12015e561b7b0cd44a0d71b2c4cd6267, type: 2}
   buttons: []
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,

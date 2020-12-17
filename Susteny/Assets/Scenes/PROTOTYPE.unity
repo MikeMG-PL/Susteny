@@ -11595,12 +11595,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 134081102}
     m_Modifications:
-    - target: {fileID: 5389328372794970724, guid: ede08e878e6a02b4daaf1fc05c532c65,
-        type: 3}
-      propertyPath: dialogues.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: fa90bcd01a84c6d4db6e817f9d083bd8,
-        type: 2}
     - target: {fileID: 5577894649324973026, guid: ede08e878e6a02b4daaf1fc05c532c65,
         type: 3}
       propertyPath: m_Name
@@ -11609,12 +11603,12 @@ PrefabInstance:
     - target: {fileID: 5577894649324973029, guid: ede08e878e6a02b4daaf1fc05c532c65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.53
+      value: -20.757
       objectReference: {fileID: 0}
     - target: {fileID: 5577894649324973029, guid: ede08e878e6a02b4daaf1fc05c532c65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.37
+      value: 2.151
       objectReference: {fileID: 0}
     - target: {fileID: 5577894649324973029, guid: ede08e878e6a02b4daaf1fc05c532c65,
         type: 3}

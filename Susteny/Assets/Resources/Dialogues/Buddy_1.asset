@@ -16,29 +16,99 @@ MonoBehaviour:
   - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
     Sentence: 
     PortName: Next
-    TargetNodeGUID: 63a0c87b-077a-40f2-81d8-e7ac3d998291
-  - BaseNodeGUID: 63a0c87b-077a-40f2-81d8-e7ac3d998291
+    TargetNodeGUID: 1fe425a0-0664-4055-bca8-dd0994a0eb36
+  - BaseNodeGUID: 1fe425a0-0664-4055-bca8-dd0994a0eb36
     Sentence: 
-    PortName: Tak.
-    TargetNodeGUID: 7948d983-9a21-4a88-83dc-c0937e17c9c0
-  - BaseNodeGUID: 63a0c87b-077a-40f2-81d8-e7ac3d998291
+    PortName: "A kim TY jeste\u015B?"
+    TargetNodeGUID: e14ecc00-8214-4320-9ee6-5438bf7371a8
+  - BaseNodeGUID: 1fe425a0-0664-4055-bca8-dd0994a0eb36
     Sentence: 
-    PortName: Nie.
-    TargetNodeGUID: 7948d983-9a21-4a88-83dc-c0937e17c9c0
-  - BaseNodeGUID: 63a0c87b-077a-40f2-81d8-e7ac3d998291
+    PortName: Nie, nie ma mnie.
+    TargetNodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+  - BaseNodeGUID: 1fe425a0-0664-4055-bca8-dd0994a0eb36
     Sentence: 
-    PortName: "Mo\u017Ce."
-    TargetNodeGUID: 7948d983-9a21-4a88-83dc-c0937e17c9c0
+    PortName: Jestem.
+    TargetNodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+  - BaseNodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+    Sentence: 
+    PortName: Jestem Konrad K.
+    TargetNodeGUID: 9ead134e-9bbe-4f7b-97f2-937ee3e27dd4
+  - BaseNodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+    Sentence: 
+    PortName: Jestem V.
+    TargetNodeGUID: 4e2b73bd-87bc-45bd-b304-51bb707c34cf
+  - BaseNodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+    Sentence: 
+    PortName: "Nikim wa\u017Cnym."
+    TargetNodeGUID: ec0fde98-e024-4541-ab63-ea079b29cb68
+  - BaseNodeGUID: e14ecc00-8214-4320-9ee6-5438bf7371a8
+    Sentence: 
+    PortName: "Nie, nie wiem. Nie mam zielonego poj\u0119cia, o co tu chodzi."
+    TargetNodeGUID: 773535db-248b-4366-9d45-6cc69a4835a4
+  - BaseNodeGUID: e14ecc00-8214-4320-9ee6-5438bf7371a8
+    Sentence: 
+    PortName: Tak, wiem.
+    TargetNodeGUID: 9ead134e-9bbe-4f7b-97f2-937ee3e27dd4
+  - BaseNodeGUID: 9ead134e-9bbe-4f7b-97f2-937ee3e27dd4
+    Sentence: 
+    PortName: Jasne...
+    TargetNodeGUID: 9a160dc5-8597-473a-ac4e-64ce39f9d0ee
+  - BaseNodeGUID: 4e2b73bd-87bc-45bd-b304-51bb707c34cf
+    Sentence: 
+    PortName: Pff...
+    TargetNodeGUID: 9a160dc5-8597-473a-ac4e-64ce39f9d0ee
+  - BaseNodeGUID: ec0fde98-e024-4541-ab63-ea079b29cb68
+    Sentence: 
+    PortName: Mhm...
+    TargetNodeGUID: 9a160dc5-8597-473a-ac4e-64ce39f9d0ee
+  - BaseNodeGUID: 773535db-248b-4366-9d45-6cc69a4835a4
+    Sentence: 
+    PortName: Tia...
+    TargetNodeGUID: 9a160dc5-8597-473a-ac4e-64ce39f9d0ee
   DialogueNodeData:
-  - QuitNode: 1
-    PlayerText: 0
-    NodeGUID: 7948d983-9a21-4a88-83dc-c0937e17c9c0
-    DialogueText: Dialogue Node
-    Position: {x: 982, y: 228}
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: 63a0c87b-077a-40f2-81d8-e7ac3d998291
+    NodeGUID: 1fe425a0-0664-4055-bca8-dd0994a0eb36
     DialogueText: "Jeste\u015B."
-    Position: {x: 253, y: 182}
+    Position: {x: 181, y: 193}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 050abe87-312e-490a-8c24-019eaedd5d80
+    DialogueText: "My\u015Bl\u0119... wi\u0119c jestem. Nie my\u015Bl\u0119, wi\u0119c
+      mnie nie ma. A ty? Kim TY jeste\u015B?"
+    Position: {x: 931, y: 254}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 9ead134e-9bbe-4f7b-97f2-937ee3e27dd4
+    DialogueText: "Oczywi\u015Bcie. Zapraszam na g\xF3r\u0119."
+    Position: {x: 1939, y: 144}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 4e2b73bd-87bc-45bd-b304-51bb707c34cf
+    DialogueText: "Nie widz\u0119 wok\xF3\u0142 \u017Cadnych modliszek. Mniejsza
+      o to. Zapraszam na g\xF3r\u0119, Konradzie."
+    Position: {x: 1940, y: 289}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: ec0fde98-e024-4541-ab63-ea079b29cb68
+    DialogueText: "I tu masz racj\u0119. A teraz zapraszam ci\u0119 na g\xF3r\u0119."
+    Position: {x: 1942, y: 427}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e14ecc00-8214-4320-9ee6-5438bf7371a8
+    DialogueText: "Nie ja tu jestem istotny. Id\u017A przed siebie... Nie zatrzymuj\u0119
+      ci\u0119. Wiesz, co masz robi\u0107."
+    Position: {x: 918, y: 677}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 773535db-248b-4366-9d45-6cc69a4835a4
+    DialogueText: "Duszno tu... duszno. No nic, nic. Id\u017A. Id\u017A na g\xF3r\u0119
+      Konradzie."
+    Position: {x: 1910, y: 815}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: 9a160dc5-8597-473a-ac4e-64ce39f9d0ee
+    DialogueText: Dialogue Node
+    Position: {x: 2775, y: 429}
   ExposedProperties: []
   CommentBlockData: []
