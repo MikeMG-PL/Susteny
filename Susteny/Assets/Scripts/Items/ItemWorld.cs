@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
+    public MonoBehaviour test;
+
     public Action action;
     public GameObject player;
     public Item item;
@@ -73,6 +75,8 @@ public class ItemWorld : MonoBehaviour
 
     public void TriggerAction()
     {
+        if (action == Action.door) GetComponent<AnyDoor>().OpenDoor();
+
         if (action == Action.interactable)
         {
             player.GetComponent<PlayerActions>().Interact(gameObject);
@@ -112,4 +116,5 @@ public enum Action
     grabbable,
     takeable,
     interactable,
+    door,
 };

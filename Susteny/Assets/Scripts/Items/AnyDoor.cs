@@ -17,15 +17,9 @@ public class AnyDoor : MonoBehaviour
         v = GameObject.FindGameObjectWithTag("Player").GetComponent<ViewMode>();
     }
 
-    void OnMouseDown()
+    public void OpenDoor()
     {
-        v.ToggleViewMode(null, false, true);
-        if (unlocked)
-        {    
-            FadeIn();
-            gameObject.AddComponent<ItemWorld>();
-            GetComponent<ItemWorld>().action = Action.interactable;
-        }
+        if (unlocked) FadeIn();
     }
 
     void FadeIn()
