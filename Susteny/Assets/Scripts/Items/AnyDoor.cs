@@ -56,6 +56,7 @@ public class AnyDoor : MonoBehaviour
         p.transform.position = doorSides[0].position;
         p.transform.localEulerAngles = new Vector3(0, 0, 0);
         p.GetComponent<CharacterController>().enabled = true;
+        v.ToggleViewMode(null, false, false);
     }
 
     void ChangeSide()
