@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Wladyslaw_1
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
+  - BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
+    Sentence: 
+    PortName: "Kim jeste\u015B? To zdj\u0119cie jest od ciebie?"
+    TargetNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
+  - BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
+    Sentence: 
+    PortName: "Co mi si\u0119 nie uda\u0142o?"
+    TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
+  - BaseNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
+    Sentence: 
+    PortName: "Tia, cze\u015B\u0107, W\u0142adek."
+    TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
+  - BaseNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
+    Sentence: 
+    PortName: "Niestety nie kojarz\u0119..."
+    TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
+  - BaseNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
+    Sentence: 
+    PortName: "Nie zrozumia\u0142em ani s\u0142owa z tego, co powiedzia\u0142e\u015B..."
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+  - BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    Sentence: 
+    PortName: O, fajno. Kolejne drzwi.
+    TargetNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+  - BaseNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+    Sentence: 
+    PortName: "Ja bym wola\u0142 ju\u017C st\u0105d spada\u0107, nie odpada\u0107..."
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+  - BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    Sentence: 
+    PortName: "W porz\u0105dku... i co, to tyle?"
+    TargetNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+  - BaseNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+    Sentence: 
+    PortName: "Nie mam ochoty na wi\u0119cej pyta\u0144."
+    TargetNodeGUID: 5b15942b-a3d0-43ba-b74f-c3284bcb35e8
+  - BaseNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+    Sentence: 
+    PortName: Wal.
+    TargetNodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
+  - BaseNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+    Sentence: 
+    PortName: "S\u0142ucham..."
+    TargetNodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
+  - BaseNodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
+    Sentence: 
+    PortName: Niebieskie?
+    TargetNodeGUID: bf96dcba-a60d-4468-a7e0-0dccaa022d5d
+  - BaseNodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
+    Sentence: 
+    PortName: Purpurowe?
+    TargetNodeGUID: 1ebab7c3-556a-45be-8737-d968e3be95c6
+  - BaseNodeGUID: 1ebab7c3-556a-45be-8737-d968e3be95c6
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: ac9856e6-bbeb-40ca-8a8a-cce8f427a8d1
+  - BaseNodeGUID: bf96dcba-a60d-4468-a7e0-0dccaa022d5d
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: ac9856e6-bbeb-40ca-8a8a-cce8f427a8d1
+  - BaseNodeGUID: ac9856e6-bbeb-40ca-8a8a-cce8f427a8d1
+    Sentence: 
+    PortName: "Anna? Niemo\u017Cliwe! Widzia\u0142em si\u0119 z ni\u0105 kilka minut
+      temu!"
+    TargetNodeGUID: cbb3c376-4797-4124-ac59-bee9487e4fc7
+  - BaseNodeGUID: cbb3c376-4797-4124-ac59-bee9487e4fc7
+    Sentence: 
+    PortName: "Ten dziwny... kto\u015B, kt\xF3rego min\u0105\u0142em na schodach?"
+    TargetNodeGUID: 56e5b282-e224-42bc-a345-28733babbea6
+  - BaseNodeGUID: 56e5b282-e224-42bc-a345-28733babbea6
+    Sentence: 
+    PortName: '[dalej...]'
+    TargetNodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
+  - BaseNodeGUID: cbb3c376-4797-4124-ac59-bee9487e4fc7
+    Sentence: 
+    PortName: "To kto? Kto zgin\u0105\u0142, do cholery?"
+    TargetNodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
+  - BaseNodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
+    Sentence: 
+    PortName: "Chyba nie mam wyj\u015Bcia... urzek\u0142a mnie rozmowa z tob\u0105,
+      W\u0142adys\u0142awie."
+    TargetNodeGUID: e5faef1a-a85e-4226-a30b-d620b12738ab
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
+    DialogueText: "Jestem W\u0142adys\u0142aw Strzemi\u0144ski. Powiniene\u015B mnie
+      zna\u0107. Ciesz\u0119 si\u0119, \u017Ce przyj\u0105\u0142e\u015B moje zaproszenie."
+    Position: {x: 1146, y: 441}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
+    DialogueText: "Witaj, Konradzie... Nie uda\u0142o ci si\u0119."
+    Position: {x: 290, y: 174}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
+    DialogueText: "Zepsu\u0142e\u015B \u015Bwiat... Niestety decyzje jakie podejmujesz
+      ca\u0142y czas ci\u0119 pogr\u0105\u017Caj\u0105."
+    Position: {x: 1916, y: 195}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    DialogueText: "Tak... Obraz m\xF3wi wi\u0119cej, ni\u017C tysi\u0105c s\u0142\xF3w.
+      Przed tob\u0105 ostatnie drzwi. Balkonowe. Wyjd\u017A przez nie. Wtedy dopiero
+      naprawd\u0119 zauwa\u017Cysz, \u017Ce zepsu\u0142e\u015B \u015Bwiat."
+    Position: {x: 2883, y: 195}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+    DialogueText: "Uwa\u017Caj, Konradzie! Wyczuwam w tobie cyniczn\u0105 natur\u0119!
+      Tacy ludzie najszybciej od nas odpadaj\u0105."
+    Position: {x: 2932, y: 21}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: 5b15942b-a3d0-43ba-b74f-c3284bcb35e8
+    DialogueText: Dialogue Node
+    Position: {x: 4792, y: 39}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+    DialogueText: Nie. Zadam ci jeszcze jedno pytanie.
+    Position: {x: 3962, y: 210}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
+    DialogueText: "Zastanawia\u0142e\u015B si\u0119 kiedy\u015B, dlaczego niebo jest..."
+    Position: {x: 4898, y: 238}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: bf96dcba-a60d-4468-a7e0-0dccaa022d5d
+    DialogueText: "Bana\u0142! Bana\u0142! Czy ty tego nie widzisz? My\u015Bla\u0142em,
+      \u017Ce jeste\u015B jednym z nas. \u017Be widzisz \u015Bwiat nasycony barwami...
+      \u017Ce widzisz \u015Bwiat, jak namalowany."
+    Position: {x: 5610, y: 65}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 1ebab7c3-556a-45be-8737-d968e3be95c6
+    DialogueText: "Tak! Widzisz to! Jeste\u015B jednym z nas... Widzisz, \u017Ce
+      \u015Bwiat jest nasycony barwami, \u017Ce jest namalowany... jak obrazek."
+    Position: {x: 5618, y: 263}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: ac9856e6-bbeb-40ca-8a8a-cce8f427a8d1
+    DialogueText: "A ty go zepsu\u0142e\u015B! I przez ciebie kto\u015B zgin\u0105\u0142!
+      Kto\u015B, z kim jeszcze niedawno mia\u0142e\u015B kontakt!"
+    Position: {x: 6640, y: 224}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: cbb3c376-4797-4124-ac59-bee9487e4fc7
+    DialogueText: "Anna... Anna, Anna, Anna! Jakby\u015B m\xF3g\u0142, to by\u015B
+      sobie da\u0142 na drugie \"Anna\". Anna si\u0119 nie liczy."
+    Position: {x: 7694, y: 227}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 56e5b282-e224-42bc-a345-28733babbea6
+    DialogueText: "On jest niewa\u017Cny. To m\xF3j od\u017Awierny."
+    Position: {x: 8639, y: 93}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
+    DialogueText: "Wyjd\u017A na balkon i zobacz. Drzwi s\u0105 zamkni\u0119te, ale
+      na dole, na stoliku przy schodach, m\xF3j od\u017Awierny zostawi\u0142 dla
+      ciebie klucz. Je\u015Bli go nie zabra\u0142e\u015B, id\u017A po niego i otw\xF3rz
+      drzwi balkonowe."
+    Position: {x: 9357, y: 219}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: e5faef1a-a85e-4226-a30b-d620b12738ab
+    DialogueText: Dialogue Node
+    Position: {x: 10678, y: 216}
+  ExposedProperties: []
+  CommentBlockData: []

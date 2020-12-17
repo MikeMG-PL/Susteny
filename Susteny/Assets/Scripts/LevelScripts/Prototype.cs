@@ -8,7 +8,6 @@ public class Prototype : MonoBehaviour
 {
     void Start()
     {
-        AnyDoor.Opened += WalkThorughDoors;
         DialogueInteraction.Conversation += ConversationEvent;
         ViewMode.ViewingItem += QuittedPhotoViewing;
         Door.Entered += InBuilding;
@@ -98,7 +97,6 @@ public class Prototype : MonoBehaviour
         DialogueInteraction.Conversation -= ConversationEvent;
         ViewMode.ViewingItem -= QuittedPhotoViewing;
         Door.Entered -= InBuilding;
-        AnyDoor.Opened -= WalkThorughDoors;
     }
 
     bool proceed = true;
@@ -120,11 +118,6 @@ public class Prototype : MonoBehaviour
     {
         Debug.Log("aaa");
         Teleport();
-    }
-
-    void WalkThorughDoors(bool b, int i)
-    {
-        ;
     }
 
     void Teleport()

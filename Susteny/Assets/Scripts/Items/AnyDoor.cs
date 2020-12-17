@@ -6,10 +6,11 @@ using UnityEngine;
 public class AnyDoor : MonoBehaviour
 {
     public int ID;
-    bool unlocked;
+    public List<Transform> doorSides;
+    public bool switchSides;
+    public bool unlocked;
     ViewMode v;
     GameObject blackPanel;
-    public static event Action<bool, int> Opened;
 
     void Start()
     {
@@ -44,6 +45,26 @@ public class AnyDoor : MonoBehaviour
         var b = blackPanel.GetComponent<BlackScreen>();
         yield return new WaitForSeconds(2f);
         a.runtimeAnimatorController = b.Unfade;
-        Opened.Invoke(true, ID);
+
+        Teleport();
     }
+
+    void Teleport()
+    {
+        var p = GameObject.FindGameObjectWithTag("Player");
+        p.GetComponent<CharacterController>().enabled = false;
+        p.transform.position = doorSides[0].position;
+        p.transform.localEulerAngles = new Vector3(0, 0, 0);
+        p.GetComponent<CharacterController>().enabled = true;
+    }
+
+    void ChangeSide()
+    {
+        if (switchSides)
+        {
+            var t = doorSides[0];
+            doorSides[0] = doorSides[1];
+            doorSides[1] = t;
+        }
+    } // TASKIIIII
 }

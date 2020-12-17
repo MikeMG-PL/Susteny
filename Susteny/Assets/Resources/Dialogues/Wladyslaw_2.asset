@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Wladyslaw_2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 96652e74-b424-4812-8416-fc9cd520dd30
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: 465e3c5e-75de-4be3-91a9-381a02867491
+  - BaseNodeGUID: 465e3c5e-75de-4be3-91a9-381a02867491
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: ecba09ba-9738-477a-a73a-14f5cd06e627
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 465e3c5e-75de-4be3-91a9-381a02867491
+    DialogueText: "Zejd\u017A na d\xF3\u0142 po klucz i otw\xF3rz drzwi balkonowe."
+    Position: {x: 219, y: 201}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: ecba09ba-9738-477a-a73a-14f5cd06e627
+    DialogueText: Dialogue Node
+    Position: {x: 897, y: 195}
+  ExposedProperties: []
+  CommentBlockData: []
