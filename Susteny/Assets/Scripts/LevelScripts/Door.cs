@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public AnyDoor secondDoor;
     ViewMode v;
     TaskSystem t;
     public GameObject blackPanel;
@@ -12,6 +13,7 @@ public class Door : MonoBehaviour
 
     void Start()
     {
+        Padlock.PadlockUnlocked += UnlockSecondDoor;
         v = GameObject.FindGameObjectWithTag("Player").GetComponent<ViewMode>();
     }
 
@@ -42,5 +44,20 @@ public class Door : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Entered.Invoke(true);
         a.runtimeAnimatorController = b.Unfade;
+    }
+
+    void OnDestroy()
+    {
+        Padlock.PadlockUnlocked -= UnlockSecondDoor;
+    }
+
+    bool openSecondDoor;
+    void UnlockSecondDoor(bool b)
+    {
+        if (!openSecondDoor)
+        {
+            secondDoor.UnlockDoor();
+            openSecondDoor = true;
+        }
     }
 }

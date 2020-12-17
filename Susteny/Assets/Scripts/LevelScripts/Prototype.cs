@@ -11,7 +11,6 @@ public class Prototype : MonoBehaviour
         AnyDoor.Opened += WalkThorughDoors;
         DialogueInteraction.Conversation += ConversationEvent;
         ViewMode.ViewingItem += QuittedPhotoViewing;
-        Padlock.PadlockUnlocked += AfterPadlock;
         Door.Entered += InBuilding;
         LevelEvents();
     }
@@ -98,7 +97,6 @@ public class Prototype : MonoBehaviour
     {
         DialogueInteraction.Conversation -= ConversationEvent;
         ViewMode.ViewingItem -= QuittedPhotoViewing;
-        Padlock.PadlockUnlocked -= AfterPadlock;
         Door.Entered -= InBuilding;
         AnyDoor.Opened -= WalkThorughDoors;
     }
@@ -122,11 +120,6 @@ public class Prototype : MonoBehaviour
     {
         Debug.Log("aaa");
         Teleport();
-    }
-
-    void AfterPadlock(bool b)
-    {
-        
     }
 
     void WalkThorughDoors(bool b, int i)
