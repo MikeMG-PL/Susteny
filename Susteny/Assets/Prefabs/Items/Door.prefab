@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7726374960479483975}
   - component: {fileID: 1774080982686097189}
   - component: {fileID: 3860611000697321915}
+  - component: {fileID: 7516381369257879241}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
   action: 2
   player: {fileID: 0}
   item: {fileID: 0}
@@ -130,3 +132,16 @@ MonoBehaviour:
   grabbed: 0
   grabbing: 0
   ungrabbing: 0
+--- !u!114 &7516381369257879241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708988322038962841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e2502972a06ff4381fa2151a9ac25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0

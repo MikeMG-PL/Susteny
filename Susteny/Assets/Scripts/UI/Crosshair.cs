@@ -63,9 +63,7 @@ public class Crosshair : MonoBehaviour
                 else
                     crosshair.color = defaultColor;
             }
-
         }
-
         else
         {
             lastHit = null;
