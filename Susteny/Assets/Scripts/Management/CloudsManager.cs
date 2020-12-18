@@ -30,7 +30,7 @@ public class CloudsManager : MonoBehaviour
             if (areaWidth < Vector3.Distance(cloud.transform.position,
                 new Vector3(Camera.main.transform.position.x, cloud.transform.position.y, Camera.main.transform.position.z)))
             {
-                cloud.SetActive(false);
+                Destroy(cloud.transform.parent.gameObject);
                 generateCloud();
             }
         }
@@ -49,5 +49,6 @@ public class CloudsManager : MonoBehaviour
         float scale = Random.Range(cloudsScaleMin, cloudsScaleMax);
         cloudClone.transform.localScale += new Vector3(scale, scale, scale);
         cloudClone.transform.parent = transform;
+        cloudClone.transform.localEulerAngles = new Vector3(Random.Range(0f, 20f), Random.Range(0f, 360f), Random.Range(0f, 20f));
     }
 }
