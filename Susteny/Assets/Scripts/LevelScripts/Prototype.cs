@@ -119,12 +119,14 @@ public class Prototype : MonoBehaviour
     AudioSource a;
     void MuteMusic(bool b)
     {
+        mute = true;
         a = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
     }
 
+    bool mute;
     void Update()
     {
-        if (a.volume > 0)
-            a.volume -= Time.deltaTime / 30;
+        if (mute && a.volume > 0)
+            a.volume -= Time.deltaTime/30;       
     }
 }

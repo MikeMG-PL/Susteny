@@ -8,6 +8,11 @@ public class LastDoor : MonoBehaviour
     Inventory inv;
     public ItemInventory keys;
     bool unlocked;
+    public AudioClip Sustain;
+    public Material newSkybox;
+    public Material nightMaterial;
+    public List<MeshRenderer> objectsToChangeMaterial;
+    public List<GameObject> objectsToDisable;
 
     void Start()
     {
