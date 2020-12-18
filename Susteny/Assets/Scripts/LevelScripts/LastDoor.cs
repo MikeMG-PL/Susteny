@@ -65,7 +65,7 @@ public class LastDoor : MonoBehaviour
             var a = p.GetComponent<AudioSource>();
             a.Stop();
             a.clip = Sustain;
-            a.volume = 0.3f;
+            a.volume = 0.6f;
             a.Play();
             a.time = 46f;
 
@@ -88,6 +88,7 @@ public class LastDoor : MonoBehaviour
             yield return new WaitForSeconds(15);
             black.enabled = true;
             black.GetComponent<Animator>().runtimeAnimatorController = black.Fade;
+            yield return new WaitForSeconds(5);
             Application.Quit();
         }
     }
