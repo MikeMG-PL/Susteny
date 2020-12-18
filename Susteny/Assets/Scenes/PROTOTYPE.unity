@@ -13359,7 +13359,7 @@ MonoBehaviour:
   basicCloud: {fileID: 5140622876554903078, guid: 93ef6496f6b49214a8f08c1d786161e0,
     type: 3}
   cloudsNumber: 30
-  areaWidth: 700
+  areaWidth: 1500
   cloudsScaleMin: 1
   cloudsScaleMax: 5
   cloudsHeightMin: 150
