@@ -11,6 +11,7 @@ public class PlayerActions : MonoBehaviour
     public bool canGrab = true;
     public bool canTalk = true;
     public bool canOpenDoor = true;
+    public bool canInteract = true;
 
     ItemWorld grabbedInteractable;
     ViewMode viewMode;
@@ -123,15 +124,23 @@ public class PlayerActions : MonoBehaviour
         canOpenDoor = !b;
     }
 
+    void LockInteracting(bool b)
+    {
+        canInteract = !b;
+    }
+
     void Subscribe()
     {
+        BrowsingInventory += LockInteracting;
         BrowsingInventory += LockGrabbingItems;
         BrowsingInventory += LockDialogueInteractions;
         BrowsingInventory += LockOpeningDoors;
+        DialogueInteraction.Talking += LockInteracting;
         DialogueInteraction.Talking += LockOpeningDoors;
         DialogueInteraction.Talking += LockDialogueInteractions;
         DialogueInteraction.Talking += LockGrabbingItems;
         Prototype.LevelStart += DisallowInventorySwitching;
+        ViewMode.ViewingItem += LockInteracting;
         ViewMode.ViewingItem += LockOpeningDoors;
         ViewMode.ViewingItem += LockGrabbingItems;
         ViewMode.ViewingItem += LockDialogueInteractions;
@@ -139,13 +148,16 @@ public class PlayerActions : MonoBehaviour
 
     void Unsubscribe()
     {
+        BrowsingInventory -= LockInteracting;
         BrowsingInventory -= LockGrabbingItems;
         BrowsingInventory -= LockDialogueInteractions;
         BrowsingInventory -= LockOpeningDoors;
+        DialogueInteraction.Talking -= LockInteracting;
         DialogueInteraction.Talking -= LockOpeningDoors;
         DialogueInteraction.Talking -= LockDialogueInteractions;
         DialogueInteraction.Talking -= LockGrabbingItems;
         Prototype.LevelStart -= DisallowInventorySwitching;
+        ViewMode.ViewingItem -= LockInteracting;
         ViewMode.ViewingItem -= LockOpeningDoors;
         ViewMode.ViewingItem -= LockGrabbingItems;
         ViewMode.ViewingItem -= LockDialogueInteractions;

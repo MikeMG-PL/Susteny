@@ -77,7 +77,7 @@ public class ItemWorld : MonoBehaviour
     {
         if (action == Action.door && player.GetComponent<PlayerActions>().canOpenDoor) GetComponent<AnyDoor>().OpenDoor();
 
-        if (action == Action.interactable)
+        if (action == Action.interactable && player.GetComponent<PlayerActions>().canInteract)
         {
             player.GetComponent<PlayerActions>().Interact(gameObject);
         }
