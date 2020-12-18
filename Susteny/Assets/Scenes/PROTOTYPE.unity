@@ -3777,6 +3777,7 @@ MonoBehaviour:
   - {fileID: 1399021043}
   - {fileID: 337113934}
   - {fileID: 497503771}
+  - {fileID: 1467131648}
   corpses: {fileID: 811950733}
   black: {fileID: 1301500455}
 --- !u!4 &617389056 stripped
