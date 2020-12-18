@@ -883,10 +883,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
   action: 2
   player: {fileID: 0}
   item: {fileID: 0}
-  interactionDistance: 1.75
+  interactionDistance: 2.35
   amount: 1
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
