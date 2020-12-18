@@ -36,7 +36,7 @@ public class Prototype : MonoBehaviour
     public static event Action<bool> UnlockBuilding;
     bool buildingUnlocked;
 
-    void LevelStarted(bool b)
+    public void LevelStarted(bool b)
     {
         LevelStart.Invoke(b);
     }
@@ -46,7 +46,7 @@ public class Prototype : MonoBehaviour
         ShowStartPanel.Invoke(b);
     }
 
-    void UnfreezeLooking(bool b)
+    public void UnfreezeLooking(bool b)
     {
         MouseLookUnfreeze.Invoke(b);
     }
@@ -124,9 +124,14 @@ public class Prototype : MonoBehaviour
     }
 
     bool mute;
+    bool stopMuting;
     void Update()
     {
-        if (mute && a.volume > 0)
-            a.volume -= Time.deltaTime/30;       
+        if (mute && a.volume > 0 && !stopMuting)
+        {
+            a.volume -= Time.deltaTime / 30;
+            if (a.volume <= 0)
+                stopMuting = true;
+        }
     }
 }

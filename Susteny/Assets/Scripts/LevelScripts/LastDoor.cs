@@ -5,6 +5,7 @@ using UnityEngine;
 public class LastDoor : MonoBehaviour
 {
     public GameObject Vlad;
+    public Anna anna;
     Inventory inv;
     public ItemInventory keys;
     bool unlocked;
@@ -13,9 +14,12 @@ public class LastDoor : MonoBehaviour
     public Material nightMaterial;
     public List<MeshRenderer> objectsToChangeMaterial;
     public List<GameObject> objectsToDisable;
+    public GameObject corpses;
+    public BlackScreen black;
 
     void Start()
     {
+        AnyDoor.WalkThrough += PassingDoor;
         DialogueInteraction.Conversation += EventConversation;
         inv = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
@@ -35,9 +39,10 @@ public class LastDoor : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         DialogueInteraction.Conversation -= EventConversation;
+        AnyDoor.WalkThrough += PassingDoor;
     }
 
     void EventConversation(bool b, string n, int i)
@@ -48,6 +53,42 @@ public class LastDoor : MonoBehaviour
             Vlad.GetComponent<LoadDialogue>().currentDialogueID = 1;
             t.hideTask("3");
             t.addTask(t.availableTasks[4]);
+        }
+    }
+
+    void PassingDoor(bool b, int n)
+    {
+        if (b && n == 10)
+        {
+            var p = GameObject.FindGameObjectWithTag("Player");
+            p.transform.localEulerAngles = new Vector3(0, 202, 0);
+            var a = p.GetComponent<AudioSource>();
+            a.Stop();
+            a.clip = Sustain;
+            a.volume = 0.3f;
+            a.Play();
+            a.time = 46f;
+
+            foreach (MeshRenderer m in objectsToChangeMaterial) m.material = nightMaterial;
+            foreach (GameObject g in objectsToDisable) g.SetActive(false);
+            RenderSettings.skybox = newSkybox;
+            corpses.SetActive(true);
+            var cars = GameObject.FindGameObjectsWithTag("Car");
+            foreach (GameObject c in cars) c.SetActive(false);
+
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Prototype>().LevelStarted(true);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Prototype>().UnfreezeLooking(true);
+            anna.transform.localPosition = new Vector3(18, 9.66f, 49);
+            anna.GetComponent<Anna>().agent.SetDestination(anna.GetComponent<Anna>().destinations[2].position);
+            StartCoroutine(Fade());
+        }
+
+        IEnumerator Fade()
+        {
+            yield return new WaitForSeconds(15);
+            black.enabled = true;
+            black.GetComponent<Animator>().runtimeAnimatorController = black.Fade;
+            Application.Quit();
         }
     }
 }

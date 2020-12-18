@@ -10,7 +10,7 @@ public class Anna : MonoBehaviour
 
     SC_FPSController player;
     GameManager.Level Level;
-    NavMeshAgent agent;
+    [HideInInspector()] public NavMeshAgent agent;
     bool inspectingPhoto;
     TaskSystem tasks;
 

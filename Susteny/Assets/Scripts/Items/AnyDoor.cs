@@ -12,6 +12,7 @@ public class AnyDoor : MonoBehaviour
     ViewMode v;
     GameObject blackPanel;
 
+    public static event Action<bool, int> WalkThrough;
     void Start()
     {
         blackPanel = GameObject.FindGameObjectWithTag("BlackPanel");
@@ -45,7 +46,6 @@ public class AnyDoor : MonoBehaviour
         var b = blackPanel.GetComponent<BlackScreen>();
         yield return new WaitForSeconds(2f);
         a.runtimeAnimatorController = b.Unfade;
-
         Teleport();
     }
 
@@ -57,6 +57,7 @@ public class AnyDoor : MonoBehaviour
         p.transform.localEulerAngles = new Vector3(0, 0, 0);
         p.GetComponent<CharacterController>().enabled = true;
         v.ToggleViewMode(null, false, false);
+        WalkThrough.Invoke(true, ID);
     }
 
     void ChangeSide()
@@ -67,5 +68,5 @@ public class AnyDoor : MonoBehaviour
             doorSides[0] = doorSides[1];
             doorSides[1] = t;
         }
-    } // TASKIIIII
+    }
 }
