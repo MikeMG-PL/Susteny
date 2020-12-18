@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctPos: {fileID: 4174849967972905185}
-  angleTolerance: 10
+  angleTolerance: 13
   rotationSpeed: 1
   correct: 0
 --- !u!114 &2914799851147524445
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctPos: {fileID: 7294158136735180521}
-  angleTolerance: 10
+  angleTolerance: 13
   rotationSpeed: 1
   correct: 0
 --- !u!114 &8809857965561389472
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctPos: {fileID: 7543321789491505932}
-  angleTolerance: 10
+  angleTolerance: 13
   rotationSpeed: 1
   correct: 0
 --- !u!114 &7032681100687859289
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctPos: {fileID: 4755577892135803627}
-  angleTolerance: 10
+  angleTolerance: 13
   rotationSpeed: 1
   correct: 0
 --- !u!114 &7065743670082155450
