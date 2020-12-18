@@ -922,6 +922,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 83a219a168227744d82e8b0a4c507dc8, type: 2}
   - {fileID: 11400000, guid: 590215975ea5e634292a6f83cfbe95e7, type: 2}
   - {fileID: 11400000, guid: 9cf174c500e45ec438a1daa30921bb7b, type: 2}
+  - {fileID: 11400000, guid: 34e7cc671e174f24ba4a49462a42a025, type: 2}
   tasksData: {fileID: 8501735986512286115}
 --- !u!1 &8501735986512286115
 GameObject:

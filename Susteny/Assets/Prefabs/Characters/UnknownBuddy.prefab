@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a63c4a5ff9878d42857a41f56797e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOfNPC: ???
+  nameOfNPC: "Od\u017Awierny"
   currentDialogueID: 0
   dialogues:
   - {fileID: 11400000, guid: fa90bcd01a84c6d4db6e817f9d083bd8, type: 2}
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talked: 0
+  incrementDialogueID: 1
 --- !u!1 &7526145798180056041
 GameObject:
   m_ObjectHideFlags: 0

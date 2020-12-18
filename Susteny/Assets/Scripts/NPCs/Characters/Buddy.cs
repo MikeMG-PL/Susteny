@@ -6,13 +6,15 @@ public class Buddy : MonoBehaviour
 {
     [HideInInspector()]
     public bool talked;
+    public bool incrementDialogueID;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !talked)
         {
             GetComponent<DialogueInteraction>().Talk(true);
-            //GetComponent<LoadDialogue>().currentDialogueID = 1;
+            if (incrementDialogueID)
+                GetComponent<LoadDialogue>().currentDialogueID = 1;
             talked = true;
         }
     }

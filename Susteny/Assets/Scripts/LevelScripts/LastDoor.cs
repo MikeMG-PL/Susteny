@@ -11,7 +11,7 @@ public class LastDoor : MonoBehaviour
 
     void Start()
     {
-        DialogueInteraction.Conversation += ConversationEvent;
+        DialogueInteraction.Conversation += EventConversation;
         inv = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
@@ -32,17 +32,17 @@ public class LastDoor : MonoBehaviour
 
     void OnDestroy()
     {
-        DialogueInteraction.Conversation -= ConversationEvent;
+        DialogueInteraction.Conversation -= EventConversation;
     }
 
-    void ConversationEvent(bool b, string n, int i)
+    void EventConversation(bool b, string n, int i)
     {
-        if (b == false && n == "Władysław Strzemiński" && i == 0)
+        if (b == false && n == "Vlad" && i == 0)
         {
-            Vlad.GetComponent<LoadDialogue>().currentDialogueID = 1;
             var t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
-            t.hideTask("2");
-            t.addTask(t.availableTasks[3]);
+            Vlad.GetComponent<LoadDialogue>().currentDialogueID = 1;
+            t.hideTask("3");
+            t.addTask(t.availableTasks[4]);
         }
     }
 }

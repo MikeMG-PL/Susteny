@@ -8,6 +8,7 @@ public class Prototype : MonoBehaviour
 {
     void Start()
     {
+        Padlock.PadlockUnlocked += MuteMusic;
         DialogueInteraction.Conversation += ConversationEvent;
         ViewMode.ViewingItem += QuittedPhotoViewing;
         Door.Entered += InBuilding;
@@ -76,27 +77,12 @@ public class Prototype : MonoBehaviour
         }
     }
 
-    ///////////////////////////////////////////////////////////
-    //WARUNKI
-
-    void Update()
-    {
-        //102 -10 91
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = false;
-            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(33, 11, 106);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().enabled = true;
-
-        }
-            
-    }
-
     void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationEvent;
         ViewMode.ViewingItem -= QuittedPhotoViewing;
         Door.Entered -= InBuilding;
+        Padlock.PadlockUnlocked -= MuteMusic;
     }
 
     bool proceed = true;
@@ -128,5 +114,17 @@ public class Prototype : MonoBehaviour
         p.transform.position = new Vector3(140, 12, 140);
         p.transform.localEulerAngles = new Vector3(0, 0, 0);
         p.GetComponent<CharacterController>().enabled = true;
+    }
+
+    AudioSource a;
+    void MuteMusic(bool b)
+    {
+        a = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (a.volume > 0)
+            a.volume -= Time.deltaTime / 30;
     }
 }
