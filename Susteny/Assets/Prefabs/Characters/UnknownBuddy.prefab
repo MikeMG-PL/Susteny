@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd849bf7070ebb45899929789ed9a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 5
+  interactionDistance: 1
 --- !u!33 &5577894649324973030
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 3.4703963
+  m_Radius: 4.2401924
   m_Height: 12.064153
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}

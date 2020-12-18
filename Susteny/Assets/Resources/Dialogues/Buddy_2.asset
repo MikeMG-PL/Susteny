@@ -25,8 +25,8 @@ MonoBehaviour:
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: ed4ef042-1a92-4922-9519-2b848836e0da
-    DialogueText: "Czasami na niekt\xF3re rzeczy w \u017Cyciu spojrze\u0107... z
-      drugiej strony."
+    DialogueText: "Czasami na niekt\xF3re rzeczy w \u017Cyciu warto spojrze\u0107...
+      z drugiej strony."
     Position: {x: 216, y: 200}
   - QuitNode: 1
     PlayerText: 0
