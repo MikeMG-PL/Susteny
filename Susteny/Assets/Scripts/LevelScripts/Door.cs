@@ -10,16 +10,19 @@ public class Door : MonoBehaviour
     TaskSystem t;
     public GameObject blackPanel;
     public static event Action<bool> Entered;
+    GameObject player;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         Padlock.PadlockUnlocked += UnlockSecondDoor;
         v = GameObject.FindGameObjectWithTag("Player").GetComponent<ViewMode>();
     }
 
     void OnMouseDown()
     {
-        if (Vector3.Distance(transform.position, v.transform.position) <= GetComponent<ItemWorld>().interactionDistance)
+        if (Vector3.Distance(transform.position, v.transform.position) <= GetComponent<ItemWorld>().interactionDistance
+            && player.GetComponent<PlayerActions>().canOpenDoor)
         {
             v.ToggleViewMode(null, false, false);
             t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
