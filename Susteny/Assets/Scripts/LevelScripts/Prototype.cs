@@ -103,6 +103,7 @@ public class Prototype : MonoBehaviour
     void InBuilding(bool b)
     {
         Teleport();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = true;
         var t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
         t.addTask(t.availableTasks[3]);
     }

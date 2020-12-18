@@ -37,6 +37,7 @@ public class Door : MonoBehaviour
         var b = blackPanel.GetComponent<BlackScreen>();
         a.enabled = true;
         a.runtimeAnimatorController = b.Fade;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = false;
         StartCoroutine(Entering());
     }
 

@@ -80,6 +80,7 @@ public class LastDoor : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Prototype>().UnfreezeLooking(true);
             anna.transform.localPosition = new Vector3(18, 9.66f, 49);
             anna.GetComponent<Anna>().agent.SetDestination(anna.GetComponent<Anna>().destinations[2].position);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = false;
             StartCoroutine(Fade());
         }
 

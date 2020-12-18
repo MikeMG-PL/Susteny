@@ -37,6 +37,7 @@ public class AnyDoor : MonoBehaviour
         var b = blackPanel.GetComponent<BlackScreen>();
         a.enabled = true;
         a.runtimeAnimatorController = b.Fade;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = false;
         StartCoroutine(Entering());
     }
 
@@ -53,6 +54,7 @@ public class AnyDoor : MonoBehaviour
     {
         var p = GameObject.FindGameObjectWithTag("Player");
         p.GetComponent<CharacterController>().enabled = false;
+        p.GetComponent<PlayerActions>().inventoryAllowed = true;
         p.transform.position = doorSides[0].position;
         p.transform.localEulerAngles = new Vector3(0, 0, 0);
         p.GetComponent<CharacterController>().enabled = true;
