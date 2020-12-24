@@ -3761,7 +3761,7 @@ MonoBehaviour:
   keys:
     item: {fileID: 11400000, guid: 9416d764fc3d9d3459e085feb83c870d, type: 2}
     amount: 1
-  Sustain: {fileID: 8300000, guid: 5e6d44543216ef545a0c475353f62865, type: 3}
+  Sustain: {fileID: 8300000, guid: b8de98060eb504448ac1b9dfeaef12fa, type: 3}
   newSkybox: {fileID: 2100000, guid: 493bfb50af5d9424da505ba945c86600, type: 2}
   nightMaterial: {fileID: 2100000, guid: 5ba2d5ccf86b0b6479d3078cdc87b848, type: 2}
   objectsToChangeMaterial:
@@ -13359,10 +13359,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicCloud: {fileID: 5140622876554903078, guid: 93ef6496f6b49214a8f08c1d786161e0,
     type: 3}
-  cloudsNumber: 30
+  cloudsNumber: 50
   areaWidth: 1500
   cloudsScaleMin: 1
-  cloudsScaleMax: 5
+  cloudsScaleMax: 7.5
   cloudsHeightMin: 150
   cloudsHeightMax: 350
   cloudsSpeed: 0.07
@@ -17560,16 +17560,6 @@ PrefabInstance:
         type: 3}
       propertyPath: level
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698530657478050963, guid: 96c0fa1dae6cb964f820dd8a55596714,
-        type: 3}
-      propertyPath: skipIntro
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698530657478050963, guid: 96c0fa1dae6cb964f820dd8a55596714,
-        type: 3}
-      propertyPath: skipPW
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c0fa1dae6cb964f820dd8a55596714, type: 3}
