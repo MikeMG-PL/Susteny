@@ -2897,7 +2897,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh226220
+  m_Name: pb_Mesh121832
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3451,7 +3451,7 @@ PrefabInstance:
     - target: {fileID: 5577894649324973026, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5577894649324973029, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
         type: 3}
@@ -7195,7 +7195,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh226448
+  m_Name: pb_Mesh122060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12697,7 +12697,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -17032,7 +17032,7 @@ PrefabInstance:
     - target: {fileID: 1824086119982000197, guid: b2391b03fbf38cb4bb771dcef6796d8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.833
+      value: -11.59
       objectReference: {fileID: 0}
     - target: {fileID: 1824086119982000197, guid: b2391b03fbf38cb4bb771dcef6796d8e,
         type: 3}
@@ -17078,11 +17078,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1824086119982000197, guid: b2391b03fbf38cb4bb771dcef6796d8e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1824086119982000198, guid: b2391b03fbf38cb4bb771dcef6796d8e,
         type: 3}
@@ -17559,7 +17554,7 @@ PrefabInstance:
     - target: {fileID: 5698530657478050963, guid: 96c0fa1dae6cb964f820dd8a55596714,
         type: 3}
       propertyPath: level
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c0fa1dae6cb964f820dd8a55596714, type: 3}

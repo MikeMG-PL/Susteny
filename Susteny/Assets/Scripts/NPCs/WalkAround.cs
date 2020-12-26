@@ -7,21 +7,22 @@ public class WalkAround : MonoBehaviour
 {
     NavMeshAgent agent;
     GameObject navigationPointsContainer;
+    Animator animator;
 
     int point;      // Do którego punktu zmierzać będzie NPC
     float time;     // Ile ma trwać jego podróż, zanim ją przerwie i zmieni punkt
     float speed;    // Szybkość chodu NPC;
-    int priority; // Priorytet omijania przeszkód wzgl. innych NPC
-    /////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
     float timer;
     int ID;
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         navigationPointsContainer = GameObject.FindGameObjectWithTag("NavigationPoints");
 
-        for(int i = 0; i < transform.parent.childCount; i++)
+        for (int i = 0; i < transform.parent.childCount; i++)
         {
             if (transform.parent.GetChild(i) == transform)
                 ID = i;
@@ -31,17 +32,16 @@ public class WalkAround : MonoBehaviour
     }
 
     void Destination()
-    { 
+    {
         int newPoint = Random.Range(0, navigationPointsContainer.transform.childCount);
-        while(newPoint == point)
+        while (newPoint == point)
         {
             newPoint = Random.Range(0, navigationPointsContainer.transform.childCount);
         }
         point = newPoint;
 
         time = Random.Range(30, 60);
-        speed = Random.Range(3, 4);
-        priority = Random.Range(0, 99);
+        speed = Random.Range(0.75f, 2);
 
         if (point + ID < navigationPointsContainer.transform.childCount)
             point += ID;
@@ -59,13 +59,26 @@ public class WalkAround : MonoBehaviour
     {
         agent.SetDestination(navigationPointsContainer.transform.GetChild(point).position);
         agent.speed = speed;
-        agent.avoidancePriority = priority;
         timer = 0;
+    }
+
+    
+
+    void Animate()
+    {
+        animator.SetFloat("Forward", agent.speed/2);
+
+        /*if (agent.angularSpeed < 0)
+            animator.SetFloat("Turn", -agent.angularSpeed);
+        else
+            animator.SetFloat("Turn", agent.angularSpeed);*/
     }
 
     void Update()
     {
         timer += Time.deltaTime;
+
+        Animate();
 
         if (Vector3.Distance(agent.pathEndPosition, agent.transform.position) < 4 || timer >= time)
             Destination();
