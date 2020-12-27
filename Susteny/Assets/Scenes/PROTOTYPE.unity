@@ -12061,7 +12061,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1774080982686097189, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
-    - {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
 --- !u!4 &1347481735 stripped
 Transform:
@@ -13687,7 +13686,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 1774080982686097189, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
-    - {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
 --- !u!4 &1507142293 stripped
 Transform:
@@ -14848,6 +14846,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663034517}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1666595708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1774080982686097189, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0c41a72f13a6d409e0770d8120af9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1688257940
 GameObject:
   m_ObjectHideFlags: 0
@@ -16887,6 +16897,16 @@ PrefabInstance:
       propertyPath: action
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1666595708}
+    - target: {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDoor
+      objectReference: {fileID: 0}
     - target: {fileID: 6389003609707793653, guid: 9305a2288e35ed54dbbe6ff492806bc4,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -16907,7 +16927,8 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7516381369257879241, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
 --- !u!4 &2130878124 stripped
 Transform:
