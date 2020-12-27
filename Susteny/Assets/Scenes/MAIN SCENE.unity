@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 218935277}
   - component: {fileID: 218935276}
   - component: {fileID: 218935275}
+  - component: {fileID: 218935274}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -212,6 +213,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &218935274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218935273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 743e5235f6ad81948a68c6d8cd3e9b70, type: 2}
+  action: 1
+  amount: 1
+  grabbed: 0
 --- !u!114 &218935275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,17 +241,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 1
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 218935274}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
+  interactionDistance: 3.5
   player: {fileID: 0}
-  item: {fileID: 11400000, guid: 743e5235f6ad81948a68c6d8cd3e9b70, type: 2}
-  interactionDistance: 2
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!65 &218935276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -480,6 +505,7 @@ GameObject:
   - component: {fileID: 644973246}
   - component: {fileID: 644973245}
   - component: {fileID: 644973244}
+  - component: {fileID: 644973249}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -499,17 +525,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 1
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644973249}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
+  interactionDistance: 3.5
   player: {fileID: 0}
-  item: {fileID: 11400000, guid: 1123f16784724df4bbcc0b2e2e33cc83, type: 2}
-  interactionDistance: 2
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!65 &644973245
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -584,6 +618,22 @@ Transform:
   m_Father: {fileID: 1700982572}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &644973249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644973243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 1123f16784724df4bbcc0b2e2e33cc83, type: 2}
+  action: 1
+  amount: 1
+  grabbed: 0
 --- !u!43 &895761879
 Mesh:
   m_ObjectHideFlags: 0
@@ -762,6 +812,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
       propertyPath: action
       value: 1
       objectReference: {fileID: 0}
@@ -772,8 +827,8 @@ PrefabInstance:
       objectReference: {fileID: 1010864988}
     - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
-      propertyPath: interactionDistance
-      value: 5
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7714389021140834262, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
@@ -1389,6 +1444,7 @@ GameObject:
   - component: {fileID: 1652378970}
   - component: {fileID: 1652378969}
   - component: {fileID: 1652378973}
+  - component: {fileID: 1652378974}
   m_Layer: 0
   m_Name: Klucze
   m_TagString: Untagged
@@ -1482,17 +1538,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 0
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1652378974}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
+  interactionDistance: 3.5
   player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
+--- !u!114 &1652378974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652378968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 9416d764fc3d9d3459e085feb83c870d, type: 2}
-  interactionDistance: 2
+  action: 0
   amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
   grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
 --- !u!1 &1700982571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,17 +1746,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 0
-  player: {fileID: 0}
-  item: {fileID: 11400000, guid: cc7efddb1d6e04947b723945d45b2246, type: 2}
+  interaction:
+    m_PersistentCalls:
+      m_Calls: []
+  crosshairColor: 0
   interactionDistance: 3.5
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!135 &1832428847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1932,6 +2009,7 @@ GameObject:
   - component: {fileID: 1878754679}
   - component: {fileID: 1878754678}
   - component: {fileID: 1878754677}
+  - component: {fileID: 1878754676}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -1939,6 +2017,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1878754676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878754675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 743e5235f6ad81948a68c6d8cd3e9b70, type: 2}
+  action: 0
+  amount: 1
+  grabbed: 0
 --- !u!114 &1878754677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1951,17 +2045,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 0
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1878754676}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
+  interactionDistance: 3.5
   player: {fileID: 0}
-  item: {fileID: 11400000, guid: 743e5235f6ad81948a68c6d8cd3e9b70, type: 2}
-  interactionDistance: 2
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!65 &1878754678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2036,6 +2138,18 @@ Transform:
   m_Father: {fileID: 1700982572}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1884411570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7372492514650168055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1894409590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2045,13 +2159,38 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1010864988}
     - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
-      propertyPath: interactionDistance
-      value: 4
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Take
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739798551366624574, guid: 16b0b96cd6a07c245a792e1f4472688e,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7714389021140834262, guid: 16b0b96cd6a07c245a792e1f4472688e,
         type: 3}
@@ -2586,6 +2725,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1884411570}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: onMouseDown.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1884411570}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2262319849322994420, guid: 66a306021ca3cf847b9a3f29fe26efba,
         type: 3}
       propertyPath: m_LocalPosition.x

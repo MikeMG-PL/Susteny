@@ -13,8 +13,8 @@ public class PlayerActions : MonoBehaviour
     public bool canOpenDoor = true;
     public bool canInteract = true;
 
-    ItemWorld grabbedInteractable;
-    ViewMode viewMode;
+    public ItemWorld grabbedItem;
+    public ViewMode viewMode;
 
     public static event Action<bool> BrowsingInventory;
 
@@ -31,15 +31,13 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopInteracting();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopWatchingObject();
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedInteractable != null) Ungrab();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null) grabbedItem.Ungrab();
 
-        else if (Input.GetKeyDown(KeyCode.E) && grabbedInteractable != null)
-            TakeToInventory(grabbedInteractable);
+        else if (Input.GetKeyDown(KeyCode.E) && grabbedItem != null) TakeToInventory(grabbedItem);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory)
-            UngrabFromInventory();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory) UngrabFromInventory();
 
         else if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
     }
@@ -67,61 +65,25 @@ public class PlayerActions : MonoBehaviour
         viewMode.StopViewingItemFromInventory();
     }
 
-    public void Grab(ItemWorld interactable)
+    public void TakeToInventory(ItemWorld itemWorld)
     {
-        grabbedInteractable = interactable;
-        grabbedInteractable.grabbed = true;
-        grabbedInteractable.grabbing = true;
-        grabbedInteractable.ungrabbing = false;
-        grabbedInteractable.SetAllCollidersStatus(false);
-        viewMode.ToggleViewMode(grabbedInteractable.gameObject, true);
-    }
-
-    void Ungrab()
-    {
-        grabbedInteractable.grabbed = false;
-        grabbedInteractable.grabbing = false;
-        grabbedInteractable.ungrabbing = true;
-        grabbedInteractable.SetAllCollidersStatus(true);
-        grabbedInteractable = null;
-        viewMode.ToggleViewMode(null, false);
-    }
-
-    public void TakeToInventory(ItemWorld interactable)
-    {
-        GetComponent<Player>().inventory.Add(interactable.item, interactable.amount);
-        /* Debbuging */ //GetComponent<Player>().inventory.ShowInventory();
-        if (grabbedInteractable != null)
+        GetComponent<Player>().inventory.Add(itemWorld.item, itemWorld.amount);
+        if (grabbedItem != null)
         {
-            grabbedInteractable = null;
+            grabbedItem = null;
             viewMode.ToggleViewMode(null, false);
         }
-        Destroy(interactable.gameObject);
+        Destroy(itemWorld.gameObject);
     }
 
-    public void Interact(GameObject item)
+    public void WatchObject(GameObject item)
     {
         viewMode.ToggleViewMode(item, true, true);
     }
 
-    void StopInteracting()
+    void StopWatchingObject()
     {
         viewMode.ToggleViewMode(null, false, false);
-    }
-
-    void LockGrabbingItems(bool b)
-    {
-        canGrab = !b;
-    }
-
-    void LockDialogueInteractions(bool b)
-    {
-        canTalk = !b;
-    }
-
-    void LockOpeningDoors(bool b)
-    {
-        canOpenDoor = !b;
     }
 
     void LockInteracting(bool b)
@@ -132,35 +94,17 @@ public class PlayerActions : MonoBehaviour
     void Subscribe()
     {
         BrowsingInventory += LockInteracting;
-        BrowsingInventory += LockGrabbingItems;
-        BrowsingInventory += LockDialogueInteractions;
-        BrowsingInventory += LockOpeningDoors;
         DialogueInteraction.Talking += LockInteracting;
-        DialogueInteraction.Talking += LockOpeningDoors;
-        DialogueInteraction.Talking += LockDialogueInteractions;
-        DialogueInteraction.Talking += LockGrabbingItems;
         Prototype.LevelStart += DisallowInventorySwitching;
         ViewMode.ViewingItem += LockInteracting;
-        ViewMode.ViewingItem += LockOpeningDoors;
-        ViewMode.ViewingItem += LockGrabbingItems;
-        ViewMode.ViewingItem += LockDialogueInteractions;
     }
 
     void Unsubscribe()
     {
         BrowsingInventory -= LockInteracting;
-        BrowsingInventory -= LockGrabbingItems;
-        BrowsingInventory -= LockDialogueInteractions;
-        BrowsingInventory -= LockOpeningDoors;
         DialogueInteraction.Talking -= LockInteracting;
-        DialogueInteraction.Talking -= LockOpeningDoors;
-        DialogueInteraction.Talking -= LockDialogueInteractions;
-        DialogueInteraction.Talking -= LockGrabbingItems;
         Prototype.LevelStart -= DisallowInventorySwitching;
         ViewMode.ViewingItem -= LockInteracting;
-        ViewMode.ViewingItem -= LockOpeningDoors;
-        ViewMode.ViewingItem -= LockGrabbingItems;
-        ViewMode.ViewingItem -= LockDialogueInteractions;
     }
 
     void OnDisable()

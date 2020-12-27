@@ -48,7 +48,7 @@ public class ViewMode : MonoBehaviour
         else
         {
             // Zawsze po skończeniu oglądania, będziemy próbować ustawić layer itemu z powrotem na domyślny
-            if (viewedItem != null && viewedItem.GetComponent<ItemWorld>() != null) viewedItem.GetComponent<ItemWorld>().ViewingEnded();
+            if (viewedItem != null && viewedItem.GetComponent<Interactable>() != null) viewedItem.GetComponent<Interactable>().ViewingEnded();
             viewedItem = null;
         }
     }

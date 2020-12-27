@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1082373109568380509}
   - component: {fileID: 7774615802324443843}
   - component: {fileID: 1739798551366624574}
+  - component: {fileID: 230610316168432890}
   m_Layer: 0
   m_Name: Blue
   m_TagString: Untagged
@@ -106,12 +107,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 1
-  item: {fileID: 11400000, guid: 61f9df3b713da7a47b2f13b9b19870b8, type: 2}
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 230610316168432890}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
   interactionDistance: 3.5
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
+--- !u!114 &230610316168432890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714389021140834262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 61f9df3b713da7a47b2f13b9b19870b8, type: 2}
+  action: 1
   amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
   grabbed: 0
-  grabbing: 0
-  ungrabbing: 0

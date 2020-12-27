@@ -16,7 +16,7 @@ public class DialogueInteraction : MonoBehaviour
     private void OnMouseDown()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance <= interactionDistance && player.GetComponent<PlayerActions>().canTalk)
+        if (distance <= interactionDistance && player.GetComponent<PlayerActions>().canInteract)
         {
             Talk(true);
         }

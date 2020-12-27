@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 7524002982192125163}
   - component: {fileID: 5250784449650326375}
   - component: {fileID: 1321024674468897285}
+  - component: {fileID: 6047415271598732943}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -187,16 +188,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 0
-  player: {fileID: 0}
-  item: {fileID: 11400000, guid: cc7efddb1d6e04947b723945d45b2246, type: 2}
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6047415271598732943}
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
   interactionDistance: 3.5
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!65 &1321024674468897285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,3 +220,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6047415271598732943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811378431932966367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf666312fc67ba540a2b6f0146aa5845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: cc7efddb1d6e04947b723945d45b2246, type: 2}
+  action: 0
+  amount: 1
+  grabbed: 0

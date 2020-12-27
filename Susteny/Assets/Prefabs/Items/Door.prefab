@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0c41a72f13a6d409e0770d8120af9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secondDoor: {fileID: 0}
   blackPanel: {fileID: 0}
 --- !u!114 &3860611000697321915
 MonoBehaviour:
@@ -121,17 +122,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  action: 2
-  player: {fileID: 0}
-  item: {fileID: 0}
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7516381369257879241}
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
   interactionDistance: 3.5
-  amount: 1
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  grabbed: 0
-  grabbing: 0
-  ungrabbing: 0
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
 --- !u!114 &7516381369257879241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
+  doorSides: []
+  switchSides: 0
+  unlocked: 0

@@ -13,6 +13,7 @@ public class AnyDoor : MonoBehaviour
     GameObject blackPanel;
 
     public static event Action<bool, int> WalkThrough;
+
     void Start()
     {
         blackPanel = GameObject.FindGameObjectWithTag("BlackPanel");
@@ -21,9 +22,8 @@ public class AnyDoor : MonoBehaviour
 
     public void UnlockDoor()
     {
+        GetComponent<Interactable>().crosshairColor = CrosshairColor.interactive;
         unlocked = true;
-        gameObject.AddComponent<ItemWorld>();
-        GetComponent<ItemWorld>().action = Action.door;
     }
 
     public void OpenDoor()

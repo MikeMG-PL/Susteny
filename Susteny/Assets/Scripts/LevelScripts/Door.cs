@@ -19,17 +19,13 @@ public class Door : MonoBehaviour
         v = GameObject.FindGameObjectWithTag("Player").GetComponent<ViewMode>();
     }
 
-    void OnMouseDown()
+    public void OpenDoor()
     {
-        if (Vector3.Distance(transform.position, v.transform.position) <= GetComponent<ItemWorld>().interactionDistance
-            && player.GetComponent<PlayerActions>().canOpenDoor)
-        {
-            v.ToggleViewMode(null, false, false);
-            t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
-            foreach (TaskScriptableObject so in t.tasks) t.hideTask(so.id.ToString());
-            FadeIn();
-        }
-    }
+        v.ToggleViewMode(null, false, false);
+        t = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
+        foreach (TaskScriptableObject so in t.tasks) t.hideTask(so.id.ToString());
+        FadeIn();
+}
 
     void FadeIn()
     {

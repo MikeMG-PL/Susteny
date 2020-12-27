@@ -77,11 +77,11 @@ public class Crosshair : MonoBehaviour
     {
         hitInteractable = true;
 
-        if (_transform.GetComponent<ItemWorld>() != null)
-            interactionDistance = _transform.GetComponent<ItemWorld>().interactionDistance;
+        if (_transform.GetComponent<Interactable>() != null && _transform.GetComponent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
+            interactionDistance = _transform.GetComponent<Interactable>().interactionDistance;
 
-        else if (_transform.GetComponent<ChildTriggerItemAction>() != null)
-            interactionDistance = _transform.GetComponentInParent<ItemWorld>().interactionDistance;
+        else if (_transform.GetComponent<ChildTriggerItemAction>() != null && _transform.GetComponentInParent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
+            interactionDistance = _transform.GetComponentInParent<Interactable>().interactionDistance;
 
         else if (_transform.GetComponent<LoadDialogue>() != null)
             interactionDistance = _transform.GetComponent<DialogueInteraction>().interactionDistance;
@@ -89,4 +89,11 @@ public class Crosshair : MonoBehaviour
         else
             hitInteractable = false;
     }
+}
+
+public enum CrosshairColor
+{
+    defaultColor,
+    interactive,
+    nonInteractive,
 }

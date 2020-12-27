@@ -1,37 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
-    public MonoBehaviour test;
-
-    public Action action;
-    public GameObject player;
     public Item item;
-    public float interactionDistance = 3.5f;
-    public int amount = 1; 
+    public ItemAction action;
+    public int amount = 1;
 
-    [HideInInspector] public Vector3 startPosition;
-    [HideInInspector] public Quaternion startRotation;
     [HideInInspector] public bool grabbed;
-    [HideInInspector] public bool grabbing;
-    [HideInInspector] public bool ungrabbing;
 
+    Vector3 startPosition;
+    Quaternion startRotation;
+    Interactable interactable;
     Player playerScript;
-    bool changeLayer;
+    PlayerActions playerActions;
+    bool grabbing;
+    bool ungrabbing;
     float moveToViewModeRotSpeed = 3.5f;
     float moveToViewModePosSpeed = 0.05f;
 
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<Player>();
-    }
-
     void Start()
     {
+        interactable = GetComponent<Interactable>();
+        playerScript = interactable.playerScript;
+        playerActions = interactable.playerActions;
+
         // Pozycja do której wracać będą przedmioty, które można podnieść, obejrzeć i z powrotem odstawić
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -57,64 +51,48 @@ public class ItemWorld : MonoBehaviour
                 ungrabbing = false;
             }
         }
-
-        // Sytuacja poniżej występuje gdy skończyliśmy oglądać ten przedmiot i focus już się wyłączył lub gdy zaczęliśmy oglądać inny przedmiot
-        if (changeLayer && player.GetComponent<ViewMode>().DisablingFocusEnded())
-        {
-            ChangeLayerAfterViewing();
-        }
     }
 
-    private void OnMouseDown()
+    public void Interact()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > interactionDistance) return;
-
-        TriggerAction();
+        if (action == ItemAction.grabbable) Grab();
+        else if (action == ItemAction.takeable) Take();
     }
 
-    public void TriggerAction()
+    // If grabbable 
+    public void Grab()
     {
-        if (action == Action.door && player.GetComponent<PlayerActions>().canOpenDoor) GetComponent<AnyDoor>().OpenDoor();
+        if (grabbed) return;
 
-        if (action == Action.interactable && player.GetComponent<PlayerActions>().canInteract)
-        {
-            player.GetComponent<PlayerActions>().Interact(gameObject);
-        }
+        grabbed = true;
+        grabbing = true;
+        ungrabbing = false;
 
-        if (!player.GetComponent<PlayerActions>().canGrab) return;
-
-        if (action == Action.grabbable && !grabbed) player.GetComponent<PlayerActions>().Grab(this);
-
-        else if (action == Action.takeable) player.GetComponent<PlayerActions>().TakeToInventory(this);
+        interactable.SetAllCollidersStatus(false);
+        playerActions.grabbedItem = this;
+        playerActions.viewMode.ToggleViewMode(gameObject, true);
     }
 
-    public void SetAllCollidersStatus(bool enable)
+    public void Ungrab()
     {
-        foreach (Collider c in GetComponents<Collider>())
-        {
-            c.enabled = enable;
-        }
+        grabbed = false;
+        grabbing = false;
+        ungrabbing = true;
+
+        interactable.SetAllCollidersStatus(true);
+        playerActions.grabbedItem = null;
+        playerActions.viewMode.ToggleViewMode(null, false);
     }
 
-    public void ViewingEnded()
+    // If takeable
+    public void Take()
     {
-        changeLayer = true;
-    }
-
-    // Jeżeli obiekt zostanie zniszczony (wzięty do ekwipunku etc.) layer może nie zostać zmieniony na czas
-    void ChangeLayerAfterViewing()
-    {
-        gameObject.layer = 0;
-        foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 0;
-        changeLayer = false;
+        interactable.playerActions.TakeToInventory(this);
     }
 }
 
-public enum Action
+public enum ItemAction
 {
     grabbable,
-    takeable,
-    interactable,
-    door,
-};
+    takeable
+}
