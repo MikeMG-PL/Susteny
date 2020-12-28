@@ -26,11 +26,11 @@ public class LastDoor : MonoBehaviour
 
     void Update()
     {
-        if (inv.inventory.Count > 0 && !unlocked)
+        if (inv.GetInventory().Count > 0 && !unlocked)
         {
-            for (int i = 0; i < inv.inventory.Count; i++)
+            for (int i = 0; i < inv.GetInventory().Count; i++)
             {
-                if (inv.inventory[i].item.name == "Klucz")
+                if (inv.GetInventory()[i].item.name == "Klucz")
                 {
                     GetComponent<AnyDoor>().UnlockDoor();
                     unlocked = true;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChildTriggerItemAction : MonoBehaviour
 {
-    private void OnMouseDown()
+    void OnMouseDown()
     {
         Interactable interactable = GetComponentInParent<Interactable>();
         if (interactable == null) Debug.LogError("No Interactable script in parent");

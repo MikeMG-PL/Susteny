@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour
 
     bool changeLayer;
 
-    private void Awake()
+    void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
@@ -32,14 +32,13 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
         TryToTriggerAction();
     }
 
     void TriggerAction()
     {
-        //if (action == Action.door && player.GetComponent<PlayerActions>().canInteract) GetComponent<AnyDoor>().OpenDoor();
         if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified"); 
         else interaction.Invoke();
     }
@@ -50,7 +49,7 @@ public class Interactable : MonoBehaviour
     }
 
     /// <summary>
-    /// Jeżeli gracz jest wystarczająco blisko, zostanie wywołana akcja.
+    /// Jeżeli gracz jest wystarczająco blisko, oraz nie jest zablokowane wykonywanie akcji, akcja zostanie wykonana.
     /// </summary>
     public void TryToTriggerAction()
     {
@@ -60,6 +59,7 @@ public class Interactable : MonoBehaviour
         TriggerAction();
     }
 
+    // Służy do włączania i wyłączania wszystkich colliderów obiektu
     public void SetAllCollidersStatus(bool enable)
     {
         foreach (Collider c in GetComponents<Collider>())

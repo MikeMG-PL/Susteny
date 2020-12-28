@@ -7,18 +7,14 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] GameObject InventoryUI;
 
-    public bool inventoryAllowed = true;
-    public bool canGrab = true;
-    public bool canTalk = true;
-    public bool canOpenDoor = true;
-    public bool canInteract = true;
-
-    public ItemWorld grabbedItem;
-    public ViewMode viewMode;
+    [HideInInspector] public ItemWorld grabbedItem;
+    [HideInInspector] public ViewMode viewMode;
+    [HideInInspector] public bool inventoryAllowed = true;
+    [HideInInspector] public bool canInteract = true;
 
     public static event Action<bool> BrowsingInventory;
 
-    private void Awake()
+    void Awake()
     {
         Subscribe();
         viewMode = GetComponent<ViewMode>();
@@ -29,7 +25,7 @@ public class PlayerActions : MonoBehaviour
         inventoryAllowed = !b;
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopWatchingObject();
 
@@ -67,7 +63,7 @@ public class PlayerActions : MonoBehaviour
 
     public void TakeToInventory(ItemWorld itemWorld)
     {
-        GetComponent<Player>().inventory.Add(itemWorld.item, itemWorld.amount);
+        GetComponent<Inventory>().Add(itemWorld.item, itemWorld.amount);
         if (grabbedItem != null)
         {
             grabbedItem = null;

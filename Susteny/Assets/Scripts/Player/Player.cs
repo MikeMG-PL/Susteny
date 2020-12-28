@@ -5,15 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject viewModePosition;
-    public new GameObject camera;
+    public new Camera camera;
     public GameObject focusCamera;
 
-    [HideInInspector] public Inventory inventory;
-
-    private void Awake()
+    void Awake()
     {
-        inventory = GetComponent<Inventory>();
-
         PrepareFocusCamera();
     }
 

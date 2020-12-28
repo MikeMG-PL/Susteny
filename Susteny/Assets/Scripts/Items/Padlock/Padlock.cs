@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Padlock : MonoBehaviour
 {
-    RotatePadlockWheels[] children; 
+    RotatePadlockWheels[] children;
 
-    private void Awake()
+    public static event Action<bool> PadlockUnlocked;
+
+    void Awake()
     {
         children = GetComponentsInChildren<RotatePadlockWheels>();
     }
@@ -24,7 +26,6 @@ public class Padlock : MonoBehaviour
         if (unlock) Unlocked();
     }
 
-    public static event Action<bool> PadlockUnlocked;
     void Unlocked()
     {
         GetComponent<Renderer>().material.color = Color.green;

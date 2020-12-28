@@ -16,18 +16,18 @@ public class InventoryUI : MonoBehaviour
 
     Dictionary<ItemInventory, GameObject> itemsDisplayed = new Dictionary<ItemInventory, GameObject>();
 
-    private void Awake()
+    void Awake()
     {
         inventory = player.GetComponent<Inventory>();
         playerActions = player.GetComponent<PlayerActions>();
     }
 
-    private void Start()
+    void Start()
     {
         CreateDisplay();
     }
 
-    private void Update()
+    void Update()
     {
         UpdateDisplay();
     }

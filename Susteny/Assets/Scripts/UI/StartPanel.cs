@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartPanel : MonoBehaviour
 {
-    void Awake()
+    void OnEnable()
     {
         Prototype.ShowStartPanel += StartPanelShow;
     }

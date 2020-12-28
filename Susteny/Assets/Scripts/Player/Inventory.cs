@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<ItemInventory> inventory;
+    List<ItemInventory> inventory;
 
     public Inventory()
     {

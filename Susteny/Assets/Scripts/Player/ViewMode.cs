@@ -24,7 +24,7 @@ public class ViewMode : MonoBehaviour
 
     public static event Action<bool> ViewingItem;
 
-    private void Awake()
+    void Awake()
     {
         focusCamera = GetComponent<Player>().focusCamera;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;

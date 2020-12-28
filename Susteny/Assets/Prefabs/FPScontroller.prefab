@@ -319,9 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewModePosition: {fileID: 1824086119190900110}
-  camera: {fileID: 1824086118552689594}
+  camera: {fileID: 1824086118552689595}
   focusCamera: {fileID: 1824086120152002050}
-  inventory: {fileID: 0}
 --- !u!114 &1824086119982000248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,9 +335,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryUI: {fileID: 4310431017799287784, guid: 32adb34fad4819a41aced96b1219cf5f,
     type: 3}
+  grabbedItem: {fileID: 0}
+  viewMode: {fileID: 0}
   inventoryAllowed: 1
-  canGrab: 1
-  canTalk: 1
+  canInteract: 1
 --- !u!114 &6911843426005422561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8793d7b0379e993428a780817c32494f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: []
 --- !u!114 &1824086119982000251
 MonoBehaviour:
   m_ObjectHideFlags: 0

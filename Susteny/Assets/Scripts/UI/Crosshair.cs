@@ -20,7 +20,7 @@ public class Crosshair : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        camera = Camera.main;
+        camera = player.GetComponent<Player>().camera;
 
         defaultColor = crosshair.color;
     }
@@ -64,6 +64,7 @@ public class Crosshair : MonoBehaviour
                     crosshair.color = defaultColor;
             }
         }
+
         else
         {
             lastHit = null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideInventory : MonoBehaviour
 {
-    void Start()
+    void OnEnable()
     {
         DialogueInteraction.Talking += NoEQduringDialogue;
         Prototype.LevelStart += HideOverlayingUI;

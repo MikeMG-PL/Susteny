@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HideUI : MonoBehaviour
 {
-    void Awake()
+    void OnEnable()
     {
         DialogueInteraction.Talking += HideOverlayingUI;
         ViewMode.ViewingItem += HideOverlayingUI;

@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemUI : MonoBehaviour
+public class ItemUI : MonoBehaviour, IPointerDownHandler
 {
-    public Item item;
-    public PlayerActions playerActions;
+    [HideInInspector] public Item item;
+    [HideInInspector] public PlayerActions playerActions;
 
-    public void PointerDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
         playerActions.GrabFromInventory(item.model);
     }
