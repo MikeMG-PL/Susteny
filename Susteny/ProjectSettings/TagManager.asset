@@ -12,6 +12,8 @@ TagManager:
   - VehiclePoints
   - BlackPanel
   - Car
+  - Fire
+  - LEVELS
   layers:
   - Default
   - TransparentFX
