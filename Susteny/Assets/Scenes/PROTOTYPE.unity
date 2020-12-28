@@ -1026,21 +1026,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1824777058551426309, guid: 00c276005295c9c4d9b7179359c6c23c,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 77.658066
-      objectReference: {fileID: 0}
-    - target: {fileID: 1824777058551426309, guid: 00c276005295c9c4d9b7179359c6c23c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -19.225233
-      objectReference: {fileID: 0}
-    - target: {fileID: 1824777058551426309, guid: 00c276005295c9c4d9b7179359c6c23c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -17.141006
-      objectReference: {fileID: 0}
-    - target: {fileID: 1824777058551426309, guid: 00c276005295c9c4d9b7179359c6c23c,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -2897,7 +2882,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh121832
+  m_Name: pb_Mesh54560
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7195,7 +7180,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh122060
+  m_Name: pb_Mesh54788
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14266,21 +14251,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6399715572669460231, guid: ee3c2dfb94150e0419e2b4e0e887ba28,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -19.225233
-      objectReference: {fileID: 0}
-    - target: {fileID: 6399715572669460231, guid: ee3c2dfb94150e0419e2b4e0e887ba28,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 77.658066
-      objectReference: {fileID: 0}
-    - target: {fileID: 6399715572669460231, guid: ee3c2dfb94150e0419e2b4e0e887ba28,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -17.141006
       objectReference: {fileID: 0}
     - target: {fileID: 6399715572669460233, guid: ee3c2dfb94150e0419e2b4e0e887ba28,
         type: 3}
