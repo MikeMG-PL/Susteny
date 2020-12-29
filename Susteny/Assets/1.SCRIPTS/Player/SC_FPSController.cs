@@ -41,23 +41,19 @@ public class SC_FPSController : MonoBehaviour
         DialogueInteraction.Talking += LockControlsCursorOn;
         PlayerActions.BrowsingInventory += LockControlsCursorOn;
         ViewMode.ViewingItem += LockControlsCursorOn;
-        Prototype.LevelStart += LockControlsCursorOff;
-        Prototype.MouseLookUnfreeze += UnfreezeLook;
     }
     void Unsubscribe()
     {
         DialogueInteraction.Talking -= LockControlsCursorOn;
         PlayerActions.BrowsingInventory -= LockControlsCursorOn;
         ViewMode.ViewingItem -= LockControlsCursorOn;
-        Prototype.LevelStart -= LockControlsCursorOff;
-        Prototype.MouseLookUnfreeze -= UnfreezeLook;
     }
 
-    void UnfreezeLook(bool b)
+    public void UnfreezeLook(bool b)
     {
         canLook = b;
     }
-    void LockControlsCursorOn(bool b)
+    public void LockControlsCursorOn(bool b)
     {
         canMove = !b;
         canLook = !b;
@@ -68,10 +64,14 @@ public class SC_FPSController : MonoBehaviour
         else
             Cursor.lockState = CursorLockMode.Locked;
     }
-    void LockControlsCursorOff(bool b)
+    public void LockControlsCursorOff(bool b)
     {
         canMove = !b;
         canLook = !b;
+    }
+    public void AllEnabled(bool b)
+    {
+        GetComponent<CharacterController>().enabled = b;
     }
     void Init()
     {

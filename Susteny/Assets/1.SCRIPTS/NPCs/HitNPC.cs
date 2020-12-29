@@ -14,7 +14,7 @@ public class HitNPC : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.CompareTag("Player"))
+        if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
         {
             GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius * 0.1f;
             agent.radius = agent.radius * 0.0001f;
@@ -23,7 +23,7 @@ public class HitNPC : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent.CompareTag("Player"))
+        if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
         {
             GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius / 0.1f;
             agent.radius = agent.radius / 0.0001f;

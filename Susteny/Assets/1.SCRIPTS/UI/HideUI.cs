@@ -9,7 +9,6 @@ public class HideUI : MonoBehaviour
     {
         DialogueInteraction.Talking += HideOverlayingUI;
         ViewMode.ViewingItem += HideOverlayingUI;
-        Prototype.LevelStart += HideOverlayingUI;
         PlayerActions.BrowsingInventory += HideOverlayingUI;
     }
 
@@ -17,7 +16,6 @@ public class HideUI : MonoBehaviour
     {
         DialogueInteraction.Talking -= HideOverlayingUI;
         ViewMode.ViewingItem -= HideOverlayingUI;
-        Prototype.LevelStart -= HideOverlayingUI;
         PlayerActions.BrowsingInventory -= HideOverlayingUI;
     }
 

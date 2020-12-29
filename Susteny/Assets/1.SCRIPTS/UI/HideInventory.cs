@@ -7,13 +7,11 @@ public class HideInventory : MonoBehaviour
     void OnEnable()
     {
         DialogueInteraction.Talking += NoEQduringDialogue;
-        Prototype.LevelStart += HideOverlayingUI;
     }
 
     void OnDisable()
     {
         DialogueInteraction.Talking -= NoEQduringDialogue;
-        Prototype.LevelStart -= HideOverlayingUI;
     }
 
     void HideOverlayingUI(bool b)

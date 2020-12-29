@@ -72,5 +72,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelObjectsContainer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4373156096513369045, guid: 8f3bd90ef7d313c47a8106a6238e37cb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8f3bd90ef7d313c47a8106a6238e37cb, type: 3}
