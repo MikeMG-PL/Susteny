@@ -60,13 +60,14 @@ public class WalkAround : MonoBehaviour
         agent.SetDestination(navigationPointsContainer.transform.GetChild(point).position);
         agent.speed = speed;
         timer = 0;
+
     }
 
-    
+
 
     void Animate()
     {
-        animator.SetFloat("Forward", agent.speed/2);
+        animator.SetFloat("Forward", agent.speed / 2);
 
         /*if (agent.angularSpeed < 0)
             animator.SetFloat("Turn", -agent.angularSpeed);
@@ -80,7 +81,7 @@ public class WalkAround : MonoBehaviour
 
         Animate();
 
-        if (Vector3.Distance(agent.pathEndPosition, agent.transform.position) < 4 || timer >= time)
+        if (Vector3.Distance(agent.destination, agent.transform.position) < 4 || timer >= time)
             Destination();
     }
 }

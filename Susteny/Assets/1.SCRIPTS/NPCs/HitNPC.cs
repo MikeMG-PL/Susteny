@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class HitNPC : MonoBehaviour
 {
     NavMeshAgent agent;
-    Vector3 destination;
 
     void Start()
     {
@@ -15,23 +14,20 @@ public class HitNPC : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        destination = agent.destination;
-        if (other.CompareTag("Player"))
+        if (other.transform.parent.CompareTag("Player"))
         {
             GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius * 0.1f;
             agent.radius = agent.radius * 0.0001f;
         }
-        agent.destination = destination;
     }
 
     void OnTriggerExit(Collider other)
     {
-        destination = agent.destination;
-        if (other.CompareTag("Player"))
+        if (other.transform.parent.CompareTag("Player"))
         {
             GetComponent<CapsuleCollider>().radius = GetComponent<CapsuleCollider>().radius / 0.1f;
             agent.radius = agent.radius / 0.0001f;
         }
-        agent.destination = destination;
     }
+
 }

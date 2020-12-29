@@ -278,7 +278,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 30
   m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -475,11 +475,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 1, y: 2, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!1 &1824086120152002050
 GameObject:
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 1824086120338536828}
   - component: {fileID: 1824086120338536818}
   - component: {fileID: 1824086120338536829}
-  - component: {fileID: 5437058771785298369}
+  - component: {fileID: 6199228635227493633}
   - component: {fileID: 446968699697811183}
   m_Layer: 2
   m_Name: Capsule
@@ -663,7 +663,7 @@ Transform:
   m_GameObject: {fileID: 1824086120338536831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalScale: {x: 1, y: 1.7, z: 1}
   m_Children:
   - {fileID: 1824086118552689597}
   m_Father: {fileID: 1824086119982000197}
@@ -716,8 +716,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &5437058771785298369
-CapsuleCollider:
+--- !u!135 &6199228635227493633
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -726,9 +726,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 1
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &446968699697811183
 Rigidbody:
