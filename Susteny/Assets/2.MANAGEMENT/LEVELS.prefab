@@ -9,13 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4592990480976773548}
-  - component: {fileID: 3807198400916924722}
   - component: {fileID: 2322402613447484464}
   - component: {fileID: 3169934774388569032}
   - component: {fileID: 3749602107658222459}
   - component: {fileID: 17137081041864950}
   - component: {fileID: 4761613300286056911}
-  - component: {fileID: 4373156096513369045}
   m_Layer: 0
   m_Name: LEVELS
   m_TagString: LEVELS
@@ -38,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3807198400916924722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572079889547013412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f1962f184fc2f448a107112865dacf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2322402613447484464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,25 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2aec3c7ab6678d4a95688c323c14457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!320 &4373156096513369045
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572079889547013412}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &6149603495865310671
 GameObject:
   m_ObjectHideFlags: 0
