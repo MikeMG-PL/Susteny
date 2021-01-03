@@ -11,6 +11,10 @@ public class PlayerActions : MonoBehaviour
     [HideInInspector] public ViewMode viewMode;
     [HideInInspector] public bool inventoryAllowed = true;
     [HideInInspector] public bool canInteract = true;
+    [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
+    [HideInInspector] public bool showCursorOnPosition;
+
+    SC_FPSController fpsController;
 
     public static event Action<bool> BrowsingInventory;
 
@@ -18,6 +22,7 @@ public class PlayerActions : MonoBehaviour
     {
         Subscribe();
         viewMode = GetComponent<ViewMode>();
+        fpsController = GetComponent<SC_FPSController>();
     }
 
     void DisallowInventorySwitching(bool b)
@@ -27,7 +32,13 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopWatchingObject();
+        if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
+        {
+            if (showCursorOnPosition) fpsController.LockControlsCursorOn(true);
+            finishedGoingAndRotatingTowardsObject = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem && finishedGoingAndRotatingTowardsObject) StopFocusOnObject(true);
 
         else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null) grabbedItem.Ungrab();
 
@@ -35,7 +46,7 @@ public class PlayerActions : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory) UngrabFromInventory();
 
-        else if (Input.GetKeyDown(KeyCode.E) && !viewMode.viewingItem && inventoryAllowed) SwitchInventoryUI();
+        else if (Input.GetKeyDown(KeyCode.E) && inventoryAllowed) SwitchInventoryUI();
     }
 
     public void ToggleInventoryUI(bool enable)
@@ -72,14 +83,26 @@ public class PlayerActions : MonoBehaviour
         Destroy(itemWorld.gameObject);
     }
 
-    public void WatchObject(GameObject item)
+    public void FocusOnObject(GameObject item, bool interact, bool switchLockControlsCursorOn)
     {
-        viewMode.ToggleViewMode(item, true, true);
+        viewMode.ToggleViewMode(item, true, interact, switchLockControlsCursorOn);
     }
 
-    void StopWatchingObject()
+    void StopFocusOnObject(bool enableMovemenetAndCursorOff)
     {
-        viewMode.ToggleViewMode(null, false, false);
+        viewMode.ToggleViewMode(null, false, interact: false, enableMovemenetAndCursorOff);
+    }
+
+    public void LookAt(Vector3 posToLook, bool interacting = false, float horizontalRotationSpeed = 250f, float verticalRotationSpeed = 3000f)
+    {
+        if (interacting) finishedGoingAndRotatingTowardsObject = false;
+        GetComponent<SC_FPSController>().LookAt(posToLook, horizontalRotationSpeed, verticalRotationSpeed);
+    }
+
+    public void GoToPosition(Vector3 posToGo, bool interacting = false, float goingSpeed = 2f)
+    {
+        if (interacting) finishedGoingAndRotatingTowardsObject = false;
+        GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed);
     }
 
     void LockInteracting(bool b)
@@ -92,6 +115,7 @@ public class PlayerActions : MonoBehaviour
         BrowsingInventory += LockInteracting;
         DialogueInteraction.Talking += LockInteracting;
         Prototype.LevelStart += DisallowInventorySwitching;
+        ViewMode.ViewingItem += DisallowInventorySwitching;
         ViewMode.ViewingItem += LockInteracting;
     }
 
@@ -100,6 +124,7 @@ public class PlayerActions : MonoBehaviour
         BrowsingInventory -= LockInteracting;
         DialogueInteraction.Talking -= LockInteracting;
         Prototype.LevelStart -= DisallowInventorySwitching;
+        ViewMode.ViewingItem -= DisallowInventorySwitching;
         ViewMode.ViewingItem -= LockInteracting;
     }
 

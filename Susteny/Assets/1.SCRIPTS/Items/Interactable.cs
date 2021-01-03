@@ -9,10 +9,17 @@ public class Interactable : MonoBehaviour
     public UnityEvent interaction;
     public CrosshairColor crosshairColor;
     public float interactionDistance = 3.5f;
+    public bool canInteractDespiteJumping = false;
+    [Space(5)]
+    public bool cursorOnWhenOnPosition = true;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerScript;
     [HideInInspector] public PlayerActions playerActions;
+    [HideInInspector] public bool enableLookAt = false;
+    [HideInInspector] public Transform objectToLookAt;
+    [HideInInspector] public bool enableGoingTo = false;
+    [HideInInspector] public Transform positionToGo;
 
     bool changeLayer;
 
@@ -39,13 +46,19 @@ public class Interactable : MonoBehaviour
 
     void TriggerAction()
     {
-        if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified"); 
-        else interaction.Invoke();
+        if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified");
+        else
+        {
+            if (enableLookAt) playerActions.LookAt(objectToLookAt.position, interacting: true);
+            if (enableGoingTo) playerActions.GoToPosition(positionToGo.position, interacting: true);
+            if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
+            interaction.Invoke();
+        }
     }
 
     public void Interact()
     {
-        player.GetComponent<PlayerActions>().WatchObject(gameObject);
+        player.GetComponent<PlayerActions>().FocusOnObject(gameObject, interact: true, !cursorOnWhenOnPosition);
     }
 
     /// <summary>
@@ -55,6 +68,7 @@ public class Interactable : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance > interactionDistance && playerActions.canInteract) return;
+        if (!canInteractDespiteJumping && !player.GetComponent<CharacterController>().isGrounded) return; // Gracz nie może skakać podczas interakcji
 
         TriggerAction();
     }
@@ -79,5 +93,42 @@ public class Interactable : MonoBehaviour
         gameObject.layer = 0;
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 0;
         changeLayer = false;
+    }
+}
+
+[CustomEditor(typeof(Interactable))]
+public class InteractableEditor : Editor
+{
+    bool setCustomPosition;
+    bool setCustomRotation;
+
+    public override void OnInspectorGUI()
+    {
+        Interactable interactable = (Interactable)target;
+        base.OnInspectorGUI();
+
+        EditorGUILayout.Space(5f);
+        setCustomRotation = EditorGUILayout.Toggle("Set custom object to look at", setCustomRotation);
+        if (setCustomRotation)
+        {
+            interactable.enableLookAt = true;
+            EditorGUILayout.LabelField("Player will look at the center of this object during interaction");
+            interactable.objectToLookAt = EditorGUILayout.ObjectField("Object transform", interactable.objectToLookAt, typeof(Transform), true) as Transform;
+
+            EditorGUILayout.Space(5f);
+        }
+        else interactable.enableLookAt = false;
+
+        EditorGUILayout.Space(5f);
+        setCustomPosition = EditorGUILayout.Toggle("Set position the player will stand", setCustomPosition);
+        if (setCustomPosition)
+        {
+            interactable.enableGoingTo = true;
+            EditorGUILayout.LabelField("Player will stand at this position during interaction");
+            interactable.positionToGo = EditorGUILayout.ObjectField("Object transform", interactable.positionToGo, typeof(Transform), true) as Transform;
+
+            EditorGUILayout.Space(5f);
+        }
+        else interactable.enableGoingTo = false;
     }
 }
