@@ -23,7 +23,12 @@ public class Anna : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == destinations[0])
+        if (other.transform == destinations[0])
             timeline2.Play();
+    }
+
+    public void SetDialogue(int i)
+    {
+        GetComponent<LoadDialogue>().currentDialogueID = i;
     }
 }
