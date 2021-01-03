@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +11,6 @@ public class Interactable : MonoBehaviour
     public CrosshairColor crosshairColor;
     public float interactionDistance = 3.5f;
     public bool canInteractDespiteJumping = false;
-    [Space(5)]
-    public bool cursorOnWhenOnPosition = true;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerScript;
@@ -20,6 +19,7 @@ public class Interactable : MonoBehaviour
     [HideInInspector] public Transform objectToLookAt;
     [HideInInspector] public bool enableGoingTo = false;
     [HideInInspector] public Transform positionToGo;
+    [HideInInspector] public bool cursorOnWhenOnPosition = true;
 
     bool changeLayer;
 
@@ -49,8 +49,14 @@ public class Interactable : MonoBehaviour
         if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified");
         else
         {
-            if (enableLookAt) playerActions.LookAt(objectToLookAt.position, interacting: true);
-            if (enableGoingTo) playerActions.GoToPosition(positionToGo.position, interacting: true);
+            if (enableLookAt)
+                if (objectToLookAt == null) Debug.LogError($"Object to look at is not assigned: {gameObject.name}, but the bool is set to true");
+                else playerActions.LookAt(objectToLookAt.position, interacting: true);
+
+            if (enableGoingTo)
+                if (positionToGo == null) Debug.LogError($"Position the player will stand on is not assigned: {gameObject.name}, but the bool is set to true");
+            else playerActions.GoToPosition(positionToGo.position, interacting: true);
+
             if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
             interaction.Invoke();
         }
@@ -58,7 +64,7 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
-        player.GetComponent<PlayerActions>().FocusOnObject(gameObject, interact: true, !cursorOnWhenOnPosition);
+        player.GetComponent<PlayerActions>().FocusOnObject(gameObject, interact: true, !playerActions.showCursorOnPosition);
     }
 
     /// <summary>
@@ -99,36 +105,45 @@ public class Interactable : MonoBehaviour
 [CustomEditor(typeof(Interactable))]
 public class InteractableEditor : Editor
 {
-    bool setCustomPosition;
-    bool setCustomRotation;
-
     public override void OnInspectorGUI()
     {
         Interactable interactable = (Interactable)target;
         base.OnInspectorGUI();
 
         EditorGUILayout.Space(5f);
-        setCustomRotation = EditorGUILayout.Toggle("Set custom object to look at", setCustomRotation);
-        if (setCustomRotation)
+
+        if (interactable.enableGoingTo || interactable.enableLookAt)
         {
-            interactable.enableLookAt = true;
-            EditorGUILayout.LabelField("Player will look at the center of this object during interaction");
-            interactable.objectToLookAt = EditorGUILayout.ObjectField("Object transform", interactable.objectToLookAt, typeof(Transform), true) as Transform;
+            interactable.cursorOnWhenOnPosition = EditorGUILayout.Toggle("Cursor on when player on position", interactable.cursorOnWhenOnPosition);
+            EditorGUILayout.Space(5f);
+        }
+        else interactable.cursorOnWhenOnPosition = false;
+
+        interactable.enableLookAt = EditorGUILayout.Toggle("Set custom object to look at", interactable.enableLookAt);
+        if (interactable.enableLookAt)
+        {
+            interactable.objectToLookAt = (Transform)EditorGUILayout.ObjectField(
+                new GUIContent("Transform", "Player will look at the center of this object during interaction"),
+                interactable.objectToLookAt, typeof(Transform), true);
 
             EditorGUILayout.Space(5f);
         }
-        else interactable.enableLookAt = false;
 
         EditorGUILayout.Space(5f);
-        setCustomPosition = EditorGUILayout.Toggle("Set position the player will stand", setCustomPosition);
-        if (setCustomPosition)
+        interactable.enableGoingTo = EditorGUILayout.Toggle("Set position the player will stand", interactable.enableGoingTo);
+        if (interactable.enableGoingTo)
         {
-            interactable.enableGoingTo = true;
-            EditorGUILayout.LabelField("Player will stand at this position during interaction");
-            interactable.positionToGo = EditorGUILayout.ObjectField("Object transform", interactable.positionToGo, typeof(Transform), true) as Transform;
+            interactable.positionToGo = (Transform)EditorGUILayout.ObjectField(
+                new GUIContent("Transform", "Player will stand at this position during interaction"),
+                interactable.positionToGo, typeof(Transform), true);
 
             EditorGUILayout.Space(5f);
         }
-        else interactable.enableGoingTo = false;
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(interactable);
+            EditorSceneManager.MarkSceneDirty(interactable.gameObject.scene);
+        }
     }
 }
