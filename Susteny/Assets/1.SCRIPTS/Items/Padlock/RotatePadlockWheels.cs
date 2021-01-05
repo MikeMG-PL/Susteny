@@ -10,8 +10,14 @@ public class RotatePadlockWheels : MonoBehaviour
 
     [HideInInspector] public bool correct;
 
+    Interactable interactable;
     Vector3 mousePos;
     bool wasClickedOn;
+
+    private void Start()
+    {
+        interactable = GetComponentInParent<Interactable>();
+    }
 
     void OnMouseDown()
     {
@@ -20,6 +26,8 @@ public class RotatePadlockWheels : MonoBehaviour
 
     void Update()
     {
+        if (!interactable.isInteractedWith) return;
+
         if (Input.GetMouseButtonUp(0)) wasClickedOn = false;
 
         if (wasClickedOn && Input.GetMouseButtonDown(0))

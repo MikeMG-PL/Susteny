@@ -11,14 +11,15 @@ public class ViewMode : MonoBehaviour
     public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
 
+    [HideInInspector] public GameObject viewedItem;
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
     [HideInInspector] public bool interactingWithItem;
 
     Vector3 mousePos;
     FloatParameter focalLength;
-    GameObject viewedItem;
     GameObject focusCamera;
+    SC_FPSController fpsController;
     bool disablingFocus;
     bool enablingFocus;
 
@@ -28,11 +29,21 @@ public class ViewMode : MonoBehaviour
     {
         focusCamera = GetComponent<Player>().focusCamera;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
+        fpsController = GetComponent<SC_FPSController>();
     }
 
-    public void ToggleViewMode(GameObject item, bool b, bool interact = false)
+    /// <summary>
+    /// Włącza focus na dany obiekt. Domyślnie pozwala na obracanie przedmiotem przez gracza za pomocą myszki.
+    /// </summary>
+    /// <param name="item">Oglądany obiekt, podczas wyłączania może przyjąć null.</param>
+    /// <param name="b">Włącza/wyłącza viewMode.</param>
+    /// <param name="interact">Jeżeli true, włącza sam focus na obiekt, bez możliwości obracania przedmiotem.</param>
+    /// <param name="switchLockControlsAndCursorOn">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
+    public void ToggleViewMode(GameObject item, bool b, bool interact = false, bool switchLockControlsAndCursorOn = true)
     {
         ViewingItem.Invoke(b);
+        if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
+        else fpsController.LockControlsCursorOff(true);
         viewingItem = b;
         interactingWithItem = interact;
         disablingFocus = !b;

@@ -79,6 +79,7 @@ public class ItemWorld : MonoBehaviour
         grabbing = false;
         ungrabbing = true;
 
+        interactable.StoppedInteracting();
         interactable.SetAllCollidersStatus(true);
         playerActions.grabbedItem = null;
         playerActions.viewMode.ToggleViewMode(null, false);

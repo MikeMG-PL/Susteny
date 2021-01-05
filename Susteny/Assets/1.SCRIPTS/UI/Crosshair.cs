@@ -14,6 +14,7 @@ public class Crosshair : MonoBehaviour
     Color interactColor = Color.green;
     RaycastHit _hit = new RaycastHit();
     Ray ray;
+    Vector3 interactablePos;
     bool hitInteractable;
     float interactionDistance;
 
@@ -39,9 +40,8 @@ public class Crosshair : MonoBehaviour
             // Jeśli *nadal* patrzymy na coś z czym możemy przeprowadzić interakcję, ale odsunęliśmy się za daleko lub przybliżyliśmy się
             if (ReferenceEquals(lastHit, _hit.transform.gameObject) && hitInteractable)
             {
-                float distance = Vector3.Distance(_hit.transform.position, player.transform.position);
-                if (distance > interactionDistance) crosshair.color = defaultColor;
-                else crosshair.color = interactColor;
+                if (NotTooFar()) crosshair.color = interactColor;
+                else crosshair.color = defaultColor;
             }
 
             // Jeśli *nadal* patrzymy na ten sam obiekt, ale nie jest on interactable
@@ -52,12 +52,10 @@ public class Crosshair : MonoBehaviour
             {
                 lastHit = _hit.transform.gameObject;
 
-                CheckIfHitInteractable(_hit.transform);
-
-                if (hitInteractable)
+                if (HitInteractable(_hit.transform))
                 {
-                    float distance = Vector3.Distance(_hit.transform.position, player.transform.position);
-                    if (distance <= interactionDistance) crosshair.color = interactColor;
+                    if (NotTooFar()) crosshair.color = interactColor;
+                    else crosshair.color = defaultColor;
                 }
 
                 else
@@ -74,21 +72,39 @@ public class Crosshair : MonoBehaviour
     }
 
     // Sprawdzanie czy natknięto się na przedmiot, lub osobę, z którą można wejść w interakcję
-    void CheckIfHitInteractable(Transform _transform)
+    bool HitInteractable(Transform _transform)
     {
         hitInteractable = true;
 
         if (_transform.GetComponent<Interactable>() != null && _transform.GetComponent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
+        {
             interactionDistance = _transform.GetComponent<Interactable>().interactionDistance;
+            interactablePos = _transform.position;
+        }
 
         else if (_transform.GetComponent<ChildTriggerItemAction>() != null && _transform.GetComponentInParent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
+        {
             interactionDistance = _transform.GetComponentInParent<Interactable>().interactionDistance;
+            interactablePos = _transform.GetComponentInParent<Interactable>().transform.position;
+        }
 
         else if (_transform.GetComponent<LoadDialogue>() != null)
+        {
             interactionDistance = _transform.GetComponent<DialogueInteraction>().interactionDistance;
+            interactablePos = _transform.position;
+        }
 
         else
             hitInteractable = false;
+
+        return hitInteractable;
+    }
+
+    bool NotTooFar()
+    {
+        float distance = Vector3.Distance(interactablePos, player.transform.position);
+        if (distance <= interactionDistance) return true;
+        else return false;
     }
 }
 
