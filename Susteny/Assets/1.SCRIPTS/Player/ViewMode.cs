@@ -43,6 +43,7 @@ public class ViewMode : MonoBehaviour
     {
         ViewingItem.Invoke(b);
         if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
+        else fpsController.LockControlsCursorOff(true);
         viewingItem = b;
         interactingWithItem = interact;
         disablingFocus = !b;

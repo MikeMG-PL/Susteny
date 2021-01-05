@@ -36,7 +36,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
         {
-            if (showCursorOnPosition) fpsController.LockControlsCursorOn(true);
+            if (showCursorOnPosition) fpsController.ToggleCursor(true);
             finishedGoingAndRotatingTowardsObject = true;
         }
 

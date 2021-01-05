@@ -88,6 +88,14 @@ public class SC_FPSController : MonoBehaviour
         canLook = !b;
     }
 
+    public void ToggleCursor(bool b)
+    {
+        Cursor.visible = b;
+
+        if (b) Cursor.lockState = CursorLockMode.None;
+        else Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Init()
     {
         characterController = GetComponent<CharacterController>();
