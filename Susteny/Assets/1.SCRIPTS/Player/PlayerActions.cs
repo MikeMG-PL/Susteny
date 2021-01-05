@@ -122,7 +122,6 @@ public class PlayerActions : MonoBehaviour
     {
         BrowsingInventory += LockInteracting;
         DialogueInteraction.Talking += LockInteracting;
-        Prototype.LevelStart += DisallowInventorySwitching;
         ViewMode.ViewingItem += DisallowInventorySwitching;
         ViewMode.ViewingItem += LockInteracting;
     }
@@ -131,7 +130,6 @@ public class PlayerActions : MonoBehaviour
     {
         BrowsingInventory -= LockInteracting;
         DialogueInteraction.Talking -= LockInteracting;
-        Prototype.LevelStart -= DisallowInventorySwitching;
         ViewMode.ViewingItem -= DisallowInventorySwitching;
         ViewMode.ViewingItem -= LockInteracting;
     }
