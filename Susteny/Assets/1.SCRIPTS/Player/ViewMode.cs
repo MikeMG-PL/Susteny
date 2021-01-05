@@ -20,6 +20,7 @@ public class ViewMode : MonoBehaviour
     FloatParameter focalLength;
     GameObject focusCamera;
     SC_FPSController fpsController;
+    Transform cameraTransform;
     bool disablingFocus;
     bool enablingFocus;
 
@@ -28,6 +29,7 @@ public class ViewMode : MonoBehaviour
     void Awake()
     {
         focusCamera = GetComponent<Player>().focusCamera;
+        cameraTransform = GetComponent<Player>().camera.transform;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
         fpsController = GetComponent<SC_FPSController>();
     }
@@ -116,8 +118,8 @@ public class ViewMode : MonoBehaviour
         {
             var delta = Input.mousePosition - mousePos;
             mousePos = Input.mousePosition;
-            viewedItem.transform.Rotate(transform.right, delta.y * rotationSpeed, Space.World);
-            viewedItem.transform.Rotate(transform.up, -delta.x * rotationSpeed, Space.World);
+            viewedItem.transform.Rotate(cameraTransform.TransformDirection(Vector3.right), delta.y * rotationSpeed, Space.World);
+            viewedItem.transform.Rotate(cameraTransform.TransformDirection(Vector3.up), -delta.x * rotationSpeed, Space.World);
         }
     }
 
