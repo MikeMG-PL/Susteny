@@ -93,16 +93,16 @@ public class PlayerActions : MonoBehaviour
         viewMode.ToggleViewMode(null, false, interact: false, enableMovemenetAndCursorOff);
     }
 
-    public void LookAt(Vector3 posToLook, bool interacting = false, float horizontalRotationSpeed = 250f, float verticalRotationSpeed = 3000f)
+    public void LookAt(Vector3 posToLook, bool interacting = false, float rotatingSpeed = 50f, float angleTolerance = 1f)
     {
         if (interacting) finishedGoingAndRotatingTowardsObject = false;
-        GetComponent<SC_FPSController>().LookAt(posToLook, horizontalRotationSpeed, verticalRotationSpeed);
+        GetComponent<SC_FPSController>().LookAt(posToLook, rotatingSpeed, angleTolerance);
     }
 
-    public void GoToPosition(Vector3 posToGo, bool interacting = false, float goingSpeed = 2f)
+    public void GoToPosition(Vector3 posToGo, bool interacting = false, float goingSpeed = 2f, float positionTolerance = 0.1f)
     {
         if (interacting) finishedGoingAndRotatingTowardsObject = false;
-        GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed);
+        GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed, positionTolerance);
     }
 
     void LockInteracting(bool b)

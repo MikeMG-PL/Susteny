@@ -19,6 +19,7 @@ public class SC_FPSController : MonoBehaviour
     CharacterController characterController;
     public Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
+    float rotationY = 0;
 
     [HideInInspector]
     public bool canMove = true;
@@ -28,12 +29,12 @@ public class SC_FPSController : MonoBehaviour
 
     Vector3 posToLook;
     public bool lookingAt;
-    float range = 0.3f; // Look at don't need to be perfect
-    float horizontalRotationSpeed;
-    float verticalRotationSpeed;
+    float angleTolerance; // Look at don't need to be perfect
+    float lookAtSpeed;
 
     Vector3 posToGo;
     public bool goingTo;
+    float positionTolerance;
     float goingSpeed;
 
     void Awake()
@@ -97,9 +98,10 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(cameraTransform.eulerAngles);
         // We are grounded, so recalculate move direction based on axes
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+        Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
+        Vector3 right = cameraTransform.TransformDirection(Vector3.right);
 
         // Press Left Shift to run
         isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -120,83 +122,80 @@ public class SC_FPSController : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+        if (characterController.enabled && canMove) characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
         if (canLook)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            cameraTransform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            rotationY += Input.GetAxis("Mouse X") * lookSpeed;
+            cameraTransform.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
         }
 
         if (lookingAt) RotateToLookAt();
         if (goingTo) GoToPosition();
     }
 
-    public void LookAt(Vector3 posToLook, float horizontalRotationSpeed, float verticalRotationSpeed)
+    public void LookAt(Vector3 posToLook, float rotatingSpeed, float angleTolerance)
     {
         lookingAt = true;
         canLook = false;
-        this.horizontalRotationSpeed = horizontalRotationSpeed;
-        this.verticalRotationSpeed = verticalRotationSpeed;
+        this.angleTolerance = angleTolerance;
+        this.lookAtSpeed = rotatingSpeed;
         this.posToLook = posToLook;
     }
 
-    public void GoTo(Vector3 posToGo, float goingSpeed)
+    public void GoTo(Vector3 posToGo, float goingSpeed, float positionTolerance)
     {
-        GetComponent<CharacterController>().enabled = false;
         canMove = false;
         goingTo = true;
+        this.positionTolerance = positionTolerance;
         this.goingSpeed = goingSpeed;
-
-        float playerHeight = 1.06477f; // Wyznaczone doświadczalnie. Nie jest to całkowita wysokość kapsułki, ani wysokość od kamery do ziemi.
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)) posToGo.y = hit.point.y + playerHeight;
-        else posToGo.y = transform.position.y;
         this.posToGo = posToGo;
     }
 
     void RotateToLookAt()
     {
-        Quaternion lookAtQuaternion = Quaternion.LookRotation(cameraTransform.position - posToLook);
-
-        // Z jakiegoś powodu gracz obraca się w przeciwną stronę, czyli o 180.
-        lookAtQuaternion *= Quaternion.Euler(0, 180, 0);
-
-        // !goTo bo gracz zawsze musi najpierw być w odpowiednim miejscu, aby kamera przestała się obracać
+        Quaternion lookAtQuaternion = Quaternion.LookRotation(posToLook - cameraTransform.position);
+        
+        // !goingTo bo gracz zawsze musi najpierw być w odpowiednim miejscu, aby kamera przestała się obracać
         if (!goingTo
-            && transform.localRotation.eulerAngles.y <= lookAtQuaternion.eulerAngles.y + range
-            && transform.localRotation.eulerAngles.y >= lookAtQuaternion.eulerAngles.y - range
-            && cameraTransform.localRotation.eulerAngles.x <= lookAtQuaternion.eulerAngles.x + range
-            && cameraTransform.localRotation.eulerAngles.x >= lookAtQuaternion.eulerAngles.x - range)
+            && cameraTransform.localEulerAngles.y <= lookAtQuaternion.eulerAngles.y + angleTolerance
+            && cameraTransform.localEulerAngles.y >= lookAtQuaternion.eulerAngles.y - angleTolerance
+            && cameraTransform.localEulerAngles.x <= lookAtQuaternion.eulerAngles.x + angleTolerance
+            && cameraTransform.localEulerAngles.x >= lookAtQuaternion.eulerAngles.x - angleTolerance)
         {
-            // Ze względu na różnice w wartości eulerAngles w inspektorze
-            // https://forum.unity.com/threads/solved-how-to-get-rotation-value-that-is-in-the-inspector.460310/
-            if (cameraTransform.localEulerAngles.x > 180) rotationX = -360 + cameraTransform.localEulerAngles.x;
-            else rotationX = cameraTransform.localEulerAngles.x;
+            rotationX = EulerDistance(cameraTransform.localEulerAngles.x);
+            rotationY = EulerDistance(cameraTransform.localEulerAngles.y);
 
             lookingAt = false;
         }
 
-        cameraTransform.localRotation = Quaternion.RotateTowards(cameraTransform.localRotation, lookAtQuaternion, Time.deltaTime * verticalRotationSpeed);
-        cameraTransform.localRotation = Quaternion.Euler(new Vector3(cameraTransform.localRotation.eulerAngles.x, 0f, 0f));
-
-        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookAtQuaternion, Time.deltaTime * horizontalRotationSpeed);
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, transform.localRotation.eulerAngles.y, 0f));
+        cameraTransform.rotation = Quaternion.RotateTowards(cameraTransform.rotation, lookAtQuaternion, Time.deltaTime * lookAtSpeed);
+        cameraTransform.rotation = Quaternion.Euler(new Vector3(cameraTransform.localEulerAngles.x, cameraTransform.localEulerAngles.y, 0));
     }
 
     void GoToPosition()
     {
-        if (transform.position == posToGo)
+        if (transform.position.x <= posToGo.x + positionTolerance && transform.position.x >= posToGo.x - positionTolerance
+            && transform.position.z <= posToGo.z + positionTolerance && transform.position.z >= posToGo.z - positionTolerance
+            && characterController.isGrounded)
         {
             goingTo = false;
-            GetComponent<CharacterController>().enabled = true;
         }
 
-        float step = goingSpeed * Time.deltaTime;
-        Vector3 positionToGo = Vector3.MoveTowards(transform.position, posToGo, step);
+        Vector3 positionToGo = posToGo - transform.position;
+        if (positionToGo.magnitude > positionTolerance)
+        {
+            positionToGo = positionToGo.normalized * goingSpeed;
+            characterController.Move(positionToGo * Time.deltaTime);
+        }
+    }
 
-        transform.position = positionToGo;
+    float EulerDistance(float euler)
+    {
+        if (euler > 180) return euler - 360;
+        else return euler;
     }
 }

@@ -73,7 +73,7 @@ public class Interactable : MonoBehaviour
     public void TryToTriggerAction()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > interactionDistance && playerActions.canInteract) return;
+        if (distance > interactionDistance || !playerActions.canInteract) return;
         if (!canInteractDespiteJumping && !player.GetComponent<CharacterController>().isGrounded) return; // Gracz nie może skakać podczas interakcji
 
         TriggerAction();
