@@ -157,6 +157,21 @@ public class SC_FPSController : MonoBehaviour
         this.posToGo = posToGo;
     }
 
+    public void StopGoingTo(bool enableMove = false)
+    {
+        goingTo = false;
+        canMove = enableMove;
+    }
+
+    public void StopLookingAt(bool enableLooking = false)
+    {
+        rotationX = EulerDistance(cameraTransform.localEulerAngles.x);
+        rotationY = EulerDistance(cameraTransform.localEulerAngles.y);
+
+        lookingAt = false;
+        canLook = enableLooking;
+    }
+
     void RotateToLookAt()
     {
         Quaternion lookAtQuaternion = Quaternion.LookRotation(posToLook - cameraTransform.position);
@@ -168,10 +183,7 @@ public class SC_FPSController : MonoBehaviour
             && cameraTransform.localEulerAngles.x <= lookAtQuaternion.eulerAngles.x + angleTolerance
             && cameraTransform.localEulerAngles.x >= lookAtQuaternion.eulerAngles.x - angleTolerance)
         {
-            rotationX = EulerDistance(cameraTransform.localEulerAngles.x);
-            rotationY = EulerDistance(cameraTransform.localEulerAngles.y);
-
-            lookingAt = false;
+            StopLookingAt();
         }
 
         cameraTransform.rotation = Quaternion.RotateTowards(cameraTransform.rotation, lookAtQuaternion, Time.deltaTime * lookAtSpeed);
@@ -184,7 +196,7 @@ public class SC_FPSController : MonoBehaviour
             && transform.position.z <= posToGo.z + positionTolerance && transform.position.z >= posToGo.z - positionTolerance
             && characterController.isGrounded)
         {
-            goingTo = false;
+            StopGoingTo();
         }
 
         Vector3 positionToGo = posToGo - transform.position;

@@ -50,12 +50,12 @@ public class Interactable : MonoBehaviour
         else
         {
             if (enableLookAt)
-                if (objectToLookAt == null) playerActions.LookAt(transform.position, interacting: true);
-                else playerActions.LookAt(objectToLookAt.position, interacting: true);
+                if (objectToLookAt == null) playerActions.LookAt(transform.position);
+                else playerActions.LookAt(objectToLookAt.position);
 
             if (enableGoingTo)
-                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward), interacting: true);
-                else playerActions.GoToPosition(positionToGo.position, interacting: true);
+                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward));
+                else playerActions.GoToPosition(positionToGo.position);
 
             if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
             interaction.Invoke();
