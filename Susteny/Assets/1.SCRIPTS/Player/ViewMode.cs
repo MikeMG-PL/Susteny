@@ -11,13 +11,13 @@ public class ViewMode : MonoBehaviour
     public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
 
+    [HideInInspector] public GameObject viewedItem;
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
     [HideInInspector] public bool interactingWithItem;
 
     Vector3 mousePos;
     FloatParameter focalLength;
-    GameObject viewedItem;
     GameObject focusCamera;
     SC_FPSController fpsController;
     bool disablingFocus;

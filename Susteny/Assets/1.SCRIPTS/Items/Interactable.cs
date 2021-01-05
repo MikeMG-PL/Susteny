@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour
     public float interactionDistance = 3.5f;
     public bool canInteractDespiteJumping = false;
 
+    [HideInInspector] public bool isInteractedWith;
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerScript;
     [HideInInspector] public PlayerActions playerActions;
@@ -33,7 +34,7 @@ public class Interactable : MonoBehaviour
     void Update()
     {
         // Sytuacja poniżej występuje gdy skończyliśmy oglądać ten przedmiot i focus już się wyłączył lub gdy zaczęliśmy oglądać inny przedmiot
-        if (changeLayer && player.GetComponent<ViewMode>().DisablingFocusEnded())
+        if (changeLayer && player.GetComponent<ViewMode>().DisablingFocusEnded() && playerActions.viewMode.viewedItem != gameObject)
         {
             ChangeLayerAfterViewing();
         }
@@ -58,13 +59,26 @@ public class Interactable : MonoBehaviour
                 else playerActions.GoToPosition(positionToGo.position);
 
             if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
+            StartedInteracting();
             interaction.Invoke();
         }
     }
 
-    public void Interact()
+    public void FocusOnInteractable()
     {
         player.GetComponent<PlayerActions>().FocusOnObject(gameObject, interact: true, !playerActions.showCursorOnPosition);
+    }
+
+    void StartedInteracting()
+    {
+        isInteractedWith = true;
+        playerActions.interactingObject = gameObject;
+    }
+
+    public void StoppedInteracting()
+    {
+        isInteractedWith = false;
+        playerActions.interactingObject = null;
     }
 
     /// <summary>

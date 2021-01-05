@@ -7,6 +7,7 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] GameObject InventoryUI;
 
+    [HideInInspector] public GameObject interactingObject;
     [HideInInspector] public ItemWorld grabbedItem;
     [HideInInspector] public ViewMode viewMode;
     [HideInInspector] public bool inventoryAllowed = true;
@@ -79,6 +80,7 @@ public class PlayerActions : MonoBehaviour
         GetComponent<Inventory>().Add(itemWorld.item, itemWorld.amount);
         if (grabbedItem != null)
         {
+            grabbedItem.GetComponent<Interactable>().StoppedInteracting();
             grabbedItem = null;
             viewMode.ToggleViewMode(null, false);
         }
@@ -90,10 +92,12 @@ public class PlayerActions : MonoBehaviour
         viewMode.ToggleViewMode(item, true, interact, switchLockControlsCursorOn);
     }
 
-    void StopFocusOnObject(bool enableMovemenetAndCursorOff)
+    public void StopFocusOnObject(bool enableMovemenetAndCursorOff)
     {
+        // Jeżeli gracz nie skończył jeszcze iść / obracać się w określonym kierunku, trzeba ręcznie je przerwać
         fpsController.StopGoingTo();
         fpsController.StopLookingAt();
+        if (interactingObject != null) interactingObject.GetComponent<Interactable>().StoppedInteracting();
         viewMode.ToggleViewMode(null, false, interact: false, enableMovemenetAndCursorOff);
     }
 
