@@ -99,7 +99,7 @@ public class PlayerActions : MonoBehaviour
         GetComponent<SC_FPSController>().LookAt(posToLook, rotatingSpeed, angleTolerance);
     }
 
-    public void GoToPosition(Vector3 posToGo, bool interacting = false, float goingSpeed = 2f, float positionTolerance = 0.1f)
+    public void GoToPosition(Vector3 posToGo, bool interacting = false, float goingSpeed = 4f, float positionTolerance = 0.1f)
     {
         if (interacting) finishedGoingAndRotatingTowardsObject = false;
         GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed, positionTolerance);

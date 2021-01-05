@@ -98,7 +98,6 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(cameraTransform.eulerAngles);
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
         Vector3 right = cameraTransform.TransformDirection(Vector3.right);
@@ -152,6 +151,9 @@ public class SC_FPSController : MonoBehaviour
         goingTo = true;
         this.positionTolerance = positionTolerance;
         this.goingSpeed = goingSpeed;
+
+        if (Physics.Raycast(posToGo, Vector3.down, out RaycastHit hit, 5f)) posToGo.y = hit.point.y;
+        else Debug.LogWarning("No floor found near the player interact position");
         this.posToGo = posToGo;
     }
 

@@ -50,12 +50,12 @@ public class Interactable : MonoBehaviour
         else
         {
             if (enableLookAt)
-                if (objectToLookAt == null) Debug.LogError($"Object to look at is not assigned: {gameObject.name}, but the bool is set to true");
+                if (objectToLookAt == null) playerActions.LookAt(transform.position, interacting: true);
                 else playerActions.LookAt(objectToLookAt.position, interacting: true);
 
             if (enableGoingTo)
-                if (positionToGo == null) Debug.LogError($"Position the player will stand on is not assigned: {gameObject.name}, but the bool is set to true");
-            else playerActions.GoToPosition(positionToGo.position, interacting: true);
+                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward), interacting: true);
+                else playerActions.GoToPosition(positionToGo.position, interacting: true);
 
             if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
             interaction.Invoke();
