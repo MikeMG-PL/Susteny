@@ -126,9 +126,9 @@ public class ViewMode : MonoBehaviour
     {
         if (disablingFocus)
         {
-            if (focalLength.value <= 15f)
+            if (focalLength.value <= 24f)
             {
-                focalLength.value = 15f;
+                focalLength.value = 24f;
                 disablingFocus = false;
             }
 
