@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824086118552689594}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1824086119190900111}
@@ -62,7 +62,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -2
@@ -102,8 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingBobbingSpeed: 11
   runningBobbingSpeed: 16
-  bobbingAmountWalk: 0.05
-  bobbingAmountSprint: 0.08
+  bobbingAmountWalk: 0.08
+  bobbingAmountSprint: 0.12
   controller: {fileID: 1824086119982000199}
 --- !u!114 &2585038835930136016
 MonoBehaviour:
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134720756254ebc408ae7e20873c28fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 6
-  runningSpeed: 10
+  walkingSpeed: 4.75
+  runningSpeed: 8.75
   jumpSpeed: 10
   gravity: 30
   playerCamera: {fileID: 1824086118552689595}
@@ -468,7 +468,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -732,7 +732,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

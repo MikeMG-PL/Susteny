@@ -13,6 +13,7 @@ public class Anna : MonoBehaviour
 
     public PlayableDirector timeline2;
     public PlayableDirector timeline3;
+    public PlayableDirector timeline4;
 
     void Awake()
     {
@@ -25,9 +26,9 @@ public class Anna : MonoBehaviour
         DialogueInteraction.Conversation -= AnnaConversationStart;
     }
 
-    public void FindPlayer()
+    public void SetDestination(int i)
     {
-        agent.SetDestination(destinations[0].position);
+        agent.SetDestination(destinations[i].position);
     }
 
     void OnTriggerEnter(Collider other)
@@ -50,11 +51,14 @@ public class Anna : MonoBehaviour
                 default:
                     break;
 
-                case 1:
+                case 0:
                     if(!start)
-                    {
                         timeline3.Play();
-                    }    
+                    break;
+
+                case 1:
+                    if (!start)
+                        timeline4.Play();
                     break;
             }
         }
@@ -71,4 +75,9 @@ public class Anna : MonoBehaviour
     }
 
     // debugging part
+
+    private void Update()
+    {
+
+    }
 }
