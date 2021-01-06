@@ -53,7 +53,6 @@ public class ViewMode : MonoBehaviour
 
         if (b)
         {
-            focusCamera.SetActive(b);
             viewedItem = item.gameObject;
             ChangeLayerToFocus();
         }
@@ -127,10 +126,9 @@ public class ViewMode : MonoBehaviour
     {
         if (disablingFocus)
         {
-            if (focalLength.value <= 25)
+            if (focalLength.value <= 15f)
             {
-                focalLength.value = 25f;
-                focusCamera.SetActive(false);
+                focalLength.value = 15f;
                 disablingFocus = false;
             }
 
