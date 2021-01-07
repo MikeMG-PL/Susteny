@@ -40,11 +40,6 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
-    {
-        TryToTriggerAction();
-    }
-
     void TriggerAction()
     {
         if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified");

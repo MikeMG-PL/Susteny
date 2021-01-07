@@ -40,6 +40,7 @@ public class Crosshair : MonoBehaviour
             // Jeśli *nadal* patrzymy na coś z czym możemy przeprowadzić interakcję, ale odsunęliśmy się za daleko lub przybliżyliśmy się
             if (ReferenceEquals(lastHit, _hit.transform.gameObject) && hitInteractable)
             {
+                interactablePos = _hit.transform.position; // Musimy zaktualizować pozycję przedmiotu (być może został przez gracza podniesiony, odłożony, itp.)
                 if (NotTooFar()) crosshair.color = interactColor;
                 else crosshair.color = defaultColor;
             }
