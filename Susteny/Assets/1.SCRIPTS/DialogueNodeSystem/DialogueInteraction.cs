@@ -36,6 +36,7 @@ public class DialogueInteraction : MonoBehaviour
 
     public void Talk(bool b)
     {
+        var actions = player.GetComponent<PlayerActions>();
         var d = GetComponent<LoadDialogue>();
         talkingGameObjectName = d.gameObject.name;
         dialogueID = d.currentDialogueID;
