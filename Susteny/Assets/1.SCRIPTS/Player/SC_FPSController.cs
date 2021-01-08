@@ -104,6 +104,9 @@ public class SC_FPSController : MonoBehaviour
         Cursor.visible = false;
 
         StartCoroutine(PreventRotatingFPSController());
+
+        rotationX += playerCamera.transform.localEulerAngles.x;
+        rotationY += playerCamera.transform.localEulerAngles.y;
     }
 
     void Update()
