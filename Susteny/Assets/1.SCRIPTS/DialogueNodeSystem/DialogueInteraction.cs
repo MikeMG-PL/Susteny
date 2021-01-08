@@ -5,13 +5,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueInteraction : MonoBehaviour
-{
-    GameObject player;
+{   
+    /// Custom editor ///
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerActions playerActions;
+
+    [HideInInspector] public bool enableLookAt = false;
+    [HideInInspector] public bool enableGoTo = false;
+
+    [HideInInspector] public float lookSpeed = 50;
+    [HideInInspector] public float moveSpeed = 4;
+    [HideInInspector] public float distance = 1;
+
+    [HideInInspector] public Transform objectToLookAt;
+    [HideInInspector] public Transform positionToGo;
+
+    /// Private properties ///
     GameObject panel;
-    public float interactionDistance = 5f;
-    bool talking;
     string talkingGameObjectName;
     int dialogueID;
+
+    /// Public properties ///
+    public float interactionDistance = 5f;
 
     public void TryToTalk()
     {
@@ -22,6 +37,7 @@ public class DialogueInteraction : MonoBehaviour
         }
     }
 
+    /// Events ///
     public static event Action<bool> Talking;
     public static event Action<bool, string, int> Conversation;
 
@@ -29,6 +45,7 @@ public class DialogueInteraction : MonoBehaviour
     {
         panel = GameObject.FindGameObjectWithTag("DialoguePanel");
         player = GameObject.FindGameObjectWithTag("Player");
+        playerActions = player.GetComponent<PlayerActions>();
         Conversation += Conv;
     }
 
@@ -36,25 +53,34 @@ public class DialogueInteraction : MonoBehaviour
 
     public void Talk(bool b)
     {
-        var actions = player.GetComponent<PlayerActions>();
-        var d = GetComponent<LoadDialogue>();
+        LoadDialogue d = GetComponent<LoadDialogue>();
         talkingGameObjectName = d.gameObject.name;
         dialogueID = d.currentDialogueID;
 
         if (d.dialogues.Count > 0)
         {
-            talking = b;
             panel.transform.GetChild(0).gameObject.SetActive(b);
             Talking.Invoke(b);
 
             if (b)
             {
+                if (enableLookAt)
+                    if (objectToLookAt == null) playerActions.LookAt(transform.position, lookSpeed);
+                    else playerActions.LookAt(objectToLookAt.position, lookSpeed);
+
+                if (enableGoTo)
+                    if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
+                    else playerActions.GoToPosition(positionToGo.position * distance, moveSpeed);
+
+
+
                 DestroyButtons(d);
                 d.Load(d.currentDialogueID);
                 d.ProcessDialogue();
             }
             else
             {
+                playerActions.StopFocusOnObject(true);
                 DestroyButtons(d);
                 Conversation.Invoke(false, talkingGameObjectName, dialogueID);
             }

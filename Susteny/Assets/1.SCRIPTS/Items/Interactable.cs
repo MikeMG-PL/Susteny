@@ -19,6 +19,9 @@ public class Interactable : MonoBehaviour
     [HideInInspector] public bool enableGoTo = false;
     [HideInInspector] public Transform positionToGo;
     [HideInInspector] public bool cursorOnWhenOnPosition = true;
+    [HideInInspector] public float lookSpeed = 50;
+    [HideInInspector] public float moveSpeed = 4;
+    [HideInInspector] public float distance = 1;
 
     bool changeLayer;
 
@@ -44,12 +47,12 @@ public class Interactable : MonoBehaviour
         else
         {
             if (enableLookAt)
-                if (objectToLookAt == null) playerActions.LookAt(transform.position);
-                else playerActions.LookAt(objectToLookAt.position);
+                if (objectToLookAt == null) playerActions.LookAt(transform.position, lookSpeed);
+                else playerActions.LookAt(objectToLookAt.position, lookSpeed);
 
             if (enableGoTo)
-                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward));
-                else playerActions.GoToPosition(positionToGo.position);
+                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
+                else playerActions.GoToPosition(positionToGo.position * distance, moveSpeed);
 
             if (cursorOnWhenOnPosition && (enableGoTo || enableLookAt)) playerActions.showCursorOnPosition = true;
             StartedInteracting();

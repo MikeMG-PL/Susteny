@@ -2739,6 +2739,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd849bf7070ebb45899929789ed9a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerActions: {fileID: 0}
+  enableLookAt: 1
+  enableGoTo: 1
+  lookSpeed: 75
+  moveSpeed: 6
+  distance: 2
+  objectToLookAt: {fileID: 0}
+  positionToGo: {fileID: 0}
   interactionDistance: 5
 --- !u!195 &1396711330841436737
 NavMeshAgent:

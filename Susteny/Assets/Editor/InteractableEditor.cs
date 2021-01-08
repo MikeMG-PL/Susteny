@@ -12,6 +12,9 @@ public class InteractableEditor : Editor
     SerializedProperty cursorOnWhenOnPosition;
     SerializedProperty enableLookAt;
     SerializedProperty enableGoTo;
+    SerializedProperty moveSpeed;
+    SerializedProperty lookSpeed;
+    SerializedProperty distance;
 
     private void OnEnable()
     {
@@ -20,6 +23,9 @@ public class InteractableEditor : Editor
         cursorOnWhenOnPosition = serializedObject.FindProperty("cursorOnWhenOnPosition");
         enableLookAt = serializedObject.FindProperty("enableLookAt");
         enableGoTo = serializedObject.FindProperty("enableGoTo");
+        moveSpeed = serializedObject.FindProperty("moveSpeed");
+        lookSpeed = serializedObject.FindProperty("lookSpeed");
+        distance = serializedObject.FindProperty("distance");
     }
 
     public override void OnInspectorGUI()
@@ -35,6 +41,14 @@ public class InteractableEditor : Editor
             EditorGUILayout.PropertyField(positionToGo, new GUIContent("Transform", "Player will stand at this position during interaction"));
 
             EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(moveSpeed, new GUIContent("Move speed", "Speed the player will have while moving to the object"));
+
+            EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(distance, new GUIContent("Default distance multiplier", "How many times is the distance between player and object longer than default"));
+
+            EditorGUILayout.Space(3f);
         }
 
         EditorGUILayout.PropertyField(enableLookAt, new GUIContent("Look at object", "Leave transform null, if you want player to look at interactable obj itself"));
@@ -42,6 +56,10 @@ public class InteractableEditor : Editor
         if (interactable.enableLookAt)
         {
             EditorGUILayout.PropertyField(objectToLookAt, new GUIContent("Transform", "Player will look at the center of this object during interaction"));
+
+            EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(lookSpeed, new GUIContent("Look speed", "Speed the player will look at the object"));
 
             EditorGUILayout.Space(3f);
         }
@@ -53,6 +71,69 @@ public class InteractableEditor : Editor
             EditorGUILayout.Space(3f);
         }
         else cursorOnWhenOnPosition.boolValue = false;
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+
+[CustomEditor(typeof(DialogueInteraction))]
+[CanEditMultipleObjects]
+public class DialogueInteractionEditor : Editor
+{
+    SerializedProperty positionToGo;
+    SerializedProperty objectToLookAt;
+    SerializedProperty enableLookAt;
+    SerializedProperty enableGoTo;
+    SerializedProperty moveSpeed;
+    SerializedProperty lookSpeed;
+    SerializedProperty distance;
+
+    private void OnEnable()
+    {
+        positionToGo = serializedObject.FindProperty("positionToGo");
+        objectToLookAt = serializedObject.FindProperty("objectToLookAt");
+        enableLookAt = serializedObject.FindProperty("enableLookAt");
+        enableGoTo = serializedObject.FindProperty("enableGoTo");
+        moveSpeed = serializedObject.FindProperty("moveSpeed");
+        lookSpeed = serializedObject.FindProperty("lookSpeed");
+        distance = serializedObject.FindProperty("distance");
+    }
+
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+        DrawDefaultInspector();
+        DialogueInteraction speaker = (DialogueInteraction)target;
+
+        EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
+
+        if (speaker.enableGoTo)
+        {
+            EditorGUILayout.PropertyField(positionToGo, new GUIContent("Transform", "Player will stand at this position during interaction"));
+
+            EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(moveSpeed, new GUIContent("Move speed", "Speed the player will have while moving to the object"));
+
+            EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(distance, new GUIContent("Default distance multiplier", "How many times is the distance between player and object longer than default"));
+
+            EditorGUILayout.Space(3f);
+        }
+
+        EditorGUILayout.PropertyField(enableLookAt, new GUIContent("Look at object", "Leave transform null, if you want player to look at interactable obj itself"));
+
+        if (speaker.enableLookAt)
+        {
+            EditorGUILayout.PropertyField(objectToLookAt, new GUIContent("Transform", "Player will look at the center of this object during interaction"));
+
+            EditorGUILayout.Space(3f);
+
+            EditorGUILayout.PropertyField(lookSpeed, new GUIContent("Look speed", "Speed the player will look at the object"));
+
+            EditorGUILayout.Space(3f);
+        }
 
         serializedObject.ApplyModifiedProperties();
     }
