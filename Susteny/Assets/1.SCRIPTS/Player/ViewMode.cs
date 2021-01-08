@@ -45,8 +45,10 @@ public class ViewMode : MonoBehaviour
     public void ToggleViewMode(GameObject item, bool b, bool interact = false, bool switchLockControlsAndCursorOn = true)
     {
         ViewingItem.Invoke(b);
+
         if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
         else fpsController.LockControlsCursorOff(true);
+
         viewingItem = b;
         interactingWithItem = interact;
         disablingFocus = !b;
@@ -57,7 +59,6 @@ public class ViewMode : MonoBehaviour
             viewedItem = item.gameObject;
             ChangeLayerToFocus();
         }
-
         else
         {
             // Zawsze po skończeniu oglądania, będziemy próbować ustawić layer itemu z powrotem na domyślny

@@ -11,6 +11,7 @@ public class PlayerActions : MonoBehaviour
     [HideInInspector] public ItemWorld grabbedItem;
     [HideInInspector] public ViewMode viewMode;
     [HideInInspector] public bool inventoryAllowed = true;
+    [HideInInspector] public bool quittingViewModeAllowed = true;
     [HideInInspector] public bool canInteract = true;
 
     [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
@@ -43,11 +44,11 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusOnObject(true);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null) grabbedItem.Ungrab();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null && quittingViewModeAllowed) grabbedItem.Ungrab();
 
         else if (Input.GetKeyDown(KeyCode.E) && grabbedItem != null) TakeToInventory(grabbedItem);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory) UngrabFromInventory();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory && quittingViewModeAllowed) UngrabFromInventory();
 
         else if (Input.GetKeyDown(KeyCode.E) && inventoryAllowed) SwitchInventoryUI();
     }
