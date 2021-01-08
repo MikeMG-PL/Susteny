@@ -102,6 +102,11 @@ public class SC_FPSController : MonoBehaviour
         cameraTransform = playerCamera.transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        StartCoroutine(PreventRotatingFPSController());
+
+        rotationX += playerCamera.transform.localEulerAngles.x;
+        rotationY += playerCamera.transform.localEulerAngles.y;
     }
 
     void Update()
@@ -183,7 +188,7 @@ public class SC_FPSController : MonoBehaviour
     void RotateToLookAt()
     {
         Quaternion lookAtQuaternion = Quaternion.LookRotation(posToLook - cameraTransform.position);
-        
+
         // !goingTo bo gracz zawsze musi najpierw być w odpowiednim miejscu, aby kamera przestała się obracać
         if (!goingTo
             && cameraTransform.localEulerAngles.y <= lookAtQuaternion.eulerAngles.y + angleTolerance
@@ -219,5 +224,15 @@ public class SC_FPSController : MonoBehaviour
     {
         if (euler > 180) return euler - 360;
         else return euler;
+    }
+
+    IEnumerator PreventRotatingFPSController()
+    {
+        while (true)
+        {
+            transform.localEulerAngles = Vector3.zero;
+            yield return new WaitForSecondsRealtime(1);
+            transform.localEulerAngles = Vector3.zero;
+        }
     }
 }
