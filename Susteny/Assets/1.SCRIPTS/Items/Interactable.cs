@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +16,7 @@ public class Interactable : MonoBehaviour
     [HideInInspector] public PlayerActions playerActions;
     [HideInInspector] public bool enableLookAt = false;
     [HideInInspector] public Transform objectToLookAt;
-    [HideInInspector] public bool enableGoingTo = false;
+    [HideInInspector] public bool enableGoTo = false;
     [HideInInspector] public Transform positionToGo;
     [HideInInspector] public bool cursorOnWhenOnPosition = true;
 
@@ -40,11 +38,6 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
-    {
-        TryToTriggerAction();
-    }
-
     void TriggerAction()
     {
         if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified");
@@ -54,11 +47,11 @@ public class Interactable : MonoBehaviour
                 if (objectToLookAt == null) playerActions.LookAt(transform.position);
                 else playerActions.LookAt(objectToLookAt.position);
 
-            if (enableGoingTo)
+            if (enableGoTo)
                 if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward));
                 else playerActions.GoToPosition(positionToGo.position);
 
-            if (cursorOnWhenOnPosition && (enableGoingTo || enableLookAt)) playerActions.showCursorOnPosition = true;
+            if (cursorOnWhenOnPosition && (enableGoTo || enableLookAt)) playerActions.showCursorOnPosition = true;
             StartedInteracting();
             interaction.Invoke();
         }
@@ -113,51 +106,5 @@ public class Interactable : MonoBehaviour
         gameObject.layer = 0;
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 0;
         changeLayer = false;
-    }
-}
-
-[CustomEditor(typeof(Interactable))]
-public class InteractableEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        Interactable interactable = (Interactable)target;
-        base.OnInspectorGUI();
-
-        EditorGUILayout.Space(5f);
-
-        if (interactable.enableGoingTo || interactable.enableLookAt)
-        {
-            interactable.cursorOnWhenOnPosition = EditorGUILayout.Toggle("Cursor on when player on position", interactable.cursorOnWhenOnPosition);
-            EditorGUILayout.Space(5f);
-        }
-        else interactable.cursorOnWhenOnPosition = false;
-
-        interactable.enableLookAt = EditorGUILayout.Toggle("Set custom object to look at", interactable.enableLookAt);
-        if (interactable.enableLookAt)
-        {
-            interactable.objectToLookAt = (Transform)EditorGUILayout.ObjectField(
-                new GUIContent("Transform", "Player will look at the center of this object during interaction"),
-                interactable.objectToLookAt, typeof(Transform), true);
-
-            EditorGUILayout.Space(5f);
-        }
-
-        EditorGUILayout.Space(5f);
-        interactable.enableGoingTo = EditorGUILayout.Toggle("Set position the player will stand", interactable.enableGoingTo);
-        if (interactable.enableGoingTo)
-        {
-            interactable.positionToGo = (Transform)EditorGUILayout.ObjectField(
-                new GUIContent("Transform", "Player will stand at this position during interaction"),
-                interactable.positionToGo, typeof(Transform), true);
-
-            EditorGUILayout.Space(5f);
-        }
-
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(interactable);
-            EditorSceneManager.MarkSceneDirty(interactable.gameObject.scene);
-        }
     }
 }

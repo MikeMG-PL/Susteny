@@ -1405,7 +1405,7 @@ MonoBehaviour:
   playerActions: {fileID: 0}
   enableLookAt: 0
   objectToLookAt: {fileID: 0}
-  enableGoingTo: 0
+  enableGoTo: 0
   positionToGo: {fileID: 0}
   cursorOnWhenOnPosition: 1
 --- !u!65 &218935276
@@ -4141,7 +4141,7 @@ MonoBehaviour:
   playerActions: {fileID: 0}
   enableLookAt: 0
   objectToLookAt: {fileID: 0}
-  enableGoingTo: 0
+  enableGoTo: 0
   positionToGo: {fileID: 0}
   cursorOnWhenOnPosition: 1
 --- !u!65 &644973245
@@ -9416,7 +9416,7 @@ MonoBehaviour:
   playerActions: {fileID: 0}
   enableLookAt: 0
   objectToLookAt: {fileID: 0}
-  enableGoingTo: 0
+  enableGoTo: 0
   positionToGo: {fileID: 0}
   cursorOnWhenOnPosition: 1
 --- !u!114 &1652378974
@@ -11088,7 +11088,7 @@ MonoBehaviour:
   playerActions: {fileID: 0}
   enableLookAt: 0
   objectToLookAt: {fileID: 0}
-  enableGoingTo: 0
+  enableGoTo: 0
   positionToGo: {fileID: 0}
   cursorOnWhenOnPosition: 0
 --- !u!135 &1832428847
@@ -11590,7 +11590,7 @@ MonoBehaviour:
   playerActions: {fileID: 0}
   enableLookAt: 0
   objectToLookAt: {fileID: 0}
-  enableGoingTo: 0
+  enableGoTo: 0
   positionToGo: {fileID: 0}
   cursorOnWhenOnPosition: 1
 --- !u!65 &1878754678
@@ -13612,6 +13612,16 @@ PrefabInstance:
       propertyPath: enableGoingTo
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: objectToLookAt
+      value: 
+      objectReference: {fileID: 7372492514650168056}
+    - target: {fileID: 1339190986310017790, guid: 66a306021ca3cf847b9a3f29fe26efba,
+        type: 3}
+      propertyPath: enableGoTo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2262319849322994420, guid: 66a306021ca3cf847b9a3f29fe26efba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13689,3 +13699,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a306021ca3cf847b9a3f29fe26efba, type: 3}
+--- !u!4 &7372492514650168056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2262319849322994420, guid: 66a306021ca3cf847b9a3f29fe26efba,
+    type: 3}
+  m_PrefabInstance: {fileID: 7372492514650168055}
+  m_PrefabAsset: {fileID: 0}

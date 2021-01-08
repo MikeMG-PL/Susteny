@@ -23,6 +23,7 @@ public class ViewMode : MonoBehaviour
     Transform cameraTransform;
     bool disablingFocus;
     bool enablingFocus;
+    bool startedInspecting;
 
     public static event Action<bool> ViewingItem;
 
@@ -103,6 +104,8 @@ public class ViewMode : MonoBehaviour
             InspectItem();
         }
 
+        else if (!viewingItem) startedInspecting = false;
+
         ManageFocus();
     }
 
@@ -111,9 +114,10 @@ public class ViewMode : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mousePos = Input.mousePosition;
+            startedInspecting = true;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && startedInspecting)
         {
             var delta = Input.mousePosition - mousePos;
             mousePos = Input.mousePosition;
