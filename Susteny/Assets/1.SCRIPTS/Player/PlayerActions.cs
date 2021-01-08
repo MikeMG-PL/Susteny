@@ -98,7 +98,7 @@ public class PlayerActions : MonoBehaviour
         fpsController.StopGoingTo();
         fpsController.StopLookingAt();
         if (interactingObject != null) interactingObject.GetComponent<Interactable>().StoppedInteracting();
-        viewMode.ToggleViewMode(null, false, interact: false, enableMovemenetAndCursorOff);
+        viewMode.ToggleViewMode(null, false, disableRotating: false, enableMovemenetAndCursorOff);
     }
 
     public void LookAt(Vector3 posToLook, float rotatingSpeed = 50f, float angleTolerance = 1f)

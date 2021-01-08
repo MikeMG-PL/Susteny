@@ -10,6 +10,7 @@ public class ViewMode : MonoBehaviour
     public Transform inventoryViewTransform;
     public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
+    public int paintEffectSpeed = 1;
 
     [HideInInspector] public GameObject viewedItem;
     [HideInInspector] public bool viewingItem;
@@ -19,11 +20,17 @@ public class ViewMode : MonoBehaviour
     Vector3 mousePos;
     FloatParameter focalLength;
     GameObject focusCamera;
+    PaintEffect postProccessCamPaintEffect;
+    PaintEffect mainCamPaintEffect;
     SC_FPSController fpsController;
     Transform cameraTransform;
+    bool increasingPaintEffect;
+    bool decreasingPaintEffect;
     bool disablingFocus;
     bool enablingFocus;
     bool startedInspecting;
+    int maxMainPaintIntensity;
+    int maxPostPaintIntensity;
 
     public static event Action<bool> ViewingItem;
 
@@ -31,8 +38,13 @@ public class ViewMode : MonoBehaviour
     {
         focusCamera = GetComponent<Player>().focusCamera;
         cameraTransform = GetComponent<Player>().camera.transform;
+        mainCamPaintEffect = cameraTransform.GetComponent<PaintEffect>();
+        postProccessCamPaintEffect = GetComponent<Player>().postProccessCamera.GetComponent<PaintEffect>();
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
         fpsController = GetComponent<SC_FPSController>();
+
+        maxMainPaintIntensity = mainCamPaintEffect.intensity;
+        maxPostPaintIntensity = postProccessCamPaintEffect.intensity;
     }
 
     /// <summary>
@@ -40,22 +52,24 @@ public class ViewMode : MonoBehaviour
     /// </summary>
     /// <param name="item">Oglądany obiekt, podczas wyłączania może przyjąć null.</param>
     /// <param name="b">Włącza/wyłącza viewMode.</param>
-    /// <param name="interact">Jeżeli true, włącza sam focus na obiekt, bez możliwości obracania przedmiotem.</param>
+    /// <param name="disableRotating">Jeżeli true, włącza sam focus na obiekt, bez możliwości obracania przedmiotem.</param>
     /// <param name="switchLockControlsAndCursorOn">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
-    public void ToggleViewMode(GameObject item, bool b, bool interact = false, bool switchLockControlsAndCursorOn = true)
+    public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOn = true)
     {
         ViewingItem.Invoke(b);
         if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
         else fpsController.LockControlsCursorOff(true);
         viewingItem = b;
-        interactingWithItem = interact;
+        interactingWithItem = disableRotating;
         disablingFocus = !b;
         enablingFocus = b;
+        decreasingPaintEffect = b;
+        increasingPaintEffect = !b;
+        temp = 0;
 
         if (b)
         {
             viewedItem = item.gameObject;
-            ChangeLayerToFocus();
         }
 
         else
@@ -66,7 +80,7 @@ public class ViewMode : MonoBehaviour
         }
     }
 
-    void ChangeLayerToFocus()
+    public void ChangeLayerToFocus()
     {
         viewedItem.layer = 9;
         foreach (Transform child in viewedItem.GetComponentsInChildren<Transform>())child.gameObject.layer = 9;
@@ -99,6 +113,8 @@ public class ViewMode : MonoBehaviour
 
     void Update()
     {
+        ManagePaintEffect();
+
         if (viewingItem && !interactingWithItem)
         {
             InspectItem();
@@ -106,7 +122,7 @@ public class ViewMode : MonoBehaviour
 
         else if (!viewingItem) startedInspecting = false;
 
-        ManageFocus();
+        if (!decreasingPaintEffect) ManageFocus();
     }
 
     void InspectItem()
@@ -148,6 +164,42 @@ public class ViewMode : MonoBehaviour
             }
 
             else focalLength.value += Time.deltaTime * focusSpeed;
+        }
+    }
+
+    float temp = 0;
+
+    void ManagePaintEffect()
+    {
+        if (decreasingPaintEffect)
+        {
+            if (mainCamPaintEffect.intensity <= 1)
+            {
+                mainCamPaintEffect.intensity = 1;
+                decreasingPaintEffect = false;
+                ChangeLayerToFocus();
+            }
+
+            else
+            {
+                temp += paintEffectSpeed * Time.deltaTime;
+                mainCamPaintEffect.intensity -= (int)temp;
+            }
+        }
+
+        if (increasingPaintEffect)
+        {
+            if (mainCamPaintEffect.intensity >= maxMainPaintIntensity)
+            {
+                mainCamPaintEffect.intensity = maxMainPaintIntensity;
+                increasingPaintEffect = false;
+            }
+
+            else
+            {
+                temp += paintEffectSpeed * Time.deltaTime;
+                mainCamPaintEffect.intensity += (int)temp;
+            }
         }
     }
 

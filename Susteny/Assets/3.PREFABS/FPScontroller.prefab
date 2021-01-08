@@ -294,6 +294,7 @@ MonoBehaviour:
   inventoryViewTransform: {fileID: 0}
   rotationSpeed: 0.25
   focusSpeed: 30
+  paintEffectSpeed: 10
   viewedItem: {fileID: 0}
   viewingItem: 0
   viewingFromInventory: 0

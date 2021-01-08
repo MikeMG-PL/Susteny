@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour
     void Update()
     {
         // Sytuacja poniżej występuje gdy skończyliśmy oglądać ten przedmiot i focus już się wyłączył lub gdy zaczęliśmy oglądać inny przedmiot
-        if (changeLayer && player.GetComponent<ViewMode>().DisablingFocusEnded() && playerActions.viewMode.viewedItem != gameObject)
+        if (changeLayer && playerActions.viewMode.viewedItem != gameObject)
         {
             ChangeLayerAfterViewing();
         }
