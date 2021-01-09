@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5698530657478050960}
   - component: {fileID: 5698530657478050963}
+  - component: {fileID: 291952400397682900}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -43,6 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a3ff62d26aaac4cb0847b83541ecd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  skipIntro: 0
-  skipPW: 0
+--- !u!114 &291952400397682900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698530657478050961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4706089f12a34f41b2dad786c8cb9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicCloud: {fileID: 6950253788498419069, guid: 76f60454998a4af45bdbf35f71b910e3,
+    type: 3}
+  cloudsParent: {fileID: 0}
+  cloudsNumber: 30
+  areaWidth: 700
+  cloudsScaleMin: 1
+  cloudsScaleMax: 5
+  cloudsHeightMin: 150
+  cloudsHeightMax: 350
+  cloudsSpeed: 0.07
+  cameraTransform: {fileID: 0}
