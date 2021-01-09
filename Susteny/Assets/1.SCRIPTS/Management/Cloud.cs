@@ -13,7 +13,7 @@ public class Cloud : MonoBehaviour
             new Vector3(cloudManager.cameraTransform.position.x, transform.position.y, cloudManager.cameraTransform.position.z)))
         {
             cloudManager.GenerateCloud();
-            //Destroy(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

@@ -87,6 +87,7 @@ public class DialogueInteractionEditor : Editor
     SerializedProperty moveSpeed;
     SerializedProperty lookSpeed;
     SerializedProperty distance;
+    SerializedProperty interactionHint;
 
     private void OnEnable()
     {
@@ -97,6 +98,7 @@ public class DialogueInteractionEditor : Editor
         moveSpeed = serializedObject.FindProperty("moveSpeed");
         lookSpeed = serializedObject.FindProperty("lookSpeed");
         distance = serializedObject.FindProperty("distance");
+        interactionHint = serializedObject.FindProperty("interactionHint");
     }
 
     public override void OnInspectorGUI()
@@ -104,6 +106,8 @@ public class DialogueInteractionEditor : Editor
         serializedObject.Update();
         DrawDefaultInspector();
         DialogueInteraction speaker = (DialogueInteraction)target;
+
+        EditorGUILayout.PropertyField(interactionHint, new GUIContent("Crosshair hover over NPC hint"));
 
         EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
 

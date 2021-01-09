@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     public CrosshairColor crosshairColor;
     public float interactionDistance = 3.5f;
     public bool canInteractDespiteJumping = false;
+    public string interactionHint;
 
     [HideInInspector] public bool isInteractedWith;
     [HideInInspector] public GameObject player;
