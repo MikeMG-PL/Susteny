@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] GameObject InventoryUI;
+    public GameObject InventoryUI;
 
     [HideInInspector] public GameObject interactingObject;
     [HideInInspector] public ItemWorld grabbedItem;

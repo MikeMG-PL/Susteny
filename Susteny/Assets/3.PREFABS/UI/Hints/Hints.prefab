@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3f338fe30a4d44a9301ae5d316b36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultInteractionHint: Interakcja [LPM]
-  interactionHint: {fileID: 7430624400896827150}
+  defaultNearCrosshairHint: Interakcja [LPM]
+  nearCrosshairHint: {fileID: 7430624400896827150}
 --- !u!1001 &7365971401067923514
 PrefabInstance:
   m_ObjectHideFlags: 0
