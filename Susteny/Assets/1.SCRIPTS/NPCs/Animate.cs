@@ -38,9 +38,18 @@ public class Animate : MonoBehaviour
         agent.isStopped = b;
 
         if (b)
+        {
             agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            animator.applyRootMotion = false;
+            if(agent.velocity.magnitude <= 0.01f)
+                animator.applyRootMotion = true;
+        }
         else
+        {
             agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            animator.applyRootMotion = true;
+        }
+            
     }
 
     void Update()
