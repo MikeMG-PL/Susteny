@@ -18,26 +18,34 @@ public class Animate : MonoBehaviour
     {
         if (GetComponent<WalkAround>() != null)
             animator.SetFloat("Forward", agent.speed / 2);
-        /*else
-        {
-            if (agent.remainingDistance <= 0.1f)
-            {
-                animator.SetFloat("Forward", 0);
-            }
-            else
-                animator.SetFloat("Forward", agent.velocity.magnitude / 2);
-        }*/
         else
+            animator.SetFloat("Forward", agent.velocity.magnitude / 2);
+    }
+
+    void ReachDestination()
+    {
+        if (GetComponent<WalkAround>() == null)
         {
-            if(agent.path.status != NavMeshPathStatus.PathComplete)
-                animator.SetFloat("Forward", agent.velocity.magnitude);
+            if ((agent.destination.magnitude - transform.position.magnitude) <= 0.2f)
+                StopAgent(true);
             else
-                animator.SetFloat("Forward", 0);
+                StopAgent(false);
         }
+    }
+
+    void StopAgent(bool b)
+    {
+        agent.isStopped = b;
+
+        if (b)
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        else
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
     void Update()
     {
         AnimateCharacter();
+        ReachDestination();
     }
 }

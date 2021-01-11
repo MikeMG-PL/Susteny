@@ -2743,11 +2743,11 @@ MonoBehaviour:
   player: {fileID: 0}
   playerActions: {fileID: 0}
   enableLookAt: 1
-  enableGoTo: 1
-  lookSpeed: 75
+  enableGoTo: 0
+  lookSpeed: 25
   moveSpeed: 6
   distance: 2
-  interactionHint: 
+  interactionHint: Rozmawiaj [LPM]
   objectToLookAt: {fileID: 0}
   positionToGo: {fileID: 0}
   interactionDistance: 5
