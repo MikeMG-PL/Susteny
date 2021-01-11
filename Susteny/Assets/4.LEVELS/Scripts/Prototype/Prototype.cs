@@ -41,9 +41,12 @@ public class Prototype : MonoBehaviour
             inventoryItem = o?.GetComponent<ItemID>().thisItem;
 
         if (!b && inventoryItem == item)
+        {
             viewCounter++;
+            inventoryItem = null;
+        }
 
-        if(viewCounter == 3)
+        if(viewCounter == 2)
             timeline5.Play();
     }
 }
