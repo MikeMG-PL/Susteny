@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   id: 4
-  name: '"Miasto kamienic"'
-  descprition: "Otw\xF3rz drzwi balkonowe. Klucz znajdziesz na stoliku przy schodach."
+  name: Miasto kamienic
+  descprition: "A wi\u0119c balkon, tak? Potrzebny mi klucz. Ciekawe, co tam zobacz\u0119..."
   isDone: 0
   isVisible: 1
   timeSpent: 420.58112

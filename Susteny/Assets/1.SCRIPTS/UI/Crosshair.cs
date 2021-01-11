@@ -13,8 +13,8 @@ public class Crosshair : MonoBehaviour
     GameObject player;
     GameObject lastHit;
     PlayerActions playerActions;
-    Color defaultColor;
-    Color interactColor = Color.green;
+    public Color defaultColor = new Color(0,0,0,0);
+    public Color interactColor = new Color(255, 0, 184, 255);
     RaycastHit _hit = new RaycastHit();
     Ray ray;
     Vector3 interactablePos;

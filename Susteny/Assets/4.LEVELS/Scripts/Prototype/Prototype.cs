@@ -5,13 +5,17 @@ using UnityEngine.Playables;
 
 public class Prototype : MonoBehaviour
 {
-    public TaskSystem tasks;
+    public TaskSystem taskSystem;
     public PlayableDirector timeline5;
+    public Item item;
+    /////////////////////////////////////
+    Item inventoryItem;
+    int viewCounter;
 
     /// SUBSCRIBING EVENTS ///
     void Awake()
     {
-        ViewMode.ViewingItem += OnViewModeSwitch;
+        ViewMode.ViewingDetails += OnViewModeSwitch;
     }
 
     /// UNSUBSCRIBING EVENTS ///
@@ -23,14 +27,26 @@ public class Prototype : MonoBehaviour
     /// FUNCTIONS ///
     public void AddTaskFromList(int i)
     {
-        tasks.addTask(tasks.availableTasks[i]);
+        taskSystem.addTask(taskSystem.availableTasks[i]);
     }
 
-    void OnViewModeSwitch(bool b)
+    public void HideTask(int i)
     {
-        if(!b)
+        taskSystem.hideTask($"{i}");
+    }
+
+    void OnViewModeSwitch(bool b, GameObject o)
+    {
+        if(b)
+            inventoryItem = o?.GetComponent<ItemID>().thisItem;
+
+        if (!b && inventoryItem == item)
         {
-            Debug.Log("Off");
+            viewCounter++;
+            inventoryItem = null;
         }
+
+        if(viewCounter == 2)
+            timeline5.Play();
     }
 }

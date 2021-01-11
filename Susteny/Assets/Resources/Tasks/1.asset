@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   id: 1
-  name: "\"Kobieta s\u0142abej wiary\""
-  descprition: "[opcjonalnie] \u015Aled\u017A Ann\u0119."
+  name: "Kobieta s\u0142abej wiary"
+  descprition: "Anna... ciekawe gdzie p\xF3jdzie."
   isDone: 0
   isVisible: 1
-  timeSpent: 471.8764
+  timeSpent: 3124.7703

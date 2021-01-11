@@ -204,9 +204,20 @@ MonoBehaviour:
         m_CallState: 2
   crosshairColor: 0
   interactionDistance: 3.5
+  canInteractDespiteJumping: 0
+  interactionHint: "Podnie\u015B [LPM]"
+  isInteractedWith: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerActions: {fileID: 0}
+  enableLookAt: 0
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 0
+  positionToGo: {fileID: 0}
+  cursorOnWhenOnPosition: 0
+  lookSpeed: 50
+  moveSpeed: 4
+  distance: 1
 --- !u!65 &1321024674468897285
 BoxCollider:
   m_ObjectHideFlags: 0

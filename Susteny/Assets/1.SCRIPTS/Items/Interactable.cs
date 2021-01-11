@@ -106,8 +106,8 @@ public class Interactable : MonoBehaviour
     // Jeżeli obiekt zostanie zniszczony (wzięty do ekwipunku etc.) layer może nie zostać zmieniony na czas
     void ChangeLayerAfterViewing()
     {
-        gameObject.layer = 0;
-        foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 0;
+        gameObject.layer = 12;
+        foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) child.gameObject.layer = 12;
         changeLayer = false;
     }
 }

@@ -82,7 +82,9 @@ public class DialogueInteraction : MonoBehaviour
             }
             else
             {
-                playerActions.StopFocusOnObject(true);
+                player.GetComponent<SC_FPSController>().StopGoingTo();
+                player.GetComponent<SC_FPSController>().StopLookingAt();
+                player.GetComponent<SC_FPSController>().LockControlsCursorOn(false);
                 DestroyButtons(d);
                 Conversation.Invoke(false, talkingGameObjectName, dialogueID);
             }

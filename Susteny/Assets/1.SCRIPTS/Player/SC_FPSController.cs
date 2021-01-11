@@ -87,7 +87,10 @@ public class SC_FPSController : MonoBehaviour
     {
         GetComponent<CharacterController>().enabled = b;
     }
-
+    public void QuittingViewModeAllowed(bool b)
+    {
+        GetComponent<PlayerActions>().quittingViewModeAllowed = b;
+    }
     public void ToggleCursor(bool b)
     {
         Cursor.visible = b;

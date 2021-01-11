@@ -29,9 +29,12 @@ public class ViewMode : MonoBehaviour
     bool startedInspecting;
 
     public static event Action<bool> ViewingItem;
+    public static event Action<bool, GameObject> ViewingDetails;
+    void V(bool arg1, GameObject arg2) {;} // Empty function - always listens to ViewingDetails event (no null exception)
 
     void Awake()
     {
+        ViewingDetails += V;
         focusCamera = GetComponent<Player>().focusCamera;
         cameraTransform = GetComponent<Player>().camera.transform;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
@@ -48,7 +51,8 @@ public class ViewMode : MonoBehaviour
     /// <param name="switchLockControlsAndCursorOnImmediately">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
     public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOnImmediately = true)
     {
-        ViewingItem.Invoke(b);
+        ViewingDetails.Invoke(b, item);
+        Debug.Log("Called!");
         if (switchLockControlsAndCursorOnImmediately)
         {
             fpsController.LockControlsCursorOn(b);
@@ -58,6 +62,7 @@ public class ViewMode : MonoBehaviour
             }
         }
         else fpsController.LockControlsCursorOff(true);
+
         viewingItem = b;
         interactingWithItem = disableRotating;
         disablingFocus = !b;
@@ -68,7 +73,6 @@ public class ViewMode : MonoBehaviour
             viewedItem = item.gameObject;
             ChangeLayerToFocus();
         }
-
         else
         {
             UIHints.HideCornerHints();
@@ -183,5 +187,10 @@ public class ViewMode : MonoBehaviour
     public bool DisablingFocusEnded()
     {
         return !disablingFocus;
+    }
+
+    void OnDisable()
+    {
+        ViewingDetails -= V;    
     }
 }

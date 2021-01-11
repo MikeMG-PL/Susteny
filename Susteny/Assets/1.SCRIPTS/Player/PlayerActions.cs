@@ -12,6 +12,7 @@ public class PlayerActions : MonoBehaviour
     [HideInInspector] public ItemWorld grabbedItem;
     [HideInInspector] public ViewMode viewMode;
     [HideInInspector] public bool inventoryAllowed = true;
+    [HideInInspector] public bool quittingViewModeAllowed = true;
     [HideInInspector] public bool canInteract = true;
     /// Gdy gracz stanie w wyznaczonym przez GoToPosition miejscu oraz gdy będzie patrzył na wyznaczony przez LookAt obiekt, jeśli true, włączy się kursor i wyłączy movement
     [HideInInspector] public bool showCursorOnPosition;
@@ -36,11 +37,11 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusOnObject(true);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null) grabbedItem.Ungrab();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null && quittingViewModeAllowed) grabbedItem.Ungrab();
 
         else if (Input.GetKeyDown(KeyCode.E) && grabbedItem != null) TakeToInventory(grabbedItem);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory) UngrabFromInventory();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory && quittingViewModeAllowed) UngrabFromInventory();
 
         else if (Input.GetKeyDown(KeyCode.E) && inventoryAllowed) SwitchInventoryUI();
     }

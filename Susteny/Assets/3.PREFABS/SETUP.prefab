@@ -1378,21 +1378,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.00024414062
       objectReference: {fileID: 0}
-    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8501735986512286124, guid: 39908803dc136e341a26d197c61c99b1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39908803dc136e341a26d197c61c99b1, type: 3}
 --- !u!1 &4175556957575156635 stripped
@@ -1775,6 +1760,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2154542875917503348}
     m_Modifications:
+    - target: {fileID: 291952400397682900, guid: 96c0fa1dae6cb964f820dd8a55596714,
+        type: 3}
+      propertyPath: cloudsParent
+      value: 
+      objectReference: {fileID: 8870550678664923439}
     - target: {fileID: 5698530657478050960, guid: 96c0fa1dae6cb964f820dd8a55596714,
         type: 3}
       propertyPath: m_LocalPosition.x
