@@ -6,14 +6,13 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject InventoryUI;
+    public UIHints UIHints;
 
     [HideInInspector] public GameObject interactingObject;
     [HideInInspector] public ItemWorld grabbedItem;
     [HideInInspector] public ViewMode viewMode;
     [HideInInspector] public bool inventoryAllowed = true;
     [HideInInspector] public bool canInteract = true;
-
-    [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
     /// Gdy gracz stanie w wyznaczonym przez GoToPosition miejscu oraz gdy będzie patrzył na wyznaczony przez LookAt obiekt, jeśli true, włączy się kursor i wyłączy movement
     [HideInInspector] public bool showCursorOnPosition;
 
@@ -35,12 +34,6 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
-        {
-            if (showCursorOnPosition) fpsController.ToggleCursor(true);
-            finishedGoingAndRotatingTowardsObject = true;
-        }
-
         if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusOnObject(true);
 
         else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null) grabbedItem.Ungrab();
@@ -103,13 +96,13 @@ public class PlayerActions : MonoBehaviour
 
     public void LookAt(Vector3 posToLook, float rotatingSpeed = 50f, float angleTolerance = 1f)
     {
-        finishedGoingAndRotatingTowardsObject = false;
+        viewMode.finishedGoingAndRotatingTowardsObject = false;
         GetComponent<SC_FPSController>().LookAt(posToLook, rotatingSpeed, angleTolerance);
     }
 
     public void GoToPosition(Vector3 posToGo, float goingSpeed = 4f, float positionTolerance = 0.1f)
     {
-        finishedGoingAndRotatingTowardsObject = false;
+        viewMode.finishedGoingAndRotatingTowardsObject = false;
         GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed, positionTolerance);
     }
 

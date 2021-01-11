@@ -34,6 +34,21 @@ public class InteractableEditor : Editor
         DrawDefaultInspector();
         Interactable interactable = (Interactable)target;
 
+        EditorGUILayout.Space(3f);
+        if (interactable.GetComponent<Hints>() == null)
+        {
+            if (GUILayout.Button("Add hints")) interactable.gameObject.AddComponent<Hints>();
+        }
+
+        else
+        {
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove hints", style)) DestroyImmediate(interactable.GetComponent<Hints>());
+        }
+        EditorGUILayout.Space(3f);
+
         EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
 
         if (interactable.enableGoTo)
@@ -107,7 +122,20 @@ public class DialogueInteractionEditor : Editor
         DrawDefaultInspector();
         DialogueInteraction speaker = (DialogueInteraction)target;
 
-        EditorGUILayout.PropertyField(interactionHint, new GUIContent("Crosshair hover over NPC hint"));
+        EditorGUILayout.Space(3f);
+        if (speaker.GetComponent<Hints>() == null)
+        {
+            if (GUILayout.Button("Add hints")) speaker.gameObject.AddComponent<Hints>();
+        }
+
+        else
+        {
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove hints", style)) DestroyImmediate(speaker.GetComponent<Hints>());
+        }
+        EditorGUILayout.Space(3f);
 
         EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
 
