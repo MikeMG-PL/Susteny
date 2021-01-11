@@ -13,7 +13,7 @@ public class UIHints : MonoBehaviour
     public Transform cornerHintsParent;
     public GameObject cornerHint;
 
-    List<TMP_Text> cornerHints = new List<TMP_Text>();
+    List<GameObject> cornerHints = new List<GameObject>();
 
     public void ShowCornerHints(List<string> hints)
     {
@@ -26,7 +26,7 @@ public class UIHints : MonoBehaviour
                 GameObject obj = Instantiate(cornerHint, cornerHintsParent);
                 TMP_Text objHint = obj.GetComponent<TMP_Text>();
                 objHint.text = hints[i];
-                cornerHints.Add(objHint);
+                cornerHints.Add(obj);
             }
         }
     }

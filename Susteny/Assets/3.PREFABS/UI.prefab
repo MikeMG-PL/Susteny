@@ -1221,6 +1221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NearCrosshairHint
       objectReference: {fileID: 0}
+    - target: {fileID: 4809183719886840615, guid: 2ca38d873764a5a40b638eaf73e90ded,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ca38d873764a5a40b638eaf73e90ded, type: 3}
 --- !u!224 &6560693723347998192 stripped

@@ -51,6 +51,7 @@ public class ViewMode : MonoBehaviour
     /// <param name="switchLockControlsAndCursorOnImmediately">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
     public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOnImmediately = true)
     {
+        ViewingItem.Invoke(b);
         ViewingDetails.Invoke(b, item);
         Debug.Log("Called!");
         if (switchLockControlsAndCursorOnImmediately)

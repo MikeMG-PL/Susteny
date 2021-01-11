@@ -1278,11 +1278,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2154542875585350575}
-    - target: {fileID: 3325052836187181273, guid: 39908803dc136e341a26d197c61c99b1,
-        type: 3}
-      propertyPath: hints
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3851696681917416620, guid: 39908803dc136e341a26d197c61c99b1,
         type: 3}
       propertyPath: m_IsActive
