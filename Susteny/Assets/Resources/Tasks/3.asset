@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   id: 3
-  name: '"Miasto kamienic"'
-  descprition: "Rozejrzyj si\u0119 wewn\u0105trz kamienicy."
+  name: Miasto kamienic
+  descprition: "Powinienem si\u0119 tu rozejrze\u0107."
   isDone: 0
   isVisible: 1
   timeSpent: 420.58112

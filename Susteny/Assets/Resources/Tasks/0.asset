@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 0
   m_EditorClassIdentifier: 
   id: 0
-  name: '"Miasto kamienic"'
-  descprition: "[E] - Obejrzyj ponownie zdj\u0119cie."
+  name: Miasto kamienic
+  descprition: "[E] Musz\u0119 zerkn\u0105\u0107 jeszcze raz na to zdj\u0119cie..."
   isDone: 0
   isVisible: 1
-  timeSpent: 464.34796
+  timeSpent: 3117.24
