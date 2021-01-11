@@ -899,9 +899,20 @@ MonoBehaviour:
         m_CallState: 2
   crosshairColor: 0
   interactionDistance: 2.35
+  canInteractDespiteJumping: 0
+  interactionHint: "Otw\xF3rz k\u0142\xF3dk\u0119 [LPM]"
+  isInteractedWith: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerActions: {fileID: 0}
+  enableLookAt: 0
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 0
+  positionToGo: {fileID: 0}
+  cursorOnWhenOnPosition: 1
+  lookSpeed: 50
+  moveSpeed: 4
+  distance: 1
 --- !u!114 &8026276012284092707
 MonoBehaviour:
   m_ObjectHideFlags: 0

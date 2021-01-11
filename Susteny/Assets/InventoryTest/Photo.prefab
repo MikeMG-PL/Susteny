@@ -205,7 +205,7 @@ MonoBehaviour:
   crosshairColor: 0
   interactionDistance: 3.5
   canInteractDespiteJumping: 0
-  interactionHint: 
+  interactionHint: "Podnie\u015B [LPM]"
   isInteractedWith: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}

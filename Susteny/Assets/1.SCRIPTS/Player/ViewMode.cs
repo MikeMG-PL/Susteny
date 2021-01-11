@@ -34,9 +34,11 @@ public class ViewMode : MonoBehaviour
 
     public static event Action<bool> ViewingItem;
     public static event Action<bool, GameObject> ViewingDetails;
+    void V(bool arg1, GameObject arg2) {;} // Empty function - always listens to ViewingDetails event (no null exception)
 
     void Awake()
     {
+        ViewingDetails += V;
         focusCamera = GetComponent<Player>().focusCamera;
         cameraTransform = GetComponent<Player>().camera.transform;
         mainCamPaintEffect = cameraTransform.GetComponent<PaintEffect>();
@@ -211,5 +213,10 @@ public class ViewMode : MonoBehaviour
     public bool DisablingFocusEnded()
     {
         return !disablingFocus;
+    }
+
+    void OnDisable()
+    {
+        ViewingDetails -= V;    
     }
 }

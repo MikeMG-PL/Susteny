@@ -9041,11 +9041,6 @@ PrefabInstance:
       propertyPath: cursorOnWhenOnPosition
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5250784449650326375, guid: 559298b258f6d174a905aeaa2e359b82,
-        type: 3}
-      propertyPath: interactionHint
-      value: "Podnie\u015B [LPM]"
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559298b258f6d174a905aeaa2e359b82, type: 3}
 --- !u!1 &1575547002
