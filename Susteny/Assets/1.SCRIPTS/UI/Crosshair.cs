@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Crosshair : MonoBehaviour
 {
     public Image crosshair;
+    public UIHints hints;
 
     new Camera camera;
     GameObject player;
@@ -17,6 +19,9 @@ public class Crosshair : MonoBehaviour
     Vector3 interactablePos;
     bool hitInteractable;
     float interactionDistance;
+
+    List<TMP_Text> allHints = new List<TMP_Text>();
+    string interactionHint = string.Empty;
 
     void Awake()
     {
@@ -41,64 +46,88 @@ public class Crosshair : MonoBehaviour
             if (ReferenceEquals(lastHit, _hit.transform.gameObject) && hitInteractable)
             {
                 interactablePos = _hit.transform.position; // Musimy zaktualizować pozycję przedmiotu (być może został przez gracza podniesiony, odłożony, itp.)
-                if (NotTooFar()) crosshair.color = interactColor;
-                else crosshair.color = defaultColor;
+                if (NotTooFar()) return;
+                else HitNothing();
             }
 
             // Jeśli *nadal* patrzymy na ten sam obiekt, ale nie jest on interactable
-            else if (ReferenceEquals(lastHit, _hit.transform.gameObject) && !hitInteractable) crosshair.color = defaultColor;
+            else if (ReferenceEquals(lastHit, _hit.transform.gameObject) && !hitInteractable) return;
 
             // Jeśli patrzymy na inny obiekt
             else
             {
                 lastHit = _hit.transform.gameObject;
 
-                if (HitInteractable(_hit.transform))
+                if (InteractableWasHit(_hit.transform))
                 {
-                    if (NotTooFar()) crosshair.color = interactColor;
-                    else crosshair.color = defaultColor;
+                    if (NotTooFar())
+                    {
+                        HitInteractable();
+                    }
+                    else HitNothing();
                 }
 
                 else
-                    crosshair.color = defaultColor;
+                    HitNothing();
             }
         }
 
         else
         {
             lastHit = null;
-            crosshair.color = defaultColor;
+            HitNothing();
         }
 
     }
 
     // Sprawdzanie czy natknięto się na przedmiot, lub osobę, z którą można wejść w interakcję
-    bool HitInteractable(Transform _transform)
+    bool InteractableWasHit(Transform _transform)
     {
         hitInteractable = true;
 
         if (_transform.GetComponent<Interactable>() != null && _transform.GetComponent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
         {
-            interactionDistance = _transform.GetComponent<Interactable>().interactionDistance;
+            Interactable interactable = _transform.GetComponent<Interactable>();
+            interactionDistance = interactable.interactionDistance;
             interactablePos = _transform.position;
+            interactionHint = interactable.interactionHint;
         }
 
         else if (_transform.GetComponent<ChildTriggerItemAction>() != null && _transform.GetComponentInParent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
         {
-            interactionDistance = _transform.GetComponentInParent<Interactable>().interactionDistance;
-            interactablePos = _transform.GetComponentInParent<Interactable>().transform.position;
+            Interactable interactable = _transform.GetComponentInParent<Interactable>();
+            interactionDistance = interactable.interactionDistance;
+            interactablePos = interactable.transform.position;
+            interactionHint = interactable.interactionHint;
         }
 
         else if (_transform.GetComponent<LoadDialogue>() != null)
         {
-            interactionDistance = _transform.GetComponent<DialogueInteraction>().interactionDistance;
+            DialogueInteraction npc = _transform.GetComponent<DialogueInteraction>();
+            interactionDistance = npc.interactionDistance;
             interactablePos = _transform.position;
+            interactionHint = npc.interactionHint;
         }
 
         else
             hitInteractable = false;
 
         return hitInteractable;
+    }
+
+    void HitInteractable()
+    {
+        crosshair.color = interactColor;
+        if (string.IsNullOrEmpty(interactionHint)) interactionHint = hints.defaultInteractionHint;
+        hints.interactionHint.text = interactionHint;
+        hints.interactionHint.gameObject.SetActive(true);
+    }
+
+    void HitNothing()
+    {
+        crosshair.color = defaultColor;
+        hints.interactionHint.gameObject.SetActive(false);
+        hints.interactionHint.text = string.Empty;
     }
 
     bool NotTooFar()

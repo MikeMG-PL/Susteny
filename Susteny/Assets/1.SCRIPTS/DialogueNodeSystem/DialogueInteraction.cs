@@ -17,6 +17,8 @@ public class DialogueInteraction : MonoBehaviour
     [HideInInspector] public float moveSpeed = 4;
     [HideInInspector] public float distance = 1;
 
+    [HideInInspector] public string interactionHint;
+
     [HideInInspector] public Transform objectToLookAt;
     [HideInInspector] public Transform positionToGo;
 

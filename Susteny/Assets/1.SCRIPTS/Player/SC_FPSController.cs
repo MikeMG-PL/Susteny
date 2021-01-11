@@ -137,7 +137,7 @@ public class SC_FPSController : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller
-        if (characterController.enabled && canMove) characterController.Move(moveDirection * Time.deltaTime);
+        if (characterController.enabled) characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
         if (canLook)

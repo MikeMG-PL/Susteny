@@ -5,6 +5,7 @@ using UnityEngine;
 public class CloudsManager : MonoBehaviour
 {
     public GameObject basicCloud;
+    public Transform cloudsParent;
     public int cloudsNumber;
     public float areaWidth;
 
@@ -14,29 +15,19 @@ public class CloudsManager : MonoBehaviour
     public float cloudsHeightMax;
     public float cloudsSpeed;
 
-    public void Start()
+    [HideInInspector] public Transform cameraTransform;
+
+    public void Awake()
     {
+        cameraTransform = Camera.main.transform;
+
         for (int i = 0; i < cloudsNumber; i++)
         {
-            generateCloud();
+            GenerateCloud();
         }
     }
 
-    public void Update()
-    {
-        foreach(GameObject cloud in GameObject.FindGameObjectsWithTag("Cloud"))
-        {
-            cloud.transform.position = new Vector3(cloud.transform.position.x + cloudsSpeed / cloud.transform.localScale.x, cloud.transform.position.y, cloud.transform.position.z);
-            if (areaWidth < Vector3.Distance(cloud.transform.position,
-                new Vector3(Camera.main.transform.position.x, cloud.transform.position.y, Camera.main.transform.position.z)))
-            {
-                Destroy(cloud.transform.parent.gameObject);
-                generateCloud();
-            }
-        }
-    }
-
-    private void generateCloud()
+    public void GenerateCloud()
     {
         float x = Random.Range(-areaWidth / 2, areaWidth / 2), z = Random.Range(-areaWidth / 2, areaWidth / 2);
         while (Mathf.PerlinNoise(x, z) > 0.5)
@@ -44,11 +35,11 @@ public class CloudsManager : MonoBehaviour
             x = Random.Range(-areaWidth / 2, areaWidth / 2);
             z = Random.Range(-areaWidth / 2, areaWidth / 2);
         }
-        Vector3 position = new Vector3(x + Camera.main.transform.position.x, Random.Range(cloudsHeightMin, cloudsHeightMax), z + Camera.main.transform.position.z);
-        GameObject cloudClone = Instantiate(basicCloud, position, new Quaternion());
+        Vector3 position = new Vector3(x + cameraTransform.position.x, Random.Range(cloudsHeightMin, cloudsHeightMax), z + cameraTransform.position.z);
+        GameObject cloudClone = Instantiate(basicCloud, position, Quaternion.identity, cloudsParent);
+        cloudClone.GetComponent<Cloud>().cloudManager = this;
         float scale = Random.Range(cloudsScaleMin, cloudsScaleMax);
         cloudClone.transform.localScale += new Vector3(scale, scale, scale);
-        cloudClone.transform.parent = transform;
         cloudClone.transform.localEulerAngles = new Vector3(Random.Range(0f, 20f), Random.Range(0f, 360f), Random.Range(0f, 20f));
     }
 }
