@@ -2704,6 +2704,7 @@ MonoBehaviour:
   timeline2: {fileID: 0}
   timeline3: {fileID: 0}
   timeline4: {fileID: 0}
+  timeline6: {fileID: 0}
 --- !u!114 &5389328372794970724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2746,6 +2747,7 @@ MonoBehaviour:
   lookSpeed: 75
   moveSpeed: 6
   distance: 2
+  interactionHint: 
   objectToLookAt: {fileID: 0}
   positionToGo: {fileID: 0}
   interactionDistance: 5
@@ -2759,7 +2761,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360

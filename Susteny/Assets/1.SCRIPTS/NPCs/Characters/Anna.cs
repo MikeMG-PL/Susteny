@@ -14,6 +14,7 @@ public class Anna : MonoBehaviour
     public PlayableDirector timeline2;
     public PlayableDirector timeline3;
     public PlayableDirector timeline4;
+    public PlayableDirector timeline6;
 
     void Awake()
     {
@@ -35,6 +36,9 @@ public class Anna : MonoBehaviour
     {
         if (other.transform == destinations[0])
             timeline2.Play();
+
+        if (other.transform == destinations[1])
+            timeline6.Play();
     }
 
     public void SetDialogue(int i)

@@ -18,15 +18,21 @@ public class Animate : MonoBehaviour
     {
         if (GetComponent<WalkAround>() != null)
             animator.SetFloat("Forward", agent.speed / 2);
-        else
+        /*else
         {
-
             if (agent.remainingDistance <= 0.1f)
             {
                 animator.SetFloat("Forward", 0);
             }
             else
                 animator.SetFloat("Forward", agent.velocity.magnitude / 2);
+        }*/
+        else
+        {
+            if(agent.path.status != NavMeshPathStatus.PathComplete)
+                animator.SetFloat("Forward", agent.velocity.magnitude);
+            else
+                animator.SetFloat("Forward", 0);
         }
     }
 
