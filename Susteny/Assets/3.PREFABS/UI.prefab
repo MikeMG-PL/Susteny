@@ -196,7 +196,7 @@ RectTransform:
   m_GameObject: {fileID: 937161404200709480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 937161402400094059}
   m_RootOrder: 1
@@ -693,7 +693,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "> Tre\u015B\u0107 taska"
+  m_Text: 
 --- !u!1 &9082036842170880020
 GameObject:
   m_ObjectHideFlags: 0

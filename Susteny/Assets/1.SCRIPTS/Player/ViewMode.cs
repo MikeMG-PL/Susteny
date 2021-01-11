@@ -61,7 +61,7 @@ public class ViewMode : MonoBehaviour
     {
         ViewingItem.Invoke(b);
         ViewingDetails.Invoke(b, item);
-
+        Debug.Log("Called!");
         if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
         else fpsController.LockControlsCursorOff(true);
 
