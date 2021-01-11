@@ -15,6 +15,7 @@ public class Anna : MonoBehaviour
     public PlayableDirector timeline3;
     public PlayableDirector timeline4;
     public PlayableDirector timeline6;
+    public PlayableDirector timeline7;
 
     void Awake()
     {
@@ -64,6 +65,11 @@ public class Anna : MonoBehaviour
                     if (!start)
                         timeline4.Play();
                     break;
+
+                case 3:
+                    if (!start)
+                        timeline7.Play();
+                    break;
             }
         }
     }
@@ -76,6 +82,11 @@ public class Anna : MonoBehaviour
     public void FinishPhotoViewing()
     {
         player.GetComponent<PlayerActions>().UngrabFromInventory();
+    }
+
+    public void RotateAnna(float r)
+    {
+        GetComponent<Animate>().RotateCharacter(Animate.Side.Right, 1, r);
     }
 
     // debugging part
