@@ -7,14 +7,15 @@ public class Prototype : MonoBehaviour
 {
     public TaskSystem taskSystem;
     public PlayableDirector timeline5;
-    public GameObject item;
+    public Item item;
     /////////////////////////////////////
-    int viewOffCounter;
+    Item inventoryItem;
+    int viewCounter;
 
     /// SUBSCRIBING EVENTS ///
     void Awake()
     {
-        ViewMode.ViewingItem += OnViewModeSwitch;
+        ViewMode.ViewingDetails += OnViewModeSwitch;
     }
 
     /// UNSUBSCRIBING EVENTS ///
@@ -34,12 +35,15 @@ public class Prototype : MonoBehaviour
         taskSystem.hideTask($"{i}");
     }
 
-    void OnViewModeSwitch(bool b)
+    void OnViewModeSwitch(bool b, GameObject o)
     {
-        if (!b)
-            viewOffCounter++;
+        if(b)
+            inventoryItem = o?.GetComponent<ItemID>().thisItem;
 
-        if (viewOffCounter == 3)
+        if (!b && inventoryItem == item)
+            viewCounter++;
+
+        if(viewCounter == 3)
             timeline5.Play();
     }
 }

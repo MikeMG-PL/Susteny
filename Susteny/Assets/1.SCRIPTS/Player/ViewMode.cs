@@ -33,6 +33,7 @@ public class ViewMode : MonoBehaviour
     int maxPostPaintIntensity;
 
     public static event Action<bool> ViewingItem;
+    public static event Action<bool, GameObject> ViewingDetails;
 
     void Awake()
     {
@@ -57,6 +58,7 @@ public class ViewMode : MonoBehaviour
     public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOn = true)
     {
         ViewingItem.Invoke(b);
+        ViewingDetails.Invoke(b, item);
 
         if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
         else fpsController.LockControlsCursorOff(true);
