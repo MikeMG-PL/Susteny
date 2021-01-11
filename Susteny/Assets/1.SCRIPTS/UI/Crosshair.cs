@@ -12,6 +12,7 @@ public class Crosshair : MonoBehaviour
     new Camera camera;
     GameObject player;
     GameObject lastHit;
+    PlayerActions playerActions;
     Color defaultColor;
     Color interactColor = Color.green;
     RaycastHit _hit = new RaycastHit();
@@ -20,12 +21,12 @@ public class Crosshair : MonoBehaviour
     bool hitInteractable;
     float interactionDistance;
 
-    List<TMP_Text> allHints = new List<TMP_Text>();
-    string interactionHint = string.Empty;
+    string nearCrosshairHint = string.Empty;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerActions = player.GetComponent<PlayerActions>();
         camera = player.GetComponent<Player>().camera;
 
         defaultColor = crosshair.color;
@@ -34,6 +35,13 @@ public class Crosshair : MonoBehaviour
     void Update()
     {
         LookRay();
+        ShowOrHideWorldHints();
+    }
+
+    void ShowOrHideWorldHints()
+    {
+        if (playerActions.canInteract && hitInteractable && !hints.nearCrosshairHint.gameObject.activeSelf) hints.nearCrosshairHint.gameObject.SetActive(true);
+        else if (!playerActions.canInteract && hints.nearCrosshairHint.gameObject.activeSelf) hints.nearCrosshairHint.gameObject.SetActive(false);
     }
 
     void LookRay()
@@ -46,7 +54,7 @@ public class Crosshair : MonoBehaviour
             if (ReferenceEquals(lastHit, _hit.transform.gameObject) && hitInteractable)
             {
                 interactablePos = _hit.transform.position; // Musimy zaktualizować pozycję przedmiotu (być może został przez gracza podniesiony, odłożony, itp.)
-                if (NotTooFar()) return;
+                if (NotTooFar()) HitInteractable();
                 else HitNothing();
             }
 
@@ -90,7 +98,7 @@ public class Crosshair : MonoBehaviour
             Interactable interactable = _transform.GetComponent<Interactable>();
             interactionDistance = interactable.interactionDistance;
             interactablePos = _transform.position;
-            interactionHint = interactable.interactionHint;
+            nearCrosshairHint = interactable.interactionHint;
         }
 
         else if (_transform.GetComponent<ChildTriggerItemAction>() != null && _transform.GetComponentInParent<Interactable>().crosshairColor != CrosshairColor.nonInteractive)
@@ -98,7 +106,7 @@ public class Crosshair : MonoBehaviour
             Interactable interactable = _transform.GetComponentInParent<Interactable>();
             interactionDistance = interactable.interactionDistance;
             interactablePos = interactable.transform.position;
-            interactionHint = interactable.interactionHint;
+            nearCrosshairHint = interactable.interactionHint;
         }
 
         else if (_transform.GetComponent<LoadDialogue>() != null)
@@ -106,7 +114,7 @@ public class Crosshair : MonoBehaviour
             DialogueInteraction npc = _transform.GetComponent<DialogueInteraction>();
             interactionDistance = npc.interactionDistance;
             interactablePos = _transform.position;
-            interactionHint = npc.interactionHint;
+            nearCrosshairHint = npc.interactionHint;
         }
 
         else
@@ -118,16 +126,26 @@ public class Crosshair : MonoBehaviour
     void HitInteractable()
     {
         crosshair.color = interactColor;
-        if (string.IsNullOrEmpty(interactionHint)) interactionHint = hints.defaultInteractionHint;
-        hints.interactionHint.text = interactionHint;
-        hints.interactionHint.gameObject.SetActive(true);
+        if (string.IsNullOrEmpty(nearCrosshairHint)) nearCrosshairHint = hints.defaultNearCrosshairHint;
+        hints.nearCrosshairHint.text = nearCrosshairHint;
+        if (playerActions.canInteract) hints.nearCrosshairHint.gameObject.SetActive(true);
     }
 
     void HitNothing()
     {
         crosshair.color = defaultColor;
-        hints.interactionHint.gameObject.SetActive(false);
-        hints.interactionHint.text = string.Empty;
+        hints.nearCrosshairHint.gameObject.SetActive(false);
+        hints.nearCrosshairHint.text = string.Empty;
+    }
+
+    void ShowHints()
+    {
+        hints.nearCrosshairHint.gameObject.SetActive(true);
+    }
+
+    void HideHints()
+    {
+        hints.nearCrosshairHint.gameObject.SetActive(false);
     }
 
     bool NotTooFar()
