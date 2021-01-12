@@ -14,14 +14,6 @@ public class Interactable : MonoBehaviour
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerScript;
     [HideInInspector] public PlayerActions playerActions;
-    [HideInInspector] public bool enableLookAt = false;
-    [HideInInspector] public Transform objectToLookAt;
-    [HideInInspector] public bool enableGoTo = false;
-    [HideInInspector] public Transform positionToGo;
-    [HideInInspector] public bool cursorOnWhenOnPosition = true;
-    [HideInInspector] public float lookSpeed = 50;
-    [HideInInspector] public float moveSpeed = 4;
-    [HideInInspector] public float distance = 1;
 
     bool changeLayer;
 
@@ -46,15 +38,7 @@ public class Interactable : MonoBehaviour
         if (interaction.GetPersistentEventCount() == 0 || interaction.GetPersistentTarget(0) == null) Debug.LogWarning("Action not specified");
         else
         {
-            if (enableLookAt)
-                if (objectToLookAt == null) playerActions.LookAt(transform.position, lookSpeed);
-                else playerActions.LookAt(objectToLookAt.position, lookSpeed);
-
-            if (enableGoTo)
-                if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
-                else playerActions.GoToPosition(positionToGo.position * distance, moveSpeed);
-
-            if (cursorOnWhenOnPosition && (enableGoTo || enableLookAt)) playerActions.showCursorOnPosition = true;
+            if (GetComponent<ManipulatePlayer>() != null) GetComponent<ManipulatePlayer>().Manipulate();
             StartedInteracting();
             interaction.Invoke();
         }
