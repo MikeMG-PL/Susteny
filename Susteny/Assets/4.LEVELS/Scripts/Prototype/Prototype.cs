@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class Prototype : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Prototype : MonoBehaviour
     /////////////////////////////////////
     Item inventoryItem;
     int viewCounter;
+
+    public int[] buildIndexes;
 
     /// SUBSCRIBING EVENTS ///
     void Awake()
