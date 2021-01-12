@@ -132,7 +132,7 @@ public class ViewMode : MonoBehaviour
     {
         if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
         {
-            if (playerActions.showCursorOnPosition)
+            if (viewingItem && playerActions.showCursorOnPosition)
             {
                 fpsController.ToggleCursor(true);
                 if (viewedItem.GetComponent<Hints>() != null) UIHints.ShowCornerHints(viewedItem.GetComponent<Hints>().cornerHints);
