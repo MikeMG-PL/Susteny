@@ -7,70 +7,49 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class InteractableEditor : Editor
 {
-    SerializedProperty positionToGo;
-    SerializedProperty objectToLookAt;
-    SerializedProperty cursorOnWhenOnPosition;
-    SerializedProperty enableLookAt;
-    SerializedProperty enableGoTo;
-    SerializedProperty moveSpeed;
-    SerializedProperty lookSpeed;
-    SerializedProperty distance;
-
-    private void OnEnable()
-    {
-        positionToGo = serializedObject.FindProperty("positionToGo");
-        objectToLookAt = serializedObject.FindProperty("objectToLookAt");
-        cursorOnWhenOnPosition = serializedObject.FindProperty("cursorOnWhenOnPosition");
-        enableLookAt = serializedObject.FindProperty("enableLookAt");
-        enableGoTo = serializedObject.FindProperty("enableGoTo");
-        moveSpeed = serializedObject.FindProperty("moveSpeed");
-        lookSpeed = serializedObject.FindProperty("lookSpeed");
-        distance = serializedObject.FindProperty("distance");
-    }
-
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
         DrawDefaultInspector();
         Interactable interactable = (Interactable)target;
 
-        EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
-
-        if (interactable.enableGoTo)
+        EditorGUILayout.Space(3f);
+        if (interactable.GetComponent<Hints>() == null)
         {
-            EditorGUILayout.PropertyField(positionToGo, new GUIContent("Transform", "Player will stand at this position during interaction"));
-
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(moveSpeed, new GUIContent("Move speed", "Speed the player will have while moving to the object"));
-
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(distance, new GUIContent("Default distance multiplier", "How many times is the distance between player and object longer than default"));
-
-            EditorGUILayout.Space(3f);
+            if (GUILayout.Button("Add hints")) interactable.gameObject.AddComponent<Hints>();
         }
 
-        EditorGUILayout.PropertyField(enableLookAt, new GUIContent("Look at object", "Leave transform null, if you want player to look at interactable obj itself"));
-
-        if (interactable.enableLookAt)
+        else
         {
-            EditorGUILayout.PropertyField(objectToLookAt, new GUIContent("Transform", "Player will look at the center of this object during interaction"));
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove hints", style))
+            {
+                if (EditorUtility.DisplayDialog("Delete hints?", "Are you sure you want to delete hints from this object?", "Yes", "No"))
+                    DestroyImmediate(interactable.GetComponent<Hints>());
+            }
+        }
+        EditorGUILayout.Space(3f);
 
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(lookSpeed, new GUIContent("Look speed", "Speed the player will look at the object"));
-
-            EditorGUILayout.Space(3f);
+        EditorGUILayout.Space(3f);
+        if (interactable.GetComponent<ManipulatePlayer>() == null)
+        {
+            if (GUILayout.Button("Add player position or rotation")) interactable.gameObject.AddComponent<ManipulatePlayer>();
         }
 
-
-        if (interactable.enableGoTo || interactable.enableLookAt)
+        else
         {
-            EditorGUILayout.PropertyField(cursorOnWhenOnPosition, new GUIContent("Cursor enabled after player on position"));
-            EditorGUILayout.Space(3f);
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove player position and rotation", style))
+            {
+                if (EditorUtility.DisplayDialog("Delete manipulation of player?", "Are you sure you want to player manipulation from this object?", "Yes", "No"))
+                    DestroyImmediate(interactable.GetComponent<ManipulatePlayer>());
+            }
         }
-        else cursorOnWhenOnPosition.boolValue = false;
+        EditorGUILayout.Space(3f);
 
         serializedObject.ApplyModifiedProperties();
     }
@@ -80,64 +59,49 @@ public class InteractableEditor : Editor
 [CanEditMultipleObjects]
 public class DialogueInteractionEditor : Editor
 {
-    SerializedProperty positionToGo;
-    SerializedProperty objectToLookAt;
-    SerializedProperty enableLookAt;
-    SerializedProperty enableGoTo;
-    SerializedProperty moveSpeed;
-    SerializedProperty lookSpeed;
-    SerializedProperty distance;
-    SerializedProperty interactionHint;
-
-    private void OnEnable()
-    {
-        positionToGo = serializedObject.FindProperty("positionToGo");
-        objectToLookAt = serializedObject.FindProperty("objectToLookAt");
-        enableLookAt = serializedObject.FindProperty("enableLookAt");
-        enableGoTo = serializedObject.FindProperty("enableGoTo");
-        moveSpeed = serializedObject.FindProperty("moveSpeed");
-        lookSpeed = serializedObject.FindProperty("lookSpeed");
-        distance = serializedObject.FindProperty("distance");
-        interactionHint = serializedObject.FindProperty("interactionHint");
-    }
-
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
         DrawDefaultInspector();
         DialogueInteraction speaker = (DialogueInteraction)target;
 
-        EditorGUILayout.PropertyField(interactionHint, new GUIContent("Crosshair hover over NPC hint"));
-
-        EditorGUILayout.PropertyField(enableGoTo, new GUIContent("Walk to the object", "If the transform is null, the default position will be chosen"));
-
-        if (speaker.enableGoTo)
+        EditorGUILayout.Space(3f);
+        if (speaker.GetComponent<Hints>() == null)
         {
-            EditorGUILayout.PropertyField(positionToGo, new GUIContent("Transform", "Player will stand at this position during interaction"));
-
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(moveSpeed, new GUIContent("Move speed", "Speed the player will have while moving to the object"));
-
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(distance, new GUIContent("Default distance multiplier", "How many times is the distance between player and object longer than default"));
-
-            EditorGUILayout.Space(3f);
+            if (GUILayout.Button("Add hints")) speaker.gameObject.AddComponent<Hints>();
         }
 
-        EditorGUILayout.PropertyField(enableLookAt, new GUIContent("Look at object", "Leave transform null, if you want player to look at interactable obj itself"));
-
-        if (speaker.enableLookAt)
+        else
         {
-            EditorGUILayout.PropertyField(objectToLookAt, new GUIContent("Transform", "Player will look at the center of this object during interaction"));
-
-            EditorGUILayout.Space(3f);
-
-            EditorGUILayout.PropertyField(lookSpeed, new GUIContent("Look speed", "Speed the player will look at the object"));
-
-            EditorGUILayout.Space(3f);
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove hints", style))
+            {
+                if (EditorUtility.DisplayDialog("Delete hints?", "Are you sure you want to delete hints from this object?", "Yes", "No"))
+                    DestroyImmediate(speaker.GetComponent<Hints>());
+            }
         }
+        EditorGUILayout.Space(3f);
+
+        EditorGUILayout.Space(3f);
+        if (speaker.GetComponent<ManipulatePlayer>() == null)
+        {
+            if (GUILayout.Button("Add player position or rotation")) speaker.gameObject.AddComponent<ManipulatePlayer>();
+        }
+
+        else
+        {
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.normal.textColor = new Color(0.6f, 0.0f, 0.2f);
+            style.fontStyle = FontStyle.Bold;
+            if (GUILayout.Button("Remove player position and rotation", style))
+            {
+                if (EditorUtility.DisplayDialog("Delete manipulation of player?", "Are you sure you want to player manipulation from this object?", "Yes", "No"))
+                    DestroyImmediate(speaker.GetComponent<ManipulatePlayer>());
+            }
+        }
+        EditorGUILayout.Space(3f);
 
         serializedObject.ApplyModifiedProperties();
     }

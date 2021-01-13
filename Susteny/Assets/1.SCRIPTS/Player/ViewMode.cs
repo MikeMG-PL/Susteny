@@ -8,29 +8,25 @@ using UnityEngine.Rendering.PostProcessing;
 public class ViewMode : MonoBehaviour
 {
     public Transform inventoryViewTransform;
+    public UIHints UIHints;
     public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
-    public int paintEffectSpeed = 1;
 
     [HideInInspector] public GameObject viewedItem;
     [HideInInspector] public bool viewingItem;
     [HideInInspector] public bool viewingFromInventory;
     [HideInInspector] public bool interactingWithItem;
+    [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
 
     Vector3 mousePos;
     FloatParameter focalLength;
     GameObject focusCamera;
-    PaintEffect postProccessCamPaintEffect;
-    PaintEffect mainCamPaintEffect;
     SC_FPSController fpsController;
     Transform cameraTransform;
-    bool increasingPaintEffect;
-    bool decreasingPaintEffect;
+    PlayerActions playerActions;
     bool disablingFocus;
     bool enablingFocus;
     bool startedInspecting;
-    int maxMainPaintIntensity;
-    int maxPostPaintIntensity;
 
     public static event Action<bool> ViewingItem;
     public static event Action<bool, GameObject> ViewingDetails;
@@ -41,13 +37,9 @@ public class ViewMode : MonoBehaviour
         ViewingDetails += V;
         focusCamera = GetComponent<Player>().focusCamera;
         cameraTransform = GetComponent<Player>().camera.transform;
-        mainCamPaintEffect = cameraTransform.GetComponent<PaintEffect>();
-        postProccessCamPaintEffect = GetComponent<Player>().postProccessCamera.GetComponent<PaintEffect>();
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
         fpsController = GetComponent<SC_FPSController>();
-
-        maxMainPaintIntensity = mainCamPaintEffect.intensity;
-        maxPostPaintIntensity = postProccessCamPaintEffect.intensity;
+        playerActions = GetComponent<PlayerActions>();
     }
 
     /// <summary>
@@ -56,29 +48,34 @@ public class ViewMode : MonoBehaviour
     /// <param name="item">Oglądany obiekt, podczas wyłączania może przyjąć null.</param>
     /// <param name="b">Włącza/wyłącza viewMode.</param>
     /// <param name="disableRotating">Jeżeli true, włącza sam focus na obiekt, bez możliwości obracania przedmiotem.</param>
-    /// <param name="switchLockControlsAndCursorOn">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
-    public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOn = true)
+    /// <param name="switchLockControlsAndCursorOnImmediately">Jeżeli true, podczas rozpoczęcia oglądania obiektu (b == true) wyłączy możliwość poruszania i włączy kursor, a po skończonym oglądaniu (b == false) na odwrót.</param>
+    public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOnImmediately = true)
     {
         ViewingItem.Invoke(b);
         ViewingDetails.Invoke(b, item);
-
-        if (switchLockControlsAndCursorOn) fpsController.LockControlsCursorOn(b);
+        if (switchLockControlsAndCursorOnImmediately)
+        {
+            fpsController.LockControlsCursorOn(b);
+            if (b && item.GetComponent<Hints>() != null)
+            {
+                UIHints.ShowCornerHints(item.GetComponent<Hints>().cornerHints);
+            }
+        }
         else fpsController.LockControlsCursorOff(true);
 
         viewingItem = b;
         interactingWithItem = disableRotating;
         disablingFocus = !b;
         enablingFocus = b;
-        decreasingPaintEffect = b;
-        increasingPaintEffect = !b;
-        temp = 0;
 
         if (b)
         {
             viewedItem = item.gameObject;
+            ChangeLayerToFocus();
         }
         else
         {
+            UIHints.HideCornerHints();
             // Zawsze po skończeniu oglądania, będziemy próbować ustawić layer itemu z powrotem na domyślny
             if (viewedItem != null && viewedItem.GetComponent<Interactable>() != null) viewedItem.GetComponent<Interactable>().ViewingEnded();
             viewedItem = null;
@@ -118,7 +115,7 @@ public class ViewMode : MonoBehaviour
 
     void Update()
     {
-        ManagePaintEffect();
+        CursorEnableAfterOnPosOrRot();
 
         if (viewingItem && !interactingWithItem)
         {
@@ -127,7 +124,20 @@ public class ViewMode : MonoBehaviour
 
         else if (!viewingItem) startedInspecting = false;
 
-        if (!decreasingPaintEffect) ManageFocus();
+        ManageFocus();
+    }
+
+    void CursorEnableAfterOnPosOrRot()
+    {
+        if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
+        {
+            if (viewingItem && playerActions.showCursorOnPosition)
+            {
+                fpsController.ToggleCursor(true);
+                if (viewedItem.GetComponent<Hints>() != null) UIHints.ShowCornerHints(viewedItem.GetComponent<Hints>().cornerHints);
+            }
+            finishedGoingAndRotatingTowardsObject = true;
+        }
     }
 
     void InspectItem()
@@ -169,42 +179,6 @@ public class ViewMode : MonoBehaviour
             }
 
             else focalLength.value += Time.deltaTime * focusSpeed;
-        }
-    }
-
-    float temp = 0;
-
-    void ManagePaintEffect()
-    {
-        if (decreasingPaintEffect)
-        {
-            if (mainCamPaintEffect.intensity <= 1)
-            {
-                mainCamPaintEffect.intensity = 1;
-                decreasingPaintEffect = false;
-                ChangeLayerToFocus();
-            }
-
-            else
-            {
-                temp += paintEffectSpeed * Time.deltaTime;
-                mainCamPaintEffect.intensity -= (int)temp;
-            }
-        }
-
-        if (increasingPaintEffect)
-        {
-            if (mainCamPaintEffect.intensity >= maxMainPaintIntensity)
-            {
-                mainCamPaintEffect.intensity = maxMainPaintIntensity;
-                increasingPaintEffect = false;
-            }
-
-            else
-            {
-                temp += paintEffectSpeed * Time.deltaTime;
-                mainCamPaintEffect.intensity += (int)temp;
-            }
         }
     }
 

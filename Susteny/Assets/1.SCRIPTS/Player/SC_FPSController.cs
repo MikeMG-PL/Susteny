@@ -54,13 +54,11 @@ public class SC_FPSController : MonoBehaviour
     {
         DialogueInteraction.Talking += LockControlsCursorOn;
         PlayerActions.BrowsingInventory += LockControlsCursorOn;
-        ViewMode.ViewingItem += LockControlsCursorOn;
     }
     void Unsubscribe()
     {
         DialogueInteraction.Talking -= LockControlsCursorOn;
         PlayerActions.BrowsingInventory -= LockControlsCursorOn;
-        ViewMode.ViewingItem -= LockControlsCursorOn;
     }
 
     public void UnfreezeLook(bool b)

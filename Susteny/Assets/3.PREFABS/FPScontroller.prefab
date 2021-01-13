@@ -260,12 +260,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryUI: {fileID: 4310431017799287784, guid: 32adb34fad4819a41aced96b1219cf5f,
     type: 3}
+  UIHintsObject: {fileID: 937161402828376836, guid: 39908803dc136e341a26d197c61c99b1,
+    type: 3}
   interactingObject: {fileID: 0}
   grabbedItem: {fileID: 0}
   viewMode: {fileID: 0}
   inventoryAllowed: 1
   canInteract: 1
-  finishedGoingAndRotatingTowardsObject: 1
   showCursorOnPosition: 0
 --- !u!114 &6911843426005422561
 MonoBehaviour:
@@ -292,13 +293,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryViewTransform: {fileID: 0}
+  UIHintsObject: {fileID: 937161402828376836, guid: 39908803dc136e341a26d197c61c99b1,
+    type: 3}
   rotationSpeed: 0.25
   focusSpeed: 30
-  paintEffectSpeed: 10
   viewedItem: {fileID: 0}
   viewingItem: 0
   viewingFromInventory: 0
   interactingWithItem: 0
+  finishedGoingAndRotatingTowardsObject: 1
 --- !u!82 &1824086119982000254
 AudioSource:
   m_ObjectHideFlags: 0

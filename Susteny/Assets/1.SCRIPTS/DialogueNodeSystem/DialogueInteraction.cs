@@ -10,18 +10,6 @@ public class DialogueInteraction : MonoBehaviour
     [HideInInspector] public GameObject player;
     [HideInInspector] public PlayerActions playerActions;
 
-    [HideInInspector] public bool enableLookAt = false;
-    [HideInInspector] public bool enableGoTo = false;
-
-    [HideInInspector] public float lookSpeed = 50;
-    [HideInInspector] public float moveSpeed = 4;
-    [HideInInspector] public float distance = 1;
-
-    [HideInInspector] public string interactionHint;
-
-    [HideInInspector] public Transform objectToLookAt;
-    [HideInInspector] public Transform positionToGo;
-
     /// Private properties ///
     GameObject panel;
     string talkingGameObjectName;
@@ -66,16 +54,7 @@ public class DialogueInteraction : MonoBehaviour
 
             if (b)
             {
-                if (enableLookAt)
-                    if (objectToLookAt == null) playerActions.LookAt(transform.position, lookSpeed);
-                    else playerActions.LookAt(objectToLookAt.position, lookSpeed);
-
-                if (enableGoTo)
-                    if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
-                    else playerActions.GoToPosition(positionToGo.position * distance, moveSpeed);
-
-
-
+                if (GetComponent<ManipulatePlayer>() != null) GetComponent<ManipulatePlayer>().Manipulate();
                 DestroyButtons(d);
                 d.Load(d.currentDialogueID);
                 d.ProcessDialogue();
