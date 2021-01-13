@@ -62398,13 +62398,14 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1603864263}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1666595708 stripped
+--- !u!114 &1666595708
 MonoBehaviour:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 1774080982686097189, guid: 9305a2288e35ed54dbbe6ff492806bc4,
     type: 3}
   m_PrefabInstance: {fileID: 2130878123}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a0c41a72f13a6d409e0770d8120af9c, type: 3}
@@ -63074,6 +63075,134 @@ Transform:
   m_Father: {fileID: 2130878124}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 25, z: 0}
+--- !u!1 &1924544277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8708988322038962841, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130878124}
+  - component: {fileID: 1924544281}
+  - component: {fileID: 1924544280}
+  - component: {fileID: 1924544279}
+  - component: {fileID: 1666595708}
+  - component: {fileID: 1924544278}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 1
+  m_IsActive: 1
+--- !u!114 &1924544278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4398aceb52bcab445b00f7c5f58d38db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interaction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1666595708}
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  crosshairColor: 0
+  interactionDistance: 3.5
+  canInteractDespiteJumping: 0
+  interactionHint: 
+  isInteractedWith: 0
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  playerActions: {fileID: 0}
+  enableLookAt: 0
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 0
+  positionToGo: {fileID: 0}
+  cursorOnWhenOnPosition: 0
+  lookSpeed: 50
+  moveSpeed: 4
+  distance: 1
+--- !u!65 &1924544279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7726374960479483975, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.031612515}
+  m_Center: {x: 0, y: 0, z: 0.48419386}
+--- !u!23 &1924544280
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6389003609707793653, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5c4b1765d687de64e9894ea05a5f76bf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1924544281
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3973208708305241259, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130878123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!43 &1925185210
 Mesh:
   m_ObjectHideFlags: 0
@@ -64265,6 +64394,11 @@ PrefabInstance:
       propertyPath: interaction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OpenDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 3860611000697321915, guid: 9305a2288e35ed54dbbe6ff492806bc4,
+        type: 3}
+      propertyPath: cursorOnWhenOnPosition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6389003609707793653, guid: 9305a2288e35ed54dbbe6ff492806bc4,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -64288,12 +64422,24 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7516381369257879241, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9305a2288e35ed54dbbe6ff492806bc4, type: 3}
---- !u!4 &2130878124 stripped
+--- !u!4 &2130878124
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 2262319849322994420, guid: 9305a2288e35ed54dbbe6ff492806bc4,
     type: 3}
   m_PrefabInstance: {fileID: 2130878123}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924544277}
+  m_LocalRotation: {x: -0, y: 0.2164396, z: -0, w: 0.97629607}
+  m_LocalPosition: {x: 41.62768, y: -34.143414, z: 64.743576}
+  m_LocalScale: {x: 1.9500002, y: 3.5, z: 0.10000001}
+  m_Children:
+  - {fileID: 1905654575}
+  - {fileID: 299493383}
+  - {fileID: 233757403}
+  m_Father: {fileID: 425464196}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 25, z: 0}
 --- !u!1001 &1824086119784905498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64640,7 +64786,7 @@ PrefabInstance:
     - target: {fileID: 323162146839139066, guid: 39908803dc136e341a26d197c61c99b1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -15.5998535
+      value: -15.599609
       objectReference: {fileID: 0}
     - target: {fileID: 586037646626439634, guid: 39908803dc136e341a26d197c61c99b1,
         type: 3}
