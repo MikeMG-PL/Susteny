@@ -172,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!220 &38745892
 LightProbeGroup:
   m_ObjectHideFlags: 0
@@ -1483,7 +1483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &508480811
 Transform:
   m_ObjectHideFlags: 0
@@ -3110,7 +3110,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341662265}
-  - component: {fileID: 1341662262}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -3118,19 +3117,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
   m_IsActive: 1
---- !u!114 &1341662262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341662261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e690fa8ecf4734942bddd18acf230014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 0
 --- !u!4 &1341662265
 Transform:
   m_ObjectHideFlags: 0
@@ -3882,7 +3868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1655565280
 Transform:
   m_ObjectHideFlags: 0
@@ -4142,10 +4128,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792158461}
+  - component: {fileID: 1792158465}
+  - component: {fileID: 1792158462}
   - component: {fileID: 1792158464}
   - component: {fileID: 1792158463}
-  - component: {fileID: 1792158462}
-  - component: {fileID: 1792158465}
   m_Layer: 0
   m_Name: Inner side
   m_TagString: Untagged
@@ -4236,9 +4222,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1792158460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f32c7d77540818429f738342db82f19, type: 3}
+  m_Script: {fileID: 11500000, guid: e690fa8ecf4734942bddd18acf230014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
+  defaultDestination: {x: 0, y: 0, z: 0}
+  alwaysReturnToLastPosition: 0
+  teleportCameraRotationY: 0
+  doorMode: 0
+  sceneName: 
+  sceneID: 0
 --- !u!1 &1833398217
 GameObject:
   m_ObjectHideFlags: 0
@@ -7685,7 +7678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1884769700
 Transform:
   m_ObjectHideFlags: 0
@@ -7769,9 +7762,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1884769699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d8282d556fc32409185024daac3c45, type: 3}
+  m_Script: {fileID: 11500000, guid: e690fa8ecf4734942bddd18acf230014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
+  defaultDestination: {x: 0, y: 0, z: 0}
+  alwaysReturnToLastPosition: 0
+  teleportCameraRotationY: 0
+  doorMode: 0
+  sceneName: 
+  sceneID: 0
 --- !u!43 &1922019795
 Mesh:
   m_ObjectHideFlags: 0
