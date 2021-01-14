@@ -32,4 +32,11 @@ public class ManipulatePlayer : MonoBehaviour
 
         if (cursorOnWhenOnPosition && (enableGoTo || enableLookAt)) playerActions.showCursorOnPosition = true;
     }
+
+    public void StopManipulating()
+    {
+        playerActions.GetComponent<SC_FPSController>().StopGoingTo();
+        playerActions.GetComponent<SC_FPSController>().StopLookingAt();
+        playerActions.GetComponent<SC_FPSController>().LockControlsCursorOn(false);
+    }
 }

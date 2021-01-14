@@ -6,27 +6,24 @@ using UnityEditor;
 
 [CustomEditor(typeof(Door))]
 [CanEditMultipleObjects]
-public class InnerDoorEditor : Editor
+public class DoorEditor : Editor
 {
     SerializedProperty defaultDestination;
-    SerializedProperty alwaysReturnToLastPosition;
-    SerializedProperty teleportCameraRotationY;
+    SerializedProperty teleportCameraRotation;
     SerializedProperty ID;
     SerializedProperty sceneName; SerializedProperty sceneID;
-    SerializedProperty doorType;
-    SerializedProperty sceneNameOrID;
-
-    Door.SceneState doorMode;
-    Door.NameOrID nameOrID;
+    SerializedProperty doorMode;
+    SerializedProperty nameOrID;
+    SerializedProperty rotType;
 
     private void OnEnable()
     {
         defaultDestination = serializedObject.FindProperty("defaultDestination");
-        alwaysReturnToLastPosition = serializedObject.FindProperty("alwaysReturnToLastPosition");
-        teleportCameraRotationY = serializedObject.FindProperty("teleportCameraRotationY");
+        teleportCameraRotation = serializedObject.FindProperty("teleportCameraRotation");
 
-        doorType = serializedObject.FindProperty("doorMode");
-        sceneNameOrID = serializedObject.FindProperty("nameOrID");
+        doorMode = serializedObject.FindProperty("doorMode");
+        nameOrID = serializedObject.FindProperty("nameOrID");
+        rotType = serializedObject.FindProperty("rotType");
 
         sceneName = serializedObject.FindProperty("sceneName"); sceneID = serializedObject.FindProperty("sceneID");
 
@@ -57,24 +54,19 @@ public class InnerDoorEditor : Editor
 
         EditorGUILayout.Space(1);
 
-        EditorGUILayout.PropertyField(ID, new GUIContent("ID", "Door ID - can be either different or equal on particular doorside"));        
+        EditorGUILayout.PropertyField(ID, new GUIContent("ID", "Door ID - can be either different or equal on particular doorside"));
 
         EditorGUILayout.Space(1);
 
-        EditorGUILayout.PropertyField(alwaysReturnToLastPosition, new GUIContent("Return to last position", "This is a simple door - you walk in, so when you walk out you go back to your previous position B)"));
+        EditorGUILayout.PropertyField(defaultDestination, new GUIContent("Opposite destination", "Player will always be teleported to this destination when walking through the door"));
 
         EditorGUILayout.Space(1);
 
-        // Conditional GUI draws (it's super cool! :O)
-        if (!instance.alwaysReturnToLastPosition)
-            EditorGUILayout.PropertyField(defaultDestination, new GUIContent("Opposite destination", "Player will always be teleported to this destination when walking through the door"));
+        EditorGUILayout.PropertyField(rotType);
+        if (rotType.intValue == (int)Door.RotationType.Default)
+            GUILayout.Label("Rotation of the destination point will be applied", style1);
         else
-            GUILayout.Label("Player will always return to his previous position he had in the moment of walking through the door. The default (eg. if none) is (0, 0, 0)", style1);
-
-        // Drawing GUI
-        EditorGUILayout.Space(1);
-
-        EditorGUILayout.PropertyField(teleportCameraRotationY, new GUIContent("Y rotation after walkthrough", "Define localEulerAngles.y of player camera after walking through the door"));
+            EditorGUILayout.PropertyField(teleportCameraRotation, new GUIContent("Teleport rotation", "Define localEulerAngles of player camera after walking through the door"));
 
         EditorGUILayout.Space(1);
 
@@ -82,14 +74,11 @@ public class InnerDoorEditor : Editor
 
         EditorGUILayout.Space(1);
 
-        GUILayout.Label("Door mode:", style1);
-
-        doorMode = (Door.SceneState)EditorGUILayout.EnumPopup(doorMode);
-        doorType.intValue = (int)doorMode;
+        EditorGUILayout.PropertyField(doorMode);
 
         EditorGUILayout.Space(1);
 
-        switch(doorMode)
+        switch ((Door.SceneState)doorMode.intValue)
         {
             case Door.SceneState.AllInOne:
                 GUILayout.Label("All in one? Cool, nothing to do there! :)", style1);
@@ -99,17 +88,15 @@ public class InnerDoorEditor : Editor
             case Door.SceneState.SingleLoad:
             case Door.SceneState.Unload:
 
-                GUILayout.Label("Either scene name or ID?", style1);
-                nameOrID = (Door.NameOrID)EditorGUILayout.EnumPopup(nameOrID);
+                EditorGUILayout.PropertyField(nameOrID);
 
-                if(nameOrID == Door.NameOrID.ID)
+                if (nameOrID.intValue == (int)Door.NameOrID.ID)
                     EditorGUILayout.PropertyField(sceneID, new GUIContent("Scene ID", "ID (Build Settings) of the scene you want to load/unload"));
                 else
                     EditorGUILayout.PropertyField(sceneName, new GUIContent("Scene name", "Name of the scene you want to load/unload"));
 
                 break;
         }
-        sceneNameOrID.intValue = (int)nameOrID;
 
         EditorGUILayout.Space(1);
 

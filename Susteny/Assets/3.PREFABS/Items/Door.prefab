@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 2.21, y: 3.4, z: 0.2}
   m_Children:
   - {fileID: 7269679820360225271}
+  - {fileID: 5666027001790494554}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,11 +52,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  defaultDestination: {x: 0, y: 0, z: 0}
+  unlocked: 1
+  usingDefaultRotation: 1
+  defaultDestination: {fileID: 0}
   alwaysReturnToLastPosition: 0
-  teleportCameraRotationY: 0
+  teleportCameraRotation: {x: 0, y: 0, z: 0}
   doorMode: 0
   nameOrID: 0
+  rotType: 0
   sceneName: 
   sceneID: 0
 --- !u!114 &661574705030705180
@@ -85,7 +89,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   crosshairColor: 0
-  interactionDistance: 3.5
+  interactionDistance: 5
   canInteractDespiteJumping: 0
   isInteractedWith: 0
   player: {fileID: 0}
@@ -117,14 +121,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13759d3e7b46234c911d05988d629ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableLookAt: 0
-  objectToLookAt: {fileID: 0}
-  enableGoTo: 0
-  positionToGo: {fileID: 7269679820360225271}
+  enableLookAt: 1
+  objectToLookAt: {fileID: 661574705030705169}
+  enableGoTo: 1
+  positionToGo: {fileID: 661574705030705169}
   lookSpeed: 50
   moveSpeed: 4
   distance: 1
-  cursorOnWhenOnPosition: 0
+  cursorOnWhenOnPosition: 1
 --- !u!33 &661574705030705170
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -185,6 +189,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6309521619486579445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5666027001790494554}
+  m_Layer: 0
+  m_Name: Spawn 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5666027001790494554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309521619486579445}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -6.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 661574705030705169}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6566744243749680539
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7269679820360225271}
   m_Layer: 0
-  m_Name: Transform
+  m_Name: Spawn 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6566744243749680539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.25}
+  m_LocalPosition: {x: 0, y: 0, z: 6.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 661574705030705169}
