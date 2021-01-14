@@ -28,8 +28,8 @@ public class Door : MonoBehaviour
 
     /// FUNCTIONS ///
 
-    void Interact()
+    public void Interact()
     {
-
+        
     }
 }
