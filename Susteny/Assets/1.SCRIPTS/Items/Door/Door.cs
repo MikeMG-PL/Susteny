@@ -51,13 +51,15 @@ public class Door : MonoBehaviour
         {
             GetComponent<Interactable>().crosshairColor = CrosshairColor.interactive;
             GetComponent<Hints>().nearCrosshairHint = "Otwórz [LPM]";
-            GetComponent<ManipulatePlayer>().enabled = true;
+            GetComponent<ManipulatePlayer>().enableGoTo = true;
+            GetComponent<ManipulatePlayer>().enableLookAt = true;
         }
         else
         {
             GetComponent<Interactable>().crosshairColor = CrosshairColor.defaultColor;
             GetComponent<Hints>().nearCrosshairHint = "Zamknięte";
-            GetComponent<ManipulatePlayer>().enabled = false;
+            GetComponent<ManipulatePlayer>().enableGoTo = false;
+            GetComponent<ManipulatePlayer>().enableLookAt = false;
         }
     }
 
@@ -85,15 +87,14 @@ public class Door : MonoBehaviour
         b = blackPanel.GetComponent<BlackScreen>();
         a.enabled = true;
         a.runtimeAnimatorController = b.Fade;
+        a.Play(0);
         character.GetComponent<PlayerActions>().inventoryAllowed = false;
         StartCoroutine(Entering());
     }
 
     IEnumerator Entering()
     {
-        WalkThrough?.Invoke(ID);
         yield return new WaitForSeconds(2f);
-        //a.runtimeAnimatorController = b.Unfade;
         Teleport();
     }
 
@@ -173,6 +174,7 @@ public class Door : MonoBehaviour
             yield return new WaitForEndOfFrame();
             a.runtimeAnimatorController = b.Unfade;
         }
+        WalkThrough?.Invoke(ID);
         StopCoroutine(CheckSceneLoad(nameOrID));
     }
 

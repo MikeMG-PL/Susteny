@@ -14,6 +14,7 @@ public class Prototype : MonoBehaviour
     /////////////////////////////////////
     Item inventoryItem;
     int viewCounter;
+    AudioSource audio;
 
     /// SUBSCRIBING EVENTS ///
     void Awake()
@@ -42,16 +43,10 @@ public class Prototype : MonoBehaviour
 
     void OnViewModeSwitch(bool b, GameObject o)
     {
-        if(b)
+        if (b)
             inventoryItem = o?.GetComponent<ItemID>().thisItem;
 
         if (!b && inventoryItem == item)
-        {
-            viewCounter++;
-            inventoryItem = null;
-        }
-
-        if(viewCounter == 2)
             timeline5.Play();
     }
 
@@ -63,5 +58,24 @@ public class Prototype : MonoBehaviour
             AddTaskFromList(3);
             timeline8.Play();
         }
+    }
+
+    public void FadeAmble()
+    {
+        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        StartCoroutine(Fade());
+    }
+
+    IEnumerator Fade()
+    {
+        var buffer = audio.volume;
+        while (audio.volume > 0)
+        {
+            audio.volume -= 0.00175f;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        audio.clip = null;
+        audio.volume = buffer + 0.075f;
+        StopCoroutine(Fade());
     }
 }
