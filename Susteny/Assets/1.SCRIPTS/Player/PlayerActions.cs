@@ -28,7 +28,7 @@ public class PlayerActions : MonoBehaviour
         fpsController = GetComponent<SC_FPSController>();
     }
 
-    void DisallowInventorySwitching(bool b)
+    public void DisallowInventorySwitching(bool b)
     {
         inventoryAllowed = !b;
     }

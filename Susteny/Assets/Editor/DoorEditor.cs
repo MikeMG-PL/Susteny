@@ -15,6 +15,7 @@ public class DoorEditor : Editor
     SerializedProperty doorMode;
     SerializedProperty nameOrID;
     SerializedProperty rotType;
+    SerializedProperty unlocked;
 
     private void OnEnable()
     {
@@ -28,6 +29,7 @@ public class DoorEditor : Editor
         sceneName = serializedObject.FindProperty("sceneName"); sceneID = serializedObject.FindProperty("sceneID");
 
         ID = serializedObject.FindProperty("ID");
+        unlocked = serializedObject.FindProperty("unlocked");
     }
 
     public override void OnInspectorGUI()
@@ -55,6 +57,10 @@ public class DoorEditor : Editor
         EditorGUILayout.Space(1);
 
         EditorGUILayout.PropertyField(ID, new GUIContent("ID", "Door ID - can be either different or equal on particular doorside"));
+
+        EditorGUILayout.Space(1);
+
+        EditorGUILayout.PropertyField(unlocked, new GUIContent("Door unlocked", "Can you walk through this doors?"));
 
         EditorGUILayout.Space(1);
 

@@ -84,6 +84,7 @@ public class SC_FPSController : MonoBehaviour
     public void AllEnabled(bool b)
     {
         GetComponent<CharacterController>().enabled = b;
+        GetComponent<PlayerActions>().DisallowInventorySwitching(!b);
     }
     public void QuittingViewModeAllowed(bool b)
     {

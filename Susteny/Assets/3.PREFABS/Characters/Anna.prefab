@@ -2661,6 +2661,7 @@ GameObject:
   - component: {fileID: 4470534741918289349}
   - component: {fileID: 7622399176745131337}
   - component: {fileID: 4242169574003065770}
+  - component: {fileID: 2758625805856699126}
   m_Layer: 12
   m_Name: Anna
   m_TagString: Untagged
@@ -2705,6 +2706,7 @@ MonoBehaviour:
   timeline3: {fileID: 0}
   timeline4: {fileID: 0}
   timeline6: {fileID: 0}
+  timeline7: {fileID: 0}
 --- !u!114 &5389328372794970724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2742,14 +2744,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerActions: {fileID: 0}
-  enableLookAt: 1
-  enableGoTo: 0
-  lookSpeed: 25
-  moveSpeed: 6
-  distance: 2
-  interactionHint: Rozmawiaj [LPM]
-  objectToLookAt: {fileID: 0}
-  positionToGo: {fileID: 0}
   interactionDistance: 5
 --- !u!195 &1396711330841436737
 NavMeshAgent:
@@ -2822,6 +2816,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edd4f7ac75d3b34ca947014412f9346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2758625805856699126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13759d3e7b46234c911d05988d629ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableLookAt: 1
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 0
+  positionToGo: {fileID: 0}
+  lookSpeed: 25
+  moveSpeed: 4
+  distance: 1
+  cursorOnWhenOnPosition: 0
 --- !u!1 &5660752834196912197
 GameObject:
   m_ObjectHideFlags: 0
