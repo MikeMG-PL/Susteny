@@ -49,7 +49,7 @@ public class TaskSystem : MonoBehaviour
     public void addTask(TaskScriptableObject newTask)
     {
         if (getTaskIterator(newTask.id) == -1) tasks.Add(newTask); // there is no task in the list with such Id
-        else Debug.LogError("Trying to add task with not unique Id!");
+        //else Debug.LogError("Trying to add task with not unique Id!");
     }
 
     // ---------------------- PRIVATE PART ---------------------- //

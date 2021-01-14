@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
     ManipulatePlayer manipulation;
 
     /// EVENTS ///
-    public static Action<int> WalkThrough;
+    public static event Action<int> WalkThrough;
 
     /// FUNCTIONS ///
     void Awake()
@@ -51,11 +51,13 @@ public class Door : MonoBehaviour
         {
             GetComponent<Interactable>().crosshairColor = CrosshairColor.interactive;
             GetComponent<Hints>().nearCrosshairHint = "Otwórz [LPM]";
+            GetComponent<ManipulatePlayer>().enabled = true;
         }
         else
         {
             GetComponent<Interactable>().crosshairColor = CrosshairColor.defaultColor;
             GetComponent<Hints>().nearCrosshairHint = "Zamknięte";
+            GetComponent<ManipulatePlayer>().enabled = false;
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
@@ -13,18 +14,18 @@ public class Prototype : MonoBehaviour
     Item inventoryItem;
     int viewCounter;
 
-    public int[] buildIndexes;
-
     /// SUBSCRIBING EVENTS ///
     void Awake()
     {
         ViewMode.ViewingDetails += OnViewModeSwitch;
+        Door.WalkThrough += WalkThroughDoor;
     }
 
     /// UNSUBSCRIBING EVENTS ///
     void OnDisable()
     {
-        
+        ViewMode.ViewingDetails -= OnViewModeSwitch;
+        Door.WalkThrough -= WalkThroughDoor;
     }
 
     /// FUNCTIONS ///
@@ -51,5 +52,14 @@ public class Prototype : MonoBehaviour
 
         if(viewCounter == 2)
             timeline5.Play();
+    }
+
+    void WalkThroughDoor(int ID)
+    {
+        if (ID == 0)
+        {
+            foreach (TaskScriptableObject so in taskSystem.tasks) taskSystem.hideTask(so.id.ToString());
+            AddTaskFromList(3);
+        }
     }
 }
