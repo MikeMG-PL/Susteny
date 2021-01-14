@@ -9,6 +9,7 @@ public class Prototype : MonoBehaviour
 {
     public TaskSystem taskSystem;
     public PlayableDirector timeline5;
+    public PlayableDirector timeline8;
     public Item item;
     /////////////////////////////////////
     Item inventoryItem;
@@ -60,6 +61,7 @@ public class Prototype : MonoBehaviour
         {
             foreach (TaskScriptableObject so in taskSystem.tasks) taskSystem.hideTask(so.id.ToString());
             AddTaskFromList(3);
+            timeline8.Play();
         }
     }
 }
