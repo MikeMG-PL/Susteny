@@ -42,11 +42,13 @@ public class Prototype : MonoBehaviour
 
     void OnViewModeSwitch(bool b, GameObject o)
     {
-        if (b)
-            inventoryItem = o?.GetComponent<ItemID>().thisItem;
+        if (b && o != null && o.GetComponent<ItemID>() != null)
+            inventoryItem = o.GetComponent<ItemID>().thisItem;
 
         if (!b && inventoryItem == item)
+        {
             timeline5.Play();
+        }
     }
 
     void WalkThroughDoor(int ID)

@@ -632,8 +632,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.9698754}
-  m_Center: {x: 0, y: 0, z: -0.0150623545}
+  m_Size: {x: 1, y: 1, z: 0.64564526}
+  m_Center: {x: 0, y: 0, z: -0.17717749}
 --- !u!1 &6884795588166923593
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +784,8 @@ GameObject:
   - component: {fileID: 7726374960479483975}
   - component: {fileID: 1339190986310017790}
   - component: {fileID: 8026276012284092707}
+  - component: {fileID: 3834534420530037663}
+  - component: {fileID: 5245520757169432961}
   m_Layer: 0
   m_Name: Padlock
   m_TagString: Untagged
@@ -869,8 +871,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.031612515}
-  m_Center: {x: 0, y: 0, z: 0.48419386}
+  m_Size: {x: 1, y: 1, z: 0.2959329}
+  m_Center: {x: 0, y: 0, z: 0.35203367}
 --- !u!114 &1339190986310017790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,7 +889,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1339190986310017790}
-        m_MethodName: Interact
+        m_MethodName: FocusOnInteractable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -900,19 +902,10 @@ MonoBehaviour:
   crosshairColor: 0
   interactionDistance: 2.35
   canInteractDespiteJumping: 0
-  interactionHint: "Otw\xF3rz k\u0142\xF3dk\u0119 [LPM]"
   isInteractedWith: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerActions: {fileID: 0}
-  enableLookAt: 0
-  objectToLookAt: {fileID: 0}
-  enableGoTo: 0
-  positionToGo: {fileID: 0}
-  cursorOnWhenOnPosition: 1
-  lookSpeed: 50
-  moveSpeed: 4
-  distance: 1
 --- !u!114 &8026276012284092707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,3 +918,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347c867d4966f30468f8ba7ffe6537bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3834534420530037663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708988322038962841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13759d3e7b46234c911d05988d629ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableLookAt: 1
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 1
+  positionToGo: {fileID: 0}
+  lookSpeed: 50
+  moveSpeed: 4
+  distance: 1
+  cursorOnWhenOnPosition: 1
+--- !u!114 &5245520757169432961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708988322038962841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8350c81972de6e40bfcaef6a1a9061a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearCrosshairHint: "Otw\xF3rz [LPM]"
+  cornerHints:
+  - "Odejd\u017A [PPM]"
+  - Otwieraj zamek [LPM]

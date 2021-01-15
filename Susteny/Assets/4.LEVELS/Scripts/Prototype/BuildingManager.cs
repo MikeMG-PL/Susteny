@@ -1,20 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using System.Linq;
 
-public class BuildingDialogueManager : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
     public LoadDialogue buddy;
     public LoadDialogue Vlad;
+    public PlayableDirector timeline11;
+    public AudioClip Seamstress;
+    AudioSource playerSource;
 
     void Awake()
     {
-        DialogueInteraction.Conversation += ConversationStart;    
+        DialogueInteraction.Conversation += ConversationStart;
+        Padlock.PadlockUnlocked += UnlockedPadlock;
+        playerSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
     }
 
     void OnDisable()
     {
         DialogueInteraction.Conversation -= ConversationStart;
+        Padlock.PadlockUnlocked -= UnlockedPadlock;
     }
 
     public void SetDialogue(LoadDialogue character, int i)
@@ -37,7 +46,7 @@ public class BuildingDialogueManager : MonoBehaviour
                         SetDialogue(buddy, 1);
                         buddy.GetComponent<ManipulatePlayer>().enableGoTo = false;
                     }
-                        break;
+                    break;
             }
         }
         if (objSpeakerName == "Vlad")
@@ -54,5 +63,29 @@ public class BuildingDialogueManager : MonoBehaviour
                     }
                     break;
             }
+    }
+
+    void UnlockedPadlock(bool b)
+    {
+        if (b)
+        {
+            playerSource.clip = Seamstress;
+            playerSource.time = 33.5f;
+            playerSource.Play();
+            StartCoroutine(Fade());
+            timeline11.Play();
+        }
+    }
+
+    IEnumerator Fade()
+    {
+        playerSource.volume = 0;
+        while (playerSource.volume <= 0.225f)
+        {
+            playerSource.volume += 0.00175f;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        playerSource.volume = 0.225f;
+        StopCoroutine(Fade());
     }
 }
