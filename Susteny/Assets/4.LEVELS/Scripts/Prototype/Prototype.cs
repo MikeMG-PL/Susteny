@@ -13,8 +13,7 @@ public class Prototype : MonoBehaviour
     public Item item;
     /////////////////////////////////////
     Item inventoryItem;
-    int viewCounter;
-    AudioSource audio;
+    AudioSource audioSource;
 
     /// SUBSCRIBING EVENTS ///
     void Awake()
@@ -62,20 +61,20 @@ public class Prototype : MonoBehaviour
 
     public void FadeAmble()
     {
-        audio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        audioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         StartCoroutine(Fade());
     }
 
     IEnumerator Fade()
     {
-        var buffer = audio.volume;
-        while (audio.volume > 0)
+        var buffer = audioSource.volume;
+        while (audioSource.volume > 0)
         {
-            audio.volume -= 0.00175f;
+            audioSource.volume -= 0.00175f;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        audio.clip = null;
-        audio.volume = buffer + 0.075f;
+        audioSource.clip = null;
+        audioSource.volume = buffer + 0.075f;
         StopCoroutine(Fade());
     }
 }

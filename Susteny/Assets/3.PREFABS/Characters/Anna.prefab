@@ -1467,7 +1467,7 @@ GameObject:
   - component: {fileID: 5146915040707783183}
   - component: {fileID: 6001745471336911490}
   - component: {fileID: 576970065884663018}
-  - component: {fileID: 5692991308426827406}
+  - component: {fileID: 6255294266759671189}
   m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
@@ -1996,8 +1996,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4240663527232289118}
   m_Mesh: {fileID: 0}
---- !u!64 &5692991308426827406
-MeshCollider:
+--- !u!136 &6255294266759671189
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2006,10 +2006,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Radius: 0.26999998
+  m_Height: 2.141916
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.070955075, z: 0}
 --- !u!1 &4253879063997221066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,6 +2662,7 @@ GameObject:
   - component: {fileID: 7622399176745131337}
   - component: {fileID: 4242169574003065770}
   - component: {fileID: 2758625805856699126}
+  - component: {fileID: 3127301885294489839}
   m_Layer: 12
   m_Name: Anna
   m_TagString: Untagged
@@ -2836,6 +2837,20 @@ MonoBehaviour:
   moveSpeed: 4
   distance: 1
   cursorOnWhenOnPosition: 0
+--- !u!114 &3127301885294489839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8350c81972de6e40bfcaef6a1a9061a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearCrosshairHint: Rozmawiaj [LPM]
+  cornerHints: []
 --- !u!1 &5660752834196912197
 GameObject:
   m_ObjectHideFlags: 0

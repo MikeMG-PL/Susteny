@@ -154,11 +154,7 @@ public class Door : MonoBehaviour
                 yield return new WaitForEndOfFrame();
                 a.runtimeAnimatorController = a.runtimeAnimatorController;
             }
-
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneID));
-            Warp();
-            yield return new WaitForEndOfFrame();
-            a.runtimeAnimatorController = b.Unfade;
         }
         else
         {
@@ -168,12 +164,14 @@ public class Door : MonoBehaviour
                 yield return new WaitForEndOfFrame();
                 a.runtimeAnimatorController = a.runtimeAnimatorController;
             }
-
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-            Warp();
-            yield return new WaitForEndOfFrame();
-            a.runtimeAnimatorController = b.Unfade;
+            
         }
+
+        Warp();
+        yield return new WaitForEndOfFrame();
+        LightProbes.TetrahedralizeAsync();
+        a.runtimeAnimatorController = b.Unfade;
         WalkThrough?.Invoke(ID);
         StopCoroutine(CheckSceneLoad(nameOrID));
     }

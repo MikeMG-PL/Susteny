@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3365021355302154253}
   - component: {fileID: 5250784449650326375}
   - component: {fileID: 2819193019151282355}
+  - component: {fileID: 4819815675490019115}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -95,10 +96,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1.1332932
+  m_Height: 11.434124
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.63329315}
 --- !u!114 &5250784449650326375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +128,8 @@ MonoBehaviour:
         m_CallState: 2
   crosshairColor: 0
   interactionDistance: 3.5
+  canInteractDespiteJumping: 0
+  isInteractedWith: 0
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerActions: {fileID: 0}
@@ -146,6 +149,20 @@ MonoBehaviour:
   action: 1
   amount: 1
   grabbed: 0
+--- !u!114 &4819815675490019115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811378431932966367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8350c81972de6e40bfcaef6a1a9061a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearCrosshairHint: Zabierz [LPM]
+  cornerHints: []
 --- !u!1 &2989949784592890118
 GameObject:
   m_ObjectHideFlags: 0
