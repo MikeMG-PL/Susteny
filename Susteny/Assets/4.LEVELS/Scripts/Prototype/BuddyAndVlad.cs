@@ -19,7 +19,6 @@ public class BuddyAndVlad : MonoBehaviour
             {
                 case BuddyOrVlad.Buddy:
                     timeline9.Play();
-                    
                     break;
 
                 case BuddyOrVlad.Vlad:

@@ -11,6 +11,8 @@ public class BuildingManager : MonoBehaviour
     public LoadDialogue Vlad;
     public PlayableDirector timeline11;
     public AudioClip Seamstress;
+    public Door doorToUnlock;
+    Inventory inv;
     AudioSource playerSource;
 
     void Awake()
@@ -18,6 +20,7 @@ public class BuildingManager : MonoBehaviour
         DialogueInteraction.Conversation += ConversationStart;
         Padlock.PadlockUnlocked += UnlockedPadlock;
         playerSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        inv = playerSource.GetComponent<Inventory>();
     }
 
     void OnDisable()
@@ -68,13 +71,16 @@ public class BuildingManager : MonoBehaviour
     void UnlockedPadlock(bool b)
     {
         if (b)
-        {
-            playerSource.clip = Seamstress;
-            playerSource.time = 33.5f;
-            playerSource.Play();
-            StartCoroutine(Fade());
             timeline11.Play();
-        }
+    }
+
+    public void FadeSong()
+    {
+        playerSource.clip = Seamstress;
+        playerSource.time = 33.5f;
+        playerSource.Play();
+
+        StartCoroutine(Fade());
     }
 
     IEnumerator Fade()
@@ -87,5 +93,21 @@ public class BuildingManager : MonoBehaviour
         }
         playerSource.volume = 0.225f;
         StopCoroutine(Fade());
+    }
+
+    bool unlocked;
+    void Update()
+    {
+        if (inv.GetInventory().Count > 0 && !unlocked)
+        {
+            for (int i = 0; i < inv.GetInventory().Count; i++)
+            {
+                if (inv.GetInventory()[i].item.name == "Klucz")
+                {
+                    doorToUnlock.unlocked = true;
+                    unlocked = true;
+                }
+            }
+        }
     }
 }

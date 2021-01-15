@@ -63,19 +63,13 @@ public class Door : MonoBehaviour
         }
     }
 
+    public void OpenDoor(bool b)
+    {
+        unlocked = b;
+    }
+
     public void Interact()
     {
-        /// Toggle viewmode off
-        /// Invoke event
-        /// Blackout
-        /// Freeze CharacterController
-        /// Register last position
-        /// Load/unload scene on condition
-        /// Teleport to opposite destination/last destination (don't override last position!!!)
-        /// Rotate player
-        /// Unfreeze CharacterController
-
-
         if (unlocked)
             FadeIn();
     }
@@ -89,6 +83,7 @@ public class Door : MonoBehaviour
         a.runtimeAnimatorController = b.Fade;
         a.Play(0);
         character.GetComponent<PlayerActions>().inventoryAllowed = false;
+        character.GetComponent<PlayerActions>().LockInteracting(true);
         StartCoroutine(Entering());
     }
 
@@ -142,6 +137,7 @@ public class Door : MonoBehaviour
 
         }
         character.GetComponent<PlayerActions>().inventoryAllowed = true;
+        character.GetComponent<PlayerActions>().LockInteracting(false);
     }
 
     IEnumerator CheckSceneLoad(NameOrID nameOrID)
@@ -165,7 +161,6 @@ public class Door : MonoBehaviour
                 a.runtimeAnimatorController = a.runtimeAnimatorController;
             }
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-            
         }
 
         Warp();

@@ -107,7 +107,7 @@ public class PlayerActions : MonoBehaviour
         GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed, positionTolerance);
     }
 
-    void LockInteracting(bool b)
+    public void LockInteracting(bool b)
     {
         canInteract = !b;
     }
