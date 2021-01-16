@@ -9,7 +9,7 @@ public class Anna : MonoBehaviour
     public List<Transform> destinations;
     public GameObject player;
     public Item photoItem;
-    NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
 
     public PlayableDirector timeline2;
     public PlayableDirector timeline3;

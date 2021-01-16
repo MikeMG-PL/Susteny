@@ -178,17 +178,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 19.95
-        value: 0.1963842
-        inSlope: -0.3462325
-        outSlope: -0.3462325
+        time: 20
+        value: 0.18123986
+        inSlope: -0.118004315
+        outSlope: -0.118004315
         tangentMode: 0
         weightedMode: 0
-        inWeight: 1
+        inWeight: 0.5443641
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 22.216667
-        value: 0
+        time: 27.366667
+        value: 0.31806946
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -216,7 +216,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 22.216667
+    m_StopTime: 27.366667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -290,17 +290,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 19.95
-        value: 0.1963842
-        inSlope: -0.3462325
-        outSlope: -0.3462325
+        time: 20
+        value: 0.18123986
+        inSlope: -0.118004315
+        outSlope: -0.118004315
         tangentMode: 0
         weightedMode: 0
-        inWeight: 1
+        inWeight: 0.5443641
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 22.216667
-        value: 0
+        time: 27.366667
+        value: 0.31806946
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -577,7 +577,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 31.24999999999998
     m_Asset: {fileID: 6459472384793383389}
-    m_Duration: 22.533333333333335
+    m_Duration: 36.266666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3910851063165928313}
     m_EaseInDuration: 0
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects: []
   m_TrackProperties:
-    volume: 0
+    volume: 0.098189525
     stereoPan: 0
     spatialBlend: 0
 --- !u!114 &-2544266586321067331

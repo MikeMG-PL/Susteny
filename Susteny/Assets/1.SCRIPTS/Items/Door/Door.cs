@@ -79,7 +79,7 @@ public class Door : MonoBehaviour
     {
         a = blackPanel.GetComponent<Animator>();
         b = blackPanel.GetComponent<BlackScreen>();
-        a.enabled = true;
+        b.Animating(true);
         a.runtimeAnimatorController = b.Fade;
         a.Play(0);
         character.GetComponent<PlayerActions>().inventoryAllowed = false;
@@ -98,7 +98,7 @@ public class Door : MonoBehaviour
         viewMode.ToggleViewMode(null, false);
         manipulation.StopManipulating();
         character.enabled = false;
-
+        WalkThrough?.Invoke(ID);
 
         switch (doorMode)
         {
@@ -138,6 +138,7 @@ public class Door : MonoBehaviour
         }
         character.GetComponent<PlayerActions>().inventoryAllowed = true;
         character.GetComponent<PlayerActions>().LockInteracting(false);
+        
     }
 
     IEnumerator CheckSceneLoad(NameOrID nameOrID)
@@ -167,7 +168,6 @@ public class Door : MonoBehaviour
         yield return new WaitForEndOfFrame();
         LightProbes.TetrahedralizeAsync();
         a.runtimeAnimatorController = b.Unfade;
-        WalkThrough?.Invoke(ID);
         StopCoroutine(CheckSceneLoad(nameOrID));
     }
 

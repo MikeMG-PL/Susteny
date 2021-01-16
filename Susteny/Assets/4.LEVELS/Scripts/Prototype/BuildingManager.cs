@@ -12,6 +12,7 @@ public class BuildingManager : MonoBehaviour
     public PlayableDirector timeline11;
     public AudioClip Seamstress;
     public Door doorToUnlock;
+    TaskSystem tasks;
     Inventory inv;
     AudioSource playerSource;
 
@@ -63,6 +64,10 @@ public class BuildingManager : MonoBehaviour
                     {
                         SetDialogue(Vlad, 1);
                         Vlad.GetComponent<ManipulatePlayer>().enableGoTo = false;
+                        tasks = GameObject.FindGameObjectWithTag("TaskSystem").GetComponent<TaskSystem>();
+                        tasks.hideTask("3");
+                        tasks.addTask(tasks.availableTasks[4]);
+                        GameObject.FindGameObjectWithTag("LEVELS").GetComponent<Prototype>().FadeAmble();
                     }
                     break;
             }
@@ -111,3 +116,4 @@ public class BuildingManager : MonoBehaviour
         }
     }
 }
+
