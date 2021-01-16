@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -111,3 +112,4 @@ public class DoorEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

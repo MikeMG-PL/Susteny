@@ -175,10 +175,11 @@ public class Door : MonoBehaviour
     {
         character.transform.position = defaultDestination.position;
 
-        if (usingDefaultRotation)
-            GameObject.FindGameObjectWithTag("MainCamera").transform.localEulerAngles = defaultDestination.localEulerAngles;
-        else
-            GameObject.FindGameObjectWithTag("MainCamera").transform.localEulerAngles = teleportCameraRotation;
+        //if (usingDefaultRotation)
+          //  GameObject.FindGameObjectWithTag("MainCamera").transform.localEulerAngles = defaultDestination.localEulerAngles;
+       // else
+        //    GameObject.FindGameObjectWithTag("MainCamera").transform.localEulerAngles = teleportCameraRotation;
+        // MODIFYING CAMERA ROTATION BREAKS INTERACTION WITH OBJECTS IN BUILD
 
         character.enabled = true;
     }

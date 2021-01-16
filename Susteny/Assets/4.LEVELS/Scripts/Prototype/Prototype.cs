@@ -85,7 +85,8 @@ public class Prototype : MonoBehaviour
         var buffer = audioSource.volume;
         while (audioSource.volume > 0)
         {
-            audioSource.volume -= 0.00175f;
+            if (audioSource.clip != Sustain)
+                audioSource.volume -= 0.00175f;
             yield return new WaitForSeconds(Time.deltaTime);
         }
         audioSource.clip = null;
@@ -95,7 +96,7 @@ public class Prototype : MonoBehaviour
 
     public void Balcony()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.parent.transform.localEulerAngles = new Vector3(0, 202, 0);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Prototype"));
         audioSource.Stop();
         audioSource.clip = Sustain;
         audioSource.volume = 0.6f;
@@ -107,10 +108,11 @@ public class Prototype : MonoBehaviour
         var cars = GameObject.FindGameObjectsWithTag("Car");
         foreach (GameObject c in cars) c.SetActive(false);
 
-        anna.transform.position = new Vector3(55, 9.66f, 100);
-        anna.GetComponent<Anna>().agent.SetDestination(anna.GetComponent<Anna>().destinations[2].position);
+        anna.transform.position = new Vector3(37, 10, 90);
+
+        GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).localEulerAngles = new Vector3(0, 202, 0);
+
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().inventoryAllowed = false;
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Prototype"));
         RenderSettings.skybox = newSkybox;
         StartCoroutine(EndFade());
     }
