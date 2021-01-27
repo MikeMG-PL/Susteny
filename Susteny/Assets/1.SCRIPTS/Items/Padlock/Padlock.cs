@@ -33,7 +33,7 @@ public class Padlock : MonoBehaviour
     void Unlock()
     {
         GetComponent<Renderer>().material.color = Color.green;
-        GetComponent<Interactable>().playerActions.StopFocusOnObject(true);
+        GetComponent<Interactable>().playerActions.StopFocusingOnObject(true);
         unlocked = true;
         PadlockUnlocked.Invoke(true);
     }

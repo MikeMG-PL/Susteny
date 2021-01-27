@@ -7,39 +7,32 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class ViewMode : MonoBehaviour
 {
-    public Transform inventoryViewTransform;
     public UIHints UIHints;
     public float rotationSpeed = 0.5f;
     public float focusSpeed = 30f;
 
     [HideInInspector] public GameObject viewedItem;
     [HideInInspector] public bool viewingItem;
-    [HideInInspector] public bool viewingFromInventory;
     [HideInInspector] public bool interactingWithItem;
-    [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
 
     Vector3 mousePos;
     FloatParameter focalLength;
     GameObject focusCamera;
     SC_FPSController fpsController;
     Transform cameraTransform;
-    PlayerActions playerActions;
     bool disablingFocus;
     bool enablingFocus;
     bool startedInspecting;
 
     public static event Action<bool> ViewingItem;
     public static event Action<bool, GameObject> ViewingDetails;
-    void V(bool arg1, GameObject arg2) {;} // Empty function - always listens to ViewingDetails event (no null exception)
 
     void Awake()
     {
-        ViewingDetails += V;
         focusCamera = GetComponent<Player>().focusCamera;
         cameraTransform = GetComponent<Player>().camera.transform;
         focalLength = focusCamera.GetComponent<PostProcessVolume>().profile.GetSetting<DepthOfField>().focalLength;
         fpsController = GetComponent<SC_FPSController>();
-        playerActions = GetComponent<PlayerActions>();
     }
 
     /// <summary>
@@ -52,7 +45,7 @@ public class ViewMode : MonoBehaviour
     public void ToggleViewMode(GameObject item, bool b, bool disableRotating = false, bool switchLockControlsAndCursorOnImmediately = true)
     {
         ViewingItem.Invoke(b);
-        ViewingDetails.Invoke(b, item);
+        ViewingDetails?.Invoke(b, item);
         if (switchLockControlsAndCursorOnImmediately)
         {
             fpsController.LockControlsCursorOn(b);
@@ -88,35 +81,8 @@ public class ViewMode : MonoBehaviour
         foreach (Transform child in viewedItem.GetComponentsInChildren<Transform>())child.gameObject.layer = 9;
     }
 
-    public void ViewItemFromInventory(GameObject item)
-    {
-        GameObject obj = CreateItemFromInventory(item);
-        viewingFromInventory = true;
-        GetComponent<PlayerActions>().ToggleInventoryUI(false);
-        ToggleViewMode(obj, true);
-    }
-
-    GameObject CreateItemFromInventory(GameObject item)
-    {
-        GameObject obj = Instantiate(item);
-        obj.transform.SetParent(inventoryViewTransform.parent);
-        obj.transform.localPosition = inventoryViewTransform.localPosition;
-        obj.transform.localScale = item.transform.localScale * 3500;
-        obj.transform.localEulerAngles = item.transform.localEulerAngles;
-        return obj;
-    }
-
-    public void StopViewingItemFromInventory()
-    {
-        viewingFromInventory = false;
-        Destroy(viewedItem);
-        ToggleViewMode(null, false);
-    }
-
     void Update()
     {
-        CursorEnableAfterOnPosOrRot();
-
         if (viewingItem && !interactingWithItem)
         {
             InspectItem();
@@ -125,19 +91,6 @@ public class ViewMode : MonoBehaviour
         else if (!viewingItem) startedInspecting = false;
 
         ManageFocus();
-    }
-
-    void CursorEnableAfterOnPosOrRot()
-    {
-        if (!finishedGoingAndRotatingTowardsObject && !fpsController.lookingAt && !fpsController.goingTo)
-        {
-            if (viewingItem && playerActions.showCursorOnPosition)
-            {
-                fpsController.ToggleCursor(true);
-                if (viewedItem.GetComponent<Hints>() != null) UIHints.ShowCornerHints(viewedItem.GetComponent<Hints>().cornerHints);
-            }
-            finishedGoingAndRotatingTowardsObject = true;
-        }
     }
 
     void InspectItem()
@@ -187,10 +140,5 @@ public class ViewMode : MonoBehaviour
     public bool DisablingFocusEnded()
     {
         return !disablingFocus;
-    }
-
-    void OnDisable()
-    {
-        ViewingDetails -= V;    
     }
 }

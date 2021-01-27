@@ -14,29 +14,30 @@ public class ManipulatePlayer : MonoBehaviour
     [HideInInspector] public bool cursorOnWhenOnPosition = true;
 
     PlayerActions playerActions;
+    SC_FPSController fpsController;
 
     private void Awake()
     {
+        fpsController = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
         playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
     }
 
     public void Manipulate()
     {
         if (enableLookAt)
-            if (objectToLookAt == null) playerActions.LookAt(transform.position, lookSpeed);
-            else playerActions.LookAt(objectToLookAt.position, lookSpeed);
+            if (objectToLookAt == null) fpsController.LookAt(transform.position, lookSpeed);
+            else fpsController.LookAt(objectToLookAt.position, lookSpeed);
 
         if (enableGoTo)
-            if (positionToGo == null) playerActions.GoToPosition(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
-            else playerActions.GoToPosition(positionToGo.position * distance, moveSpeed);
+            if (positionToGo == null) fpsController.GoTo(transform.position + transform.TransformDirection(Vector3.forward * distance), moveSpeed);
+            else fpsController.GoTo(positionToGo.position * distance, moveSpeed);
 
         if (cursorOnWhenOnPosition && (enableGoTo || enableLookAt)) playerActions.showCursorOnPosition = true;
     }
 
     public void StopManipulating()
     {
-        playerActions.GetComponent<SC_FPSController>().StopGoingTo();
-        playerActions.GetComponent<SC_FPSController>().StopLookingAt();
-        playerActions.GetComponent<SC_FPSController>().LockControlsCursorOn(false);
+        fpsController.ForceStopGoingRotating();
+        fpsController.LockControlsCursorOn(false);
     }
 }

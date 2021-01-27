@@ -16,6 +16,11 @@ public class SC_FPSController : MonoBehaviour
     public float lookXLimit = 45.0f;
     public bool isRunning;
 
+    [HideInInspector] public bool finishedGoingAndRotatingTowardsObject = true;
+    ViewMode viewMode;
+    PlayerActions playerActions;
+    UIHints UIHints;
+
     CharacterController characterController;
     public Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -55,6 +60,7 @@ public class SC_FPSController : MonoBehaviour
         DialogueInteraction.Talking += LockControlsCursorOn;
         PlayerActions.BrowsingInventory += LockControlsCursorOn;
     }
+
     void Unsubscribe()
     {
         DialogueInteraction.Talking -= LockControlsCursorOn;
@@ -65,6 +71,7 @@ public class SC_FPSController : MonoBehaviour
     {
         canLook = b;
     }
+
     public void LockControlsCursorOn(bool b)
     {
         canMove = !b;
@@ -76,20 +83,24 @@ public class SC_FPSController : MonoBehaviour
         else
             Cursor.lockState = CursorLockMode.Locked;
     }
+
     public void LockControlsCursorOff(bool b)
     {
         canMove = !b;
         canLook = !b;
     }
+
     public void AllEnabled(bool b)
     {
         GetComponent<CharacterController>().enabled = b;
         GetComponent<PlayerActions>().DisallowInventorySwitching(!b);
     }
+
     public void QuittingViewModeAllowed(bool b)
     {
         GetComponent<PlayerActions>().quittingViewModeAllowed = b;
     }
+
     public void ToggleCursor(bool b)
     {
         Cursor.visible = b;
@@ -100,6 +111,9 @@ public class SC_FPSController : MonoBehaviour
 
     void Init()
     {
+        viewMode = GetComponent<ViewMode>();
+        playerActions = GetComponent<PlayerActions>();
+        UIHints = viewMode.UIHints;
         characterController = GetComponent<CharacterController>();
         cameraTransform = playerCamera.transform;
         Cursor.lockState = CursorLockMode.Locked;
@@ -113,6 +127,8 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
+        CursorEnableAfterOnPosOrRot();
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
         Vector3 right = cameraTransform.TransformDirection(Vector3.right);
@@ -151,8 +167,9 @@ public class SC_FPSController : MonoBehaviour
         if (goingTo) GoToPosition();
     }
 
-    public void LookAt(Vector3 posToLook, float rotatingSpeed, float angleTolerance)
+    public void LookAt(Vector3 posToLook, float rotatingSpeed = 50f, float angleTolerance = 0.2f)
     {
+        finishedGoingAndRotatingTowardsObject = false;
         lookingAt = true;
         canLook = false;
         this.angleTolerance = angleTolerance;
@@ -160,8 +177,9 @@ public class SC_FPSController : MonoBehaviour
         this.posToLook = posToLook;
     }
 
-    public void GoTo(Vector3 posToGo, float goingSpeed, float positionTolerance)
+    public void GoTo(Vector3 posToGo, float goingSpeed = 4f, float positionTolerance = 0.1f)
     {
+        finishedGoingAndRotatingTowardsObject = false;
         canMove = false;
         goingTo = true;
         this.positionTolerance = positionTolerance;
@@ -172,13 +190,16 @@ public class SC_FPSController : MonoBehaviour
         this.posToGo = posToGo;
     }
 
-    public void StopGoingTo(bool enableMove = false)
+    // !!! Jeśli chcesz zatrzymać gracza i *od razu* nadać mu nowy cel, musisz użyć funkcji ForceStopGoingRotating
+    // Używanie ForceStop jest ogólnie bezpieczniejsze.
+
+    void StopGoingTo(bool enableMove = false)
     {
         goingTo = false;
         canMove = enableMove;
     }
 
-    public void StopLookingAt(bool enableLooking = false)
+    void StopLookingAt(bool enableLooking = false)
     {
         rotationX = EulerDistance(cameraTransform.localEulerAngles.x);
         rotationY = EulerDistance(cameraTransform.localEulerAngles.y);
@@ -219,6 +240,38 @@ public class SC_FPSController : MonoBehaviour
         {
             positionToGo = positionToGo.normalized * goingSpeed;
             characterController.Move(positionToGo * Time.deltaTime);
+        }
+    }
+
+    public void ForceStopGoingRotating(bool enableMove = false, bool enableLooking = false)
+    {
+        finishedGoingAndRotatingTowardsObject = true;
+        playerActions.showCursorOnPosition = false;
+
+        goingTo = false;
+        canMove = enableMove;
+
+        rotationX = EulerDistance(cameraTransform.localEulerAngles.x);
+        rotationY = EulerDistance(cameraTransform.localEulerAngles.y);
+
+        lookingAt = false;
+        canLook = enableLooking;
+    }
+
+    void CursorEnableAfterOnPosOrRot()
+    {
+        if (!finishedGoingAndRotatingTowardsObject && !lookingAt && !goingTo)
+        {
+            if (playerActions.showCursorOnPosition)
+            {
+                playerActions.showCursorOnPosition = false;
+                if (viewMode.viewingItem)
+                {
+                    ToggleCursor(true);
+                    if (viewMode.viewedItem.GetComponent<Hints>() != null) UIHints.ShowCornerHints(viewMode.viewedItem.GetComponent<Hints>().cornerHints);
+                }
+            }
+            finishedGoingAndRotatingTowardsObject = true;
         }
     }
 

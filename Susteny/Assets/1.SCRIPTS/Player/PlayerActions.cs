@@ -6,7 +6,10 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject InventoryUI;
+    public Transform inventoryViewTransform;
     public UIHints UIHints;
+
+    public bool viewingItemFromInventory;
 
     [HideInInspector] public GameObject interactingObject;
     [HideInInspector] public ItemWorld grabbedItem;
@@ -35,18 +38,18 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusOnObject(true);
+        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusingOnObject(true);
 
         else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null && quittingViewModeAllowed) grabbedItem.Ungrab();
 
         else if (Input.GetKeyDown(KeyCode.E) && grabbedItem != null) TakeToInventory(grabbedItem);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.viewingFromInventory && quittingViewModeAllowed) UngrabFromInventory();
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewingItemFromInventory && quittingViewModeAllowed) StopViewingItemFromInventory();
 
         else if (Input.GetKeyDown(KeyCode.E) && inventoryAllowed) SwitchInventoryUI();
     }
 
-    public void ToggleInventoryUI(bool enable)
+    public void EnableInventoryUI(bool enable)
     {
         BrowsingInventory.Invoke(enable);
         InventoryUI.SetActive(enable);
@@ -59,14 +62,29 @@ public class PlayerActions : MonoBehaviour
         InventoryUI.SetActive(b);
     }
 
-    public void GrabFromInventory(GameObject item)
+    public void ViewItemFromInventory(GameObject item)
     {
-        viewMode.ViewItemFromInventory(item);
+        GameObject obj = CreateItemFromInventory(item);
+        viewingItemFromInventory = true;
+        EnableInventoryUI(false);
+        viewMode.ToggleViewMode(obj, true);
     }
 
-    public void UngrabFromInventory()
+    GameObject CreateItemFromInventory(GameObject item)
     {
-        viewMode.StopViewingItemFromInventory();
+        GameObject obj = Instantiate(item);
+        obj.transform.SetParent(inventoryViewTransform.parent);
+        obj.transform.localPosition = inventoryViewTransform.localPosition;
+        obj.transform.localScale = item.transform.localScale * 3500;
+        obj.transform.localEulerAngles = item.transform.localEulerAngles;
+        return obj;
+    }
+
+    public void StopViewingItemFromInventory()
+    {
+        viewingItemFromInventory = false;
+        Destroy(viewMode.viewedItem);
+        viewMode.ToggleViewMode(null, false);
     }
 
     public void TakeToInventory(ItemWorld itemWorld)
@@ -81,30 +99,18 @@ public class PlayerActions : MonoBehaviour
         Destroy(itemWorld.gameObject);
     }
 
-    public void FocusOnObject(GameObject item, bool interact, bool switchLockControlsCursorOn)
+    public void FocusOnObject(GameObject item, bool disableRotating, bool switchLockControlsCursorOn)
     {
-        viewMode.ToggleViewMode(item, true, interact, switchLockControlsCursorOn);
+        viewMode.ToggleViewMode(item, true, disableRotating, switchLockControlsCursorOn);
     }
 
-    public void StopFocusOnObject(bool enableMovemenetAndCursorOff)
+    public void StopFocusingOnObject(bool enableMovemenetAndCursorOff)
     {
-        // Jeżeli gracz nie skończył jeszcze iść / obracać się w określonym kierunku, trzeba ręcznie je przerwać
-        fpsController.StopGoingTo();
-        fpsController.StopLookingAt();
+        // Jeżeli gracz nie skończył jeszcze iść / obracać się w określonym kierunku, trzeba ręcznie to przerwać
+        fpsController.ForceStopGoingRotating();
+
         if (interactingObject != null) interactingObject.GetComponent<Interactable>().StoppedInteracting();
         viewMode.ToggleViewMode(null, false, disableRotating: false, enableMovemenetAndCursorOff);
-    }
-
-    public void LookAt(Vector3 posToLook, float rotatingSpeed = 50f, float angleTolerance = 1f)
-    {
-        viewMode.finishedGoingAndRotatingTowardsObject = false;
-        GetComponent<SC_FPSController>().LookAt(posToLook, rotatingSpeed, angleTolerance);
-    }
-
-    public void GoToPosition(Vector3 posToGo, float goingSpeed = 4f, float positionTolerance = 0.1f)
-    {
-        viewMode.finishedGoingAndRotatingTowardsObject = false;
-        GetComponent<SC_FPSController>().GoTo(posToGo, goingSpeed, positionTolerance);
     }
 
     public void LockInteracting(bool b)

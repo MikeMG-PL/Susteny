@@ -10,7 +10,7 @@ public class ItemUI : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        playerActions.GrabFromInventory(item.model);
+        playerActions.ViewItemFromInventory(item.model);
     }
 
     void Start()

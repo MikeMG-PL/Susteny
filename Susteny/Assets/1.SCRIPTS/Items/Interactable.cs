@@ -46,7 +46,7 @@ public class Interactable : MonoBehaviour
 
     public void FocusOnInteractable()
     {
-        player.GetComponent<PlayerActions>().FocusOnObject(gameObject, interact: true, !playerActions.showCursorOnPosition);
+        playerActions.FocusOnObject(gameObject, disableRotating: true, !playerActions.showCursorOnPosition);
     }
 
     void StartedInteracting()

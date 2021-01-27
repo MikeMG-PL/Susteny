@@ -81,7 +81,7 @@ public class Anna : MonoBehaviour
 
     public void FinishPhotoViewing()
     {
-        player.GetComponent<PlayerActions>().UngrabFromInventory();
+        player.GetComponent<PlayerActions>().StopViewingItemFromInventory();
     }
 
     public void RotateAnna(float r)
