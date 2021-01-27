@@ -2703,6 +2703,7 @@ MonoBehaviour:
   - {fileID: 0}
   player: {fileID: 0}
   photoItem: {fileID: 0}
+  agent: {fileID: 0}
   timeline2: {fileID: 0}
   timeline3: {fileID: 0}
   timeline4: {fileID: 0}
@@ -2720,6 +2721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a63c4a5ff9878d42857a41f56797e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons: []
+  instantiatedButtons: 0
   nameOfNPC: Anna
   currentDialogueID: 0
   dialogues:
@@ -2727,10 +2730,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 99a06c6b66607cb458bd19a49307bf56, type: 2}
   - {fileID: 11400000, guid: 884768199e8b02f4ea33c26580d1a342, type: 2}
   - {fileID: 11400000, guid: aad74521ba7d2f548bfc006349699a8e, type: 2}
-  buttons: []
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
     type: 3}
-  instantiatedButtons: 0
+  chosenOptionColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
 --- !u!114 &7849140011197825162
 MonoBehaviour:
   m_ObjectHideFlags: 0

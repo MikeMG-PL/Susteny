@@ -8,25 +8,25 @@ using Subtegral.DialogueSystem.DataContainers;
 
 public class LoadDialogue : MonoBehaviour
 {
+    // Public
+    [HideInInspector] public List<GameObject> buttons;
+    [HideInInspector] public int instantiatedButtons;
     public string nameOfNPC;
     public int currentDialogueID;
-    int choice;
     public List<DialogueContainer> dialogues;
-    DialogueContainer currentDialogue;
-    bool dialogueStarted;
-
-    string dialogueText;
-    List<string> options;
-    List<string> targetNodes;
-    [HideInInspector] public List<GameObject> buttons;
-    string nodeGUID;
-    bool quitNode;
-
-    GameObject panel;
     public GameObject buttonPrefab;
-    Text npcName;
-    Text sentence;
-    public int instantiatedButtons;
+    public Color chosenOptionColor = new Color(0.5f, 0.5f, 0.5f, 0.75f);
+
+    // Private
+    int choice;
+    bool dialogueStarted, quitNode;
+    string dialogueText, nodeGUID;
+
+    List<string> options, targetNodes;
+    DialogueContainer currentDialogue;
+    GameObject panel;
+    Text npcName, sentence;
+    Color defaultColor = Color.white;
 
     void Awake()
     {
@@ -46,7 +46,6 @@ public class LoadDialogue : MonoBehaviour
             sentence = panel.GetComponent<Panel>().sentence;
             Clear();
         }
-
     }
 
     void Clear()
@@ -68,7 +67,7 @@ public class LoadDialogue : MonoBehaviour
     {
         if (!dialogueStarted && dialogues.Count > 0)
             FirstNode();
-        else if(dialogues.Count > 0)
+        else if (dialogues.Count > 0)
         {
             GetNode();
             if (!quitNode)
@@ -105,6 +104,7 @@ public class LoadDialogue : MonoBehaviour
 
                 GetOptions();
             }
+            d.WasChosen = false;
         }
     }
 
@@ -183,7 +183,7 @@ public class LoadDialogue : MonoBehaviour
         }
     }
 
-    void CreateButton(string text)
+    GameObject CreateButton(string text)
     {
         instantiatedButtons++;
         var option = Instantiate(buttonPrefab, panel.transform.GetChild(0));
@@ -193,10 +193,11 @@ public class LoadDialogue : MonoBehaviour
         option.GetComponent<ButtonID>().buttonID = instantiatedButtons - 1;
 
         buttons.Add(option);
-        option.GetComponent<Button>().onClick.AddListener(delegate { DBG(option.GetComponent<ButtonID>().buttonID); });
+        option.GetComponent<Button>().onClick.AddListener(delegate { OnClick(option.GetComponent<ButtonID>().buttonID); });
+        return option;
     }
 
-    void DBG(int n)
+    void OnClick(int n)
     {
         choice = n;
 
