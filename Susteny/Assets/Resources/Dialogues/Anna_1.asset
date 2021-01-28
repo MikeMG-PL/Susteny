@@ -19,209 +19,221 @@ MonoBehaviour:
     TargetNodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
   - BaseNodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     Sentence: 
-    PortName: "S\u0142ucham?"
+    PortName: aaa
     TargetNodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
   - BaseNodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     Sentence: 
-    PortName: "Dla ciebie zawsze p\u0142yn\u0105\u0142 wolniej. Pi\u0119knie wygl\u0105dasz."
+    PortName: aaa
     TargetNodeGUID: d48b136e-6af6-4cf8-bce4-6914182219c2
   - BaseNodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     Sentence: 
-    PortName: "Sp\xF3\u017Ani\u0142a\u015B si\u0119. P\xF3\u0142 godziny."
+    PortName: aaa
     TargetNodeGUID: bb806e22-61a4-46e0-b5c5-581b30688734
   - BaseNodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     Sentence: 
-    PortName: "Dobrze ci\u0119 widzie\u0107."
+    PortName: aaa
     TargetNodeGUID: 936f9a40-d5d9-4eba-b2ac-c972b0c9e117
   - BaseNodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
     Sentence: 
-    PortName: ...
+    PortName: Option 1
     TargetNodeGUID: 784af33b-ae93-426b-940d-915cf3383627
   - BaseNodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
     Sentence: 
-    PortName: "G\u0142\u0119bokie."
+    PortName: Option 2
     TargetNodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
   - BaseNodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
     Sentence: 
-    PortName: "Przejd\u017Amy do rzeczy. Szkoda... czasu."
+    PortName: Option 3
     TargetNodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
   - BaseNodeGUID: d48b136e-6af6-4cf8-bce4-6914182219c2
     Sentence: 
-    PortName: '[dalej...]'
+    PortName: Option 1
     TargetNodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
   - BaseNodeGUID: bb806e22-61a4-46e0-b5c5-581b30688734
     Sentence: 
-    PortName: "Patrz\u0119 wi\u0119c..."
+    PortName: Option 1
     TargetNodeGUID: 2185073c-a94e-41fa-88d1-e8b082a987ed
   - BaseNodeGUID: 936f9a40-d5d9-4eba-b2ac-c972b0c9e117
     Sentence: 
-    PortName: "Przejd\u017Amy w takim razie do sedna."
+    PortName: Option 1
     TargetNodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
   - BaseNodeGUID: 784af33b-ae93-426b-940d-915cf3383627
     Sentence: 
-    PortName: Pokazuj.
+    PortName: Option 1
     TargetNodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
   - BaseNodeGUID: 784af33b-ae93-426b-940d-915cf3383627
     Sentence: 
-    PortName: Co takiego?
+    PortName: Option 2
     TargetNodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
   - BaseNodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
     Sentence: 
-    PortName: '[dalej...]'
+    PortName: Option 1
     TargetNodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
   - BaseNodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
     Sentence: 
-    PortName: "W takim razie we\u017A mnie za r\u0119k\u0119... i podejd\u017A bli\u017Cej."
+    PortName: Option 1
     TargetNodeGUID: 9d62d358-c1a3-408c-b2c0-417774da8c42
   - BaseNodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
     Sentence: 
-    PortName: "Zbli\u017C si\u0119 wi\u0119c. O co chodzi? Sk\u0105d ten tw\xF3j
-      nag\u0142y list?"
+    PortName: Option 2
     TargetNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
   - BaseNodeGUID: 2185073c-a94e-41fa-88d1-e8b082a987ed
     Sentence: 
-    PortName: '[dalej...]'
+    PortName: Option 1
     TargetNodeGUID: 784af33b-ae93-426b-940d-915cf3383627
   - BaseNodeGUID: 9d62d358-c1a3-408c-b2c0-417774da8c42
     Sentence: 
-    PortName: '[dalej...]'
+    PortName: Option 1
     TargetNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
   - BaseNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
     Sentence: 
-    PortName: ...
+    PortName: Option 1
     TargetNodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
-  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
-    Sentence: 
-    PortName: "Wiesz, kto to podrzuci\u0142?"
-    TargetNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
-  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
-    Sentence: 
-    PortName: "Zajmujesz si\u0119 renowacj\u0105 kamienic? I to tu, na miejscu? Dlaczego
-      napisa\u0142a\u015B do mnie dopiero teraz?"
-    TargetNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
-  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
-    Sentence: 
-    PortName: Co to jest?
-    TargetNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
   - BaseNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
     Sentence: 
-    PortName: Rozumiem.
-    TargetNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
-  - BaseNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
-    Sentence: 
-    PortName: Wybacz.
+    PortName: Option 1
     TargetNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
   - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
     Sentence: 
-    PortName: "Wiesz, kto to podrzuci\u0142?"
+    PortName: Option 1
     TargetNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
   - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
     Sentence: 
-    PortName: "Zajmujesz si\u0119 renowacj\u0105 kamienic? I to tu, na miejscu? Dlaczego
-      napisa\u0142a\u015B do mnie dopiero teraz?"
+    PortName: Option 2
     TargetNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
   - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
     Sentence: 
-    PortName: Co to jest?
+    PortName: Option 3
     TargetNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
+  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
+    Sentence: 
+    PortName: Option 1
+    TargetNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
+  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
+    Sentence: 
+    PortName: Option 2
+    TargetNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
+  - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
+    Sentence: 
+    PortName: Option 3
+    TargetNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
+  - BaseNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
+    Sentence: 
+    PortName: Option 1
+    TargetNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
   DialogueNodeData:
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     DialogueText: "Czas jest wzgl\u0119dny."
     Position: {x: 223, y: 160}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
     DialogueText: "Wskaz\xF3wki zegara przeskakuj\u0105. Tik-tak, tik-tak. A przecie\u017C
       czas nie skacze, czas p\u0142ynie nieustannie."
     Position: {x: 1202, y: -163}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: d48b136e-6af6-4cf8-bce4-6914182219c2
     DialogueText: "Mi\u0142o z twojej strony. W og\xF3le si\u0119 nie zmieni\u0142e\u015B,
       Konrad. Lepiej napatrz si\u0119 na mnie teraz, bo potem mo\u017Ce nie by\u0107
       okazji. Nikt nie mo\u017Ce mnie tu zobaczy\u0107."
     Position: {x: 1201, y: 11}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: bb806e22-61a4-46e0-b5c5-581b30688734
     DialogueText: "Wiem. Na dodatek mog\u0119 ci powiedzie\u0107, \u017Ce nie b\u0119d\u0119
       tu sta\u0142a w niesko\u0144czono\u015B\u0107. Nikt nie mo\u017Ce mnie tu zobaczy\u0107.
       Dlatego napatrz si\u0119 lepiej na mnie teraz."
     Position: {x: 1203, y: 173}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 936f9a40-d5d9-4eba-b2ac-c972b0c9e117
     DialogueText: "Ciebie r\xF3wnie\u017C. Min\u0119\u0142o troch\u0119 lat, prawda?
       Szkoda, \u017Ce za kr\xF3tk\u0105 chwil\u0119 si\u0119 rozstaniemy. Nie ode
       mnie niestety to zale\u017Cy. Nikt nie mo\u017Ce mnie tu zobaczy\u0107."
     Position: {x: 1201, y: 317}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 784af33b-ae93-426b-940d-915cf3383627
     DialogueText: "Mam ci co\u015B ciekawego do pokazania."
     Position: {x: 2068, y: -356}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 1
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
     DialogueText: "Chcia\u0142a\u015B wi\u0119c mi pokaza\u0107 co\u015B wa\u017Cnego...
       Co to jest?"
     Position: {x: 2254, y: -176}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
     DialogueText: "Przede wszystkim... Cholera jasna. Nie m\xF3w tak g\u0142o\u015Bno.
       Lada moment kto\u015B mo\u017Ce nadej\u015B\u0107."
     Position: {x: 3002, y: -378}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 2185073c-a94e-41fa-88d1-e8b082a987ed
     DialogueText: To dobrze, bo...
     Position: {x: 2326, y: 128}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 9d62d358-c1a3-408c-b2c0-417774da8c42
     DialogueText: "Konrad, prosz\u0119... Daruj sobie."
     Position: {x: 4000, y: -560}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
     DialogueText: Ty mi powiedz, to do ciebie.
     Position: {x: 6357, y: -353}
   - QuitNode: 1
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
     DialogueText: Dialogue Node
     Position: {x: 7070, y: -344}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
     DialogueText: "Nie, ale my\u015Bl\u0119, \u017Ce b\u0119dziesz w stanie si\u0119
       dowiedzie\u0107."
     Position: {x: 6334, y: -611}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 0
     NodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
     DialogueText: "W porz\u0105dku, na czym stan\u0119li\u015Bmy?"
     Position: {x: 4711, y: -465}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 0
     NodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
     DialogueText: "S\u0142uchaj uwa\u017Cnie. Nie mam czasu, \u017Ceby powtarza\u0107
       dwa razy. Kto\u015B mi to podrzuci\u0142 w zesz\u0142ym tygodniu. Najprawdopodobniej
@@ -229,8 +241,9 @@ MonoBehaviour:
       Znalaz\u0142am to w szparga\u0142ach z kamienicy, kt\xF3r\u0105 renowowa\u0142am."
     Position: {x: 4691, y: -263}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
     DialogueText: "Tak naprawd\u0119, to w og\xF3le nie powinnam by\u0142a do ciebie
       pisa\u0107. Nie zmieniaj tematu, do cholery."

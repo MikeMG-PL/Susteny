@@ -19,7 +19,7 @@ public class LoadDialogue : MonoBehaviour
 
     // Private
     int choice;
-    bool dialogueStarted, quitNode, wasChosen;
+    bool dialogueStarted, quitNode;
     string dialogueText, nodeGUID;
 
     List<string> options, targetNodes;
@@ -60,7 +60,6 @@ public class LoadDialogue : MonoBehaviour
         targetNodes = new List<string>();
         nodeGUID = null;
         quitNode = false;
-        wasChosen = false;
     }
 
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
@@ -117,7 +116,12 @@ public class LoadDialogue : MonoBehaviour
             if (targetNodes[choice] == d.NodeGUID)
             {
                 quitNode = d.QuitNode;
-                d.WasChosen = true;
+
+                if (d.GrayOut)
+                    d.WasChosen = true;
+                else
+                    d.WasChosen = false;
+
                 if (!quitNode)
                 {
                     nodeGUID = d.NodeGUID;
@@ -169,22 +173,22 @@ public class LoadDialogue : MonoBehaviour
 
                 // Przekazanie zdania lub tytułu opcji na przycisk
                 targetNodes.Add(n.TargetNodeGUID);
-                if (string.IsNullOrEmpty(n.Sentence))
-                {
-                    options.Add(n.PortName);
-                    if (!quitOption)
-                        WasChosen(CreateButton(n.PortName), wasChosen);
-                    else
-                        WasChosen(CreateButton($"[ZAKOŃCZ] {n.PortName}"), wasChosen);
-                }
+                //if (string.IsNullOrEmpty(n.Sentence))
+                //{
+                options.Add(n.PortName);
+                if (!quitOption)
+                    WasChosen(CreateButton(n.PortName), wasChosen);
                 else
-                {
-                    options.Add(n.Sentence);
-                    if (!quitOption)
-                        WasChosen(CreateButton(n.Sentence), wasChosen);
-                    else
-                        WasChosen(CreateButton($"[ZAKOŃCZ] {n.Sentence}"), wasChosen);
-                }
+                    WasChosen(CreateButton($"[ZAKOŃCZ] {n.PortName}"), wasChosen);
+                /* }
+                 else
+                 {
+                     options.Add(n.Sentence);
+                     if (!quitOption)
+                         WasChosen(CreateButton(n.Sentence), wasChosen);
+                     else
+                         WasChosen(CreateButton($"[ZAKOŃCZ] {n.Sentence}"), wasChosen);
+                 }*/
             }
         }
     }

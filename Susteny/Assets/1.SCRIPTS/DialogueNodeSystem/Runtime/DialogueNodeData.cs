@@ -7,8 +7,9 @@ namespace Subtegral.DialogueSystem.DataContainers
     public class DialogueNodeData
     {
         public bool QuitNode;
-        public bool WasChosen;
         public bool PlayerText;
+        public bool WasChosen;
+        public bool GrayOut;
         public string NodeGUID;
         public string DialogueText;
         public Vector2 Position;

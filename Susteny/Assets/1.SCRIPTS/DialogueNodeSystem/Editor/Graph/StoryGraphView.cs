@@ -119,12 +119,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText, bool gray)
         {
-            AddElement(CreateNode(nodeName, position, quit, pText));
+            AddElement(CreateNode(nodeName, position, quit, pText, gray));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText, bool gray)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -132,7 +132,8 @@ namespace Subtegral.DialogueSystem.Editor
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
                 QuitNode = quit,
-                PlayerText = pText
+                PlayerText = pText,
+                GrayOut = gray
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
@@ -161,6 +162,15 @@ namespace Subtegral.DialogueSystem.Editor
             playerText.SetValueWithoutNotify(playerText.value);
             tempDialogueNode.mainContainer.Add(playerText);
 
+            var grayOut = new UnityEngine.UIElements.Toggle()
+            {
+                text = "gray out these options when chosen again?",
+                value = tempDialogueNode.GrayOut
+            };
+            grayOut.RegisterValueChangedCallback((x) => tempDialogueNode.GrayOut = x.newValue);
+            grayOut.SetValueWithoutNotify(grayOut.value);
+            tempDialogueNode.mainContainer.Add(grayOut);
+
             var textField = new TextField();
             textField.multiline = true;
 
@@ -172,7 +182,7 @@ namespace Subtegral.DialogueSystem.Editor
             textField.SetValueWithoutNotify(tempDialogueNode.title);
             tempDialogueNode.mainContainer.Add(textField);
 
-            var button = new Button(() => { AddChoicePort(tempDialogueNode, "[Do not modify to use \"Option\" as a text]"); })
+            var button = new Button(() => { AddChoicePort(tempDialogueNode, "Please enter the sentence"); })
             {
                 text = "Add Choice"
             };
@@ -181,7 +191,7 @@ namespace Subtegral.DialogueSystem.Editor
         }
 
 
-        public void AddChoicePort(DialogueNode nodeCache, string title, string overriddenPortName = "")
+        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
         {
             var generatedPort = GetPortInstance(nodeCache, Direction.Output);
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
@@ -192,7 +202,7 @@ namespace Subtegral.DialogueSystem.Editor
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
             //var sentenceToShow = "[Do not modify to use \"Option\" as a text]";
-            var sentenceToShow = string.IsNullOrEmpty(title) ? "[Do not modify to use \"Option\" as a text]" : title;
+            /*var sentenceToShow = string.IsNullOrEmpty(title) ? "[Do not modify to use \"Option\" as a text]" : title;
 
             generatedPort.contentContainer.Add(new Label("  "));
             var sentence = new TextField()
@@ -204,7 +214,7 @@ namespace Subtegral.DialogueSystem.Editor
 
             sentence.RegisterValueChangedCallback((x) => generatedPort.name = x.newValue);
             generatedPort.contentContainer.Add(sentence);
-            generatedPort.contentContainer.Add(new Label("| Sentence:"));
+            generatedPort.contentContainer.Add(new Label("| Sentence:"));*/
 
             var textField = new TextField()
             {
@@ -221,7 +231,7 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 text = "Delete choice"
             };
-            generatedPort.contentContainer.Add(new Label("  | Option:"));
+            generatedPort.contentContainer.Add(new Label(" | Option:"));
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);

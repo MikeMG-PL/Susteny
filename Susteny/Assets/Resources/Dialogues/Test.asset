@@ -25,52 +25,76 @@ MonoBehaviour:
     Sentence: 
     PortName: "Cze\u015B\u0107, co ci\u0119 sprowadza?"
     TargetNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-  - BaseNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
+  - BaseNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
     Sentence: 
-    PortName: Rozumiem.
-    TargetNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    PortName: Opowiadaj, mordooooo!
+    TargetNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
   - BaseNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
     Sentence: 
     PortName: Tia.
     TargetNodeGUID: 75464860-8ff1-455c-a1c2-85ffb0fe777e
-  - BaseNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+  - BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
+    Sentence: 
+    PortName: "Opowiedz co\u015B o sobie"
+    TargetNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
+  - BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
+    Sentence: 
+    PortName: "Cze\u015B\u0107, co ci\u0119 sprowadza?"
+    TargetNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
+  - BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
     Sentence: 
     PortName: Opowiadaj, mordooooo!
     TargetNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
   - BaseNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
     Sentence: 
-    PortName: :(
-    TargetNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    PortName: Meh...
+    TargetNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
+  - BaseNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
+    Sentence: 
+    PortName: Rozumiem.
+    TargetNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
   DialogueNodeData:
-  - QuitNode: 0
-    WasChosen: 0
-    PlayerText: 0
-    NodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
-    DialogueText: Witaj!
-    Position: {x: 273, y: 197}
-  - QuitNode: 0
-    WasChosen: 0
-    PlayerText: 0
-    NodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
-    DialogueText: "Jestem sobie go\u015Bciem od testowania dialog\xF3w."
-    Position: {x: 320, y: 446}
-  - QuitNode: 0
-    WasChosen: 0
-    PlayerText: 0
-    NodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-    DialogueText: Okej, porozmawiajmy o dalszych rzeczach!
-    Position: {x: 1154, y: 198}
   - QuitNode: 1
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 0
     NodeGUID: 75464860-8ff1-455c-a1c2-85ffb0fe777e
     DialogueText: Dialogue Node
     Position: {x: 1831, y: 199}
   - QuitNode: 0
-    WasChosen: 0
     PlayerText: 0
+    WasChosen: 0
+    GrayOut: 0
+    NodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    DialogueText: Witaj!
+    Position: {x: 273, y: 197}
+  - QuitNode: 0
+    PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
+    NodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
+    DialogueText: Okej, porozmawiajmy o dalszych rzeczach!
+    Position: {x: 1390, y: 197}
+  - QuitNode: 0
+    PlayerText: 0
+    WasChosen: 0
+    GrayOut: 0
+    NodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
+    DialogueText: Okej, do rzeczy.
+    Position: {x: 751, y: 196}
+  - QuitNode: 0
+    PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
     NodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
     DialogueText: Nieeee!
-    Position: {x: 521, y: -20}
+    Position: {x: 815, y: 545}
+  - QuitNode: 0
+    PlayerText: 0
+    WasChosen: 0
+    GrayOut: 1
+    NodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
+    DialogueText: "Jestem sobie go\u015Bciem od testowania dialog\xF3w."
+    Position: {x: 760, y: -104}
   ExposedProperties: []
   CommentBlockData: []
