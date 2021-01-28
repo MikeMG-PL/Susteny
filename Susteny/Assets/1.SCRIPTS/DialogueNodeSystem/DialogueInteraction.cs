@@ -51,7 +51,6 @@ public class DialogueInteraction : MonoBehaviour
         {
             panel.transform.GetChild(0).gameObject.SetActive(b);
             Talking.Invoke(b);
-
             if (b)
             {
                 if (GetComponent<ManipulatePlayer>() != null) GetComponent<ManipulatePlayer>().Manipulate();
@@ -61,6 +60,7 @@ public class DialogueInteraction : MonoBehaviour
             }
             else
             {
+                d.ResetChosenMarks();
                 player.GetComponent<SC_FPSController>().StopGoingTo();
                 player.GetComponent<SC_FPSController>().StopLookingAt();
                 player.GetComponent<SC_FPSController>().LockControlsCursorOn(false);
@@ -68,22 +68,21 @@ public class DialogueInteraction : MonoBehaviour
                 Conversation.Invoke(false, talkingGameObjectName, dialogueID);
             }
         }
+    }
 
-        void DestroyButtons(LoadDialogue dial)
+    void DestroyButtons(LoadDialogue dial)
+    {
+        var p = GameObject.FindGameObjectWithTag("DialoguePanel").transform.GetChild(0);
+        for (int i = 0; i < p.childCount; i++)
         {
-            var p = GameObject.FindGameObjectWithTag("DialoguePanel").transform.GetChild(0);
-            for (int i = 0; i < p.childCount; i++)
-            {
-                if (p.GetChild(i).GetComponent<Button>() != null)
-                    Destroy(p.GetChild(i).gameObject);
-            }
-
-            foreach (GameObject o in dial.buttons)
-            {
-                Destroy(o);
-            }
-            dial.buttons?.Clear();
+            if (p.GetChild(i).GetComponent<Button>() != null)
+                Destroy(p.GetChild(i).gameObject);
         }
+        foreach (GameObject o in dial.buttons)
+        {
+            Destroy(o);
+        }
+        dial.buttons?.Clear();
     }
 
     void OnDisable()

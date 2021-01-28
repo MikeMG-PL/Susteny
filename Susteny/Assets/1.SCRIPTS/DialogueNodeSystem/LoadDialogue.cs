@@ -15,11 +15,11 @@ public class LoadDialogue : MonoBehaviour
     public int currentDialogueID;
     public List<DialogueContainer> dialogues;
     public GameObject buttonPrefab;
-    public Color chosenOptionColor = new Color(0.5f, 0.5f, 0.5f, 0.75f);
+    public Color chosenOptionColor = new Color(0.75f, 0.75f, 0.75f, 0.75f);
 
     // Private
     int choice;
-    bool dialogueStarted, quitNode;
+    bool dialogueStarted, quitNode, wasChosen;
     string dialogueText, nodeGUID;
 
     List<string> options, targetNodes;
@@ -60,6 +60,7 @@ public class LoadDialogue : MonoBehaviour
         targetNodes = new List<string>();
         nodeGUID = null;
         quitNode = false;
+        wasChosen = false;
     }
 
     // Prowadzenie dialogu - przenoszenie kwestii z wczytanego SO do gry
@@ -86,6 +87,7 @@ public class LoadDialogue : MonoBehaviour
 
         foreach (DialogueNodeData d in dialogueNodeData)
         {
+            d.WasChosen = false;
             if (target == d.NodeGUID && !d.QuitNode)
             {
                 nodeGUID = d.NodeGUID;
@@ -104,7 +106,6 @@ public class LoadDialogue : MonoBehaviour
 
                 GetOptions();
             }
-            d.WasChosen = false;
         }
     }
 
@@ -116,6 +117,7 @@ public class LoadDialogue : MonoBehaviour
             if (targetNodes[choice] == d.NodeGUID)
             {
                 quitNode = d.QuitNode;
+                d.WasChosen = true;
                 if (!quitNode)
                 {
                     nodeGUID = d.NodeGUID;
@@ -155,10 +157,14 @@ public class LoadDialogue : MonoBehaviour
                 // Sprawdzenie czy ta opcja kończy dialog
                 var nodes = currentDialogue.DialogueNodeData;
                 bool quitOption = false;
+                bool wasChosen = false;
                 foreach (DialogueNodeData d in nodes)
                 {
-                    if (n.TargetNodeGUID == d.NodeGUID && d.QuitNode)
-                        quitOption = true;
+                    if (n.TargetNodeGUID == d.NodeGUID)
+                    {
+                        quitOption = d.QuitNode;
+                        wasChosen = d.WasChosen;
+                    }
                 }
 
                 // Przekazanie zdania lub tytułu opcji na przycisk
@@ -167,20 +173,28 @@ public class LoadDialogue : MonoBehaviour
                 {
                     options.Add(n.PortName);
                     if (!quitOption)
-                        CreateButton(n.PortName);
+                        WasChosen(CreateButton(n.PortName), wasChosen);
                     else
-                        CreateButton($"[ZAKOŃCZ] {n.PortName}");
+                        WasChosen(CreateButton($"[ZAKOŃCZ] {n.PortName}"), wasChosen);
                 }
                 else
                 {
                     options.Add(n.Sentence);
                     if (!quitOption)
-                        CreateButton(n.Sentence);
+                        WasChosen(CreateButton(n.Sentence), wasChosen);
                     else
-                        CreateButton($"[ZAKOŃCZ] {n.Sentence}");
+                        WasChosen(CreateButton($"[ZAKOŃCZ] {n.Sentence}"), wasChosen);
                 }
             }
         }
+    }
+
+    void WasChosen(GameObject buttonObject, bool chosen)
+    {
+        if (chosen)
+            buttonObject.GetComponentInChildren<Text>().color = chosenOptionColor;
+        else
+            buttonObject.GetComponentInChildren<Text>().color = defaultColor;
     }
 
     GameObject CreateButton(string text)
@@ -199,6 +213,23 @@ public class LoadDialogue : MonoBehaviour
 
     void OnClick(int n)
     {
+        /*var nodeLinks = currentDialogue.NodeLinks;
+        foreach (NodeLinkData links in nodeLinks)
+        {
+            if (links.BaseNodeGUID == nodeGUID)
+            {
+                var nodes = currentDialogue.DialogueNodeData;
+                foreach (DialogueNodeData d in nodes)
+                {
+                    if (links.TargetNodeGUID == d.NodeGUID)
+                    {
+                        d.WasChosen = true;
+                        Debug.Log("a");
+                    }
+                }
+            }
+        }*/
+
         choice = n;
 
         DestroyButtons();
@@ -213,5 +244,21 @@ public class LoadDialogue : MonoBehaviour
             Destroy(o);
         }
         buttons?.Clear();
+    }
+
+    public void ResetChosenMarks()
+    {
+        var nodeLinks = currentDialogue.NodeLinks;
+        foreach (NodeLinkData links in nodeLinks)
+        {
+            if (links.BaseNodeGUID == nodeGUID)
+            {
+                var nodes = currentDialogue.DialogueNodeData;
+                foreach (DialogueNodeData d in nodes)
+                {
+                    d.WasChosen = false;
+                }
+            }
+        }
     }
 }

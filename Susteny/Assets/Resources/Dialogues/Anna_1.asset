@@ -86,6 +86,10 @@ MonoBehaviour:
     Sentence: 
     PortName: '[dalej...]'
     TargetNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
+  - BaseNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
+    Sentence: 
+    PortName: ...
+    TargetNodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
   - BaseNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
     Sentence: 
     PortName: "Wiesz, kto to podrzuci\u0142?"
@@ -102,28 +106,40 @@ MonoBehaviour:
   - BaseNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
     Sentence: 
     PortName: Rozumiem.
-    TargetNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
+    TargetNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
   - BaseNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
     Sentence: 
     PortName: Wybacz.
-    TargetNodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
-  - BaseNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
+    TargetNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
+  - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
     Sentence: 
-    PortName: ...
-    TargetNodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
+    PortName: "Wiesz, kto to podrzuci\u0142?"
+    TargetNodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
+  - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
+    Sentence: 
+    PortName: "Zajmujesz si\u0119 renowacj\u0105 kamienic? I to tu, na miejscu? Dlaczego
+      napisa\u0142a\u015B do mnie dopiero teraz?"
+    TargetNodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
+  - BaseNodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
+    Sentence: 
+    PortName: Co to jest?
+    TargetNodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
   DialogueNodeData:
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 74b05ecd-48d7-4a18-b0ab-5c21e898e4f0
     DialogueText: "Czas jest wzgl\u0119dny."
     Position: {x: 223, y: 160}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 6a4a074e-acf8-4b52-ab20-a2f0ac3bee4f
     DialogueText: "Wskaz\xF3wki zegara przeskakuj\u0105. Tik-tak, tik-tak. A przecie\u017C
       czas nie skacze, czas p\u0142ynie nieustannie."
     Position: {x: 1202, y: -163}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: d48b136e-6af6-4cf8-bce4-6914182219c2
     DialogueText: "Mi\u0142o z twojej strony. W og\xF3le si\u0119 nie zmieni\u0142e\u015B,
@@ -131,6 +147,7 @@ MonoBehaviour:
       okazji. Nikt nie mo\u017Ce mnie tu zobaczy\u0107."
     Position: {x: 1201, y: 11}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: bb806e22-61a4-46e0-b5c5-581b30688734
     DialogueText: "Wiem. Na dodatek mog\u0119 ci powiedzie\u0107, \u017Ce nie b\u0119d\u0119
@@ -138,6 +155,7 @@ MonoBehaviour:
       Dlatego napatrz si\u0119 lepiej na mnie teraz."
     Position: {x: 1203, y: 173}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 936f9a40-d5d9-4eba-b2ac-c972b0c9e117
     DialogueText: "Ciebie r\xF3wnie\u017C. Min\u0119\u0142o troch\u0119 lat, prawda?
@@ -145,61 +163,79 @@ MonoBehaviour:
       mnie niestety to zale\u017Cy. Nikt nie mo\u017Ce mnie tu zobaczy\u0107."
     Position: {x: 1201, y: 317}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 784af33b-ae93-426b-940d-915cf3383627
     DialogueText: "Mam ci co\u015B ciekawego do pokazania."
     Position: {x: 2068, y: -356}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 1
     NodeGUID: 75c2d7f1-6d09-4a2a-841a-833ba0dd9fec
     DialogueText: "Chcia\u0142a\u015B wi\u0119c mi pokaza\u0107 co\u015B wa\u017Cnego...
       Co to jest?"
     Position: {x: 2254, y: -176}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: cebefbca-4299-4034-9a33-ea26bb9b534b
     DialogueText: "Przede wszystkim... Cholera jasna. Nie m\xF3w tak g\u0142o\u015Bno.
       Lada moment kto\u015B mo\u017Ce nadej\u015B\u0107."
     Position: {x: 3002, y: -378}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 2185073c-a94e-41fa-88d1-e8b082a987ed
     DialogueText: To dobrze, bo...
     Position: {x: 2326, y: 128}
   - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 9d62d358-c1a3-408c-b2c0-417774da8c42
     DialogueText: "Konrad, prosz\u0119... Daruj sobie."
     Position: {x: 4000, y: -560}
   - QuitNode: 0
+    WasChosen: 0
+    PlayerText: 0
+    NodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
+    DialogueText: Ty mi powiedz, to do ciebie.
+    Position: {x: 6357, y: -353}
+  - QuitNode: 1
+    WasChosen: 0
+    PlayerText: 0
+    NodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
+    DialogueText: Dialogue Node
+    Position: {x: 7070, y: -344}
+  - QuitNode: 0
+    WasChosen: 0
+    PlayerText: 0
+    NodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
+    DialogueText: "Nie, ale my\u015Bl\u0119, \u017Ce b\u0119dziesz w stanie si\u0119
+      dowiedzie\u0107."
+    Position: {x: 6334, y: -611}
+  - QuitNode: 0
+    WasChosen: 0
+    PlayerText: 0
+    NodeGUID: 7a1e784d-c04d-4e4b-afc4-fa4e312d39af
+    DialogueText: "W porz\u0105dku, na czym stan\u0119li\u015Bmy?"
+    Position: {x: 4711, y: -465}
+  - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: 94298320-2ad0-44a2-a5a2-6bc9c9c46f59
     DialogueText: "S\u0142uchaj uwa\u017Cnie. Nie mam czasu, \u017Ceby powtarza\u0107
       dwa razy. Kto\u015B mi to podrzuci\u0142 w zesz\u0142ym tygodniu. Najprawdopodobniej
       po tym, jak pr\xF3bowa\u0142am si\u0119 z tob\u0105 ostatnio skontaktowa\u0107.
       Znalaz\u0142am to w szparga\u0142ach z kamienicy, kt\xF3r\u0105 renowowa\u0142am."
-    Position: {x: 4691, y: -359}
+    Position: {x: 4691, y: -263}
   - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 638bc65e-53a8-4a61-abf0-9f715b330fae
-    DialogueText: "Nie, ale my\u015Bl\u0119, \u017Ce b\u0119dziesz w stanie si\u0119
-      dowiedzie\u0107."
-    Position: {x: 5168, y: -676}
-  - QuitNode: 0
+    WasChosen: 0
     PlayerText: 0
     NodeGUID: d4972c02-448c-4dbd-a69a-9249665cdac7
     DialogueText: "Tak naprawd\u0119, to w og\xF3le nie powinnam by\u0142a do ciebie
       pisa\u0107. Nie zmieniaj tematu, do cholery."
-    Position: {x: 5170, y: -88}
-  - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 9cd99e27-0a64-4e4e-bc51-b5ede64bbbca
-    DialogueText: Ty mi powiedz, to do ciebie.
-    Position: {x: 6357, y: -353}
-  - QuitNode: 1
-    PlayerText: 0
-    NodeGUID: 815dfa43-579f-4157-9b97-f234cb2a9969
-    DialogueText: Dialogue Node
-    Position: {x: 7070, y: -344}
-  ExposedProperties: []
+    Position: {x: 6328, y: -765}
+  ExposedProperties:
+  - PropertyName: 
+    PropertyValue: New Value
   CommentBlockData: []

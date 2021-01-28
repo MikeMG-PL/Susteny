@@ -10658,7 +10658,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15636
+  m_Name: pb_Mesh-2206
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16302,28 +16302,8 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogues.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 44d6f81575e8b9846b8ae634c39895cc,
+      objectReference: {fileID: 11400000, guid: ea00eb4f6f3dd584a98d485e47dd8042,
         type: 2}
-    - target: {fileID: 5389328372794970724, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
-        type: 3}
-      propertyPath: chosenOptionColor.r
-      value: 0.5019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389328372794970724, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
-        type: 3}
-      propertyPath: chosenOptionColor.g
-      value: 0.5019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389328372794970724, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
-        type: 3}
-      propertyPath: chosenOptionColor.b
-      value: 0.5019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389328372794970724, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
-        type: 3}
-      propertyPath: chosenOptionColor.a
-      value: 0.7529412
-      objectReference: {fileID: 0}
     - target: {fileID: 5440889915733638849, guid: 74a8a7d7e78684b4580acf2a0d43cdc6,
         type: 3}
       propertyPath: m_Mesh
