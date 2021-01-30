@@ -15,6 +15,7 @@ namespace Subtegral.DialogueSystem.Editor
 {
     public class StoryGraphView : GraphView
     {
+        public List<UnityEngine.UIElements.Toggle> grayOutToggles;
         public readonly Vector2 DefaultNodeSize = new Vector2(200, 150);
         public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
         public DialogueNode EntryPointNode;
@@ -119,12 +120,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText, bool gray)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
         {
-            AddElement(CreateNode(nodeName, position, quit, pText, gray));
+            AddElement(CreateNode(nodeName, position, quit, pText));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText, bool gray)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -132,8 +133,7 @@ namespace Subtegral.DialogueSystem.Editor
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
                 QuitNode = quit,
-                PlayerText = pText,
-                GrayOut = gray
+                PlayerText = pText
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
@@ -162,14 +162,14 @@ namespace Subtegral.DialogueSystem.Editor
             playerText.SetValueWithoutNotify(playerText.value);
             tempDialogueNode.mainContainer.Add(playerText);
 
-            var grayOut = new UnityEngine.UIElements.Toggle()
+            /*var grayOut = new UnityEngine.UIElements.Toggle()
             {
                 text = "gray out these options when chosen again?",
                 value = tempDialogueNode.GrayOut
             };
             grayOut.RegisterValueChangedCallback((x) => tempDialogueNode.GrayOut = x.newValue);
             grayOut.SetValueWithoutNotify(grayOut.value);
-            tempDialogueNode.mainContainer.Add(grayOut);
+            tempDialogueNode.mainContainer.Add(grayOut);*/
 
             var textField = new TextField();
             textField.multiline = true;
@@ -182,7 +182,7 @@ namespace Subtegral.DialogueSystem.Editor
             textField.SetValueWithoutNotify(tempDialogueNode.title);
             tempDialogueNode.mainContainer.Add(textField);
 
-            var button = new Button(() => { AddChoicePort(tempDialogueNode, "Please enter the sentence"); })
+            var button = new Button(() => { AddChoicePort(tempDialogueNode, "[Please enter the sentence]"); })
             {
                 text = "Add Choice"
             };
@@ -222,12 +222,14 @@ namespace Subtegral.DialogueSystem.Editor
                 value = outputPortName
             };
             textField.multiline = true;
-
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
+
             generatedPort.contentContainer.Add(new Label("  "));
             generatedPort.contentContainer.Add(textField);
 
-            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
+            var toggle = GrayOutHandling(nodeCache, generatedPort);
+
+            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort, toggle))
             {
                 text = "Delete choice"
             };
@@ -235,12 +237,48 @@ namespace Subtegral.DialogueSystem.Editor
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);
+
+
+
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();
         }
 
-        private void RemovePort(Node node, Port socket)
+        UnityEngine.UIElements.Toggle GrayOutHandling(DialogueNode nodeCache, Port generatedPort)
         {
+            // Inicjalizacja tablicy i dodanie elementów - biorąc pod uwagę stworzenie Toggle'a w międzyczasie
+            if (nodeCache.GrayOutPorts == null)
+            {
+                nodeCache.GrayOutPorts = new List<bool>();
+                grayOutToggles = new List<UnityEngine.UIElements.Toggle>();
+            }
+            nodeCache.GrayOutPorts.Add(true);
+
+            var grayOut = new UnityEngine.UIElements.Toggle()
+            {
+                text = $"debug: {nodeCache.GrayOutPorts.Count}, change back to: \"gray out?\"",
+                value = true,
+                userData = new IDInfo { ID = nodeCache.GrayOutPorts.Count - 1 }
+            };
+            grayOutToggles.Add(grayOut);
+            //////////////////////////////////////////////
+
+            dynamic userData = grayOut.userData;
+            int ID = userData.ID;
+
+            //debugging
+            grayOut.text = ID.ToString();
+
+            grayOut.RegisterValueChangedCallback((x) => nodeCache.GrayOutPorts[ID] = x.newValue);
+            grayOut.SetValueWithoutNotify(grayOut.value);
+            generatedPort.contentContainer.Add(grayOut);
+
+            return grayOut;
+        }
+
+        private void RemovePort(Node node, Port socket, UnityEngine.UIElements.Toggle grayOutToggle)
+        {
+            var dialogueNode = (DialogueNode)node;
             var targetEdge = edges.ToList()
                 .Where(x => x.output.portName == socket.portName && x.output.node == socket.node);
             if (targetEdge.Any())
@@ -251,6 +289,27 @@ namespace Subtegral.DialogueSystem.Editor
             }
 
             node.outputContainer.Remove(socket);
+
+            dynamic userData = grayOutToggle.userData;
+            int ID = userData.ID;
+
+            // tutaj usuwa z tablicy
+            if (dialogueNode.GrayOutPorts.Count > 0)
+            {
+                dialogueNode.GrayOutPorts.RemoveAt(ID);
+                grayOutToggles.RemoveAt(ID);
+
+                for (int i = ID; i < grayOutToggles.Count; i++)
+                {
+                    dynamic data = grayOutToggles[i].userData;
+                    var newID = data.ID - 1;
+                    IDInfo idInfo = new IDInfo { ID = newID };
+                    grayOutToggles[i].userData = idInfo;
+                    grayOutToggles[i].text = $"{newID}";
+                }
+            }
+            //////////////////////////////////////////////
+
             node.RefreshPorts();
             node.RefreshExpandedState();
         }
@@ -283,6 +342,11 @@ namespace Subtegral.DialogueSystem.Editor
             nodeCache.SetPosition(new Rect(100, 200, 100, 150));
             return nodeCache;
         }
+    }
+
+    class IDInfo
+    {
+        public int ID;
     }
 }
 #endif

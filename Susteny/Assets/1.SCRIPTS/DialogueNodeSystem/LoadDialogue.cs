@@ -86,7 +86,6 @@ public class LoadDialogue : MonoBehaviour
 
         foreach (DialogueNodeData d in dialogueNodeData)
         {
-            d.WasChosen = false;
             if (target == d.NodeGUID && !d.QuitNode)
             {
                 nodeGUID = d.NodeGUID;
@@ -111,17 +110,23 @@ public class LoadDialogue : MonoBehaviour
     void GetNode()
     {
         var dialogueNodeData = currentDialogue.DialogueNodeData;
+        var nodeLinkData = currentDialogue.NodeLinks;
         foreach (DialogueNodeData d in dialogueNodeData)
         {
             if (targetNodes[choice] == d.NodeGUID)
             {
+                Debug.Log(d.GrayOutPorts.Count);
+                // Sprawdzenie połączeń - zbadanie czy wybrane połączenie powinno zostać oznaczone jako gotowe do wyszarzenia
+                foreach (NodeLinkData n in nodeLinkData)
+                {
+                    if (n.GrayOut && d.NodeGUID == n.TargetNodeGUID) // base?
+                        n.WasChosen = true;
+                    else if (!n.GrayOut && d.NodeGUID == n.TargetNodeGUID)
+                        n.WasChosen = false;
+                }
+
+
                 quitNode = d.QuitNode;
-
-                if (d.GrayOut)
-                    d.WasChosen = true;
-                else
-                    d.WasChosen = false;
-
                 if (!quitNode)
                 {
                     nodeGUID = d.NodeGUID;
@@ -165,10 +170,7 @@ public class LoadDialogue : MonoBehaviour
                 foreach (DialogueNodeData d in nodes)
                 {
                     if (n.TargetNodeGUID == d.NodeGUID)
-                    {
                         quitOption = d.QuitNode;
-                        wasChosen = d.WasChosen;
-                    }
                 }
 
                 // Przekazanie zdania lub tytułu opcji na przycisk
@@ -260,7 +262,7 @@ public class LoadDialogue : MonoBehaviour
                 var nodes = currentDialogue.DialogueNodeData;
                 foreach (DialogueNodeData d in nodes)
                 {
-                    d.WasChosen = false;
+                    ;
                 }
             }
         }
