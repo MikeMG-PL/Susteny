@@ -120,12 +120,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText, List<bool> gout)
         {
-            AddElement(CreateNode(nodeName, position, quit, pText));
+            AddElement(CreateNode(nodeName, position, quit, pText, gout));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText, List<bool> gout)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -133,7 +133,8 @@ namespace Subtegral.DialogueSystem.Editor
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
                 QuitNode = quit,
-                PlayerText = pText
+                PlayerText = pText,
+                GrayOutPorts = gout
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
@@ -238,8 +239,6 @@ namespace Subtegral.DialogueSystem.Editor
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);
 
-
-
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();
         }
@@ -247,7 +246,7 @@ namespace Subtegral.DialogueSystem.Editor
         UnityEngine.UIElements.Toggle GrayOutHandling(DialogueNode nodeCache, Port generatedPort)
         {
             // Inicjalizacja tablicy i dodanie elementów - biorąc pod uwagę stworzenie Toggle'a w międzyczasie
-            if (nodeCache.GrayOutPorts == null)
+            if (nodeCache.GrayOutPorts == null || nodeCache.GrayOutPorts.Count == 0)
             {
                 nodeCache.GrayOutPorts = new List<bool>();
                 grayOutToggles = new List<UnityEngine.UIElements.Toggle>();
@@ -305,6 +304,8 @@ namespace Subtegral.DialogueSystem.Editor
                     var newID = data.ID - 1;
                     IDInfo idInfo = new IDInfo { ID = newID };
                     grayOutToggles[i].userData = idInfo;
+
+                    // this one is for debugging
                     grayOutToggles[i].text = $"{newID}";
                 }
             }
