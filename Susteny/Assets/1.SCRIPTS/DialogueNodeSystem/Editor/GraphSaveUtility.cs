@@ -54,13 +54,23 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 var outputNode = (connectedSockets[i].output.node as DialogueNode);
                 var inputNode = (connectedSockets[i].input.node as DialogueNode);
+
+                bool grayOut;
+                if(connectedSockets[i].output.userData == null)
+                    grayOut = false;
+                else
+                {
+                    dynamic userData = connectedSockets[i].output.userData;
+                    grayOut = userData.grayOut;
+                }
+
                 dialogueContainerObject.NodeLinks.Add(new NodeLinkData
                 {
                     BaseNodeGUID = outputNode.GUID,
                     PortName = connectedSockets[i].output.portName,
                     Sentence = connectedSockets[i].output.name,
                     TargetNodeGUID = inputNode.GUID,
-                    //GrayOut = ???
+                    GrayOut = grayOut
                 });
             }
 
@@ -148,7 +158,7 @@ namespace Subtegral.DialogueSystem.Editor
                 
                 _graphView.AddElement(tempNode);
                 var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
-                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName));
+                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.GrayOut, x.PortName));
             }
         }
 
