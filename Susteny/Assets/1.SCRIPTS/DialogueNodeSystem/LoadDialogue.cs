@@ -115,7 +115,6 @@ public class LoadDialogue : MonoBehaviour
         {
             if (targetNodes[choice] == d.NodeGUID)
             {
-                Debug.Log(d.GrayOutPorts.Count);
                 // Sprawdzenie połączeń - zbadanie czy wybrane połączenie powinno zostać oznaczone jako gotowe do wyszarzenia
                 foreach (NodeLinkData n in nodeLinkData)
                 {

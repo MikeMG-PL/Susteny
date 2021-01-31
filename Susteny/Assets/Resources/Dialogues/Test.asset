@@ -10,111 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
-  m_Name: Test
+  m_Name: test
   m_EditorClassIdentifier: 
   NodeLinks:
   - WasChosen: 0
     GrayOut: 0
-    BaseNodeGUID: 7bc1dde4-8986-4beb-93ee-171888218ac4
+    BaseNodeGUID: 2a7fc8e2-d976-43ee-8575-cb1d8d6fa08c
     Sentence: 
     PortName: Next
-    TargetNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    TargetNodeGUID: e3e5e005-1278-4388-a3b4-873749e05c8a
   - WasChosen: 0
     GrayOut: 0
-    BaseNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    BaseNodeGUID: e3e5e005-1278-4388-a3b4-873749e05c8a
     Sentence: 
-    PortName: "Opowiedz co\u015B o sobie"
-    TargetNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
+    PortName: Option 1
+    TargetNodeGUID: fc89ecd5-89b1-42f3-9b17-5858d308f37b
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: e3e5e005-1278-4388-a3b4-873749e05c8a
+    Sentence: 
+    PortName: Option 2
+    TargetNodeGUID: fc89ecd5-89b1-42f3-9b17-5858d308f37b
   - WasChosen: 0
     GrayOut: 0
-    BaseNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
+    BaseNodeGUID: e3e5e005-1278-4388-a3b4-873749e05c8a
     Sentence: 
-    PortName: "Cze\u015B\u0107, co ci\u0119 sprowadza?"
-    TargetNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
-    Sentence: 
-    PortName: Opowiadaj, mordooooo!
-    TargetNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-    Sentence: 
-    PortName: Tia.
-    TargetNodeGUID: 75464860-8ff1-455c-a1c2-85ffb0fe777e
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
-    Sentence: 
-    PortName: "Opowiedz co\u015B o sobie"
-    TargetNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
-    Sentence: 
-    PortName: "Cze\u015B\u0107, co ci\u0119 sprowadza?"
-    TargetNodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
-    Sentence: 
-    PortName: Opowiadaj, mordooooo!
-    TargetNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
-    Sentence: 
-    PortName: Meh...
-    TargetNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
-    Sentence: 
-    PortName: Rozumiem.
-    TargetNodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
+    PortName: Option 3
+    TargetNodeGUID: fc89ecd5-89b1-42f3-9b17-5858d308f37b
   DialogueNodeData:
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 0
+  - QuitNode: 1
     PlayerText: 0
-    NodeGUID: 902c814c-05d4-4a6f-ade9-06646baa9e54
-    DialogueText: Nieeee!
-    Position: {x: 815, y: 545}
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 30b2ae96-614f-44a0-94b9-84fe1bca9ebe
-    DialogueText: "Jestem sobie go\u015Bciem od testowania dialog\xF3w."
-    Position: {x: 760, y: -104}
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 3b652cbc-910b-41bf-9ad1-65df3a7abefb
-    DialogueText: Okej, do rzeczy.
-    Position: {x: 1138, y: 201}
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 0
-    PlayerText: 0
-    NodeGUID: ed31898b-d8f8-44f9-81ef-6ea9f625f779
-    DialogueText: Okej, porozmawiajmy o dalszych rzeczach!
-    Position: {x: 2165, y: 227}
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 1
-    PlayerText: 0
-    NodeGUID: 75464860-8ff1-455c-a1c2-85ffb0fe777e
+    NodeGUID: fc89ecd5-89b1-42f3-9b17-5858d308f37b
     DialogueText: Dialogue Node
-    Position: {x: 2856, y: 227}
-  - WasChosenPorts: 
-    GrayOutPorts: 
-    QuitNode: 0
+    Position: {x: 646, y: 228}
+  - QuitNode: 0
     PlayerText: 0
-    NodeGUID: 1b50b0c4-c0ac-4f5f-b837-8bd49ee7e66c
-    DialogueText: Witaj!
-    Position: {x: 366, y: 199}
+    NodeGUID: e3e5e005-1278-4388-a3b4-873749e05c8a
+    DialogueText: Dialogue Node
+    Position: {x: 204, y: 200}
   ExposedProperties: []
   CommentBlockData: []
