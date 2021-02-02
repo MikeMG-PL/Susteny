@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
-  m_Name: Wladyslaw_1
+  m_Name: a
   m_EditorClassIdentifier: 
   NodeLinks:
   - WasChosen: 0
@@ -125,52 +125,34 @@ MonoBehaviour:
     TargetNodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
   - WasChosen: 0
     GrayOut: 1
+    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    Sentence: 
+    PortName: O, fajno. Kolejne drzwi.
+    TargetNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    Sentence: 
+    PortName: "W porz\u0105dku... i co, to tyle?"
+    TargetNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+    Sentence: 
+    PortName: "Znasz Ann\u0119?"
+    TargetNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
+  - WasChosen: 0
+    GrayOut: 1
     BaseNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
     Sentence: 
     PortName: "Ja bym wola\u0142 ju\u017C st\u0105d spada\u0107, nie odpada\u0107..."
-    TargetNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
   - WasChosen: 0
     GrayOut: 1
     BaseNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
     Sentence: 
     PortName: "W porz\u0105dku, rozumiem."
-    TargetNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    Sentence: 
-    PortName: O, fajno. Kolejne drzwi.
-    TargetNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    Sentence: 
-    PortName: "W porz\u0105dku... i co, to tyle?"
-    TargetNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
-    Sentence: 
-    PortName: O, fajno. Kolejne drzwi.
-    TargetNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
-    Sentence: 
-    PortName: "W porz\u0105dku... i co, to tyle?"
-    TargetNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
-    Sentence: 
-    PortName: "Znasz Ann\u0119?"
-    TargetNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    Sentence: 
-    PortName: "Znasz Ann\u0119?"
-    TargetNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
   DialogueNodeData:
   - QuitNode: 0
     PlayerText: 0
@@ -255,21 +237,16 @@ MonoBehaviour:
     Position: {x: 4348, y: -14}
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
-    DialogueText: "Anna... Anna, Anna, Anna! Jakby\u015B m\xF3g\u0142, to by\u015B
-      sobie da\u0142 na drugie \"Anna\". Anna si\u0119 nie liczy. Ale tak, znam j\u0105."
-    Position: {x: 4198, y: 481}
-  - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    DialogueText: O czym to my? Ach tak, drzwi balkonowe...
-    Position: {x: 4761, y: 234}
-  - QuitNode: 0
-    PlayerText: 0
     NodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
     DialogueText: "Tak... Obraz m\xF3wi wi\u0119cej, ni\u017C tysi\u0105c s\u0142\xF3w.
       Przed tob\u0105 ostatnie drzwi. Balkonowe. Wyjd\u017A przez nie. Wtedy dopiero
       naprawd\u0119 zauwa\u017Cysz, \u017Ce zepsu\u0142e\u015B \u015Bwiat."
     Position: {x: 3649, y: 221}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
+    DialogueText: "Anna... Anna, Anna, Anna! Jakby\u015B m\xF3g\u0142, to by\u015B
+      sobie da\u0142 na drugie \"Anna\". Anna si\u0119 nie liczy. Ale tak, znam j\u0105."
+    Position: {x: 4210, y: 521}
   ExposedProperties: []
   CommentBlockData: []
