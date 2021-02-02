@@ -161,17 +161,15 @@ public class LoadDialogue : MonoBehaviour
         var nodeLinks = currentDialogue.NodeLinks;
         foreach (NodeLinkData n in nodeLinks)
         {
-            bool wasChosen;
-
-            if (n.GrayOut) wasChosen = n.WasChosen;
-            else wasChosen = false;
-
             if (n.BaseNodeGUID == nodeGUID)
             {
                 // Sprawdzenie czy ta opcja kończy dialog
                 var nodes = currentDialogue.DialogueNodeData;
                 bool quitOption = false;
-                
+                bool wasChosen;
+
+                if (n.GrayOut) wasChosen = n.WasChosen;
+                else wasChosen = false;
 
                 foreach (DialogueNodeData d in nodes)
                 {
