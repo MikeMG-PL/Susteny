@@ -2663,6 +2663,8 @@ GameObject:
   - component: {fileID: 4242169574003065770}
   - component: {fileID: 2758625805856699126}
   - component: {fileID: 3127301885294489839}
+  - component: {fileID: 4702648885517482245}
+  - component: {fileID: 7859072905373309608}
   m_Layer: 12
   m_Name: Anna
   m_TagString: Untagged
@@ -2732,7 +2734,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aad74521ba7d2f548bfc006349699a8e, type: 2}
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
     type: 3}
-  chosenOptionColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.78431374}
+  quitButton: {fileID: 6461714216415666858, guid: 44b385c490ddf4840bc7cc1694e89335,
+    type: 3}
+  chosenOptionAlpha: 0.8
 --- !u!114 &7849140011197825162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2852,6 +2856,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nearCrosshairHint: Rozmawiaj [LPM]
+  cornerHints: []
+--- !u!114 &4702648885517482245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13759d3e7b46234c911d05988d629ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableLookAt: 1
+  objectToLookAt: {fileID: 0}
+  enableGoTo: 1
+  positionToGo: {fileID: 0}
+  lookSpeed: 50
+  moveSpeed: 4
+  distance: 2
+  cursorOnWhenOnPosition: 1
+--- !u!114 &7859072905373309608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577894649324973026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8350c81972de6e40bfcaef6a1a9061a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearCrosshairHint: Porozmawiaj [LPM]
   cornerHints: []
 --- !u!1 &5660752834196912197
 GameObject:

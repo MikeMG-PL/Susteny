@@ -33,9 +33,10 @@ namespace Subtegral.DialogueSystem.Editor
             };
         }
 
-        public void SaveGraph(string fileName)
+        public void SaveGraph(string fileName, bool canQuit)
         {
             var dialogueContainerObject = ScriptableObject.CreateInstance<DialogueContainer>();
+            dialogueContainerObject.canLeaveDialogue = canQuit;
             if (!SaveNodes(fileName, dialogueContainerObject)) return;
             SaveExposedProperties(dialogueContainerObject);
             SaveCommentBlocks(dialogueContainerObject);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 using Subtegral.DialogueSystem.DataContainers;
 
 public class LoadDialogue : MonoBehaviour
@@ -15,7 +16,9 @@ public class LoadDialogue : MonoBehaviour
     public int currentDialogueID;
     public List<DialogueContainer> dialogues;
     public GameObject buttonPrefab;
-    public Color chosenOptionColor = new Color(0.78125f, 0.78125f, 0.78125f, 0.78125f);
+    public GameObject quitButton;
+    private Color chosenOptionColor;
+    public float chosenOptionAlpha = 0.8f;
 
     // Private
     int choice;
@@ -25,8 +28,8 @@ public class LoadDialogue : MonoBehaviour
     List<string> options, targetNodes;
     DialogueContainer currentDialogue;
     GameObject panel;
-    Text npcName, sentence;
-    Color defaultColor = Color.white;
+    TMP_Text npcName, sentence;
+    Color defaultColor;
 
     void Awake()
     {
@@ -38,9 +41,18 @@ public class LoadDialogue : MonoBehaviour
     {
         if (dialogues.Count > 0)
         {
+            defaultColor = buttonPrefab.transform.GetChild(0).GetComponent<TMP_Text>().color;
+            chosenOptionColor = new Color(defaultColor.r, defaultColor.g * 0.7f, defaultColor.b, chosenOptionAlpha * defaultColor.a);
+
             currentDialogue = dialogues[i];
             if (currentDialogue == null)
                 Debug.LogError($"Beware! NPC \"{name}\", a.k.a. \"{nameOfNPC}\" has empty places for dialogue data! Assign them in the inspector.");
+
+            if(currentDialogue.canLeaveDialogue)
+            {
+                GameObject leaveConversationButton;
+                leaveConversationButton = Instantiate(quitButton, panel.transform.GetChild(0));
+            }
 
             npcName = panel.GetComponent<Panel>().npcName;
             sentence = panel.GetComponent<Panel>().sentence;
@@ -193,9 +205,9 @@ public class LoadDialogue : MonoBehaviour
     void WasChosen(GameObject buttonObject, bool chosen)
     {
         if (chosen)
-            buttonObject.GetComponentInChildren<Text>().color = chosenOptionColor;
+            buttonObject.GetComponentInChildren<TMP_Text>().color = chosenOptionColor;
         else
-            buttonObject.GetComponentInChildren<Text>().color = defaultColor;
+            buttonObject.GetComponentInChildren<TMP_Text>().color = defaultColor;
     }
 
     GameObject CreateButton(string text, NodeLinkData nodelinks)
@@ -204,7 +216,7 @@ public class LoadDialogue : MonoBehaviour
         var option = Instantiate(buttonPrefab, panel.transform.GetChild(0));
 
         option.transform.localPosition = new Vector2(0, (instantiatedButtons - 1) * (-40) - 100);
-        option.transform.GetChild(0).GetComponent<Text>().text = text;
+        option.transform.GetChild(0).GetComponent<TMP_Text>().text = text;
         option.GetComponent<ButtonID>().buttonID = instantiatedButtons - 1;
 
         buttons.Add(option);

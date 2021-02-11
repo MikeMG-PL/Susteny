@@ -33,18 +33,6 @@ MonoBehaviour:
     TargetNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
-    Sentence: 
-    PortName: Rozumiem...
-    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
-    Sentence: 
-    PortName: "To pomy\u0142ka."
-    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
-  - WasChosen: 0
-    GrayOut: 1
     BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
     Sentence: 
     PortName: "Znamy si\u0119?"
@@ -55,6 +43,18 @@ MonoBehaviour:
     Sentence: 
     PortName: "Dobra, chod\u017Amy."
     TargetNodeGUID: a2534496-55e1-4522-9cf3-bf1559e6eb45
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
+    Sentence: 
+    PortName: Rozumiem...
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
+    Sentence: 
+    PortName: "To pomy\u0142ka."
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
   DialogueNodeData:
   - QuitNode: 0
     PlayerText: 0
@@ -89,3 +89,4 @@ MonoBehaviour:
     Position: {x: 1721, y: 197}
   ExposedProperties: []
   CommentBlockData: []
+  canLeaveDialogue: 1

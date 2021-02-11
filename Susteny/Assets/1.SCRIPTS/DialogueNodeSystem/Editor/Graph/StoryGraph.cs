@@ -15,6 +15,7 @@ namespace Subtegral.DialogueSystem.Editor
     public class StoryGraph : EditorWindow
     {
         private string _fileName = "New Narrative";
+        private bool canQuit;
 
         private StoryGraphView _graphView;
         private DialogueContainer _dialogueContainer;
@@ -50,6 +51,10 @@ namespace Subtegral.DialogueSystem.Editor
 
             toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
 
+            var toggle = new Toggle { text = "Can quit dialogue anytime" };
+            toolbar.Add(toggle);
+            toggle.RegisterValueChangedCallback(evt => canQuit = evt.newValue);
+
             rootVisualElement.Add(toolbar);
         }
 
@@ -59,7 +64,7 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 var saveUtility = GraphSaveUtility.GetInstance(_graphView);
                 if (save)
-                    saveUtility.SaveGraph(_fileName);
+                    saveUtility.SaveGraph(_fileName, canQuit);
                 else
                     saveUtility.LoadNarrative(_fileName);
             }

@@ -11,5 +11,6 @@ namespace Subtegral.DialogueSystem.DataContainers
         public List<DialogueNodeData> DialogueNodeData = new List<DialogueNodeData>();
         public List<ExposedProperty> ExposedProperties = new List<ExposedProperty>();
         public List<CommentBlockData> CommentBlockData = new List<CommentBlockData>();
+        public bool canLeaveDialogue;
     }
 }

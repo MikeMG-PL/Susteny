@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Panel : MonoBehaviour
 {
-    public Text npcName;
-    public Text sentence;
+    public TMP_Text npcName;
+    public TMP_Text sentence;
 }
