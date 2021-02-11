@@ -18,68 +18,74 @@ MonoBehaviour:
     BaseNodeGUID: 2a7fc8e2-d976-43ee-8575-cb1d8d6fa08c
     Sentence: 
     PortName: Next
-    TargetNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
     Sentence: 
-    PortName: "Opcja g\u0142\xF3wna"
-    TargetNodeGUID: 7ffab301-fd6f-4375-b5e6-497bd9d54291
+    PortName: "Przysz\u0142am na spotkanie stowarzyszenia."
+    TargetNodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: 7ffab301-fd6f-4375-b5e6-497bd9d54291
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
     Sentence: 
-    PortName: ...
-    TargetNodeGUID: e907bded-cc6b-4733-847c-66b6ae5ce452
+    PortName: Anna? Co tutaj robisz?
+    TargetNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    BaseNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
     Sentence: 
-    PortName: Opcja poboczna 1
-    TargetNodeGUID: 8bc94cc7-4951-4587-86e5-8eaeeba6cf39
+    PortName: Rozumiem...
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: 8bc94cc7-4951-4587-86e5-8eaeeba6cf39
+    BaseNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
     Sentence: 
-    PortName: Okej, wracamy.
-    TargetNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    PortName: "To pomy\u0142ka."
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
     Sentence: 
-    PortName: Opcja poboczna 2
-    TargetNodeGUID: 1a8d03fc-8ee7-4581-8b96-21f586e67839
+    PortName: "Znamy si\u0119?"
+    TargetNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
   - WasChosen: 0
     GrayOut: 1
-    BaseNodeGUID: 1a8d03fc-8ee7-4581-8b96-21f586e67839
+    BaseNodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
     Sentence: 
-    PortName: Okej, wracamy.
-    TargetNodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
+    PortName: "Dobra, chod\u017Amy."
+    TargetNodeGUID: a2534496-55e1-4522-9cf3-bf1559e6eb45
   DialogueNodeData:
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: c9be9a49-d234-4c62-b7c2-b65d3bb996f5
-    DialogueText: Hej!
-    Position: {x: 225, y: 200}
+    NodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+    DialogueText: "Cze\u015B\u0107, Klaudia! Jeste\u015B w ko\u0144cu!"
+    AlternateText: Susteny zaraz ma spotkanie...
+    Position: {x: 313, y: 200}
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: 7ffab301-fd6f-4375-b5e6-497bd9d54291
-    DialogueText: "No, dalsza cz\u0119\u015B\u0107 dialogu g\u0142\xF3wnego..."
-    Position: {x: 727, y: 220}
+    NodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
+    DialogueText: "Chod\u017A ze mn\u0105. Nied\u0142ugo zaczynamy."
+    AlternateText: 
+    Position: {x: 1101, y: 198}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
+    DialogueText: "No jak to co? Nale\u017C\u0119 do Susteny od jakiego\u015B czasu."
+    AlternateText: "M\xF3wilam, \u017Ce nale\u017C\u0119 do Susteny... zaraz jest
+      spotkanie. Chod\u017A do nas."
+    Position: {x: 346, y: 583}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
+    DialogueText: Hmm? Nie rozumiem.
+    AlternateText: Klaudia...
+    Position: {x: 389, y: -74}
   - QuitNode: 1
     PlayerText: 0
-    NodeGUID: e907bded-cc6b-4733-847c-66b6ae5ce452
+    NodeGUID: a2534496-55e1-4522-9cf3-bf1559e6eb45
     DialogueText: Dialogue Node
-    Position: {x: 1149, y: 220}
-  - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 8bc94cc7-4951-4587-86e5-8eaeeba6cf39
-    DialogueText: Opcja poboczna!
-    Position: {x: 230, y: -4}
-  - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: 1a8d03fc-8ee7-4581-8b96-21f586e67839
-    DialogueText: Opcja poboczna!
-    Position: {x: 233, y: 408}
+    AlternateText: 
+    Position: {x: 1721, y: 197}
   ExposedProperties: []
   CommentBlockData: []

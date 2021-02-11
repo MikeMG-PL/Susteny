@@ -2732,7 +2732,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aad74521ba7d2f548bfc006349699a8e, type: 2}
   buttonPrefab: {fileID: 6461714216415666858, guid: 395880a46df0cfb41bf04a6afca42a27,
     type: 3}
-  chosenOptionColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 0.81960785}
+  chosenOptionColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.78431374}
 --- !u!114 &7849140011197825162
 MonoBehaviour:
   m_ObjectHideFlags: 0

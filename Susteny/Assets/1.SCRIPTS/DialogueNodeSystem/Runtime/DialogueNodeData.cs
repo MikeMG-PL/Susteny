@@ -11,6 +11,7 @@ namespace Subtegral.DialogueSystem.DataContainers
         public bool PlayerText;
         public string NodeGUID;
         public string DialogueText;
+        public string AlternateText;
         public Vector2 Position;
     }
 }

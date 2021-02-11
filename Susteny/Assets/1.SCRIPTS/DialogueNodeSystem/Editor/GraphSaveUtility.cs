@@ -80,6 +80,7 @@ namespace Subtegral.DialogueSystem.Editor
                 {
                     PlayerText = node.PlayerText,
                     QuitNode = node.QuitNode,
+                    AlternateText = node.AlternateText,
                     NodeGUID = node.GUID,
                     DialogueText = node.DialogueText,
                     Position = node.GetPosition().position
@@ -149,9 +150,10 @@ namespace Subtegral.DialogueSystem.Editor
         {
             foreach (var perNode in _dialogueContainer.DialogueNodeData)
             {
-                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero, perNode.QuitNode, perNode.PlayerText);
+                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero, perNode.QuitNode, perNode.PlayerText, perNode.AlternateText);
                 tempNode.GUID = perNode.NodeGUID;
                 tempNode.QuitNode = perNode.QuitNode;
+                tempNode.AlternateText = perNode.AlternateText;
                 tempNode.PlayerText = perNode.PlayerText;
                 
                 _graphView.AddElement(tempNode);

@@ -15,7 +15,7 @@ public class LoadDialogue : MonoBehaviour
     public int currentDialogueID;
     public List<DialogueContainer> dialogues;
     public GameObject buttonPrefab;
-    public Color chosenOptionColor = new Color(0.815f, 0.815f, 0.815f, 0.815f);
+    public Color chosenOptionColor = new Color(0.78125f, 0.78125f, 0.78125f, 0.78125f);
 
     // Private
     int choice;
@@ -116,32 +116,33 @@ public class LoadDialogue : MonoBehaviour
         {
             if (targetNodes[choice] == d.NodeGUID)
             {
-                /*// Sprawdzenie połączeń - zbadanie czy wybrane połączenie powinno zostać oznaczone jako gotowe do wyszarzenia
-                foreach (NodeLinkData n in nodeLinkData)
-                {
-                    if (n.GrayOut && d.NodeGUID == n.TargetNodeGUID) // base?
-                        n.WasChosen = true;
-                    else if (!n.GrayOut && d.NodeGUID == n.TargetNodeGUID)
-                        n.WasChosen = false;
-                }*/
-
-
                 quitNode = d.QuitNode;
                 if (!quitNode)
                 {
                     nodeGUID = d.NodeGUID;
-                    dialogueText = d.DialogueText;
+                    npcName.text = nameOfNPC;
 
+                    bool checking = true;
+                    // Ustawienie dialogu głównego lub alternatywnego zależnie czy gracz wrócił do opcji
+                    foreach (NodeLinkData n in nodeLinkData)
+                    {
+                        if (n.BaseNodeGUID == nodeGUID && checking)
+                        {
+                            if(n.WasChosen && !string.IsNullOrEmpty(d.AlternateText))
+                            {
+                                dialogueText = d.AlternateText;
+                                checking = false;
+                            }
+                            else
+                                dialogueText = d.DialogueText;
+                        }
+                    }
+
+                    // Przekształcenie opcji w zależności czy jest wypowiadana przez gracza czy nie
                     if (!d.PlayerText)
-                    {
-                        npcName.text = nameOfNPC;
                         sentence.text = dialogueText;
-                    }
                     else
-                    {
-                        npcName.text = nameOfNPC;
-                        sentence.text = ($"[TY:] {dialogueText}");
-                    }
+                        sentence.text = $"[TY:] {dialogueText}";
                 }
                 else
                 {
@@ -213,23 +214,6 @@ public class LoadDialogue : MonoBehaviour
 
     void OnClick(int n, NodeLinkData link)
     {
-        /*var nodeLinks = currentDialogue.NodeLinks;
-        foreach (NodeLinkData links in nodeLinks)
-        {
-            if (links.BaseNodeGUID == nodeGUID)
-            {
-                var nodes = currentDialogue.DialogueNodeData;
-                foreach (DialogueNodeData d in nodes)
-                {
-                    if (links.TargetNodeGUID == d.NodeGUID)
-                    {
-                        d.WasChosen = true;
-                        Debug.Log("a");
-                    }
-                }
-            }
-        }*/
-
         choice = n;
         link.WasChosen = true;
 
@@ -241,9 +225,8 @@ public class LoadDialogue : MonoBehaviour
     void DestroyButtons()
     {
         foreach (GameObject o in buttons)
-        {
             Destroy(o);
-        }
+
         buttons?.Clear();
     }
 
@@ -251,9 +234,6 @@ public class LoadDialogue : MonoBehaviour
     {
         var nodeLinks = currentDialogue.NodeLinks;
         foreach (NodeLinkData links in nodeLinks)
-        {
-            //if (links.BaseNodeGUID == nodeGUID)
-                links.WasChosen = false;
-        }
+            links.WasChosen = false;
     }
 }

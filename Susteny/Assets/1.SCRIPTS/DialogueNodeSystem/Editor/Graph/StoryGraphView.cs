@@ -15,7 +15,6 @@ namespace Subtegral.DialogueSystem.Editor
 {
     public class StoryGraphView : GraphView
     {
-        //public List<UnityEngine.UIElements.Toggle> grayOutToggles;
         public readonly Vector2 DefaultNodeSize = new Vector2(200, 150);
         public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
         public DialogueNode EntryPointNode;
@@ -120,12 +119,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText, string altText)
         {
-            AddElement(CreateNode(nodeName, position, quit, pText));
+            AddElement(CreateNode(nodeName, position, quit, pText, altText));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText, string altText)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -133,6 +132,7 @@ namespace Subtegral.DialogueSystem.Editor
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
                 QuitNode = quit,
+                AlternateText = altText,
                 PlayerText = pText
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
@@ -173,12 +173,46 @@ namespace Subtegral.DialogueSystem.Editor
             textField.SetValueWithoutNotify(tempDialogueNode.title);
             tempDialogueNode.mainContainer.Add(textField);
 
+            string emptyValue = "[No alternate text]";
+            var altTextField = new TextField();
+            altTextField.multiline = true;
+
+            if (!string.IsNullOrEmpty(tempDialogueNode.AlternateText))
+                altTextField.value = tempDialogueNode.AlternateText;
+            else
+                altTextField.value = emptyValue;
+
+            altTextField.RegisterValueChangedCallback(evt =>
+            {
+                if (!string.IsNullOrEmpty(evt.newValue) && evt.newValue != emptyValue)
+                    tempDialogueNode.AlternateText = evt.newValue;
+                else
+                    tempDialogueNode.AlternateText = null;
+            });
+            tempDialogueNode.mainContainer.Add(altTextField);
+
+            var deleteButton = new Button(() => RemoveAlternateText(altTextField, emptyValue))
+            {
+                text = "Clean textfield"
+            };
+            altTextField.contentContainer.Add(deleteButton);
+
             var button = new Button(() => { AddChoicePort(tempDialogueNode, true, ""); })
             {
                 text = "Add Choice"
             };
             tempDialogueNode.titleButtonContainer.Add(button);
             return tempDialogueNode;
+        }
+
+        public void AddAlternateText(DialogueNode nodeCache, string emptyValue = "[NO ALTERNATE TEXT]")
+        {
+
+        }
+
+        void RemoveAlternateText(TextField textField, string emptyValue)
+        {
+            textField.value = emptyValue;
         }
 
         public void AddChoicePort(DialogueNode nodeCache, bool grayOutValue, string overriddenPortName = "")
@@ -232,7 +266,6 @@ namespace Subtegral.DialogueSystem.Editor
 
         private void RemovePort(Node node, Port socket)
         {
-            var dialogueNode = (DialogueNode)node;
             var targetEdge = edges.ToList()
                 .Where(x => x.output.portName == socket.portName && x.output.node == socket.node);
             if (targetEdge.Any())
@@ -280,6 +313,11 @@ namespace Subtegral.DialogueSystem.Editor
     class PortValue
     {
         public bool grayOut;
+    }
+
+    class ContainsAltText
+    {
+        public bool contains;
     }
 }
 #endif
