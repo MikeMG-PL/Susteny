@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
-  m_Name: Wladyslaw_1
+  m_Name: a
   m_EditorClassIdentifier: 
   NodeLinks:
   - WasChosen: 0
@@ -19,18 +19,6 @@ MonoBehaviour:
     Sentence: 
     PortName: Next
     TargetNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
-    Sentence: 
-    PortName: "Kim jeste\u015B? To zdj\u0119cie jest od ciebie?"
-    TargetNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
-  - WasChosen: 0
-    GrayOut: 0
-    BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
-    Sentence: 
-    PortName: "Co mi si\u0119 nie uda\u0142o?"
-    TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
   - WasChosen: 0
     GrayOut: 0
     BaseNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
@@ -113,6 +101,12 @@ MonoBehaviour:
     TargetNodeGUID: 91d91ec0-82f6-4a79-b799-456e58d6639e
   - WasChosen: 0
     GrayOut: 1
+    BaseNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+    Sentence: 
+    PortName: "Ja bym wola\u0142 ju\u017C st\u0105d spada\u0107, nie odpada\u0107..."
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
+  - WasChosen: 0
+    GrayOut: 1
     BaseNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
     Sentence: 
     PortName: O, fajno. Kolejne drzwi.
@@ -129,36 +123,24 @@ MonoBehaviour:
     Sentence: 
     PortName: "Znasz Ann\u0119?"
     TargetNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
-    Sentence: 
-    PortName: "Ja bym wola\u0142 ju\u017C st\u0105d spada\u0107, nie odpada\u0107..."
-    TargetNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
   - WasChosen: 0
     GrayOut: 1
     BaseNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
     Sentence: 
     PortName: "W porz\u0105dku, rozumiem."
-    TargetNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
+    TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
   - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
+    GrayOut: 0
+    BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
     Sentence: 
-    PortName: O, fajno. Kolejne drzwi.
-    TargetNodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+    PortName: "Kim jeste\u015B? To zdj\u0119cie jest od ciebie?"
+    TargetNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
   - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
+    GrayOut: 0
+    BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
     Sentence: 
-    PortName: "W porz\u0105dku... i co, to tyle?"
-    TargetNodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
-  - WasChosen: 0
-    GrayOut: 1
-    BaseNodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    Sentence: 
-    PortName: "Znasz Ann\u0119?"
-    TargetNodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
+    PortName: "Co mi si\u0119 nie uda\u0142o?"
+    TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
   - WasChosen: 0
     GrayOut: 0
     BaseNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
@@ -174,26 +156,16 @@ MonoBehaviour:
   DialogueNodeData:
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
-    DialogueText: "Witaj, Konradzie... Nie uda\u0142o ci si\u0119."
-    AlternateTexts:
-    - 
-    - 
-    - 
-    - dw
-    Position: {x: 290, y: 174}
-  - QuitNode: 0
-    PlayerText: 0
     NodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
     DialogueText: "Zepsu\u0142e\u015B \u015Bwiat... Niestety decyzje jakie podejmujesz
       ca\u0142y czas ci\u0119 pogr\u0105\u017Caj\u0105."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 1916, y: 195}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: 56e5b282-e224-42bc-a345-28733babbea6
     DialogueText: "On jest niewa\u017Cny. To m\xF3j od\u017Awierny."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 10633, y: 53}
   - QuitNode: 0
     PlayerText: 0
@@ -202,31 +174,31 @@ MonoBehaviour:
       na dole, na stoliku przy schodach, m\xF3j od\u017Awierny zostawi\u0142 dla
       ciebie klucz. Je\u015Bli go nie zabra\u0142e\u015B, id\u017A po niego i otw\xF3rz
       drzwi balkonowe."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 11351, y: 179}
   - QuitNode: 1
     PlayerText: 0
     NodeGUID: e5faef1a-a85e-4226-a30b-d620b12738ab
     DialogueText: Dialogue Node
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 12672, y: 176}
   - QuitNode: 1
     PlayerText: 0
     NodeGUID: 5b15942b-a3d0-43ba-b74f-c3284bcb35e8
     DialogueText: Dialogue Node
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 6786, y: -1}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: 7420f809-1c48-4016-ba6e-99282bf6ed0f
     DialogueText: Nie. Zadam ci jeszcze jedno pytanie.
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 5956, y: 170}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: 9061df93-d322-4c32-86d7-9847123e8a10
     DialogueText: "Zastanawia\u0142e\u015B si\u0119 kiedy\u015B, dlaczego niebo jest..."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 6892, y: 198}
   - QuitNode: 0
     PlayerText: 0
@@ -234,63 +206,63 @@ MonoBehaviour:
     DialogueText: "Bana\u0142! Bana\u0142! Czy ty tego nie widzisz? My\u015Bla\u0142em,
       \u017Ce jeste\u015B jednym z nas. \u017Be widzisz \u015Bwiat nasycony barwami...
       \u017Ce widzisz \u015Bwiat, jak namalowany."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 7604, y: 25}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: 1ebab7c3-556a-45be-8737-d968e3be95c6
     DialogueText: "Tak! Widzisz to! Jeste\u015B jednym z nas... Widzisz, \u017Ce
       \u015Bwiat jest nasycony barwami, \u017Ce jest namalowany... jak obrazek."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 7612, y: 223}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: ac9856e6-bbeb-40ca-8a8a-cce8f427a8d1
     DialogueText: "A ty go zepsu\u0142e\u015B! I przez ciebie kto\u015B zgin\u0105\u0142!
       Kto\u015B, z kim jeszcze niedawno mia\u0142e\u015B kontakt!"
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 8634, y: 184}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: cbb3c376-4797-4124-ac59-bee9487e4fc7
     DialogueText: "Anna... Anna, Anna, Anna! Jakby\u015B m\xF3g\u0142, to by\u015B
       sobie da\u0142 na drugie \"Anna\". Anna si\u0119 nie liczy."
-    AlternateTexts: []
+    AlternateText: 
     Position: {x: 9688, y: 187}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
+    DialogueText: "Uwa\u017Caj, Konradzie! Wyczuwam w tobie cyniczn\u0105 natur\u0119!
+      Tacy ludzie najszybciej od nas odpadaj\u0105."
+    AlternateText: 
+    Position: {x: 4348, y: -14}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
     DialogueText: "Tak... Obraz m\xF3wi wi\u0119cej, ni\u017C tysi\u0105c s\u0142\xF3w.
       Przed tob\u0105 ostatnie drzwi. Balkonowe. Wyjd\u017A przez nie. Wtedy dopiero
       naprawd\u0119 zauwa\u017Cysz, \u017Ce zepsu\u0142e\u015B \u015Bwiat."
-    AlternateTexts: []
+    AlternateText: "W porz\u0105dku, wracaj\u0105c do kwestii drzwi..."
     Position: {x: 3649, y: 221}
-  - QuitNode: 0
-    PlayerText: 0
-    NodeGUID: e4f67edf-854b-4004-bd82-ab89fb22d7fd
-    DialogueText: "Uwa\u017Caj, Konradzie! Wyczuwam w tobie cyniczn\u0105 natur\u0119!
-      Tacy ludzie najszybciej od nas odpadaj\u0105."
-    AlternateTexts: []
-    Position: {x: 5025, y: -140}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: d61ca0b9-a7d5-4c2f-aab2-fa234e0d3e86
     DialogueText: "Anna... Anna, Anna, Anna! Jakby\u015B m\xF3g\u0142, to by\u015B
       sobie da\u0142 na drugie \"Anna\". Anna si\u0119 nie liczy. Ale tak, znam j\u0105."
-    AlternateTexts: []
-    Position: {x: 4975, y: 809}
+    AlternateText: 
+    Position: {x: 4210, y: 521}
   - QuitNode: 0
     PlayerText: 0
-    NodeGUID: 7549197f-330e-4fc1-9815-159ba45baa80
-    DialogueText: O czym to my? Ach tak, drzwi balkonowe...
-    AlternateTexts: []
-    Position: {x: 5124, y: 319}
+    NodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
+    DialogueText: "Witaj, Konradzie... Nie uda\u0142o ci si\u0119."
+    AlternateText: 
+    Position: {x: 290, y: 174}
   - QuitNode: 0
     PlayerText: 0
     NodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
     DialogueText: "Jestem W\u0142adys\u0142aw Strzemi\u0144ski. Powiniene\u015B mnie
       zna\u0107. Ciesz\u0119 si\u0119, \u017Ce przyj\u0105\u0142e\u015B moje zaproszenie."
-    AlternateTexts: []
-    Position: {x: 963, y: 359}
+    AlternateText: 
+    Position: {x: 978, y: 464}
   ExposedProperties: []
   CommentBlockData: []

@@ -54,12 +54,23 @@ namespace Subtegral.DialogueSystem.Editor
             {
                 var outputNode = (connectedSockets[i].output.node as DialogueNode);
                 var inputNode = (connectedSockets[i].input.node as DialogueNode);
+
+                bool grayOut;
+                if(connectedSockets[i].output.userData == null)
+                    grayOut = false;
+                else
+                {
+                    dynamic userData = connectedSockets[i].output.userData;
+                    grayOut = userData.grayOut;
+                }
+
                 dialogueContainerObject.NodeLinks.Add(new NodeLinkData
                 {
                     BaseNodeGUID = outputNode.GUID,
                     PortName = connectedSockets[i].output.portName,
                     Sentence = connectedSockets[i].output.name,
-                    TargetNodeGUID = inputNode.GUID
+                    TargetNodeGUID = inputNode.GUID,
+                    GrayOut = grayOut
                 });
             }
 
@@ -69,6 +80,7 @@ namespace Subtegral.DialogueSystem.Editor
                 {
                     PlayerText = node.PlayerText,
                     QuitNode = node.QuitNode,
+                    AlternateText = node.AlternateText,
                     NodeGUID = node.GUID,
                     DialogueText = node.DialogueText,
                     Position = node.GetPosition().position
@@ -138,13 +150,15 @@ namespace Subtegral.DialogueSystem.Editor
         {
             foreach (var perNode in _dialogueContainer.DialogueNodeData)
             {
-                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero, perNode.QuitNode, perNode.PlayerText);
+                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero, perNode.QuitNode, perNode.PlayerText, perNode.AlternateText);
                 tempNode.GUID = perNode.NodeGUID;
                 tempNode.QuitNode = perNode.QuitNode;
+                tempNode.AlternateText = perNode.AlternateText;
                 tempNode.PlayerText = perNode.PlayerText;
+                
                 _graphView.AddElement(tempNode);
                 var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
-                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.Sentence, x.PortName));
+                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.GrayOut, x.PortName));
             }
         }
 

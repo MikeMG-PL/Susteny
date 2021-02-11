@@ -8,25 +8,25 @@ using Subtegral.DialogueSystem.DataContainers;
 
 public class LoadDialogue : MonoBehaviour
 {
+    // Public
+    [HideInInspector] public List<GameObject> buttons;
+    [HideInInspector] public int instantiatedButtons;
     public string nameOfNPC;
     public int currentDialogueID;
-    int choice;
     public List<DialogueContainer> dialogues;
-    DialogueContainer currentDialogue;
-    bool dialogueStarted;
-
-    string dialogueText;
-    List<string> options;
-    List<string> targetNodes;
-    [HideInInspector] public List<GameObject> buttons;
-    string nodeGUID;
-    bool quitNode;
-
-    GameObject panel;
     public GameObject buttonPrefab;
-    Text npcName;
-    Text sentence;
-    public int instantiatedButtons;
+    public Color chosenOptionColor = new Color(0.78125f, 0.78125f, 0.78125f, 0.78125f);
+
+    // Private
+    int choice;
+    bool dialogueStarted, quitNode;
+    string dialogueText, nodeGUID;
+
+    List<string> options, targetNodes;
+    DialogueContainer currentDialogue;
+    GameObject panel;
+    Text npcName, sentence;
+    Color defaultColor = Color.white;
 
     void Awake()
     {
@@ -45,8 +45,8 @@ public class LoadDialogue : MonoBehaviour
             npcName = panel.GetComponent<Panel>().npcName;
             sentence = panel.GetComponent<Panel>().sentence;
             Clear();
+            ResetChosenMarks();
         }
-
     }
 
     void Clear()
@@ -68,7 +68,7 @@ public class LoadDialogue : MonoBehaviour
     {
         if (!dialogueStarted && dialogues.Count > 0)
             FirstNode();
-        else if(dialogues.Count > 0)
+        else if (dialogues.Count > 0)
         {
             GetNode();
             if (!quitNode)
@@ -111,6 +111,7 @@ public class LoadDialogue : MonoBehaviour
     void GetNode()
     {
         var dialogueNodeData = currentDialogue.DialogueNodeData;
+        var nodeLinkData = currentDialogue.NodeLinks;
         foreach (DialogueNodeData d in dialogueNodeData)
         {
             if (targetNodes[choice] == d.NodeGUID)
@@ -119,18 +120,29 @@ public class LoadDialogue : MonoBehaviour
                 if (!quitNode)
                 {
                     nodeGUID = d.NodeGUID;
-                    dialogueText = d.DialogueText;
+                    npcName.text = nameOfNPC;
 
+                    bool checking = true;
+                    // Ustawienie dialogu głównego lub alternatywnego zależnie czy gracz wrócił do opcji
+                    foreach (NodeLinkData n in nodeLinkData)
+                    {
+                        if (n.BaseNodeGUID == nodeGUID && checking)
+                        {
+                            if(n.WasChosen && !string.IsNullOrEmpty(d.AlternateText))
+                            {
+                                dialogueText = d.AlternateText;
+                                checking = false;
+                            }
+                            else
+                                dialogueText = d.DialogueText;
+                        }
+                    }
+
+                    // Przekształcenie opcji w zależności czy jest wypowiadana przez gracza czy nie
                     if (!d.PlayerText)
-                    {
-                        npcName.text = nameOfNPC;
                         sentence.text = dialogueText;
-                    }
                     else
-                    {
-                        npcName.text = nameOfNPC;
-                        sentence.text = ($"[TY:] {dialogueText}");
-                    }
+                        sentence.text = $"[TY:] {dialogueText}";
                 }
                 else
                 {
@@ -155,35 +167,38 @@ public class LoadDialogue : MonoBehaviour
                 // Sprawdzenie czy ta opcja kończy dialog
                 var nodes = currentDialogue.DialogueNodeData;
                 bool quitOption = false;
+                bool wasChosen;
+
+                if (n.GrayOut) wasChosen = n.WasChosen;
+                else wasChosen = false;
+
                 foreach (DialogueNodeData d in nodes)
                 {
-                    if (n.TargetNodeGUID == d.NodeGUID && d.QuitNode)
-                        quitOption = true;
+                    if (n.TargetNodeGUID == d.NodeGUID)
+                        quitOption = d.QuitNode;
                 }
 
                 // Przekazanie zdania lub tytułu opcji na przycisk
                 targetNodes.Add(n.TargetNodeGUID);
-                if (string.IsNullOrEmpty(n.Sentence))
-                {
-                    options.Add(n.PortName);
-                    if (!quitOption)
-                        CreateButton(n.PortName);
-                    else
-                        CreateButton($"[ZAKOŃCZ] {n.PortName}");
-                }
+                options.Add(n.PortName);
+
+                if (!quitOption)
+                    WasChosen(CreateButton(n.PortName, n), wasChosen);
                 else
-                {
-                    options.Add(n.Sentence);
-                    if (!quitOption)
-                        CreateButton(n.Sentence);
-                    else
-                        CreateButton($"[ZAKOŃCZ] {n.Sentence}");
-                }
+                    WasChosen(CreateButton($"[ZAKOŃCZ] {n.PortName}", n), wasChosen);
             }
         }
     }
 
-    void CreateButton(string text)
+    void WasChosen(GameObject buttonObject, bool chosen)
+    {
+        if (chosen)
+            buttonObject.GetComponentInChildren<Text>().color = chosenOptionColor;
+        else
+            buttonObject.GetComponentInChildren<Text>().color = defaultColor;
+    }
+
+    GameObject CreateButton(string text, NodeLinkData nodelinks)
     {
         instantiatedButtons++;
         var option = Instantiate(buttonPrefab, panel.transform.GetChild(0));
@@ -193,12 +208,14 @@ public class LoadDialogue : MonoBehaviour
         option.GetComponent<ButtonID>().buttonID = instantiatedButtons - 1;
 
         buttons.Add(option);
-        option.GetComponent<Button>().onClick.AddListener(delegate { DBG(option.GetComponent<ButtonID>().buttonID); });
+        option.GetComponent<Button>().onClick.AddListener(delegate { OnClick(option.GetComponent<ButtonID>().buttonID, nodelinks); });
+        return option;
     }
 
-    void DBG(int n)
+    void OnClick(int n, NodeLinkData link)
     {
         choice = n;
+        link.WasChosen = true;
 
         DestroyButtons();
         GetNode();
@@ -208,9 +225,15 @@ public class LoadDialogue : MonoBehaviour
     void DestroyButtons()
     {
         foreach (GameObject o in buttons)
-        {
             Destroy(o);
-        }
+
         buttons?.Clear();
+    }
+
+    public void ResetChosenMarks()
+    {
+        var nodeLinks = currentDialogue.NodeLinks;
+        foreach (NodeLinkData links in nodeLinks)
+            links.WasChosen = false;
     }
 }

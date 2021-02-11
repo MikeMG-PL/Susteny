@@ -119,12 +119,12 @@ namespace Subtegral.DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public void CreateNewDialogueNode(string nodeName, Vector2 position, bool quit, bool pText, string altText)
         {
-            AddElement(CreateNode(nodeName, position, quit, pText));
+            AddElement(CreateNode(nodeName, position, quit, pText, altText));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, bool quit, bool pText, string altText)
         {
             var tempDialogueNode = new DialogueNode()
             {
@@ -132,6 +132,7 @@ namespace Subtegral.DialogueSystem.Editor
                 DialogueText = nodeName,
                 GUID = Guid.NewGuid().ToString(),
                 QuitNode = quit,
+                AlternateText = altText,
                 PlayerText = pText
             };
             tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
@@ -172,7 +173,31 @@ namespace Subtegral.DialogueSystem.Editor
             textField.SetValueWithoutNotify(tempDialogueNode.title);
             tempDialogueNode.mainContainer.Add(textField);
 
-            var button = new Button(() => { AddChoicePort(tempDialogueNode, "[Do not modify to use \"Option\" as a text]"); })
+            string emptyValue = "[No alternate text]";
+            var altTextField = new TextField();
+            altTextField.multiline = true;
+
+            if (!string.IsNullOrEmpty(tempDialogueNode.AlternateText))
+                altTextField.value = tempDialogueNode.AlternateText;
+            else
+                altTextField.value = emptyValue;
+
+            altTextField.RegisterValueChangedCallback(evt =>
+            {
+                if (!string.IsNullOrEmpty(evt.newValue) && evt.newValue != emptyValue)
+                    tempDialogueNode.AlternateText = evt.newValue;
+                else
+                    tempDialogueNode.AlternateText = null;
+            });
+            tempDialogueNode.mainContainer.Add(altTextField);
+
+            var deleteButton = new Button(() => RemoveAlternateText(altTextField, emptyValue))
+            {
+                text = "Clean textfield"
+            };
+            altTextField.contentContainer.Add(deleteButton);
+
+            var button = new Button(() => { AddChoicePort(tempDialogueNode, true, ""); })
             {
                 text = "Add Choice"
             };
@@ -180,10 +205,23 @@ namespace Subtegral.DialogueSystem.Editor
             return tempDialogueNode;
         }
 
+        public void AddAlternateText(DialogueNode nodeCache, string emptyValue = "[NO ALTERNATE TEXT]")
+        {
 
-        public void AddChoicePort(DialogueNode nodeCache, string title, string overriddenPortName = "")
+        }
+
+        void RemoveAlternateText(TextField textField, string emptyValue)
+        {
+            textField.value = emptyValue;
+        }
+
+        public void AddChoicePort(DialogueNode nodeCache, bool grayOutValue, string overriddenPortName = "")
         {
             var generatedPort = GetPortInstance(nodeCache, Direction.Output);
+
+            dynamic userData = new PortValue();
+            userData.grayOut = grayOutValue;
+
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
             generatedPort.contentContainer.Remove(portLabel);
 
@@ -191,20 +229,6 @@ namespace Subtegral.DialogueSystem.Editor
             var outputPortName = string.IsNullOrEmpty(overriddenPortName)
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
-            //var sentenceToShow = "[Do not modify to use \"Option\" as a text]";
-            var sentenceToShow = string.IsNullOrEmpty(title) ? "[Do not modify to use \"Option\" as a text]" : title;
-
-            generatedPort.contentContainer.Add(new Label("  "));
-            var sentence = new TextField()
-            {
-                name = string.Empty,
-                value = sentenceToShow
-            };
-            sentence.multiline = true;
-
-            sentence.RegisterValueChangedCallback((x) => generatedPort.name = x.newValue);
-            generatedPort.contentContainer.Add(sentence);
-            generatedPort.contentContainer.Add(new Label("| Sentence:"));
 
             var textField = new TextField()
             {
@@ -212,19 +236,30 @@ namespace Subtegral.DialogueSystem.Editor
                 value = outputPortName
             };
             textField.multiline = true;
-
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
-            generatedPort.contentContainer.Add(new Label("  "));
+
+            generatedPort.contentContainer.Add(new Label("|    "));
             generatedPort.contentContainer.Add(textField);
+
+            var grayOut = new UnityEngine.UIElements.Toggle()
+            {
+                text = "gray out",
+                value = userData.grayOut
+            };
+            grayOut.RegisterValueChangedCallback((x) => userData.grayOut = x.newValue);
+            grayOut.SetValueWithoutNotify(grayOut.value);
+            generatedPort.contentContainer.Add(new Label("| Option:"));
+            generatedPort.userData = userData;
+            generatedPort.contentContainer.Add(grayOut);
 
             var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
             {
                 text = "Delete choice"
             };
-            generatedPort.contentContainer.Add(new Label("  | Option:"));
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);
+
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();
         }
@@ -273,6 +308,16 @@ namespace Subtegral.DialogueSystem.Editor
             nodeCache.SetPosition(new Rect(100, 200, 100, 150));
             return nodeCache;
         }
+    }
+
+    class PortValue
+    {
+        public bool grayOut;
+    }
+
+    class ContainsAltText
+    {
+        public bool contains;
     }
 }
 #endif

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - WasChosen: 0
+    GrayOut: 0
+    BaseNodeGUID: 2a7fc8e2-d976-43ee-8575-cb1d8d6fa08c
+    Sentence: 
+    PortName: Next
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+    Sentence: 
+    PortName: "Przysz\u0142am na spotkanie stowarzyszenia."
+    TargetNodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+    Sentence: 
+    PortName: Anna? Co tutaj robisz?
+    TargetNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
+    Sentence: 
+    PortName: Rozumiem...
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
+    Sentence: 
+    PortName: "To pomy\u0142ka."
+    TargetNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+    Sentence: 
+    PortName: "Znamy si\u0119?"
+    TargetNodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
+  - WasChosen: 0
+    GrayOut: 1
+    BaseNodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
+    Sentence: 
+    PortName: "Dobra, chod\u017Amy."
+    TargetNodeGUID: a2534496-55e1-4522-9cf3-bf1559e6eb45
+  DialogueNodeData:
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 745af61c-10a2-4024-9940-7bda96f1850c
+    DialogueText: "Cze\u015B\u0107, Klaudia! Jeste\u015B w ko\u0144cu!"
+    AlternateText: Susteny zaraz ma spotkanie...
+    Position: {x: 313, y: 200}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: a63e5a40-318e-4c14-8cb9-206dedc605cd
+    DialogueText: "Chod\u017A ze mn\u0105. Nied\u0142ugo zaczynamy."
+    AlternateText: 
+    Position: {x: 1101, y: 198}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: b19fe155-b26e-4770-ab16-d326b14f0403
+    DialogueText: "No jak to co? Nale\u017C\u0119 do Susteny od jakiego\u015B czasu."
+    AlternateText: "M\xF3wilam, \u017Ce nale\u017C\u0119 do Susteny... zaraz jest
+      spotkanie. Chod\u017A do nas."
+    Position: {x: 346, y: 583}
+  - QuitNode: 0
+    PlayerText: 0
+    NodeGUID: 0e160881-f5b5-476f-8bee-1688d349c2fc
+    DialogueText: Hmm? Nie rozumiem.
+    AlternateText: Klaudia...
+    Position: {x: 389, y: -74}
+  - QuitNode: 1
+    PlayerText: 0
+    NodeGUID: a2534496-55e1-4522-9cf3-bf1559e6eb45
+    DialogueText: Dialogue Node
+    AlternateText: 
+    Position: {x: 1721, y: 197}
+  ExposedProperties: []
+  CommentBlockData: []
