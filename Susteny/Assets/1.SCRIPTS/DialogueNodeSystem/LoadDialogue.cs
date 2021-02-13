@@ -42,7 +42,7 @@ public class LoadDialogue : MonoBehaviour
         if (dialogues.Count > 0)
         {
             defaultColor = buttonPrefab.transform.GetChild(0).GetComponent<TMP_Text>().color;
-            chosenOptionColor = new Color(defaultColor.r, defaultColor.g * 0.7f, defaultColor.b, chosenOptionAlpha * defaultColor.a);
+            chosenOptionColor = new Color(defaultColor.r, defaultColor.g * 0.725f, defaultColor.b, chosenOptionAlpha * defaultColor.a);
 
             currentDialogue = dialogues[i];
             if (currentDialogue == null)
@@ -52,6 +52,7 @@ public class LoadDialogue : MonoBehaviour
             {
                 GameObject leaveConversationButton;
                 leaveConversationButton = Instantiate(quitButton, panel.transform.GetChild(0));
+                leaveConversationButton.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<DialogueInteraction>().Talk(false); });
             }
 
             npcName = panel.GetComponent<Panel>().npcName;
@@ -197,7 +198,7 @@ public class LoadDialogue : MonoBehaviour
                 if (!quitOption)
                     WasChosen(CreateButton(n.PortName, n), wasChosen);
                 else
-                    WasChosen(CreateButton($"[ZAKOŃCZ] {n.PortName}", n), wasChosen);
+                    WasChosen(CreateButton($"(Zakończ) {n.PortName}", n), wasChosen);
             }
         }
     }
@@ -208,6 +209,11 @@ public class LoadDialogue : MonoBehaviour
             buttonObject.GetComponentInChildren<TMP_Text>().color = chosenOptionColor;
         else
             buttonObject.GetComponentInChildren<TMP_Text>().color = defaultColor;
+    }
+
+    void QuitButton(GameObject q)
+    {
+        //q.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<DialogueInteraction>().Talk(false); });
     }
 
     GameObject CreateButton(string text, NodeLinkData nodelinks)

@@ -19,7 +19,7 @@ MonoBehaviour:
     Sentence: 
     PortName: Next
     TargetNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
-  - WasChosen: 0
+  - WasChosen: 1
     GrayOut: 0
     BaseNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
     Sentence: 
@@ -129,7 +129,7 @@ MonoBehaviour:
     Sentence: 
     PortName: "W porz\u0105dku, rozumiem."
     TargetNodeGUID: 7ca95822-1c45-401f-b069-b7f24b5d8ba3
-  - WasChosen: 0
+  - WasChosen: 1
     GrayOut: 0
     BaseNodeGUID: a33c2dca-a7bf-491b-8c8f-f569c331db81
     Sentence: 
@@ -147,7 +147,7 @@ MonoBehaviour:
     Sentence: 
     PortName: "Tia, cze\u015B\u0107, W\u0142adek."
     TargetNodeGUID: 73f2ba6a-f78c-4921-8e6f-a541d490fbc7
-  - WasChosen: 0
+  - WasChosen: 1
     GrayOut: 0
     BaseNodeGUID: e772a797-99de-4502-8db5-24ccffeaac5c
     Sentence: 
@@ -266,3 +266,4 @@ MonoBehaviour:
     Position: {x: 978, y: 464}
   ExposedProperties: []
   CommentBlockData: []
+  canLeaveDialogue: 0

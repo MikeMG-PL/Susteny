@@ -17,8 +17,8 @@ public class ItemWorld : MonoBehaviour
     PlayerActions playerActions;
     bool grabbing;
     bool ungrabbing;
-    float moveToViewModeRotSpeed = 3.5f;
-    float moveToViewModePosSpeed = 0.05f;
+    float moveToViewModeRotSpeed = 5; // 3.5f - MIN, 10 - MAX
+    float moveToViewModePosSpeed = 0.05f; //0.03f - MIN
 
     void Start()
     {
