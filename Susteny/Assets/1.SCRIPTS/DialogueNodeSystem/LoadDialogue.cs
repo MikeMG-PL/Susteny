@@ -155,7 +155,7 @@ public class LoadDialogue : MonoBehaviour
                     if (!d.PlayerText)
                         sentence.text = dialogueText;
                     else
-                        sentence.text = $"[TY:] {dialogueText}";
+                        sentence.text = $"[Klaudia:] {dialogueText}";
                 }
                 else
                 {
@@ -209,11 +209,6 @@ public class LoadDialogue : MonoBehaviour
             buttonObject.GetComponentInChildren<TMP_Text>().color = chosenOptionColor;
         else
             buttonObject.GetComponentInChildren<TMP_Text>().color = defaultColor;
-    }
-
-    void QuitButton(GameObject q)
-    {
-        //q.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<DialogueInteraction>().Talk(false); });
     }
 
     GameObject CreateButton(string text, NodeLinkData nodelinks)

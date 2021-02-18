@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5698530657478050960}
   - component: {fileID: 5698530657478050963}
   - component: {fileID: 291952400397682900}
+  - component: {fileID: 3849735237317863329}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -62,8 +63,26 @@ MonoBehaviour:
   cloudsNumber: 30
   areaWidth: 700
   cloudsScaleMin: 1
-  cloudsScaleMax: 5
+  cloudsScaleMax: 6.5
   cloudsHeightMin: 150
   cloudsHeightMax: 350
-  cloudsSpeed: 0.07
+  cloudsSpeed: 0.165
   cameraTransform: {fileID: 0}
+--- !u!114 &3849735237317863329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698530657478050961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91da071ccc85fba4abbbc8d219315c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogues:
+  - {fileID: 11400000, guid: 2dcd0e5fda3eb124d91582d8df3a29c0, type: 2}
+  choices: []
+  triggeredAction:
+    m_PersistentCalls:
+      m_Calls: []
