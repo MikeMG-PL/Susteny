@@ -17,13 +17,14 @@ public class LoadDialogue : MonoBehaviour
     public List<DialogueContainer> dialogues;
     public GameObject buttonPrefab;
     public GameObject quitButton;
-    private Color chosenOptionColor;
     public float chosenOptionAlpha = 0.8f;
 
     // Private
+    ChoiceManager choiceManager;
     int choice;
     bool dialogueStarted, quitNode;
     string dialogueText, nodeGUID;
+    Color chosenOptionColor;
 
     List<string> options, targetNodes;
     DialogueContainer currentDialogue;
@@ -34,6 +35,7 @@ public class LoadDialogue : MonoBehaviour
     void Awake()
     {
         panel = GameObject.FindGameObjectWithTag("DialoguePanel");
+        choiceManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChoiceManager>();
     }
 
     // Wczytanie dialogu
@@ -113,7 +115,7 @@ public class LoadDialogue : MonoBehaviour
                 else
                 {
                     npcName.text = nameOfNPC;
-                    sentence.text = ($"[TY:] {dialogueText}");
+                    sentence.text = ($"[Klaudia:] {dialogueText}");
                 }
 
                 GetOptions();
@@ -166,6 +168,7 @@ public class LoadDialogue : MonoBehaviour
         }
     }
 
+    public static event Action<DialogueContainer, string, string> OptionChosen; // <SO dialogu, Base node GUID, wybrane zdanie>
     void GetOptions()
     {
         options = new List<string>();
@@ -196,9 +199,9 @@ public class LoadDialogue : MonoBehaviour
                 options.Add(n.PortName);
 
                 if (!quitOption)
-                    WasChosen(CreateButton(n.PortName, n), wasChosen);
+                    WasChosen(CreateButton(n.PortName, n, n.BaseNodeGUID), wasChosen);
                 else
-                    WasChosen(CreateButton($"(Zakończ) {n.PortName}", n), wasChosen);
+                    WasChosen(CreateButton($"(Zakończ) {n.PortName}", n, n.BaseNodeGUID), wasChosen);
             }
         }
     }
@@ -211,7 +214,7 @@ public class LoadDialogue : MonoBehaviour
             buttonObject.GetComponentInChildren<TMP_Text>().color = defaultColor;
     }
 
-    GameObject CreateButton(string text, NodeLinkData nodelinks)
+    GameObject CreateButton(string text, NodeLinkData nodelinks, string baseGUID)
     {
         instantiatedButtons++;
         var option = Instantiate(buttonPrefab, panel.transform.GetChild(0));
@@ -221,8 +224,17 @@ public class LoadDialogue : MonoBehaviour
         option.GetComponent<ButtonID>().buttonID = instantiatedButtons - 1;
 
         buttons.Add(option);
-        option.GetComponent<Button>().onClick.AddListener(delegate { OnClick(option.GetComponent<ButtonID>().buttonID, nodelinks); });
+        option.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            OnClick(option.GetComponent<ButtonID>().buttonID, nodelinks);
+            ClickEvent(currentDialogue, baseGUID, text);
+        });
         return option;
+    }
+
+    void ClickEvent(DialogueContainer thisDialogue, string baseGUID, string portName)
+    {
+        OptionChosen?.Invoke(thisDialogue, baseGUID, portName);
     }
 
     void OnClick(int n, NodeLinkData link)
