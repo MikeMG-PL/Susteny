@@ -249,4 +249,9 @@ public class LoadDialogue : MonoBehaviour
         foreach (NodeLinkData links in nodeLinks)
             links.WasChosen = false;
     }
+
+    public void DebugOptionEvents()
+    {
+        Debug.Log("Udałam, że nie znam Anny. Co ze mnie za przyjaciółka?");
+    }
 }

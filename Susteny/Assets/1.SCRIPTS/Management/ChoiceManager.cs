@@ -11,7 +11,7 @@ namespace Subtegral.DialogueSystem.DataContainers
 
         public List<DialogueContainer> dialogues;
         public List<NodeLinkData> choices;
-        public UnityEvent triggeredAction;
+        public List<UnityEvent> actions;
     }
 }
 
