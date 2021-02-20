@@ -5,14 +5,23 @@ using UnityEngine.Events;
 
 namespace Subtegral.DialogueSystem.DataContainers
 {
+    [System.Serializable]
+    public class ChoiceEvent
+    {
+        public string baseGUID, text;
+        public DialogueContainer container;
+        public UnityEvent evt;
+    }
+
+    [System.Serializable]
     public class ChoiceManager : MonoBehaviour
     {
         /// CUSTOM EDITOR ///
 
         public List<DialogueContainer> dialogues;
-        public List<NodeLinkData> choices;
-        public List<List<UnityEvent>> eventListContainer; // This is a container corelated with dialogues list. In every element it contains list of dialogue events
-        public List<UnityEvent> actions;
+        public List<ChoiceEvent> choiceEvents;
+        public List<UnityEvent> unityEventList;
+
 
         void Awake()
         {
@@ -30,7 +39,13 @@ namespace Subtegral.DialogueSystem.DataContainers
 
         void IterateThroughDialogues(DialogueContainer dialogue, string baseGUID, string text)
         {
-            foreach (DialogueContainer d in dialogues)
+            foreach(ChoiceEvent c in choiceEvents)
+            {
+                if (baseGUID == c.baseGUID && text == c.text)
+                    c.evt.Invoke();
+            }
+
+            /*foreach (DialogueContainer d in dialogues)
             {
                 if (d == dialogue)
                 {
@@ -39,12 +54,12 @@ namespace Subtegral.DialogueSystem.DataContainers
 
                     }
                 }
-            }
+            }*/
         }
 
         void CheckForOption(DialogueContainer dialogue, string baseGUID, string text)
         {
-            
+
         }
 
         void InvokeUnityEvent()
