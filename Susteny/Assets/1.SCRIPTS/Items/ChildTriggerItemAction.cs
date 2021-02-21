@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ChildTriggerItemAction : MonoBehaviour
 {
-    void OnMouseDown()
+    public Interactable interactable;
+
+    private void Awake()
     {
-        Interactable interactable = GetComponentInParent<Interactable>();
+        interactable = GetComponentInParent<Interactable>();
         if (interactable == null) Debug.LogError("No Interactable script in parent");
-        else interactable.TryToTriggerAction();
     }
 }

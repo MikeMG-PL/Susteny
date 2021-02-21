@@ -44,6 +44,7 @@ public class Door : MonoBehaviour
         manipulation = GetComponent<ManipulatePlayer>();
     }
 
+    // TODO: nie przypisywać ciągle zmiennych w Update, przypisać raz, a potem czekać na kolejną zmianę
     // Unlocked/locked - visuals
     void Update()
     {

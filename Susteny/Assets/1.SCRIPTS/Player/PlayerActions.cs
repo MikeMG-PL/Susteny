@@ -21,6 +21,7 @@ public class PlayerActions : MonoBehaviour
     [HideInInspector] public bool showCursorOnPosition;
 
     SC_FPSController fpsController;
+    InputManager input;
 
     public static event Action<bool> BrowsingInventory;
 
@@ -29,6 +30,7 @@ public class PlayerActions : MonoBehaviour
         Subscribe();
         viewMode = GetComponent<ViewMode>();
         fpsController = GetComponent<SC_FPSController>();
+        input = InputManager.instance;
     }
 
     public void DisallowInventorySwitching(bool b)
@@ -38,15 +40,15 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && viewMode.interactingWithItem) StopFocusingOnObject(true);
+        if (input.GetKeybindDown(input.keybinds.cancel) && viewMode.interactingWithItem) StopFocusingOnObject(true);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && grabbedItem != null && quittingViewModeAllowed) grabbedItem.Ungrab();
+        else if (input.GetKeybindDown(input.keybinds.cancel) && grabbedItem != null && quittingViewModeAllowed) grabbedItem.Ungrab();
 
-        else if (Input.GetKeyDown(KeyCode.E) && grabbedItem != null) TakeToInventory(grabbedItem);
+        else if (input.GetKeybindDown(input.keybinds.inventory) && grabbedItem != null) TakeToInventory(grabbedItem);
 
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && viewingItemFromInventory && quittingViewModeAllowed) StopViewingItemFromInventory();
+        else if (input.GetKeybindDown(input.keybinds.cancel) && viewingItemFromInventory && quittingViewModeAllowed) StopViewingItemFromInventory();
 
-        else if (Input.GetKeyDown(KeyCode.E) && inventoryAllowed) SwitchInventoryUI();
+        else if (input.GetKeybindDown(input.keybinds.inventory) && inventoryAllowed) SwitchInventoryUI();
     }
 
     public void EnableInventoryUI(bool enable)

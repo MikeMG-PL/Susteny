@@ -20,6 +20,7 @@ public class SC_FPSController : MonoBehaviour
     ViewMode viewMode;
     PlayerActions playerActions;
     UIHints UIHints;
+    InputManager input;
 
     CharacterController characterController;
     public Vector3 moveDirection = Vector3.zero;
@@ -46,6 +47,7 @@ public class SC_FPSController : MonoBehaviour
     {
         Init();
         Subscribe();
+        input = InputManager.instance;
     }
 
     void OnDisable()
@@ -134,13 +136,13 @@ public class SC_FPSController : MonoBehaviour
         Vector3 right = cameraTransform.TransformDirection(Vector3.right);
 
         // Press Left Shift to run
-        isRunning = Input.GetKey(KeyCode.LeftShift);
+        isRunning = input.GetKeybind(input.keybinds.run);
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         if (characterController.isGrounded) moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (input.GetKeybindDown(input.keybinds.jump) && canMove && characterController.isGrounded)
             moveDirection.y = jumpSpeed;
         else
             moveDirection.y = movementDirectionY;

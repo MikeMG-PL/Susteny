@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Interactable interactableItem;
     DialogueInteraction person;
     PlayerActions playerActions;
+    InputManager input;
 
     Ray ray;
     RaycastHit _hit = new RaycastHit();
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerActions = GetComponent<PlayerActions>();
+        input = InputManager.instance;
     }
 
     void LateUpdate()
@@ -28,7 +30,8 @@ public class Player : MonoBehaviour
 
     void TryToInteract()
     {
-        if (Input.GetMouseButtonDown(0) && playerActions.canInteract)
+
+        if (input.GetKeybindDown(input.keybinds.interact) && playerActions.canInteract)
         {
             ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -36,7 +39,7 @@ public class Player : MonoBehaviour
             {
                 if (HitInteractable(_hit.transform)) _hit.transform.GetComponent<Interactable>().TryToTriggerAction();
                 else if (HitNPC(_hit.transform)) _hit.transform.GetComponent<DialogueInteraction>().TryToTalk();
-                else if (HitInteractableChild(_hit.transform)) _hit.transform.GetComponentInParent<Interactable>().TryToTriggerAction();
+                else if (HitInteractableChild(_hit.transform)) _hit.transform.GetComponent<ChildTriggerItemAction>().interactable.TryToTriggerAction();
             }
         }
     }
@@ -52,7 +55,6 @@ public class Player : MonoBehaviour
         if (_transform.GetComponent<ChildTriggerItemAction>() != null) return true;
         else return false;
     }
-
 
     bool HitInteractable(Transform _transform)
     {
