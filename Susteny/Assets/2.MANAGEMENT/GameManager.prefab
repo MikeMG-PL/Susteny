@@ -63,10 +63,10 @@ MonoBehaviour:
   cloudsNumber: 30
   areaWidth: 700
   cloudsScaleMin: 1
-  cloudsScaleMax: 5
+  cloudsScaleMax: 6.5
   cloudsHeightMin: 150
   cloudsHeightMax: 350
-  cloudsSpeed: 0.07
+  cloudsSpeed: 0.165
   cameraTransform: {fileID: 0}
 --- !u!114 &1583007558684287779
 MonoBehaviour:
