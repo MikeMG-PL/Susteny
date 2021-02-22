@@ -18,6 +18,7 @@ public class Crosshair : MonoBehaviour
     RaycastHit _hit = new RaycastHit();
     Ray ray;
     Vector3 interactablePos;
+    InteractableTypeHit interactableType;
     bool hitInteractable;
     float interactionDistance;
 
@@ -46,7 +47,9 @@ public class Crosshair : MonoBehaviour
             // Jeśli *nadal* patrzymy na coś z czym możemy przeprowadzić interakcję, ale odsunęliśmy się za daleko lub przybliżyliśmy się
             if (ReferenceEquals(lastHit, _hit.transform.gameObject) && hitInteractable)
             {
-                interactablePos = _hit.transform.position; // Musimy zaktualizować pozycję przedmiotu (być może został przez gracza podniesiony, odłożony, itp.)
+                if (interactableType == InteractableTypeHit.childTriggerInteractable)
+                    interactablePos = _hit.transform.GetComponentInParent<Interactable>().transform.position;
+                else interactablePos = _hit.transform.position; // Musimy zaktualizować pozycję przedmiotu (być może został przez gracza podniesiony, odłożony, itp.)
                 if (NotTooFar()) HitInteractable();
                 else HitNothing();
             }
@@ -91,6 +94,7 @@ public class Crosshair : MonoBehaviour
             Interactable interactable = _transform.GetComponent<Interactable>();
             interactionDistance = interactable.interactionDistance;
             interactablePos = _transform.position;
+            interactableType = InteractableTypeHit.interactable;
             if (interactable.GetComponent<Hints>() == null) nearCrosshairHint = string.Empty;
             else nearCrosshairHint = interactable.GetComponent<Hints>().nearCrosshairHint;
         }
@@ -100,6 +104,7 @@ public class Crosshair : MonoBehaviour
             Interactable interactable = _transform.GetComponentInParent<Interactable>();
             interactionDistance = interactable.interactionDistance;
             interactablePos = interactable.transform.position;
+            interactableType = InteractableTypeHit.childTriggerInteractable;
             if (interactable.GetComponent<Hints>() == null) nearCrosshairHint = string.Empty;
             else nearCrosshairHint = interactable.GetComponent<Hints>().nearCrosshairHint;
         }
@@ -109,12 +114,16 @@ public class Crosshair : MonoBehaviour
             DialogueInteraction npc = _transform.GetComponent<DialogueInteraction>();
             interactionDistance = npc.interactionDistance;
             interactablePos = _transform.position;
-            if (npc.GetComponent<Hints>() == null) nearCrosshairHint = string.Empty; 
+            interactableType = InteractableTypeHit.NPC;
+            if (npc.GetComponent<Hints>() == null) nearCrosshairHint = string.Empty;
             else nearCrosshairHint = npc.GetComponent<Hints>().nearCrosshairHint;
         }
 
         else
+        {
+            interactableType = InteractableTypeHit.none;
             hitInteractable = false;
+        }
 
         return hitInteractable;
     }
@@ -144,4 +153,12 @@ public enum CrosshairColor
     defaultColor,
     interactive,
     nonInteractive,
+}
+
+public enum InteractableTypeHit
+{
+    none,
+    interactable,
+    childTriggerInteractable,
+    NPC,
 }
