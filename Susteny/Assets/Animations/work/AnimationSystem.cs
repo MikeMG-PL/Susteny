@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Animations
-{
-    RUN, DANCE, DIE
-}
-
 public class AnimationSystem : MonoBehaviour
 {
     static int animationState;
@@ -36,23 +31,7 @@ public class AnimationSystem : MonoBehaviour
             characterAnimator = character.GetComponent<Animator>();
         }
 
-        int animationIndex = 0;
-        switch (animation)
-        {
-            case Animations.RUN:
-                animationIndex = 3;
-                break;
-
-            case Animations.DIE:
-                animationIndex = 4;
-                break;
-
-            case Animations.DANCE:
-                animationIndex = 5;
-                break;
-        }
-
-        characterAnimator.SetInteger("animationIndex", animationIndex);
+        characterAnimator.SetInteger("animationIndex", (int) animation);
     }
 
     // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
@@ -65,7 +44,24 @@ public class AnimationSystem : MonoBehaviour
     {
         AnimationSystem.animate(xbot, Animations.RUN);
         AnimationSystem.animate(ybot, Animations.DIE);
-        AnimationSystem.animate(henry, Animations.DANCE);
+        AnimationSystem.animate(henry, Animations.ARGUE1);
     }
 }
 
+public enum Animations
+{
+    IDLE = 0,
+    RUN = 1,
+    DANCE = 2,
+    DIE = 3, 
+    WALK_MEN = 4, 
+    WALK_WOMEN = 5,
+    WHEELCHAIR1 = 6, 
+    WHEELCHAIR2 = 7, 
+    WALK_WITH_BRIEFCASE = 8,
+    SMOKE = 9,
+    ARGUE1 = 10,
+    ARGUE2 = 11,
+    SIT_AND_TALK_MEN = 12,
+    SIT_AND_TALK_WOMEN = 13
+}
