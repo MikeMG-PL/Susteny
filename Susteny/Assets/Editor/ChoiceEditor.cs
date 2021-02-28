@@ -3,91 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using Subtegral.DialogueSystem.DataContainers;
 
 [CustomEditor(typeof(ChoiceManager))]
 [CanEditMultipleObjects]
 public class ChoiceEditor : Editor
 {
-    SerializedProperty choiceEvents;
-    SerializedProperty dialogues;
-    SerializedProperty unityEventList;
+    SerializedProperty dialogue;
+    SerializedProperty choiceList;
+    SerializedProperty canView;
+    GUIStyle style1;
+    GUIStyle header;
     ChoiceManager c;
 
     private void OnEnable()
     {
-        choiceEvents = serializedObject.FindProperty("choiceEvents");
-        dialogues = serializedObject.FindProperty("dialogues");
-        unityEventList = serializedObject.FindProperty("unityEventList");
-        c = (ChoiceManager)target;
-    }
-
-    public void OnValidate()
-    {
-        GenerateDialogueChoices();
+        dialogue = serializedObject.FindProperty("dialogue");
+        choiceList = serializedObject.FindProperty("choiceList");
+        canView = serializedObject.FindProperty("canView");
     }
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-        c = (ChoiceManager)target;
-
-        if (GUILayout.Button("Generate dialogue choices") && c.dialogues.Count > 0 && !c.dialogues.Contains(null))
-        {
-            GenerateDialogueChoices();
-        }
-        GenerateDialogueChoices();
-
-        EditorGUILayout.PropertyField(dialogues, new GUIContent("Important dialogues", "Dialogues that cause events"), true);
-        EditorGUILayout.Space(5);
-
-        if (c.choiceEvents != null && c.choiceEvents.Count > 0 && c.dialogues.Count > 0 && !c.dialogues.Contains(null))
-        {
-            Display();
-            //Debug.Log(c.choiceEvents.Count);
-        }
-
-        serializedObject.ApplyModifiedProperties();
-    }
-
-    void GenerateDialogueChoices()
-    {
-        c.choiceEvents = new List<ChoiceEvent>();
-        c.unityEventList = new List<UnityEvent>();
-
-        if (c.dialogues.Count > 0 && !c.dialogues.Contains(null))
-        {
-            c.choiceEvents = new List<ChoiceEvent>();
-            for (int i = 0; i < c.dialogues.Count; i++)
-            {
-                for (int j = 1; j < c.dialogues[i].NodeLinks.Count; j++)
-                {
-                    var d = c.dialogues[i];
-                    c.choiceEvents.Add(new ChoiceEvent
-                    {
-                        container = d,
-                        baseGUID = d.NodeLinks[j].BaseNodeGUID,
-                        text = d.NodeLinks[j].PortName,
-                        evt = new UnityEvent(),
-                    });
-                }
-            }
-        }
-
-        UnityEvent e = new UnityEvent();
-        foreach (ChoiceEvent cev in c.choiceEvents)
-        {
-            e = cev.evt;
-            if (c.unityEventList == null)
-                c.unityEventList = new List<UnityEvent>();
-            c.unityEventList.Add(e);
-        }
-    }
-
-    void Display()
-    {
         // Bold style
-        GUIStyle style1 = new GUIStyle(GUI.skin.label)
+        style1 = new GUIStyle(GUI.skin.label)
         {
             wordWrap = true,
             fontStyle = FontStyle.Bold,
@@ -95,7 +35,7 @@ public class ChoiceEditor : Editor
         };
 
         // Header style
-        GUIStyle header = new GUIStyle(GUI.skin.label)
+        header = new GUIStyle(GUI.skin.label)
         {
             wordWrap = true,
             fontStyle = FontStyle.Bold,
@@ -103,43 +43,69 @@ public class ChoiceEditor : Editor
             fontSize = 20
         };
 
-        ///////////////////////////////////////////
+        ////////////////////////////////////////
 
-        foreach (DialogueContainer d in c.dialogues)
+        serializedObject.Update();
+        c = (ChoiceManager)target;
+
+        if (c.dialogue != null)
         {
-            GUILayout.Label(d.name, header);
-            GUILayout.Space(5);
-            for (int i = 1; i < d.NodeLinks.Count; i++)
+            if (GUILayout.Button("Generate choices"))
             {
-                GUILayout.Label(d.NodeLinks[i].PortName, style1);
-                GUILayout.Space(5);
+                Generate();
+                canView.boolValue = true;
+            }
+        }
 
-                if(i <= c.unityEventList.Count && c.unityEventList.Count > 0 && unityEventList.GetArrayElementAtIndex(i-1) != null)
-                {
-                    //Debug.Log($"i: {i}, i-1: {i-1}, {d.NodeLinks[i].PortName}, {unityEventList.GetArrayElementAtIndex(i - 1)}");
-                    EditorGUILayout.PropertyField(unityEventList.GetArrayElementAtIndex(i - 1), new GUIContent($"Base node GUID: {d.NodeLinks[i].BaseNodeGUID}"));
-                }
-                    
+        Space(15);
 
-                GUILayout.Space(5);
+        EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(dialogue, new GUIContent("Important dialogue", "Dialogue that causes events"), true);
+        if (EditorGUI.EndChangeCheck())
+            canView.boolValue = false;
+
+        Space(15);
+
+        //if (c.dialogue != null && c.actions.Count > 0 && canView)
+        if (c.dialogue != null && canView.boolValue)
+            Display();
+
+        serializedObject.ApplyModifiedProperties();
+    }
+
+    void Generate()
+    {
+        //c.actions = new List<UnityEvent>();
+        choiceList.ClearArray();
+
+        if (c.dialogue != null)
+        {
+            for (int i = 1; i < c.dialogue.NodeLinks.Count; i++)
+            {
+                choiceList.InsertArrayElementAtIndex(i - 1);
+                //Debug.Log(dialogue.FindPropertyRelative(""));
+                choiceList.GetArrayElementAtIndex(i - 1).FindPropertyRelative("optionText").stringValue =
+                c.dialogue.NodeLinks[i].PortName;
+
+                choiceList.GetArrayElementAtIndex(i - 1).FindPropertyRelative("baseGUID").stringValue =
+                c.dialogue.NodeLinks[i].BaseNodeGUID;
             }
         }
     }
 
-    void ImportEvent()
+    void Display()
     {
-        
-
-        /*UnityEvent e = new UnityEvent();
-        foreach (ChoiceEvent cev in c.choiceEvents)
+        /*for (int i = 1; i < c.dialogue.NodeLinks.Count; i++)
         {
-            if (baseGUID == cev.baseGUID && text == cev.text)
-            {
-                e = cev.evt;
-                if (c.unityEventList == null)
-                    c.unityEventList = new List<UnityEvent>();
-                c.unityEventList.Add(e);
-            }
-        }*/
+            GUILayout.Label($"Element {i - 1}: {c.dialogue.NodeLinks[i].PortName}", style1);
+            Space(15);
+        }
+        EditorGUILayout.PropertyField(actions, new GUIContent($"{c.dialogue.name}"));*/
+        EditorGUILayout.PropertyField(choiceList);
+    }
+
+    void Space(float p)
+    {
+        GUILayout.Space(p);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New item", menuName = "Inventory System/Item")]
+[CreateAssetMenu(fileName = "New item", menuName = "Inventory system/Item")]
 public class Item : ScriptableObject
 {
     public ItemType itemType = ItemType.Default;
