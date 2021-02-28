@@ -6,70 +6,52 @@ using UnityEngine.Events;
 namespace Subtegral.DialogueSystem.DataContainers
 {
     [System.Serializable]
-    public class ChoiceEvent
+    public class Choice
     {
-        public string baseGUID, text;
-        public DialogueContainer container;
-        public UnityEvent evt;
+        public UnityEvent choice;
+        public string optionText;
+        public string baseGUID;
     }
+
 
     [System.Serializable]
     public class ChoiceManager : MonoBehaviour
     {
         /// CUSTOM EDITOR ///
 
-        public List<DialogueContainer> dialogues;
-        public List<ChoiceEvent> choiceEvents;
-        public List<UnityEvent> unityEventList;
-
+        //public Choice choice;
+        public DialogueContainer dialogue;
+        public List<Choice> choiceList;
+        public bool canView;
 
         void Awake()
         {
             Subscribe();
         }
 
-
-
         /// SUBSCRIBING AND UNSUBSCRIBING EVENTS, EVENT FUNCTIONS ///
 
         void Subscribe()
         {
-            LoadDialogue.OptionChosen += IterateThroughDialogues;
+            LoadDialogue.OptionChosen += CheckForOption;
         }
 
-        void IterateThroughDialogues(DialogueContainer dialogue, string baseGUID, string text)
+        void CheckForOption(DialogueContainer dial, string guid, string text)
         {
-            foreach(ChoiceEvent c in choiceEvents)
+            if(dial == dialogue)
             {
-                if (baseGUID == c.baseGUID && text == c.text)
-                    c.evt.Invoke();
-            }
-
-            /*foreach (DialogueContainer d in dialogues)
-            {
-                if (d == dialogue)
+                for(int i = 0; i < choiceList.Count; i++)
                 {
-                    for(int i = 1; i < d.NodeLinks.Count; i++)
-                    {
-
-                    }
+                    var v = choiceList[i];
+                    if (v.baseGUID == guid && v.optionText == text)
+                        v.choice.Invoke();
                 }
-            }*/
-        }
-
-        void CheckForOption(DialogueContainer dialogue, string baseGUID, string text)
-        {
-
-        }
-
-        void InvokeUnityEvent()
-        {
-
+            }
         }
 
         void Unsubscribe()
         {
-            LoadDialogue.OptionChosen -= IterateThroughDialogues;
+            LoadDialogue.OptionChosen -= CheckForOption;
         }
 
         void OnDisable()

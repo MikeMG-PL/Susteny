@@ -14,6 +14,7 @@ TagManager:
   - Car
   - Fire
   - LEVELS
+  - ChoiceManager
   layers:
   - Default
   - TransparentFX

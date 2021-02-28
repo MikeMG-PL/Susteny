@@ -265,5 +265,6 @@ public class LoadDialogue : MonoBehaviour
     public void DebugOptionEvents()
     {
         Debug.Log("Udałam, że nie znam Anny. Co ze mnie za przyjaciółka?");
+        Instantiate(Camera.main.GetComponentInParent<SC_FPSController>().gameObject, transform.position, Quaternion.identity);
     }
 }
