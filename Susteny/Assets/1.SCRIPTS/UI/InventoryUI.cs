@@ -6,32 +6,49 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public GameObject player;
-    public RectTransform startPosition;
-    public int x_space_between_items;
-    public int y_space_between_items;
-    public int number_of_colums;
+    public GameObject blankSlotPrefab;
+    public GameObject itemDescPrefab;
+    public GameObject itemDescParent;
+    public int maxInventorySlots = 28;
+    public float itemDescPosOriginalOffset = 180f;
+
+    [HideInInspector] public float itemDescPosActualOffset;
+    [HideInInspector] public GameObject itemThatDescrptionIsVisible;
 
     Inventory inventory;
     PlayerActions playerActions;
 
     Dictionary<ItemInventory, GameObject> itemsDisplayed = new Dictionary<ItemInventory, GameObject>();
+    List<GameObject> blankSlots = new List<GameObject>();
 
-    void Awake()
-    {
+    public void Initialization()
+    { 
         inventory = player.GetComponent<Inventory>();
         playerActions = player.GetComponent<PlayerActions>();
-    }
-
-    void Start()
-    {
+        itemDescPosActualOffset = itemDescPosOriginalOffset;
         CreateDisplay();
     }
 
+    // Odległość opisu od przedmiotu zależy od wielkości ekranu, ciężko zrobić to inaczej bo opis nie może być dzieckiem 
+    float originalWidth = 1124f; // Wielkość okna, którą miałem podczas ustawiania elementu UI
+    float oldWidth = 1124f;
     void Update()
     {
+        if (oldWidth != Screen.width)
+        {
+            itemDescPosActualOffset = itemDescPosOriginalOffset * (Screen.width / originalWidth);
+            oldWidth = Screen.width;
+        }
+    }
+
+    public void OpenInventory(bool b)
+    {
+        if (!b && itemThatDescrptionIsVisible != null) itemThatDescrptionIsVisible.GetComponent<ItemUI>().DestoryDescription();
+        gameObject.SetActive(b);
         UpdateDisplay();
     }
 
+    // TODO: Usuwanie przedmiotów z eq, jeśli potrzebne
     void UpdateDisplay()
     {
         for (int i = 0; i < inventory.GetInventory().Count; i++)
@@ -48,28 +65,37 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < inventory.GetInventory().Count; i++)
         {
-            AddUIItem(i);
+            AddUIItem(i, true);
+        }
+
+        for (int i = 0; i < maxInventorySlots - inventory.GetInventory().Count; i++)
+        {
+            AddBlankSlot();
         }
     }
 
-    void AddUIItem(int index)
+    void AddBlankSlot()
+    {
+        var obj = Instantiate(blankSlotPrefab, transform);
+        blankSlots.Add(obj);
+    }
+
+    void AddUIItem(int index, bool init = false)
     {
         var obj = Instantiate(inventory.GetInventory()[index].item.UI_Prefab, Vector3.zero, Quaternion.identity, transform);
-        obj.GetComponent<RectTransform>().localPosition = GetPosition(index);
+        if (!init) // Remove one blank slot
+        {
+            Destroy(blankSlots[blankSlots.Count - 1]);
+            blankSlots.RemoveAt(blankSlots.Count - 1);
+            obj.transform.SetSiblingIndex(itemsDisplayed.Count);
+        }
         obj.GetComponentInChildren<Text>().text = inventory.GetInventory()[index].amount.ToString("n0");
 
         ItemUI item = obj.GetComponent<ItemUI>();
         item.item = inventory.GetInventory()[index].item;
+        item.inventoryUI = this;
         item.playerActions = playerActions;
 
         itemsDisplayed.Add(inventory.GetInventory()[index], obj);
-    }
-
-    Vector3 GetPosition(int i)
-    {
-        return new Vector3(
-            startPosition.localPosition.x + (x_space_between_items * (i % number_of_colums)),
-            startPosition.localPosition.y + (-y_space_between_items * (i / number_of_colums)),
-            0f);
     }
 }

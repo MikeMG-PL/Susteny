@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    public GameObject InventoryUI;
+    public GameObject inventoryUIObject;
     public Transform inventoryViewTransform;
     public UIHints UIHints;
 
@@ -22,6 +22,7 @@ public class PlayerActions : MonoBehaviour
 
     SC_FPSController fpsController;
     InputManager input;
+    InventoryUI inventoryUI;
 
     public static event Action<bool> BrowsingInventory;
 
@@ -31,6 +32,7 @@ public class PlayerActions : MonoBehaviour
         viewMode = GetComponent<ViewMode>();
         fpsController = GetComponent<SC_FPSController>();
         input = InputManager.instance;
+        inventoryUI = inventoryUIObject.GetComponent<InventoryUI>();
     }
 
     public void DisallowInventorySwitching(bool b)
@@ -54,14 +56,14 @@ public class PlayerActions : MonoBehaviour
     public void EnableInventoryUI(bool enable)
     {
         BrowsingInventory.Invoke(enable);
-        InventoryUI.SetActive(enable);
+        inventoryUI.OpenInventory(enable);
     }
 
     public void SwitchInventoryUI()
     {
-        bool b = !InventoryUI.activeSelf;
+        bool b = !inventoryUIObject.activeSelf;
         BrowsingInventory.Invoke(b);
-        InventoryUI.SetActive(b);
+        inventoryUI.OpenInventory(b);
     }
 
     public void ViewItemFromInventory(GameObject item)
