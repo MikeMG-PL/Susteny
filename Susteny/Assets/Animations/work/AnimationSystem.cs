@@ -5,9 +5,13 @@ public class AnimationSystem : MonoBehaviour
 {
     static int animationState;
     static RuntimeAnimatorController animatorController;
+
     void Start()
     {
         animatorController = GetComponent<Animator>().runtimeAnimatorController;
+        prepare(xbot); // ---- do usunięcia
+        prepare(ybot); // ---- do usunięcia
+        prepare(henry); // ---- do usunięcia
     }
 
     public static Animator prepare(GameObject character)
@@ -31,50 +35,66 @@ public class AnimationSystem : MonoBehaviour
     public static void animate(GameObject character, Animations animation, AnimationBodyPart animationBodyPart)
     {
         Animator characterAnimator = prepare(character);
-        if(animationBodyPart == AnimationBodyPart.WHOLE_BODY)
+
+        switch(animationBodyPart)
         {
-            characterAnimator.SetInteger("bodyLevel", 1);
-            characterAnimator.SetInteger("animationIndex", (int)animation);
-            //characterAnimator.SetTrigger("endTrigger");
-            characterAnimator.SetInteger("bodyLevel", 2);
-            characterAnimator.SetInteger("animationIndex", (int)animation);
-            characterAnimator.SetTrigger("endTrigger");
+            case AnimationBodyPart.LOWER_BODY:
+                characterAnimator.SetInteger("LowerAnimationIndex", (int)animation);
+                characterAnimator.SetTrigger("LowerEndTrigger");
+                break;
+
+            case AnimationBodyPart.UPPER_BODY:
+                characterAnimator.SetInteger("UpperAnimationIndex", (int)animation);
+                characterAnimator.SetTrigger("UpperEndTrigger");
+                break;
+
+            case AnimationBodyPart.WHOLE_BODY:
+                characterAnimator.SetInteger("UpperAnimationIndex", (int)animation);
+                characterAnimator.SetTrigger("UpperEndTrigger");
+                characterAnimator.SetInteger("LowerAnimationIndex", (int)animation);
+                characterAnimator.SetTrigger("LowerEndTrigger");
+                break;
         }
-        else characterAnimator.SetInteger("bodyLevel", (int)animationBodyPart);
-        characterAnimator.SetInteger("animationIndex", (int) animation);
-        characterAnimator.SetTrigger("endTrigger");
     }
 
     public static void resetAnimation(GameObject character)
     {
         Animator characterAnimator = prepare(character);
-        characterAnimator.SetTrigger("endTrigger");
+        characterAnimator.SetTrigger("UpperEndTrigger");
+        characterAnimator.SetTrigger("LowerEndTrigger");
     }
 
     public static void stopAnimation(GameObject character)
     {
-        animate(character, Animations.NULL, AnimationBodyPart.WHOLE_BODY);
+        Animator characterAnimator = prepare(character);
+        characterAnimator.SetInteger("UpperAnimationIndex", (int) Animations.NULL);
+        characterAnimator.SetTrigger("UpperEndTrigger");
+        characterAnimator.SetInteger("LowerAnimationIndex", (int)Animations.NULL);
+        characterAnimator.SetTrigger("LowerEndTrigger");
     }
 
-    // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
-
-    public GameObject xbot;
-    public GameObject ybot;
-    public GameObject henry;
+    public GameObject xbot; // ---- do usunięcia
+    public GameObject ybot; // ---- do usunięcia
+    public GameObject henry; // ---- do usunięcia
 
     void Update()
     {
-        if (Input.GetKeyDown("q")) AnimationSystem.animate(ybot, Animations.IDLE_1, AnimationBodyPart.UPPER_BODY);
-        if (Input.GetKeyDown("w")) AnimationSystem.animate(ybot, Animations.RUNNING_1, AnimationBodyPart.UPPER_BODY);
-        if (Input.GetKeyDown("e")) AnimationSystem.animate(ybot, Animations.SITTING_1, AnimationBodyPart.UPPER_BODY);
-        if (Input.GetKeyDown("r")) AnimationSystem.animate(ybot, Animations.DYING, AnimationBodyPart.UPPER_BODY);
-        if (Input.GetKeyDown("t")) AnimationSystem.animate(ybot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
-        if (Input.GetKeyDown("space")) AnimationSystem.resetAnimation(ybot);
-        if (Input.GetKeyDown("b")) AnimationSystem.stopAnimation(ybot);
+        // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
+        if (Input.GetKeyDown("q"))
+        {
+            AnimationSystem.animate(ybot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
+            AnimationSystem.animate(ybot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
+        }
+
+        if (Input.GetKeyDown("w"))
+        {
+            AnimationSystem.animate(xbot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
+            AnimationSystem.animate(xbot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
+        }
+        // -------------------------------------------------------------------------------------------------------------------------------------------------------------- //
     }
 }
-
-public enum Animations
+    public enum Animations
 {
     NULL = 0,
     DYING = 1,
