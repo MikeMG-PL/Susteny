@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ItemUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -26,7 +27,7 @@ public class ItemUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, 
         if (descriptionVisible) return;
         descriptionVisible = true;
         // TODO: lepsze ustawianie opisu względem przedmiotu, aktualnie jest mocno "na czuja"
-        inventoryUI.itemDescParent.transform.position = new Vector3(transform.position.x + inventoryUI.itemDescPosActualOffset, transform.position.y - 20f, transform.position.z);;
+        inventoryUI.itemDescParent.transform.position = new Vector3(transform.position.x + inventoryUI.itemDescPosActualOffset, transform.position.y - 20f, transform.position.z);
         description = Instantiate(inventoryUI.itemDescPrefab, inventoryUI.itemDescParent.transform);
         description.GetComponent<ItemDescriptionUI>().name.text = item.name;
         description.GetComponent<ItemDescriptionUI>().desc.text = item.description;
