@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Animations.Rigging;
+using UnityEngine.Animations;
 
 public class AnimationSystem : MonoBehaviour
 {
@@ -9,9 +9,10 @@ public class AnimationSystem : MonoBehaviour
     void Start()
     {
         animatorController = GetComponent<Animator>().runtimeAnimatorController;
-        prepare(xbot); // ---- do usunięcia
+        /*prepare(xbot); // ---- do usunięcia
         prepare(ybot); // ---- do usunięcia
         prepare(henry); // ---- do usunięcia
+        AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia*/
     }
 
     public static Animator prepare(GameObject character)
@@ -66,18 +67,54 @@ public class AnimationSystem : MonoBehaviour
 
     public static void stopAnimation(GameObject character)
     {
-        Animator characterAnimator = prepare(character);
-        characterAnimator.SetInteger("UpperAnimationIndex", (int) Animations.NULL);
-        characterAnimator.SetTrigger("UpperEndTrigger");
-        characterAnimator.SetInteger("LowerAnimationIndex", (int)Animations.NULL);
-        characterAnimator.SetTrigger("LowerEndTrigger");
+        animate(character, Animations.NULL, AnimationBodyPart.WHOLE_BODY);
+    }
+    
+    public static void startLookingAt(GameObject character, GameObject observed)
+    {
+        GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
+        GameObject head =  character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").Find("mixamorig:Spine2").Find("mixamorig:Neck").Find("mixamorig:Head").gameObject;
+
+        if (head.GetComponent<LookAtConstraint>() == null) head.AddComponent<LookAtConstraint>().weight = 0.7f;
+        if (spine.GetComponent<LookAtConstraint>() == null) spine.AddComponent<LookAtConstraint>().weight = 0.2f;
+
+        ConstraintSource source = new ConstraintSource();
+        source.sourceTransform = observed.transform;
+        source.weight = 1;
+
+        head.GetComponent<LookAtConstraint>().AddSource(source);
+        head.GetComponent<LookAtConstraint>().constraintActive = true;
+        spine.GetComponent<LookAtConstraint>().AddSource(source);
+        spine.GetComponent<LookAtConstraint>().constraintActive = true;
     }
 
-    public GameObject xbot; // ---- do usunięcia
+    public static void stopLookingAt(GameObject character, GameObject observed)
+    {
+        GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
+        GameObject head = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").Find("mixamorig:Spine2").Find("mixamorig:Neck").Find("mixamorig:Head").gameObject;
+
+        ConstraintSource source = new ConstraintSource();
+        source.sourceTransform = observed.transform;
+        LookAtConstraint headComponent = head.GetComponent<LookAtConstraint>();
+        LookAtConstraint spineComponent = spine.GetComponent<LookAtConstraint>();
+
+        for (int i=0; i< headComponent.sourceCount; i++)
+        {
+            if (headComponent.GetSource(i).Equals(source)) headComponent.RemoveSource(i);
+        }
+
+        for (int i = 0; i < spineComponent.sourceCount; i++)
+        {
+            if (spineComponent.GetSource(i).Equals(source)) spineComponent.RemoveSource(i);
+        }
+    }
+
+    /*public GameObject xbot; // ---- do usunięcia
     public GameObject ybot; // ---- do usunięcia
     public GameObject henry; // ---- do usunięcia
+    public GameObject block; // ---- do usunięcia*/
 
-    void Update()
+    /*void Update()
     {
         // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
         if (Input.GetKeyDown("q"))
@@ -92,7 +129,7 @@ public class AnimationSystem : MonoBehaviour
             AnimationSystem.animate(xbot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
         }
         // -------------------------------------------------------------------------------------------------------------------------------------------------------------- //
-    }
+    }*/
 }
     public enum Animations
 {
