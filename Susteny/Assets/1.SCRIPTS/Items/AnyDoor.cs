@@ -22,7 +22,7 @@ public class AnyDoor : MonoBehaviour
 
     public void UnlockDoor()
     {
-        GetComponent<Interactable>().crosshairColor = CrosshairColor.interactive;
+        GetComponent<Interactable>().crosshairInteractivity = CrosshairInteractivity.interactive;
         unlocked = true;
     }
 

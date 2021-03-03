@@ -51,10 +51,15 @@ public class InventoryUI : MonoBehaviour
     // TODO: Usuwanie przedmiotów z eq, jeśli potrzebne
     void UpdateDisplay()
     {
+        Text amount;
         for (int i = 0; i < inventory.GetInventory().Count; i++)
         {
             if (itemsDisplayed.ContainsKey(inventory.GetInventory()[i]))
-                itemsDisplayed[inventory.GetInventory()[i]].GetComponentInChildren<Text>().text = inventory.GetInventory()[i].amount.ToString("n0");
+            {
+                amount = itemsDisplayed[inventory.GetInventory()[i]].GetComponentInChildren<Text>();
+                if (amount != null)
+                    amount.text = inventory.GetInventory()[i].amount.ToString("n0");
+            }
 
             else
                 AddUIItem(i);
@@ -82,19 +87,19 @@ public class InventoryUI : MonoBehaviour
 
     void AddUIItem(int index, bool init = false)
     {
-        var obj = Instantiate(inventory.GetInventory()[index].item.UI_Prefab, Vector3.zero, Quaternion.identity, transform);
+        var obj = Instantiate(inventory.GetInventory()[index].item.icon, Vector3.zero, Quaternion.identity, transform);
         if (!init) // Remove one blank slot
         {
             Destroy(blankSlots[blankSlots.Count - 1]);
             blankSlots.RemoveAt(blankSlots.Count - 1);
             obj.transform.SetSiblingIndex(itemsDisplayed.Count);
         }
-        obj.GetComponentInChildren<Text>().text = inventory.GetInventory()[index].amount.ToString("n0");
+        if (obj.GetComponentInChildren<Text>() != null) obj.GetComponentInChildren<Text>().text = inventory.GetInventory()[index].amount.ToString("n0");
 
-        ItemUI item = obj.GetComponent<ItemUI>();
-        item.item = inventory.GetInventory()[index].item;
-        item.inventoryUI = this;
-        item.playerActions = playerActions;
+        ItemUI itemUI = obj.GetComponent<ItemUI>();
+        itemUI.item = inventory.GetInventory()[index].item;
+        itemUI.inventoryUI = this;
+        itemUI.playerActions = playerActions;
 
         itemsDisplayed.Add(inventory.GetInventory()[index], obj);
     }

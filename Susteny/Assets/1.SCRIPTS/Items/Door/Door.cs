@@ -50,14 +50,14 @@ public class Door : MonoBehaviour
     {
         if (unlocked)
         {
-            GetComponent<Interactable>().crosshairColor = CrosshairColor.interactive;
+            GetComponent<Interactable>().crosshairInteractivity = CrosshairInteractivity.interactive;
             GetComponent<Hints>().nearCrosshairHint = "Otwórz [LPM]";
             GetComponent<ManipulatePlayer>().enableGoTo = true;
             GetComponent<ManipulatePlayer>().enableLookAt = true;
         }
         else
         {
-            GetComponent<Interactable>().crosshairColor = CrosshairColor.defaultColor;
+            GetComponent<Interactable>().crosshairInteractivity = CrosshairInteractivity.interactive;
             GetComponent<Hints>().nearCrosshairHint = "Zamknięte";
             GetComponent<ManipulatePlayer>().enableGoTo = false;
             GetComponent<ManipulatePlayer>().enableLookAt = false;

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     public UnityEvent interaction;
-    public CrosshairColor crosshairColor;
+    public CrosshairInteractivity crosshairInteractivity;
     public float interactionDistance = 3.5f;
     public bool canInteractDespiteJumping = false;
 
