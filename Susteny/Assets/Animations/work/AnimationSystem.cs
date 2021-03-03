@@ -9,10 +9,10 @@ public class AnimationSystem : MonoBehaviour
     void Start()
     {
         animatorController = GetComponent<Animator>().runtimeAnimatorController;
-        /*prepare(xbot); // ---- do usunięcia
+        prepare(xbot); // ---- do usunięcia
         prepare(ybot); // ---- do usunięcia
         prepare(henry); // ---- do usunięcia
-        AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia*/
+        AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia
     }
 
     public static Animator prepare(GameObject character)
@@ -109,12 +109,12 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
-    /*public GameObject xbot; // ---- do usunięcia
+    public GameObject xbot; // ---- do usunięcia
     public GameObject ybot; // ---- do usunięcia
     public GameObject henry; // ---- do usunięcia
-    public GameObject block; // ---- do usunięcia*/
+    public GameObject block; // ---- do usunięcia
 
-    /*void Update()
+    void Update()
     {
         // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
         if (Input.GetKeyDown("q"))
@@ -129,7 +129,7 @@ public class AnimationSystem : MonoBehaviour
             AnimationSystem.animate(xbot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
         }
         // -------------------------------------------------------------------------------------------------------------------------------------------------------------- //
-    }*/
+    }
 }
     public enum Animations
 {
