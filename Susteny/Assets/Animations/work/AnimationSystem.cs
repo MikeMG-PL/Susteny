@@ -9,12 +9,10 @@ public class AnimationSystem : MonoBehaviour
     void Start()
     {
         animatorController = GetComponent<Animator>().runtimeAnimatorController;
-        prepare(xbot); // ---- do usunięcia
-        prepare(ybot); // ---- do usunięcia
-        prepare(henry); // ---- do usunięcia
     }
 
-    public static Animator prepare(GameObject character)
+    // prepares character to be animated (gives Animator and sets everything to work)
+    public static Animator prepare(GameObject character) 
     {
         Animator characterAnimator;
 
@@ -30,8 +28,9 @@ public class AnimationSystem : MonoBehaviour
         }
 
         return characterAnimator;
-    }
+    } 
 
+    // gives character animation and asign it to the specific body part (it does not have to be "prepared")
     public static void animate(GameObject character, Animations animation, AnimationBodyPart animationBodyPart)
     {
         Animator characterAnimator = prepare(character);
@@ -57,6 +56,7 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
+    // refresh all animations
     public static void resetAnimation(GameObject character)
     {
         Animator characterAnimator = prepare(character);
@@ -64,11 +64,13 @@ public class AnimationSystem : MonoBehaviour
         characterAnimator.SetTrigger("LowerEndTrigger");
     }
 
+    // stop all animations and make T-pose
     public static void stopAnimation(GameObject character)
     {
         animate(character, Animations.NULL, AnimationBodyPart.WHOLE_BODY);
     }
     
+    // make character look at some game object
     public static void startLookingAt(GameObject character, GameObject observed)
     {
         GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
@@ -87,6 +89,7 @@ public class AnimationSystem : MonoBehaviour
         spine.GetComponent<LookAtConstraint>().constraintActive = true;
     }
 
+    // stop looking at some game object
     public static void stopLookingAt(GameObject character, GameObject observed)
     {
         GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
@@ -108,6 +111,7 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
+    // stop looking at every game object
     public static void stopLookingAtAll(GameObject character)
     {
         GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
@@ -127,58 +131,18 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
+    // returns speed of all "move" animations character is performing
     public static float getMoveAnimationSpeed(GameObject character)
     {
         Animator characterAnimator = prepare(character);
         return characterAnimator.GetFloat("animationSpeed");
     }
 
+    // sets speed of all "move" animations character is performing
     public static void setMoveAnimationSpeed(GameObject character, float newSpeed)
     {
         Animator characterAnimator = prepare(character);
         characterAnimator.SetFloat("animationSpeed",newSpeed);
-    }
-
-    public GameObject xbot; // ---- do usunięcia
-    public GameObject ybot; // ---- do usunięcia
-    public GameObject henry; // ---- do usunięcia
-    public GameObject block; // ---- do usunięcia
-
-    void Update()
-    {
-        // -------------------------------------------------------------------- TESTING AND DEBUGING -------------------------------------------------------------------- //
-        if (Input.GetKeyDown("q"))
-        {
-            AnimationSystem.animate(ybot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
-            AnimationSystem.animate(ybot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
-            AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia
-        }
-
-        if (Input.GetKeyDown("w"))
-        {
-            AnimationSystem.animate(xbot, Animations.RUNNING_1, AnimationBodyPart.WHOLE_BODY);
-            AnimationSystem.startLookingAt(xbot, block); // ---- do usunięcia
-        }
-
-        if (Input.GetKeyDown("e"))
-        {
-            AnimationSystem.animate(henry, Animations.SITTING_1, AnimationBodyPart.LOWER_BODY);
-            AnimationSystem.animate(henry, Animations.TALKING_ON_PHONE_1, AnimationBodyPart.UPPER_BODY);
-            AnimationSystem.startLookingAt(henry, block); // ---- do usunięcia
-        }
-
-        if (Input.GetKeyDown("r"))
-        {
-            AnimationSystem.setMoveAnimationSpeed(ybot, AnimationSystem.getMoveAnimationSpeed(ybot) + 0.1f);
-            AnimationSystem.setMoveAnimationSpeed(xbot, AnimationSystem.getMoveAnimationSpeed(xbot) - 0.1f);
-        }
-
-        if (Input.GetKeyDown("t"))
-        {
-            AnimationSystem.setMoveAnimationSpeed(ybot, AnimationSystem.getMoveAnimationSpeed(ybot) - 0.1f);
-            AnimationSystem.setMoveAnimationSpeed(xbot, AnimationSystem.getMoveAnimationSpeed(xbot) + 0.1f);
-        }
-        // -------------------------------------------------------------------------------------------------------------------------------------------------------------- //
     }
 }
     public enum Animations
