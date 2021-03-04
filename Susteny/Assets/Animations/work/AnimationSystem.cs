@@ -12,7 +12,6 @@ public class AnimationSystem : MonoBehaviour
         prepare(xbot); // ---- do usunięcia
         prepare(ybot); // ---- do usunięcia
         prepare(henry); // ---- do usunięcia
-        AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia
     }
 
     public static Animator prepare(GameObject character)
@@ -109,6 +108,37 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
+    public static void stopLookingAtAll(GameObject character)
+    {
+        GameObject spine = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").gameObject;
+        GameObject head = character.transform.Find("mixamorig:Hips").Find("mixamorig:Spine").Find("mixamorig:Spine1").Find("mixamorig:Spine2").Find("mixamorig:Neck").Find("mixamorig:Head").gameObject;
+
+        LookAtConstraint headComponent = head.GetComponent<LookAtConstraint>();
+        LookAtConstraint spineComponent = spine.GetComponent<LookAtConstraint>();
+
+        for (int i = 0; i < headComponent.sourceCount; i++)
+        {
+            headComponent.RemoveSource(i);
+        }
+
+        for (int i = 0; i < spineComponent.sourceCount; i++)
+        {
+            spineComponent.RemoveSource(i);
+        }
+    }
+
+    public static float getMoveAnimationSpeed(GameObject character)
+    {
+        Animator characterAnimator = prepare(character);
+        return characterAnimator.GetFloat("animationSpeed");
+    }
+
+    public static void setMoveAnimationSpeed(GameObject character, float newSpeed)
+    {
+        Animator characterAnimator = prepare(character);
+        characterAnimator.SetFloat("animationSpeed",newSpeed);
+    }
+
     public GameObject xbot; // ---- do usunięcia
     public GameObject ybot; // ---- do usunięcia
     public GameObject henry; // ---- do usunięcia
@@ -121,12 +151,32 @@ public class AnimationSystem : MonoBehaviour
         {
             AnimationSystem.animate(ybot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
             AnimationSystem.animate(ybot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
+            AnimationSystem.startLookingAt(ybot, block); // ---- do usunięcia
         }
 
         if (Input.GetKeyDown("w"))
         {
-            AnimationSystem.animate(xbot, Animations.SMOKING, AnimationBodyPart.UPPER_BODY);
-            AnimationSystem.animate(xbot, Animations.WALKING_1, AnimationBodyPart.LOWER_BODY);
+            AnimationSystem.animate(xbot, Animations.RUNNING_1, AnimationBodyPart.WHOLE_BODY);
+            AnimationSystem.startLookingAt(xbot, block); // ---- do usunięcia
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            AnimationSystem.animate(henry, Animations.SITTING_1, AnimationBodyPart.LOWER_BODY);
+            AnimationSystem.animate(henry, Animations.TALKING_ON_PHONE_1, AnimationBodyPart.UPPER_BODY);
+            AnimationSystem.startLookingAt(henry, block); // ---- do usunięcia
+        }
+
+        if (Input.GetKeyDown("r"))
+        {
+            AnimationSystem.setMoveAnimationSpeed(ybot, AnimationSystem.getMoveAnimationSpeed(ybot) + 0.1f);
+            AnimationSystem.setMoveAnimationSpeed(xbot, AnimationSystem.getMoveAnimationSpeed(xbot) - 0.1f);
+        }
+
+        if (Input.GetKeyDown("t"))
+        {
+            AnimationSystem.setMoveAnimationSpeed(ybot, AnimationSystem.getMoveAnimationSpeed(ybot) - 0.1f);
+            AnimationSystem.setMoveAnimationSpeed(xbot, AnimationSystem.getMoveAnimationSpeed(xbot) + 0.1f);
         }
         // -------------------------------------------------------------------------------------------------------------------------------------------------------------- //
     }
