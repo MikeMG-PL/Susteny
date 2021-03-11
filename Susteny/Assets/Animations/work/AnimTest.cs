@@ -21,7 +21,7 @@ public class AnimTest : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            AnimationSystem.startLookingAt(cube, characters[0]);
+            AnimationSystem.startLookingAt(characters[0], cube);
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
             AnimationSystem.stopLookingAtAll(characters[0]);
