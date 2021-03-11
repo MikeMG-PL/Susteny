@@ -15,6 +15,7 @@ public class AnimationSystem : MonoBehaviour
     public static Animator prepare(GameObject character) 
     {
         Animator characterAnimator;
+        animatorController = GameObject.FindGameObjectWithTag("MainAnimator").GetComponent<Animator>().runtimeAnimatorController;
 
         if (character.GetComponent<Animator>() == null)
         {
@@ -25,6 +26,8 @@ public class AnimationSystem : MonoBehaviour
         else
         {
             characterAnimator = character.GetComponent<Animator>();
+            characterAnimator.runtimeAnimatorController = animatorController;
+            characterAnimator.avatar = null;
         }
 
         return characterAnimator;

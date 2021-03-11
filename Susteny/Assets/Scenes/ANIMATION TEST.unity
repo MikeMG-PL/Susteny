@@ -188,8 +188,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: henry
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5866666021909216657, guid: 555863bcea7ba4446aeb6872adb82a4d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 555863bcea7ba4446aeb6872adb82a4d, type: 3}
 --- !u!1 &688230749 stripped
 GameObject:
@@ -657,6 +656,7 @@ GameObject:
   - component: {fileID: 1762239758}
   - component: {fileID: 1762239757}
   - component: {fileID: 1762239756}
+  - component: {fileID: 1762239761}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -738,6 +738,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1762239761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762239755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec9812c604c8f541a88bfaaa9ec1413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 1405125615}
+  - {fileID: 688230749}
+  - {fileID: 1167899332}
+  cube: {fileID: 1762239755}
 --- !u!1 &1771625949
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +768,7 @@ GameObject:
   - component: {fileID: 1771625952}
   m_Layer: 0
   m_Name: MainAnimator
-  m_TagString: Untagged
+  m_TagString: MainAnimator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -768,10 +785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de55108593a9e147935c0ac2b1b924c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xbot: {fileID: 1405125615}
-  ybot: {fileID: 688230749}
-  henry: {fileID: 1167899332}
-  block: {fileID: 1762239755}
 --- !u!4 &1771625951
 Transform:
   m_ObjectHideFlags: 0
