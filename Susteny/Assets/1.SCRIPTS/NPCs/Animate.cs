@@ -8,20 +8,23 @@ public class Animate : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     WalkAround walkAround;
+    int forwardID;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         walkAround = GetComponent<WalkAround>();
+        forwardID = Animator.StringToHash("Forward");
     }
 
     void AnimateCharacter()
     {
-        if (walkAround != null)
-            animator.SetFloat("Forward", agent.speed / 2);
-        else
-            animator.SetFloat("Forward", agent.velocity.magnitude / 2);
+        if (walkAround != null && animator.GetFloat(forwardID) != agent.speed / 2)
+            animator.SetFloat(forwardID, agent.speed / 2);
+
+        else if (animator.GetFloat(forwardID) != agent.velocity.magnitude / 2)
+            animator.SetFloat(forwardID, agent.velocity.magnitude / 2);
     }
 
     void ReachDestination()
